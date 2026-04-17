@@ -89,6 +89,7 @@
 
 html { scroll-behavior: smooth; }
 
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -965,6 +966,17 @@ footer {
   .ai-workflow { grid-template-columns: 1fr; }
   .about-cards { grid-template-columns: 1fr; }
 }
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+
+.input-error {
+  border: 1px solid #ff4d4d;
+}
 </style>
 </head>
 <body>
@@ -1595,20 +1607,23 @@ footer {
       </div>
       <div class="reveal reveal-delay-2">
         <form id="contact-form" class="contact-form">
-  <div class="form-group">
-    <label class="form-label">YOUR NAME</label>
-    <input name="name" type="text" class="form-input" placeholder="Jane Smith" />
-  </div>
+<div class="form-group">
+  <label class="form-label">YOUR NAME</label>
+  <input name="name" type="text" class="form-input" placeholder="Jane Smith" />
+  <small class="error-message"></small>
+</div>
 
-  <div class="form-group">
-    <label class="form-label">EMAIL</label>
-    <input name="email" type="email" class="form-input" placeholder="jane@company.com" />
-  </div>
+<div class="form-group">
+  <label class="form-label">EMAIL</label>
+  <input name="email" type="email" class="form-input" placeholder="jane@company.com" />
+  <small class="error-message"></small>
+</div>
 
-  <div class="form-group">
-    <label class="form-label">MESSAGE</label>
-    <textarea name="message" class="form-textarea" placeholder="Tell me about your project..."></textarea>
-  </div>
+<div class="form-group">
+  <label class="form-label">MESSAGE</label>
+  <textarea name="message" class="form-textarea" placeholder="Tell me about your project..."></textarea>
+  <small class="error-message"></small>
+</div>
 
   <button id="submit-btn" type="submit" class="btn btn-primary" style="width:100%; justify-content:center">
     Send Message →
@@ -1636,10 +1651,73 @@ emailjs.init("IW4RGjwqjRI8v2pDy");
 const form = document.getElementById("contact-form");
 const button = document.getElementById("submit-btn");
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function setError(input, message) {
+  const group = input.parentElement;
+  const error = group.querySelector(".error-message");
+
+  error.textContent = message;
+  input.classList.add("input-error");
+}
+
+function clearError(input) {
+  const group = input.parentElement;
+  const error = group.querySelector(".error-message");
+
+  error.textContent = "";
+  input.classList.remove("input-error");
+}
+
+function validateForm() {
+  let isValid = true;
+
+  const name = form.name;
+  const email = form.email;
+  const message = form.message;
+
+  // NAME
+  if (!name.value.trim()) {
+    setError(name, "Name is required");
+    isValid = false;
+  } else {
+    clearError(name);
+  }
+
+  // EMAIL
+  if (!email.value.trim()) {
+    setError(email, "Email is required");
+    isValid = false;
+  } else if (!emailPattern.test(email.value.trim())) {
+    setError(email, "Enter a valid email");
+    isValid = false;
+  } else {
+    clearError(email);
+  }
+
+  // MESSAGE
+  if (!message.value.trim()) {
+    setError(message, "Message is required");
+    isValid = false;
+  } else {
+    clearError(message);
+  }
+
+  return isValid;
+}
+
+// Clear error while typing
+form.querySelectorAll("input, textarea").forEach((input) => {
+  input.addEventListener("input", () => clearError(input));
+});
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
+  if (!validateForm()) return;
+
   button.textContent = "Sending...";
+  button.disabled = true;
 
   emailjs.sendForm("service_x2j6fvi", "template_w31okso", this)
     .then(() => {
@@ -1649,11 +1727,11 @@ form.addEventListener("submit", function (event) {
     .catch((error) => {
       console.error("EmailJS Error:", error);
       button.textContent = "Failed to send";
-      alert("Message failed to send. Check console.");
     })
     .finally(() => {
       setTimeout(() => {
         button.textContent = "Send Message →";
+        button.disabled = false;
       }, 2000);
     });
 });
