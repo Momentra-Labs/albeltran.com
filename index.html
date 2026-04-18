@@ -58,6 +58,31 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    const music = $('#bg-music')[0];
+    const $btn = $('#music-toggle');
+    const $text = $('#music-text');
+    const $icon = $('#music-icon');
+
+    // Function para sa Play/Pause logic
+    $btn.on('click', function() {
+        if (music.paused) {
+            music.play().then(() => {
+                $icon.text("⏸");
+                $btn.css('background', '#a78bfa');
+            }).catch(error => {
+                console.log("Autoplay blocked: Browser requires manual click.");
+            });
+        } else {
+            music.pause();
+            $icon.text("🎵");
+            $btn.css('background', '#1a1a1a');
+        }
+    });
+});
+</script>
 <style>
 /* ─── RESET & ROOT ────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1021,6 +1046,33 @@ footer {
 </head>
 <body>
 
+<audio id="bg-music" loop>
+  <source src="saturnlullaby.mp3" type="audio/mpeg">
+</audio>
+
+<button id="music-toggle" 
+   style="
+     position: fixed;
+     bottom: 25px; /* Sakto sa taas ng chat button */
+     left: 20px;
+     background: #0084ff;
+     color: white;
+     padding: 14px 18px;
+     border-radius: 50px;
+     border: none;
+     font-family: sans-serif;
+     font-size: 14px;
+     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+     z-index: 99999;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     transition: all 0.3s ease;
+   ">
+  <span id="music-icon">🎵</span>
+</button>
+
 <a href="https://m.me/codebypawpu" target="_blank"
    style="
      position: fixed;
@@ -1062,10 +1114,12 @@ footer {
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
+</div>
   </ul>
   <div class="nav-hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
+  
 </nav>
 
 <!-- HERO -->
@@ -1692,7 +1746,12 @@ footer {
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
+<script>
+// Ito ang "Autoclick" pagkalapag na pagkalapag ng website
+$(window).on('load', function() {
+     $('#music-toggle').trigger('click');
+});
+</script>
 <script>
 emailjs.init("IW4RGjwqjRI8v2pDy");
 
