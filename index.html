@@ -201,7 +201,7 @@ section { position: relative; z-index: 1; }
 #hero {
   min-height: 100vh;
   display: flex; align-items: center;
-  padding: 140px 0 80px;
+  padding: 140px 0 150px;
   position: relative; overflow: hidden;
 }
 
@@ -364,7 +364,7 @@ section { position: relative; z-index: 1; }
 .btn-ghost:hover { color: var(--text); border-color: var(--line-bright); }
 
 .hero-stats {
-  display: flex; gap: 40px; margin-top: 72px; flex-wrap: wrap;
+  display: flex; gap: 40px; margin-top: 32px; flex-wrap: wrap;
   opacity: 0;
   animation: fadeUp 0.8s var(--ease) 1.0s forwards;
 }
@@ -387,15 +387,55 @@ section { position: relative; z-index: 1; }
 }
 
 /* Scroll indicator */
+/* Default (desktop) */
 .scroll-hint {
-  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  opacity: 0.4;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   animation: fadeIn 1s 1.5s forwards;
 }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 0.4; } }
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+  .scroll-hint {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    bottom: 35px;
+    opacity: 0.6; /* optional: make it more visible on small screens */
+  }
+}
+
+.scroll-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+
+  animation: arrowBounce 1.5s infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 90% { transform: translate(-50%, 0) rotate(45deg); }
+  50% { transform: translate(-50%, 6px) rotate(45deg); }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 0.6; } }
 .scroll-hint span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--text-dim); }
-.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollLine 2s ease-in-out infinite; }
+.scroll-line { width: 3px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollLine 2s ease-in-out infinite; }
 @keyframes scrollLine { 0%,100%{transform:scaleY(1);transform-origin:top} 50%{transform:scaleY(0.4);transform-origin:top} }
 
 @keyframes fadeUp {
@@ -1094,7 +1134,7 @@ footer {
     </div>
   </div>
   <div class="scroll-hint">
-    <span>SCROLL</span>
+    <span>Keep scrolling — it gets interesting 👀</span>
     <div class="scroll-line"></div>
   </div>
 </section>
