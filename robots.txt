@@ -1,4 +1,4 @@
-# https://al-beltran.github.io — allow indexing; point crawlers to the sitemap.
+# https://codemoon2019.github.io — allow indexing; point crawlers to the sitemap.
 User-agent: *
 Allow: /
 
@@ -21,4 +21,4 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-Sitemap: https://al-beltran.github.io/sitemap.xml
+Sitemap: https://codemoon2019.github.io/sitemap.xml
