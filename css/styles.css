@@ -88,6 +88,10 @@ nav {
   letter-spacing: 0.05em;
   text-decoration: none;
 }
+.nav-logo-sub {
+  color: var(--text-muted);
+  font-weight: 400;
+}
 .nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a {
   font-size: 13px;
@@ -532,6 +536,25 @@ section { position: relative; z-index: 1; }
   color: var(--text-dim);
   letter-spacing: 0.1em;
 }
+.project-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-2);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.project-name--featured { font-size: 28px; margin: 12px 0 16px; }
+.project-desc--spaced { margin-bottom: 20px; }
+.project-card--full { grid-column: 1 / -1; }
+.project-name--etl { font-size: 24px; margin: 12px 0 12px; }
+.project-desc--compact { margin-bottom: 16px; }
+.project-etl-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 40px;
+}
+.project-tech--spaced { margin-top: 16px; }
 .project-name {
   font-size: 22px;
   font-weight: 700;
@@ -874,7 +897,7 @@ footer {
 }
 .footer-left { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
 .footer-right { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); }
-.footer-right span { color: var(--accent); }
+.footer-brand { color: var(--accent); font-weight: 600; }
 
 /* ─── SCROLL ANIMATIONS ───────────────────────────────────────── */
 .reveal {
@@ -921,6 +944,7 @@ footer {
 /* ─── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
+  .nav-logo { font-size: 12px; max-width: 55vw; line-height: 1.35; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -947,6 +971,7 @@ footer {
   .eda-arrow { transform: rotate(90deg); }
   .ai-workflow { grid-template-columns: 1fr; }
   .about-cards { grid-template-columns: 1fr; }
+  .project-etl-cols { grid-template-columns: 1fr; }
 }
 
 .error-message {
@@ -1007,4 +1032,52 @@ footer {
 
 .sysdesign-ai-wrap {
   margin-top: 56px;
+}
+
+/* ─── FORM STATUS (EmailJS fallback messaging) ──────────────── */
+.form-status {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-top: 12px;
+  min-height: 1.2em;
+}
+.form-status a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.form-status.is-error { color: #f0a8a8; }
+.form-status.is-success { color: var(--accent-3); }
+
+/* ─── ACCESSIBILITY: reduced motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { cursor: auto; }
+  #cursor, #cursor-ring {
+    display: none !important;
+  }
+  .hero-grid, .orb {
+    animation: none !important;
+  }
+  .hero-badge, .hero-name, .hero-title, .hero-tagline, .hero-ctas, .hero-stats {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .scroll-hint {
+    opacity: 0.6 !important;
+    animation: none !important;
+  }
+  .scroll-line { animation: none !important; }
+  .scroll-line::after { animation: none !important; }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .reveal.visible {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

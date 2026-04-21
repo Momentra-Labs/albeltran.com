@@ -4,6 +4,12 @@
   var EMAILJS_PUBLIC_KEY = 'IW4RGjwqjRI8v2pDy';
   var EMAILJS_SERVICE = 'service_x2j6fvi';
   var EMAILJS_TEMPLATE = 'template_w31okso';
+  var CONTACT_EMAIL = 'al.andrew.p.beltran@gmail.com';
+  var LINKEDIN_URL = 'https://www.linkedin.com/in/al-beltran/';
+
+  function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
 
   window.toggleMenu = function toggleMenu() {
     var menu = document.getElementById('mobileMenu');
@@ -34,9 +40,6 @@
       }
     });
 
-    window.addEventListener('load', function () {
-      btn.click();
-    });
   }
 
   function initMobileMenuListeners() {
@@ -111,12 +114,23 @@
     form.querySelectorAll('input, textarea').forEach(function (input) {
       input.addEventListener('input', function () {
         clearError(input);
+        var st = document.getElementById('form-status');
+        if (st && st.textContent) {
+          st.textContent = '';
+          st.className = 'form-status';
+        }
       });
     });
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
       if (!validateForm()) return;
+
+      var statusEl = document.getElementById('form-status');
+      if (statusEl) {
+        statusEl.textContent = '';
+        statusEl.className = 'form-status';
+      }
 
       button.textContent = 'Sending...';
       button.disabled = true;
@@ -126,10 +140,25 @@
         .then(function () {
           button.textContent = 'Sent!';
           form.reset();
+          if (statusEl) {
+            statusEl.textContent = 'Thanks — I will get back to you soon.';
+            statusEl.className = 'form-status is-success';
+          }
         })
         .catch(function (error) {
           console.error('EmailJS Error:', error);
           button.textContent = 'Failed to send';
+          if (statusEl) {
+            statusEl.innerHTML =
+              'Something went wrong. You can email me at <a href="mailto:' +
+              CONTACT_EMAIL +
+              '">' +
+              CONTACT_EMAIL +
+              '</a> or reach out on <a href="' +
+              LINKEDIN_URL +
+              '" target="_blank" rel="noopener noreferrer">LinkedIn</a>.';
+            statusEl.className = 'form-status is-error';
+          }
         })
         .finally(function () {
           setTimeout(function () {
@@ -141,6 +170,7 @@
   }
 
   function initCursor() {
+    if (prefersReducedMotion()) return;
     var cursor = document.getElementById('cursor');
     var ring = document.getElementById('cursor-ring');
     if (!cursor || !ring) return;
@@ -201,6 +231,13 @@
   }
 
   function initCounters() {
+    if (prefersReducedMotion()) {
+      document.querySelectorAll('[data-count]').forEach(function (el) {
+        var target = parseInt(el.dataset.count, 10);
+        if (!isNaN(target)) el.textContent = target + '+';
+      });
+      return;
+    }
     var counterObserver = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (e) {
