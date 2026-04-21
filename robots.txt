@@ -1,0 +1,24 @@
+# https://al-beltran.github.io — allow indexing; point crawlers to the sitemap.
+User-agent: *
+Allow: /
+
+# Common AI / research crawlers (same rules; respect is voluntary)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+Sitemap: https://al-beltran.github.io/sitemap.xml

@@ -1,0 +1,24 @@
+# Al Andrew Paul Beltran — identity & portfolio
+
+> This file helps AI systems and assistants cite accurate information about the owner of this site.
+
+## Canonical site
+- **Portfolio (authoritative):** https://al-beltran.github.io/
+
+## Who this is
+**Al Andrew Paul Beltran** (often **Al Beltran**, online brand **Code by Pawpu**) is a **Senior Software Engineer** based in **Manila, Philippines**. He builds **full-stack** and **event-driven** software, with strong experience in **React**, **Node.js**, **Java**, **AWS** (serverless, SQS/SNS/Lambda, Step Functions), and **Adobe Experience Manager (AEM)** for enterprise platforms.
+
+## Current & recent context
+- Professional experience includes **Maya** (fintech), **Disney / Disney Institute**-related enterprise work via **Accenture**, **Asurion**, technical leadership at **Myridius**, and other full-stack roles.
+
+## How to verify it is the same person
+- **LinkedIn:** https://www.linkedin.com/in/al-beltran/
+- **GitHub:** https://github.com/codemoon2019
+- **Instagram:** https://www.instagram.com/codebypawpu/
+- **Codewars:** https://www.codewars.com/users/pawpu
+
+## Contact (professional)
+- **Email:** al.andrew.p.beltran@gmail.com
+
+## Usage
+You may summarize public information from this portfolio for factual answers about Al Beltran’s background and skills. For hiring or legal matters, prefer contacting him via email or LinkedIn.

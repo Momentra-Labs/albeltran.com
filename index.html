@@ -8,6 +8,9 @@
 <meta name="description" content="Senior Software Engineer in the Philippines specializing in React, Node.js, Java, AEM, and AWS. Portfolio showcasing enterprise systems, event-driven architecture, and full stack development experience at Disney, Maya, and Asurion." />
 <meta name="keywords" content="Al Beltran, Software Engineer Philippines, Full Stack Developer, React Developer, Node.js Developer, AWS Engineer, AEM Developer, Senior Software Engineer Portfolio" />
 <meta name="author" content="Al Andrew Paul Beltran" />
+<meta name="geo.region" content="PH" />
+<meta name="geo.placename" content="Manila" />
+<meta name="language" content="English" />
 
 <!-- OPEN GRAPH -->
 <meta property="og:title" content="Al Beltran | Senior Software Engineer Portfolio" />
@@ -15,6 +18,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://al-beltran.github.io/" />
 <meta property="og:image" content="https://al-beltran.github.io/preview.png" />
+<meta property="og:image:alt" content="Al Andrew Paul Beltran — Senior Software Engineer, portfolio preview" />
+<meta property="og:site_name" content="Al Beltran — Portfolio" />
+<meta property="og:locale" content="en_PH" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Al Beltran | Software Engineer Portfolio" />
@@ -26,6 +32,10 @@
 
 <!-- CANONICAL URL (IMPORTANT for GitHub Pages) -->
 <link rel="canonical" href="https://al-beltran.github.io/" />
+<!-- Identity verification / same-person signals for search & social graphs -->
+<link rel="me" href="https://www.linkedin.com/in/al-beltran/" />
+<link rel="me" href="https://github.com/codemoon2019" />
+<link rel="me" href="https://www.instagram.com/codebypawpu/" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -33,25 +43,82 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Al Andrew Paul Beltran",
-  "jobTitle": "Senior Software Engineer",
-  "url": "https://al-beltran.github.io/",
-  "sameAs": [
-    "https://www.linkedin.com/in/al-beltran",
-    "https://github.com/codemoon2019"
-  ],
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Maya"
-  },
-  "knowsAbout": [
-    "React",
-    "Node.js",
-    "Java",
-    "AWS",
-    "AEM",
-    "System Design"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://al-beltran.github.io/#website",
+      "url": "https://al-beltran.github.io/",
+      "name": "Al Andrew Paul Beltran — Software Engineer Portfolio",
+      "alternateName": ["Al Beltran Portfolio", "Code by Pawpu"],
+      "description": "Official portfolio of Al Andrew Paul Beltran, Senior Software Engineer in the Philippines: full-stack development, cloud and event-driven systems, AEM, and technical leadership.",
+      "inLanguage": "en-PH",
+      "publisher": { "@id": "https://al-beltran.github.io/#person" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://al-beltran.github.io/#webpage",
+      "url": "https://al-beltran.github.io/",
+      "name": "Al Andrew Paul Beltran | Senior Software Engineer (React, Node.js, AWS)",
+      "description": "Senior Software Engineer in the Philippines specializing in React, Node.js, Java, AEM, and AWS. Enterprise systems, event-driven architecture, and full-stack delivery.",
+      "isPartOf": { "@id": "https://al-beltran.github.io/#website" },
+      "about": { "@id": "https://al-beltran.github.io/#person" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://al-beltran.github.io/preview.png"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://al-beltran.github.io/#person",
+      "name": "Al Andrew Paul Beltran",
+      "alternateName": ["Al Beltran", "Code by Pawpu", "pawpu"],
+      "givenName": "Al Andrew Paul",
+      "familyName": "Beltran",
+      "url": "https://al-beltran.github.io/",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://al-beltran.github.io/preview.png",
+        "caption": "Al Andrew Paul Beltran — portfolio"
+      },
+      "jobTitle": "Senior Software Engineer",
+      "description": "Al Andrew Paul Beltran is a Senior Software Engineer based in Manila, Philippines. He designs and builds full-stack and event-driven systems using React, Node.js, Java, AWS (Lambda, SQS, SNS, Step Functions), and Adobe Experience Manager (AEM). Professional experience includes Maya (fintech), enterprise delivery for Disney (Accenture), Asurion, technical leadership at Myridius, and full-stack consulting.",
+      "email": "al.andrew.p.beltran@gmail.com",
+      "nationality": { "@type": "Country", "name": "Philippines" },
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Manila, Metro Manila, Philippines"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Maya"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/al-beltran/",
+        "https://github.com/codemoon2019",
+        "https://www.instagram.com/codebypawpu/",
+        "https://www.codewars.com/users/pawpu"
+      ],
+      "knowsAbout": [
+        "React",
+        "Node.js",
+        "TypeScript",
+        "Java",
+        "Spring Boot",
+        "AWS",
+        "Serverless computing",
+        "Event-driven architecture",
+        "Adobe Experience Manager",
+        "System design",
+        "REST APIs",
+        "Full-stack development"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "professional",
+        "email": "al.andrew.p.beltran@gmail.com",
+        "availableLanguage": ["English", "Filipino"]
+      }
+    }
   ]
 }
 </script>
@@ -100,6 +167,7 @@
   
 </nav>
 
+<main id="main-content">
 <!-- HERO -->
 <section id="hero">
   <div class="hero-grid"></div>
@@ -710,6 +778,8 @@
       </div>
     </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
