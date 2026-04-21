@@ -329,8 +329,7 @@ section { position: relative; z-index: 1; }
   margin-top: 2px;
 }
 
-/* Scroll indicator */
-/* Default (desktop) */
+/* Scroll indicator — minimalist mouse (portfolio-style) */
 .scroll-hint {
   position: absolute;
   bottom: 40px;
@@ -339,51 +338,60 @@ section { position: relative; z-index: 1; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  animation: fadeIn 1s 1.5s forwards;
+  gap: 10px;
+  animation: scrollHintFade 1s 1.5s forwards;
+  opacity: 0;
+  color: rgba(180, 188, 210, 0.55);
+}
+.scroll-hint:hover {
+  color: rgba(200, 208, 230, 0.75);
 }
 
-/* Mobile adjustment */
+.scroll-hint-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.scroll-mouse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-mouse-svg {
+  display: block;
+  overflow: visible;
+}
+
+.scroll-mouse-wheel {
+  animation: scrollMouseWheel 2s ease-in-out infinite;
+  transform-origin: 14px 15px;
+}
+
+@keyframes scrollMouseWheel {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  45% { transform: translateY(9px); opacity: 0.65; }
+  55% { transform: translateY(9px); opacity: 0.65; }
+}
+
+@keyframes scrollHintFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @media (max-width: 768px) {
   .scroll-hint {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%; 
-    bottom: 35px;
-    opacity: 0.6; /* optional: make it more visible on small screens */
+    bottom: 32px;
+    width: 100%;
   }
 
   #hero {
     padding: 100px 0 150px;
   }
 }
-
-.scroll-line::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid var(--accent);
-  border-bottom: 2px solid var(--accent);
-
-  animation: arrowBounce 1.5s infinite;
-}
-
-@keyframes arrowBounce {
-  0%, 90% { transform: translate(-50%, 0) rotate(45deg); }
-  50% { transform: translate(-50%, 6px) rotate(45deg); }
-}
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 0.6; } }
-.scroll-hint span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; color: var(--text-dim); }
-.scroll-line { width: 3px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollLine 2s ease-in-out infinite; }
-@keyframes scrollLine { 0%,100%{transform:scaleY(1);transform-origin:top} 50%{transform:scaleY(0.4);transform-origin:top} }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -1147,11 +1155,13 @@ footer {
     transform: none !important;
   }
   .scroll-hint {
-    opacity: 0.6 !important;
+    opacity: 1 !important;
     animation: none !important;
   }
-  .scroll-line { animation: none !important; }
-  .scroll-line::after { animation: none !important; }
+  .scroll-mouse-wheel {
+    animation: none !important;
+    transform: translateY(4px);
+  }
   .reveal {
     opacity: 1 !important;
     transform: none !important;
