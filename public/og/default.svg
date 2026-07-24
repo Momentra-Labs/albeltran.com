@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Al Beltran Portfolio">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#050507"/>
+      <stop offset="50%" stop-color="#0c0c14"/>
+      <stop offset="100%" stop-color="#071018"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="#4f8eff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#4f8eff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="80" y="250" fill="#f0f0f5" font-family="Geist, Arial, sans-serif" font-size="64" font-weight="600">Al Beltran</text>
+  <text x="80" y="320" fill="#8b8b9c" font-family="Geist, Arial, sans-serif" font-size="28">Senior Software Engineer</text>
+  <text x="80" y="380" fill="#4f8eff" font-family="Geist, Arial, sans-serif" font-size="22">React · Node.js · AWS · AEM · Event-driven systems</text>
+  <text x="80" y="540" fill="#555566" font-family="Geist, Arial, sans-serif" font-size="18">codemoon2019.github.io</text>
+</svg>

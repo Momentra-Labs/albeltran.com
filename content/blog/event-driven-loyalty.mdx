@@ -1,0 +1,36 @@
+---
+title: "Designing Event-Driven Loyalty Rewards for Card Activation"
+description: "How an activation-to-reward pipeline using SQS, SNS, Lambda, and Talon.One keeps fintech loyalty flows decoupled and operable."
+date: "2026-03-12"
+category: "Architecture"
+tags: ["event-driven", "aws", "loyalty", "fintech", "node.js"]
+---
+
+Card activation rewards look simple from a product brief: activate a card, issue a reward. In production, activation traffic, campaign rules, and reconciliation requirements make a synchronous request path fragile.
+
+## The core problem
+
+If activation services call a loyalty engine directly, every campaign change and every loyalty outage becomes an activation risk. Fintech systems also need auditability. You must be able to answer which activation produced which reward, and what happened when processing failed.
+
+## A practical event-driven shape
+
+A workable shape looks like this:
+
+1. **Activation produces an event** with a stable identifier.
+2. **A message bus** (SNS/SQS) decouples producers from processors.
+3. **Lambda processors** orchestrate campaign evaluation.
+4. **Talon.One** evaluates campaign eligibility.
+5. **Reward issuance and reconciliation** complete the path with explicit retries.
+
+This is the architecture pattern behind loyalty work I have done in fintech contexts: keep activation responsive, move reward logic into asynchronous processors, and treat reconciliation as a first-class concern.
+
+## Why documentation matters here
+
+Event-driven systems fail socially before they fail technically. Product, engineering, and operations need a shared vocabulary for idempotency keys, retry windows, and what "reward issued" actually means. System design docs are part of delivery, not optional polish.
+
+## Takeaways
+
+- Decouple activation from reward evaluation.
+- Make idempotency and reconciliation explicit.
+- Keep third-party loyalty engines behind clear API boundaries.
+- Write the contracts down so the next engineer does not rediscover them in an incident.

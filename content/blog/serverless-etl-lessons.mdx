@@ -1,0 +1,31 @@
+---
+title: "Lessons from Serverless ETL on AWS"
+description: "What matters when Lambda, S3, and Step Functions process high-volume data under production SLAs."
+date: "2025-05-09"
+category: "Cloud"
+tags: ["aws", "serverless", "etl", "step-functions", "lambda"]
+---
+
+Serverless ETL is attractive because it scales with load and avoids fixed server pools. It becomes expensive when orchestration, retries, and observability are treated as afterthoughts.
+
+## A production-shaped pipeline
+
+A durable pattern uses:
+
+- **S3** for landing and intermediate data
+- **Lambda** for transform stages
+- **Step Functions** for orchestration
+- **API Gateway** for downstream consumers that should not speak raw pipeline internals
+
+This shape supports high-volume processing with elastic throughput when each stage has clear failure handling.
+
+## Lessons that stick
+
+- Multi-stage transforms need explicit retry and dead-letter behavior.
+- Monitoring must map to SLA questions operators actually ask.
+- Downstream APIs should expose stable contracts, not temporary file layouts.
+- Cost visibility matters; unbounded retries can become a budget incident.
+
+## Takeaways
+
+Serverless ETL works when workflow orchestration is designed with the same care as the transform code. Elastic compute does not replace operational clarity.

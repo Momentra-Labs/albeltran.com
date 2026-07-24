@@ -1,0 +1,30 @@
+---
+title: "Cutting System Load Time from 15 Seconds to 2 Seconds"
+description: "A practical account of performance work on a high-availability insurance technology platform: find the critical path, measure, then simplify."
+date: "2025-08-21"
+category: "Performance"
+tags: ["performance", "optimization", "node.js", "reliability"]
+---
+
+A 15-second load time is not a minor UX issue. It is an operational tax. People stop trusting the tool, workarounds appear, and every release becomes harder to validate because the baseline experience is already painful.
+
+## Start with the critical path
+
+Performance work fails when teams optimize random queries or micro-benchmarks disconnected from user waits. The useful first question is: which request path blocks the screen the user is staring at?
+
+On high-availability insurance technology work, the improvement from roughly 15 seconds to 2 seconds came from architecture and path optimization on the routes that mattered, not from decorative micro-optimizations.
+
+## What usually moves the needle
+
+- Remove unnecessary sequential calls on the critical path.
+- Cache stable reference data with clear invalidation rules.
+- Shrink payloads for first paint and progressive enrichment.
+- Measure before and after with the same user journey.
+
+## Reliability stays in scope
+
+Faster systems that fail opaquely are not a win. Keep timeouts, fallbacks, and observability in the same change set as latency work. A two-second success path with a clear failure mode beats a one-second path that hangs.
+
+## Takeaways
+
+Treat load time as a product requirement. Find the path users wait on, change that path deliberately, and prove the improvement with the same journey you claimed to fix.

@@ -1,0 +1,30 @@
+---
+title: "Reusable AEM Components That Actually Reduce Authoring Work"
+description: "Lessons from enterprise Adobe Experience Manager delivery on making component libraries useful for authors, not just developers."
+date: "2025-11-04"
+category: "Enterprise"
+tags: ["aem", "cms", "react", "enterprise", "components"]
+---
+
+Enterprise CMS programs often ship component libraries that look complete in demos and still create duplicate authoring work in production. The gap is usually not React skill. It is whether components encode real authoring workflows.
+
+## What authors actually need
+
+Authors need predictable dialogs, sensible defaults, and components that compose without hidden constraints. A "flexible" component that requires tribal knowledge becomes slower than a narrower component with clear intent.
+
+On Disney Institute platform work, reusable AEM components mattered because multiple teams authored content for a global professional audience. Consistency was a delivery requirement, not a design preference.
+
+## Patterns that help
+
+- **Name components after author jobs**, not implementation details.
+- **Share contracts across teams** so variations do not fork silently.
+- **Document examples in the authoring context**, not only in engineering wikis.
+- **Prefer composable primitives** over one mega-component that tries to do everything.
+
+## The engineering side
+
+AEM work sits between content governance and frontend presentation. React is useful where interaction demands it, but the platform win comes from architecture that reduces duplicate authoring and keeps content structures maintainable at scale.
+
+## Takeaways
+
+Reusable AEM systems succeed when developers optimize for authoring time and governance, not only for component elegance in isolation.
