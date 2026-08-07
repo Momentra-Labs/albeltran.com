@@ -17,8 +17,8 @@ import {
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Contact",
-  description: `Contact ${person.name} — email, LinkedIn, GitHub, location, and availability for senior engineering roles and consulting.`,
+  title: "Contact Al Beltran",
+  description: `Contact Al Beltran (Al Andrew Paul Beltran) — Senior Software Engineer and Full-Stack Developer in the Philippines. Email, LinkedIn, GitHub, and availability.`,
   path: "/contact/",
 });
 

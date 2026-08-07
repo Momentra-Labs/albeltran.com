@@ -68,7 +68,7 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/projects/disney-institute-placeholder.svg",
-        alt: "Disney Institute platform case study visual placeholder",
+        alt: "Disney Institute enterprise AEM platform case study cover for Al Beltran",
       },
     ],
     demo: "https://www.disneyinstitute.com/",
@@ -120,10 +120,11 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/projects/fwd-placeholder.svg",
-        alt: "FWD Smart Recruitment case study visual placeholder",
+        alt: "FWD Smart Recruitment full-stack MVP case study cover",
       },
     ],
     demo: "https://smart-recruitment.fwd.com.ph/login",
+    relatedArticles: ["ai-augmented-engineering"],
     relatedExperience: ["yondu"],
   },
   {
@@ -172,7 +173,7 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/projects/maya-loyalty-placeholder.svg",
-        alt: "Maya card loyalty event pipeline visual placeholder",
+        alt: "Maya card activation and loyalty event-driven architecture diagram cover",
       },
     ],
     relatedArticles: ["event-driven-loyalty"],
@@ -218,9 +219,10 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/projects/disney-crew-placeholder.svg",
-        alt: "Disney Crew Management APIs case study visual placeholder",
+        alt: "Disney Crew Management API modernization case study cover",
       },
     ],
+    relatedArticles: ["performance-15s-to-2s"],
     relatedExperience: ["accenture"],
   },
   {
@@ -266,10 +268,11 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/projects/etl-placeholder.svg",
-        alt: "ETL serverless pipeline visual placeholder",
+        alt: "Serverless ETL data processing pipeline on AWS case study cover",
       },
     ],
     relatedArticles: ["serverless-etl-lessons"],
+    relatedExperience: ["accenture"],
   },
 ];
 

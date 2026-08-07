@@ -4,7 +4,7 @@ export const SITE_URL =
 
 export const SITE_NAME = "Al Beltran — Portfolio";
 export const SITE_DESCRIPTION =
-  "Official portfolio of Al Andrew Paul Beltran, Senior Software Engineer in Manila, Philippines — React, Node.js, Java, AWS, AEM, and event-driven systems.";
+  "Al Beltran (Al Andrew Paul Beltran) is a Senior Software Engineer and Full-Stack Developer based in the Philippines. Portfolio covering React, Next.js, TypeScript, Node.js, Java, Spring Boot, Laravel, AEM, and cloud systems — https://albeltran.com";
 
 export const NAV_LINKS = [
   { href: "/about/", label: "About" },

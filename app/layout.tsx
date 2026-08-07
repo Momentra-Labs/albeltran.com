@@ -3,8 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PlausibleAnalytics } from "@/components/layout/plausible";
-import { defaultMetadata } from "@/lib/seo";
-import { SITE_URL } from "@/lib/constants";
+import { defaultMetadata, PRIMARY_TITLE } from "@/lib/seo";
+import { SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
 import "./globals.css";
 
@@ -22,24 +22,51 @@ export const metadata: Metadata = {
   ...defaultMetadata,
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${person.name} | Senior Software Engineer (React, Node.js, AWS)`,
+    default: PRIMARY_TITLE,
     template: `%s · ${person.shortName}`,
   },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_URL.replace("https://", ""),
   keywords: [
     "Al Beltran",
     "Al Andrew Paul Beltran",
-    "Software Engineer Philippines",
+    "Al Beltran Software Engineer",
+    "Al Beltran Developer",
+    "Al Beltran Philippines",
+    "Senior Software Engineer",
     "Full Stack Developer",
-    "React Developer",
-    "Node.js Developer",
-    "AWS Engineer",
-    "AEM Developer",
-    "Senior Software Engineer Portfolio",
+    "Software Engineer Philippines",
+    "React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
   ],
   authors: [{ name: person.name, url: SITE_URL }],
+  creator: person.name,
+  publisher: person.name,
   openGraph: {
     ...defaultMetadata.openGraph,
+    title: PRIMARY_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
     type: "website",
+    siteName: "Al Beltran — Portfolio",
+    images: [
+      {
+        url: `${SITE_URL}/og/default.jpg`,
+        secureUrl: `${SITE_URL}/og/default.jpg`,
+        width: 1200,
+        height: 630,
+        alt: PRIMARY_TITLE,
+        type: "image/jpeg",
+      },
+    ],
+  },
+  twitter: {
+    ...defaultMetadata.twitter,
+    title: PRIMARY_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [`${SITE_URL}/og/default.jpg`],
   },
   other: {
     "geo.region": "PH",

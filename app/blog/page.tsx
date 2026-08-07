@@ -10,6 +10,7 @@ import {
   personSchema,
   webPageSchema,
 } from "@/lib/schema";
+import { SITE_URL } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -36,9 +37,10 @@ export default function BlogPage() {
     ]),
     {
       "@type": "Blog",
-      "@id": "https://albeltran.com/blog/#blog",
+      "@id": `${SITE_URL}/blog/#blog`,
       name: `${person.shortName} Blog`,
-      author: { "@id": "https://albeltran.com/#person" },
+      url: `${SITE_URL}/blog/`,
+      author: { "@id": `${SITE_URL}/#person` },
     },
   ]);
 

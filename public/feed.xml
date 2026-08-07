@@ -2,41 +2,41 @@
 <rss version="2.0">
   <channel>
     <title>Al Beltran — Engineering Blog</title>
-    <link>https://codemoon2019.github.io/blog/</link>
+    <link>https://albeltran.com/blog/</link>
     <description>Articles on architecture, performance, cloud, and engineering workflows by Al Andrew Paul Beltran.</description>
     <language>en-ph</language>
   <item>
     <title>Designing Event-Driven Loyalty Rewards for Card Activation</title>
-    <link>https://codemoon2019.github.io/blog/event-driven-loyalty/</link>
-    <guid>https://codemoon2019.github.io/blog/event-driven-loyalty/</guid>
+    <link>https://albeltran.com/blog/event-driven-loyalty/</link>
+    <guid>https://albeltran.com/blog/event-driven-loyalty/</guid>
     <pubDate>Thu, 12 Mar 2026 00:00:00 GMT</pubDate>
     <description>How an activation-to-reward pipeline using SQS, SNS, Lambda, and Talon.One keeps fintech loyalty flows decoupled and operable.</description>
   </item>
   <item>
     <title>AI-Augmented Engineering Without Outsourcing Judgment</title>
-    <link>https://codemoon2019.github.io/blog/ai-augmented-engineering/</link>
-    <guid>https://codemoon2019.github.io/blog/ai-augmented-engineering/</guid>
+    <link>https://albeltran.com/blog/ai-augmented-engineering/</link>
+    <guid>https://albeltran.com/blog/ai-augmented-engineering/</guid>
     <pubDate>Sun, 18 Jan 2026 00:00:00 GMT</pubDate>
     <description>How Claude and Cursor can compress design, coding, and review cycles while keeping architecture and production decisions human-owned.</description>
   </item>
   <item>
     <title>Reusable AEM Components That Actually Reduce Authoring Work</title>
-    <link>https://codemoon2019.github.io/blog/aem-reusable-components/</link>
-    <guid>https://codemoon2019.github.io/blog/aem-reusable-components/</guid>
+    <link>https://albeltran.com/blog/aem-reusable-components/</link>
+    <guid>https://albeltran.com/blog/aem-reusable-components/</guid>
     <pubDate>Tue, 04 Nov 2025 00:00:00 GMT</pubDate>
     <description>Lessons from enterprise Adobe Experience Manager delivery on making component libraries useful for authors, not just developers.</description>
   </item>
   <item>
     <title>Cutting System Load Time from 15 Seconds to 2 Seconds</title>
-    <link>https://codemoon2019.github.io/blog/performance-15s-to-2s/</link>
-    <guid>https://codemoon2019.github.io/blog/performance-15s-to-2s/</guid>
+    <link>https://albeltran.com/blog/performance-15s-to-2s/</link>
+    <guid>https://albeltran.com/blog/performance-15s-to-2s/</guid>
     <pubDate>Thu, 21 Aug 2025 00:00:00 GMT</pubDate>
     <description>A practical account of performance work on a high-availability insurance technology platform: find the critical path, measure, then simplify.</description>
   </item>
   <item>
     <title>Lessons from Serverless ETL on AWS</title>
-    <link>https://codemoon2019.github.io/blog/serverless-etl-lessons/</link>
-    <guid>https://codemoon2019.github.io/blog/serverless-etl-lessons/</guid>
+    <link>https://albeltran.com/blog/serverless-etl-lessons/</link>
+    <guid>https://albeltran.com/blog/serverless-etl-lessons/</guid>
     <pubDate>Fri, 09 May 2025 00:00:00 GMT</pubDate>
     <description>What matters when Lambda, S3, and Step Functions process high-volume data under production SLAs.</description>
   </item>

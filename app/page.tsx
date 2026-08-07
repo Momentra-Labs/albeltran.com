@@ -16,13 +16,15 @@ import {
   webPageSchema,
   websiteSchema,
 } from "@/lib/schema";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION } from "@/lib/constants";
 
 export const metadata = buildMetadata({
-  title: `${person.name} | Senior Software Engineer (React, Node.js, AWS)`,
+  title: PRIMARY_TITLE,
   description: SITE_DESCRIPTION,
   path: "/",
+  absoluteTitle: true,
+  image: "/og/default.jpg",
 });
 
 export default function HomePage() {
@@ -31,7 +33,7 @@ export default function HomePage() {
     personSchema(),
     webPageSchema({
       path: "/",
-      name: `${person.name} | Senior Software Engineer (React, Node.js, AWS)`,
+      name: PRIMARY_TITLE,
       description: SITE_DESCRIPTION,
     }),
     faqSchema(homeFaqs),
@@ -47,8 +49,8 @@ export default function HomePage() {
       <Testimonials />
       <Section
         label="Discoverability"
-        title="Common questions"
-        description="Straight answers for search engines, assistants, and visitors verifying the right profile."
+        title="Common questions about Al Beltran"
+        description="Straight answers for search engines, assistants, and visitors verifying the right engineering profile."
       >
         <FAQ items={homeFaqs} title="FAQ" />
       </Section>

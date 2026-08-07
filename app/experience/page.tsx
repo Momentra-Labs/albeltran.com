@@ -13,8 +13,8 @@ import {
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Experience",
-  description: `Career timeline for ${person.name}: Maya, Myridius, Asurion, Yondu, Accenture, freelance, and GoETU — roles, achievements, technologies, and business impact.`,
+  title: "Experience — Al Beltran",
+  description: `Career timeline for Al Beltran (Al Andrew Paul Beltran), Senior Software Engineer: Google via High Spring, Maya, Myridius, Asurion, Yondu, Accenture, freelance, and GoETU.`,
   path: "/experience/",
 });
 

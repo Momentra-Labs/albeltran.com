@@ -1,6 +1,17 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/shared/container";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Page not found · Al Beltran",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function NotFound() {
   return (
@@ -12,12 +23,15 @@ export default function NotFound() {
         Page not found
       </h1>
       <p className="mt-4 max-w-md text-muted">
-        That URL doesn’t exist on this portfolio. Try the home page, projects, or
-        contact.
+        That URL doesn&apos;t exist on Al Beltran&apos;s portfolio. Try the home
+        page, about, projects, or contact.
       </p>
       <div className="mt-8 flex flex-wrap gap-3">
         <Button asChild>
           <Link href="/">Go home</Link>
+        </Button>
+        <Button asChild variant="secondary">
+          <Link href="/about/">About Al Beltran</Link>
         </Button>
         <Button asChild variant="secondary">
           <Link href="/projects/">View projects</Link>

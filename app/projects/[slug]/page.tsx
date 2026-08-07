@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ExternalLink, Code2 } from "lucide-react";
@@ -6,7 +7,9 @@ import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { experience } from "@/content/experience";
 import { getProject, projects } from "@/content/projects";
+import { person } from "@/content/person";
 import { getAllPosts } from "@/lib/mdx";
 import {
   breadcrumbSchema,
@@ -28,8 +31,8 @@ export async function generateMetadata({ params }: Props) {
   const project = getProject(slug);
   if (!project) return {};
   return buildMetadata({
-    title: project.name,
-    description: project.tagline,
+    title: `${project.name} — Case Study`,
+    description: `${project.tagline} Role: ${project.role}. Built by ${person.shortName} using ${project.techStack.slice(0, 5).join(", ")}.`,
     path: `/projects/${project.slug}/`,
   });
 }
@@ -42,12 +45,15 @@ export default async function ProjectDetailPage({ params }: Props) {
   const relatedArticles = getAllPosts().filter((post) =>
     project.relatedArticles?.includes(post.slug),
   );
+  const relatedRoles = experience.filter((item) =>
+    project.relatedExperience?.includes(item.id),
+  );
 
   const schema = graphSchema([
     personSchema(),
     webPageSchema({
       path: `/projects/${project.slug}/`,
-      name: project.name,
+      name: `${project.name} — Case Study by ${person.shortName}`,
       description: project.overview,
     }),
     breadcrumbSchema([
@@ -72,7 +78,14 @@ export default async function ProjectDetailPage({ params }: Props) {
         ]}
       />
       <Container className="py-16">
-        <p className="mb-10 text-sm text-muted-dim">{project.role}</p>
+        <p className="mb-4 text-sm text-muted-dim">{project.role}</p>
+        <p className="mb-10 max-w-3xl text-base leading-relaxed text-muted">
+          Case study by{" "}
+          <Link href="/about/" className="text-accent hover:underline">
+            Al Beltran
+          </Link>{" "}
+          ({person.name}), Senior Software Engineer and Full-Stack Developer.
+        </p>
 
         <div className="mb-10 flex flex-wrap gap-3">
           {project.demo && (
@@ -102,16 +115,20 @@ export default async function ProjectDetailPage({ params }: Props) {
               <p className="mt-4 leading-relaxed text-muted">{project.overview}</p>
             </section>
             <section>
-              <h2 className="text-2xl font-semibold text-foreground">Problem</h2>
+              <h2 className="text-2xl font-semibold text-foreground">
+                The problem
+              </h2>
               <p className="mt-4 leading-relaxed text-muted">{project.problem}</p>
             </section>
             <section>
-              <h2 className="text-2xl font-semibold text-foreground">Solution</h2>
+              <h2 className="text-2xl font-semibold text-foreground">
+                The solution
+              </h2>
               <p className="mt-4 leading-relaxed text-muted">{project.solution}</p>
             </section>
             <section>
               <h2 className="text-2xl font-semibold text-foreground">
-                Architecture
+                Architecture & engineering decisions
               </h2>
               <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
                 {project.architecture.map((item) => (
@@ -125,18 +142,25 @@ export default async function ProjectDetailPage({ params }: Props) {
               </h2>
               <div className="mt-4 grid gap-4">
                 {project.screenshots.map((shot) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <div
                     key={shot.src}
-                    src={shot.src}
-                    alt={shot.alt}
-                    className="w-full border border-border bg-surface"
-                  />
+                    className="relative aspect-video w-full overflow-hidden border border-border bg-surface"
+                  >
+                    <Image
+                      src={shot.src}
+                      alt={shot.alt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 720px"
+                      className="object-cover"
+                    />
+                  </div>
                 ))}
               </div>
             </section>
             <section>
-              <h2 className="text-2xl font-semibold text-foreground">Features</h2>
+              <h2 className="text-2xl font-semibold text-foreground">
+                Key features
+              </h2>
               <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
                 {project.features.map((item) => (
                   <li key={item}>{item}</li>
@@ -145,7 +169,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </section>
             <section>
               <h2 className="text-2xl font-semibold text-foreground">
-                Challenges
+                Technical challenges
               </h2>
               <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
                 {project.challenges.map((item) => (
@@ -187,6 +211,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       >
                         {post.title}
                       </Link>
+                      <p className="text-sm text-muted">{post.description}</p>
                     </li>
                   ))}
                 </ul>
@@ -203,17 +228,44 @@ export default async function ProjectDetailPage({ params }: Props) {
                 ))}
               </div>
             </div>
+            {relatedRoles.length > 0 && (
+              <div className="border border-border bg-surface/50 p-5 text-sm">
+                <h3 className="font-medium text-foreground">Related experience</h3>
+                <ul className="mt-3 space-y-2 text-muted">
+                  {relatedRoles.map((role) => (
+                    <li key={role.id}>
+                      <Link
+                        href="/experience/"
+                        className="text-accent hover:underline"
+                      >
+                        {role.role} at {role.company}
+                      </Link>
+                      <span className="block text-xs text-muted-dim">
+                        {role.duration}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="border border-border bg-surface/50 p-5 text-sm text-muted">
               <p>
-                See also{" "}
-                <Link href="/experience/" className="text-accent hover:underline">
-                  experience
-                </Link>{" "}
-                and{" "}
+                More about{" "}
+                <Link href="/about/" className="text-accent hover:underline">
+                  Al Beltran
+                </Link>
+                , the full{" "}
+                <Link
+                  href="/experience/"
+                  className="text-accent hover:underline"
+                >
+                  experience timeline
+                </Link>
+                , and{" "}
                 <Link href="/blog/" className="text-accent hover:underline">
-                  writing
-                </Link>{" "}
-                related to this work.
+                  engineering writing
+                </Link>
+                .
               </p>
             </div>
           </aside>

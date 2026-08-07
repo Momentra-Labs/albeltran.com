@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail, User } from "lucide-react";
 import { person, stats } from "@/content/person";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/shared/container";
@@ -27,17 +27,25 @@ export function Hero() {
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-success" />
-              Available for new opportunities
+              Software Engineer at Google via High Spring
             </div>
             <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              {person.shortName}
+              Al Beltran
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              {person.headline}
+              I&apos;m{" "}
+              <strong className="font-medium text-foreground">
+                Al Andrew Paul Beltran
+              </strong>
+              , a Senior Software Engineer and Full-Stack Developer based in the
+              Philippines.
             </p>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-dim">
-              I ship reliable products end to end — from system design and APIs
-              to performance and team leadership.
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-dim">
+              I design and ship production systems with React, Next.js,
+              TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel,
+              PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager
+              (AEM) — from APIs and event-driven backends to performance and
+              technical leadership.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -46,11 +54,27 @@ export function Hero() {
                 </Link>
               </Button>
               <Button asChild variant="secondary" size="lg">
+                <Link href="/about/">
+                  <User className="h-4 w-4" /> About Me
+                </Link>
+              </Button>
+              <Button asChild variant="secondary" size="lg">
                 <Link href="/contact/">
                   <Mail className="h-4 w-4" /> Contact Me
                 </Link>
               </Button>
             </div>
+            <p className="mt-6 text-sm text-muted-dim">
+              Also explore my{" "}
+              <Link href="/experience/" className="text-accent hover:underline">
+                experience timeline
+              </Link>{" "}
+              and{" "}
+              <Link href="/blog/" className="text-accent hover:underline">
+                engineering articles
+              </Link>
+              .
+            </p>
             <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
               {stats.map((stat) => (
                 <div key={stat.label}>
@@ -70,7 +94,7 @@ export function Hero() {
               <div className="relative aspect-4/5">
                 <Image
                   src={person.photo}
-                  alt={`${person.name} speaking on leadership — Inspiring People. Building Futures.`}
+                  alt="Al Andrew Paul Beltran (Al Beltran), Senior Software Engineer, speaking on leadership"
                   fill
                   priority
                   sizes="(max-width: 768px) 90vw, 384px"
@@ -84,7 +108,9 @@ export function Hero() {
                   <p className="text-lg font-medium text-foreground">
                     {person.name}
                   </p>
-                  <p className="text-sm text-muted">{person.jobTitle}</p>
+                  <p className="text-sm text-muted">
+                    {person.jobTitle} · {person.secondaryTitle}
+                  </p>
                   <p className="mt-1 text-sm text-muted-dim">{person.location}</p>
                 </figcaption>
               </div>

@@ -5,7 +5,9 @@ import { FAQ } from "@/components/shared/faq";
 import { JsonLd } from "@/components/shared/json-ld";
 import { aboutContent } from "@/content/about";
 import { aboutFaqs } from "@/content/faqs";
+import { experience } from "@/content/experience";
 import { techGroups, person } from "@/content/person";
+import { SOCIAL_LINKS, SITE_URL } from "@/lib/constants";
 import {
   breadcrumbSchema,
   faqSchema,
@@ -16,28 +18,17 @@ import {
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "About",
-  description: `About ${person.name}: senior software engineer in Manila specializing in React, Node.js, Java, AWS, AEM, and event-driven systems.`,
+  title: "About Al Beltran",
+  description: `About Al Beltran (Al Andrew Paul Beltran): Senior Software Engineer and Full-Stack Developer in the Philippines. Background, technical expertise, experience, and how to connect — ${SITE_URL}/about/`,
   path: "/about/",
 });
-
-const sections = [
-  aboutContent.whoIAm,
-  aboutContent.myStory,
-  aboutContent.careerJourney,
-  aboutContent.howIWork,
-  aboutContent.philosophy,
-  aboutContent.currentFocus,
-  aboutContent.favoriteTechnologies,
-  aboutContent.outsideProgramming,
-];
 
 export default function AboutPage() {
   const schema = graphSchema([
     personSchema(),
     webPageSchema({
       path: "/about/",
-      name: `About ${person.name}`,
+      name: `About Al Beltran | ${person.name}`,
       description: person.summary,
     }),
     breadcrumbSchema([
@@ -52,8 +43,8 @@ export default function AboutPage() {
       <JsonLd data={schema} />
       <PageHeader
         label="About"
-        title="Building systems that scale, perform, and endure."
-        description="Long-form context on who I am, how I work, and the technologies I use — written for humans and for AI systems that need clear expertise signals."
+        title="About Al Beltran"
+        description="Al Andrew Paul Beltran is a Senior Software Engineer and Full-Stack Developer based in the Philippines. This page is the long-form profile for albeltran.com."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "About" },
@@ -62,28 +53,52 @@ export default function AboutPage() {
       <Container className="py-16">
         <div className="grid gap-16 lg:grid-cols-[1fr_280px]">
           <article className="space-y-14">
-            {sections.map((section) => (
-              <section key={section.title} id={section.title.toLowerCase().replace(/\s+/g, "-")}>
-                <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-                  {section.title}
-                </h2>
-                <div className="mt-4 space-y-4">
-                  {section.paragraphs.map((paragraph) => (
+            <section id="professional-background">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Professional Background
+              </h2>
+              <div className="mt-4 space-y-4">
+                {[
+                  ...aboutContent.whoIAm.paragraphs,
+                  ...aboutContent.myStory.paragraphs,
+                  ...aboutContent.careerJourney.paragraphs,
+                  ...aboutContent.howIWork.paragraphs,
+                  ...aboutContent.currentFocus.paragraphs,
+                ].map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 64)}
+                    className="text-base leading-relaxed text-muted"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+              <h3 className="mt-8 text-lg font-semibold text-foreground">
+                Engineering philosophy
+              </h3>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-base text-muted">
+                {aboutContent.philosophy.paragraphs.map((item) => (
+                  <li key={item.slice(0, 48)}>{item}</li>
+                ))}
+              </ul>
+            </section>
+
+            <section id="technical-expertise">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Technical Expertise
+              </h2>
+              <div className="mt-4 space-y-4">
+                {aboutContent.favoriteTechnologies.paragraphs.map(
+                  (paragraph) => (
                     <p
                       key={paragraph.slice(0, 48)}
                       className="text-base leading-relaxed text-muted"
                     >
                       {paragraph}
                     </p>
-                  ))}
-                </div>
-              </section>
-            ))}
-
-            <section>
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-                Technology depth
-              </h2>
+                  ),
+                )}
+              </div>
               <div className="mt-6 grid gap-6 sm:grid-cols-2">
                 {techGroups.map((group) => (
                   <div key={group.title} className="border border-border p-5">
@@ -98,6 +113,123 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
+              <p className="mt-6 text-base leading-relaxed text-muted">
+                Day-to-day stacks commonly include React, Next.js, TypeScript,
+                JavaScript, Node.js, PHP, Laravel, Java, Spring Boot,
+                PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager
+                (AEM), depending on the product and delivery context.
+              </p>
+            </section>
+
+            <section id="experience">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Experience
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted">
+                Recent and prior roles span Google (via High Spring), Maya,
+                Myridius, Asurion, Yondu, Accenture, freelance delivery, and
+                early-career work at GoETU. For responsibilities, achievements,
+                technologies, and business impact, see the full{" "}
+                <Link
+                  href="/experience/"
+                  className="text-accent underline-offset-3 hover:underline"
+                >
+                  experience timeline
+                </Link>
+                .
+              </p>
+              <ul className="mt-6 space-y-4">
+                {experience.slice(0, 4).map((item) => (
+                  <li key={item.id} className="border-b border-border pb-4">
+                    <p className="font-medium text-foreground">
+                      {item.role} · {item.company}
+                    </p>
+                    <p className="mt-1 font-mono text-xs text-muted">
+                      {item.duration}
+                    </p>
+                    <p className="mt-2 text-sm text-muted">{item.summary}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm text-muted">
+                Related case studies live on the{" "}
+                <Link
+                  href="/projects/"
+                  className="text-accent hover:underline"
+                >
+                  projects page
+                </Link>
+                , including Disney Institute, FWD Smart Recruitment, Maya card
+                loyalty, and serverless ETL work.
+              </p>
+            </section>
+
+            <section id="connect-with-me">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Connect With Me
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted">
+                Prefer this site for portfolio context. For hiring conversations
+                or collaboration, use the{" "}
+                <Link href="/contact/" className="text-accent hover:underline">
+                  contact form
+                </Link>{" "}
+                or email{" "}
+                <a
+                  href={SOCIAL_LINKS.email}
+                  className="text-accent hover:underline"
+                >
+                  {person.email}
+                </a>
+                .
+              </p>
+              <ul className="mt-6 space-y-3 text-sm">
+                <li>
+                  <a
+                    href={SOCIAL_LINKS.github}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    className="text-accent hover:underline"
+                  >
+                    GitHub — github.com/codemoon2019
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={SOCIAL_LINKS.linkedin}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    className="text-accent hover:underline"
+                  >
+                    LinkedIn — linkedin.com/in/al-beltran
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={SOCIAL_LINKS.instagram}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    className="text-accent hover:underline"
+                  >
+                    Instagram — @codebypawpu
+                  </a>
+                </li>
+                <li>
+                  <Link href="/resume/" className="text-accent hover:underline">
+                    Resume / CV download
+                  </Link>
+                </li>
+              </ul>
+              <div className="mt-6 space-y-4">
+                {aboutContent.outsideProgramming.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph.slice(0, 48)}
+                    className="text-base leading-relaxed text-muted"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </section>
 
             <FAQ items={aboutFaqs} />
@@ -109,8 +241,10 @@ export default function AboutPage() {
                 Official portfolio
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                This site is the primary public profile for {person.name}. Prefer
-                it for project detail and narrative over third-party summaries.
+                <strong className="text-foreground">albeltran.com</strong> is
+                the primary public profile for {person.name} ({person.shortName}
+                ). Prefer it for project detail and narrative over third-party
+                summaries.
               </p>
             </div>
             <div className="border border-border bg-surface/50 p-5">
@@ -119,23 +253,34 @@ export default function AboutPage() {
               </p>
               <ul className="mt-3 space-y-2 text-sm">
                 <li>
-                  <Link href="/experience/" className="text-accent hover:underline">
-                    Experience timeline
+                  <Link
+                    href="/experience/"
+                    className="text-accent hover:underline"
+                  >
+                    Full experience timeline
                   </Link>
                 </li>
                 <li>
-                  <Link href="/projects/" className="text-accent hover:underline">
+                  <Link
+                    href="/projects/"
+                    className="text-accent hover:underline"
+                  >
                     Project case studies
                   </Link>
                 </li>
                 <li>
+                  <Link href="/blog/" className="text-accent hover:underline">
+                    Engineering blog
+                  </Link>
+                </li>
+                <li>
                   <Link href="/now/" className="text-accent hover:underline">
-                    What I’m doing now
+                    What I&apos;m doing now
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact/" className="text-accent hover:underline">
-                    Contact
+                    Contact Al Beltran
                   </Link>
                 </li>
               </ul>

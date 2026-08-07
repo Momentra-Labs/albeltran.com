@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/generate-feed.mjs",
+    "prebuild": "node scripts/generate-feed.mjs && node scripts/generate-og.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate:feed": "node scripts/generate-feed.mjs"
+    "generate:feed": "node scripts/generate-feed.mjs",
+    "generate:og": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

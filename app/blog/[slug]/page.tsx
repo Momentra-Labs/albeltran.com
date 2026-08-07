@@ -34,6 +34,9 @@ export async function generateMetadata({ params }: Props) {
       description: post.description,
       path: `/blog/${post.slug}/`,
       type: "article",
+      publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
+      tags: post.tags,
     });
   } catch {
     return {};
@@ -131,13 +134,21 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         <p className="mt-12 text-sm text-muted">
-          More writing in the{" "}
-          <Link href="/blog/" className="text-accent hover:underline">
-            blog index
+          Written by{" "}
+          <Link href="/about/" className="text-accent hover:underline">
+            Al Beltran
           </Link>
-          . Explore related{" "}
+          . Browse the{" "}
+          <Link href="/blog/" className="text-accent hover:underline">
+            engineering blog
+          </Link>
+          , related{" "}
           <Link href="/projects/" className="text-accent hover:underline">
-            projects
+            project case studies
+          </Link>
+          , or the{" "}
+          <Link href="/experience/" className="text-accent hover:underline">
+            experience timeline
           </Link>
           .
         </p>

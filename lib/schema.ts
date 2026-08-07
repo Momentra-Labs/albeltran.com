@@ -12,18 +12,30 @@ export function personSchema() {
     givenName: "Al Andrew Paul",
     familyName: "Beltran",
     url: SITE_URL,
+    mainEntityOfPage: `${SITE_URL}/`,
     image: {
       "@type": "ImageObject",
       url: person.image,
-      caption: `${person.name} — portfolio`,
+      contentUrl: person.image,
+      caption: `${person.name} — Senior Software Engineer`,
     },
-    jobTitle: person.jobTitle,
+    jobTitle: [person.jobTitle, person.secondaryTitle],
     description: person.summary,
     email: person.email,
     nationality: { "@type": "Country", name: "Philippines" },
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "PH",
+      addressLocality: "Manila",
+    },
     homeLocation: {
       "@type": "Place",
       name: person.location,
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "PH",
+        addressLocality: "Manila",
+      },
     },
     worksFor: {
       "@type": "Organization",
@@ -36,6 +48,7 @@ export function personSchema() {
       "@type": "ContactPoint",
       contactType: "professional",
       email: person.email,
+      url: `${SITE_URL}/contact/`,
       availableLanguage: ["English", "Filipino"],
     },
   };
@@ -46,9 +59,14 @@ export function websiteSchema() {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
-    name: `${person.name} — Software Engineer Portfolio`,
-    alternateName: ["Al Beltran Portfolio", "Code by Pawpu"],
+    name: "Al Beltran — Senior Software Engineer | Full-Stack Developer",
+    alternateName: [
+      "Al Beltran Portfolio",
+      "Al Andrew Paul Beltran Portfolio",
+      "Code by Pawpu",
+    ],
     description: person.summary,
+    about: { "@id": `${SITE_URL}/#person` },
     inLanguage: "en-PH",
     publisher: { "@id": `${SITE_URL}/#person` },
     copyrightHolder: { "@id": `${SITE_URL}/#person` },
@@ -142,11 +160,14 @@ export function articleSchema({
 }) {
   const url = `${SITE_URL}${path}`;
   return {
-    "@type": "BlogPosting",
+    "@type": ["BlogPosting", "Article"],
     headline: title,
     description,
     url,
-    mainEntityOfPage: url,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
     datePublished,
     dateModified: dateModified ?? datePublished,
     author: { "@id": `${SITE_URL}/#person` },
@@ -154,7 +175,9 @@ export function articleSchema({
       "@type": "Person",
       name: person.name,
       url: SITE_URL,
+      image: person.image,
     },
+    image: person.image,
     keywords: tags?.join(", "),
     inLanguage: "en-PH",
     isPartOf: {

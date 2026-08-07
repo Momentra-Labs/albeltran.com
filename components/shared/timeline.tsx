@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ExperienceItem } from "@/content/experience";
+import { getProject } from "@/content/projects";
 import { Badge } from "@/components/ui/badge";
 
 export function Timeline({ items }: { items: ExperienceItem[] }) {
@@ -58,18 +59,21 @@ export function Timeline({ items }: { items: ExperienceItem[] }) {
 
               {item.relatedProjects && item.relatedProjects.length > 0 && (
                 <p className="text-sm text-muted">
-                  Related:{" "}
-                  {item.relatedProjects.map((slug, index) => (
-                    <span key={slug}>
-                      {index > 0 && ", "}
-                      <Link
-                        href={`/projects/${slug}/`}
-                        className="text-accent underline-offset-3 hover:underline"
-                      >
-                        {slug}
-                      </Link>
-                    </span>
-                  ))}
+                  Related projects:{" "}
+                  {item.relatedProjects.map((slug, index) => {
+                    const project = getProject(slug);
+                    return (
+                      <span key={slug}>
+                        {index > 0 && ", "}
+                        <Link
+                          href={`/projects/${slug}/`}
+                          className="text-accent underline-offset-3 hover:underline"
+                        >
+                          {project?.name ?? slug}
+                        </Link>
+                      </span>
+                    );
+                  })}
                 </p>
               )}
             </div>
