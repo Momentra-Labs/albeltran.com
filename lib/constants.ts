@@ -1,4 +1,7 @@
-export const SITE_URL = "https://codemoon2019.github.io";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
+  "https://albeltran.com";
+
 export const SITE_NAME = "Al Beltran — Portfolio";
 export const SITE_DESCRIPTION =
   "Official portfolio of Al Andrew Paul Beltran, Senior Software Engineer in Manila, Philippines — React, Node.js, Java, AWS, AEM, and event-driven systems.";

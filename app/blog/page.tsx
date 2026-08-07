@@ -36,9 +36,9 @@ export default function BlogPage() {
     ]),
     {
       "@type": "Blog",
-      "@id": "https://codemoon2019.github.io/blog/#blog",
+      "@id": "https://albeltran.com/blog/#blog",
       name: `${person.shortName} Blog`,
-      author: { "@id": "https://codemoon2019.github.io/#person" },
+      author: { "@id": "https://albeltran.com/#person" },
     },
   ]);
 

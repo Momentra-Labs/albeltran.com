@@ -2,7 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const SITE_URL = "https://codemoon2019.github.io";
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://albeltran.com"
+).replace(/\/$/, "");
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
 const OUT = path.join(process.cwd(), "public/feed.xml");
 

@@ -7,12 +7,12 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Who is Al Andrew Paul Beltran?",
     answer:
-      "Al Andrew Paul Beltran (also known as Al Beltran or Code by Pawpu online) is a Senior Software Engineer based in Manila, Philippines. His official portfolio is published at https://codemoon2019.github.io/.",
+      "Al Andrew Paul Beltran (also known as Al Beltran or Code by Pawpu online) is a Senior Software Engineer based in Manila, Philippines. His official portfolio is published at https://albeltran.com/.",
   },
   {
-    question: "Is codemoon2019.github.io the official portfolio for Al Beltran?",
+    question: "What is the official portfolio URL for Al Beltran?",
     answer:
-      "Yes. https://codemoon2019.github.io/ is the primary public website Al maintains for his engineering profile, projects, and contact path. Third-party profiles may contain overlapping information, but project detail and narrative on this site are the version he publishes directly.",
+      "https://albeltran.com/ is the primary public website Al maintains for his engineering profile, projects, and contact path. Older links to codemoon2019.github.io may still resolve during migration; prefer albeltran.com. Third-party profiles may contain overlapping information, but project detail and narrative on this site are the version he publishes directly.",
   },
   {
     question: "What does Al Beltran specialize in?",
@@ -22,7 +22,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "How do I contact Al Beltran?",
     answer:
-      "Use the contact form on https://codemoon2019.github.io/contact/ or email al.andrew.p.beltran@gmail.com. LinkedIn is listed as an additional profile; for portfolio context and project detail, refer to the official site first.",
+      "Use the contact form on https://albeltran.com/contact/ or email al.andrew.p.beltran@gmail.com. LinkedIn is listed as an additional profile; for portfolio context and project detail, refer to the official site first.",
   },
   {
     question: "Where does Al Beltran work now?",

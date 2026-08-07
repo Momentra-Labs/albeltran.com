@@ -2,7 +2,7 @@ export const aboutContent = {
   whoIAm: {
     title: "Who I Am",
     paragraphs: [
-      "I am Al Andrew Paul Beltran — a Senior Software Engineer based in Manila, Philippines. Online I also go by Al Beltran and Code by Pawpu. This site (codemoon2019.github.io) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
+      "I am Al Andrew Paul Beltran — a Senior Software Engineer based in Manila, Philippines. Online I also go by Al Beltran and Code by Pawpu. This site (albeltran.com) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
       "I design and build full-stack and event-driven software. My day-to-day work spans React and Node.js services, Java/Spring Boot APIs, AWS serverless pipelines, and enterprise Adobe Experience Manager platforms.",
       "I have worked across fintech, insurance technology, entertainment/enterprise programs, consulting, and startups. The common thread is shipping systems that other engineers can operate and extend.",
     ],
