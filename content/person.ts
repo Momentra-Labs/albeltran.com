@@ -45,8 +45,8 @@ export const person = {
     SOCIAL_LINKS.codewars,
   ],
   url: SITE_URL,
-  image: `${SITE_URL}/assets/professional-photo.jpg`,
-  photo: "/assets/professional-photo.jpg",
+  image: `${SITE_URL}/assets/professional-photo.png`,
+  photo: "/assets/professional-photo.png",
 } as const;
 
 export const stats = [

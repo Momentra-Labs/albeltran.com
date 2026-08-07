@@ -3,7 +3,7 @@ import path from "path";
 import sharp from "sharp";
 
 const ROOT = process.cwd();
-const PHOTO = path.join(ROOT, "public/assets/professional-photo.jpg");
+const PHOTO = path.join(ROOT, "public/assets/professional-photo.png");
 const OUT_DIR = path.join(ROOT, "public/og");
 const OUT_JPG = path.join(OUT_DIR, "default.jpg");
 const OUT_PNG = path.join(OUT_DIR, "default.png");
