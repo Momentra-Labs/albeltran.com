@@ -17,11 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/now/",
     "/resume/",
     "/contact/",
+    "/apps/gloves-up/privacy/",
   ].map((path) => ({
     url: `${SITE_URL}${path || "/"}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : 0.8,
+    priority: path === "" ? 1 : path.includes("/privacy/") ? 0.5 : 0.8,
   }));
 
   const projectRoutes = projects.map((project) => ({

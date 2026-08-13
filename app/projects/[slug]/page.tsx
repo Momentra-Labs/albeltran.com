@@ -106,6 +106,11 @@ export default async function ProjectDetailPage({ params }: Props) {
               </a>
             </Button>
           )}
+          {project.privacyPolicy && (
+            <Button asChild variant="secondary">
+              <a href={project.privacyPolicy}>Privacy policy</a>
+            </Button>
+          )}
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[1fr_280px]">

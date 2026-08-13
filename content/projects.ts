@@ -18,6 +18,8 @@ export type Project = {
   screenshots: { src: string; alt: string }[];
   repository?: string;
   demo?: string;
+  /** Public privacy policy URL (e.g. for store-listed apps). */
+  privacyPolicy?: string;
   relatedArticles?: string[];
   relatedExperience?: string[];
 };
@@ -273,6 +275,53 @@ export const projects: Project[] = [
     ],
     relatedArticles: ["serverless-etl-lessons"],
     relatedExperience: ["accenture"],
+  },
+  {
+    slug: "gloves-up",
+    name: "Gloves Up",
+    shortName: "Gloves Up",
+    tagline:
+      "Offline-first boxing training companion — timer, coach combos, macros, and sparring journal.",
+    role: "Solo founder · product & engineering (Momentra Labs)",
+    year: "2026",
+    featured: false,
+    overview:
+      "Gloves Up is a personal boxing training app that keeps workouts, goals, and sparring notes on-device. No signup and no cloud account — built for gyms and home sessions where connectivity is unreliable.",
+    problem:
+      "Boxing apps often push accounts, ads, or cloud sync when fighters mainly need a reliable timer, simple coaching cues, and a private training log.",
+    solution:
+      "Shipped an Expo React Native app with a round timer, voice coach combos, macros calculator, recovery check-ins, and local history — all offline-first with a clear privacy posture for store listing.",
+    architecture: [
+      "Expo Router client with local AsyncStorage persistence",
+      "On-device repositories for sessions, goals, and journal entries",
+      "No backend; privacy policy hosted on the developer portfolio",
+    ],
+    techStack: ["Expo", "React Native", "TypeScript", "Reanimated"],
+    features: [
+      "Configurable boxing timer with prep, bells, and warning cues",
+      "Coach punch combinations with on-device speech",
+      "Macros calculator and training history",
+      "Optional local notifications and sparring photo references",
+    ],
+    challenges: [
+      "Keeping UX simple for non-technical athletes",
+      "Store-ready privacy and offline data lifecycle without a backend",
+    ],
+    performance: [
+      "Works fully offline after install",
+      "Reset wipes on-device data and returns to welcome flow",
+    ],
+    lessons: [
+      "Offline-first products need an equally clear privacy story for stores",
+      "Timer and coach cues matter more than dashboards for training focus",
+    ],
+    screenshots: [
+      {
+        src: "/projects/gloves-up-placeholder.svg",
+        alt: "Gloves Up boxing training app case study cover",
+      },
+    ],
+    privacyPolicy: "https://albeltran.com/apps/gloves-up/privacy/",
   },
 ];
 
