@@ -290,10 +290,11 @@ export const projects: Project[] = [
     problem:
       "Boxing apps often push accounts, ads, or cloud sync when fighters mainly need a reliable timer, simple coaching cues, and a private training log.",
     solution:
-      "Shipped an Expo React Native app with a round timer, voice coach combos, macros calculator, recovery check-ins, and local history — all offline-first with a clear privacy posture for store listing.",
+      "Shipped an Expo React Native app with a round timer, voice coach combos, macros calculator, recovery check-ins, optional training video with on-screen timer, and local history — all offline-first with a clear privacy posture for store listing.",
     architecture: [
       "Expo Router client with local AsyncStorage persistence",
       "On-device repositories for sessions, goals, and journal entries",
+      "Optional camera / mic / gallery permissions for training video only",
       "No backend; privacy policy hosted on the developer portfolio",
     ],
     techStack: ["Expo", "React Native", "TypeScript", "Reanimated"],
@@ -301,6 +302,7 @@ export const projects: Project[] = [
       "Configurable boxing timer with prep, bells, and warning cues",
       "Coach punch combinations with on-device speech",
       "Macros calculator and training history",
+      "Optional training video recording with round timer HUD",
       "Optional local notifications and sparring photo references",
     ],
     challenges: [
