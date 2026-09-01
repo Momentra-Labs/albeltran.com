@@ -30,6 +30,7 @@
   --color-success: var(--success);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-instrument-serif);
 }
 
 html {
@@ -62,11 +63,15 @@ body {
   color: var(--foreground);
 }
 
-.bg-atmosphere {
-  background-color: var(--background);
-  background-image:
-    radial-gradient(ellipse 70% 40% at 50% -10%, rgba(79, 142, 255, 0.1), transparent 60%),
-    linear-gradient(180deg, #050507 0%, #07070c 40%, #050507 100%);
+.editorial-grain::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 .has-custom-cursor,
@@ -139,7 +144,7 @@ body {
   display: block;
 }
 
-.recruiter section {
+.recruiter section:not(.magazine-cover) {
   padding-block: 3rem;
 }
 

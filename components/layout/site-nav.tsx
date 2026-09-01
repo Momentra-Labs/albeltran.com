@@ -54,18 +54,18 @@ export function SiteNav() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-4 z-40 flex justify-center px-4">
-        <div className="flex h-12 w-full max-w-5xl items-center justify-between gap-3 border border-border/80 bg-background/80 px-3 backdrop-blur-xl sm:px-4">
+      <header className="fixed inset-x-0 top-3 z-40 flex justify-center px-4">
+        <div className="flex h-10 w-full max-w-6xl items-center justify-between gap-3 border border-border/60 bg-background/70 px-3 backdrop-blur-md sm:px-4">
           <Link
             href="/"
-            className="font-mono text-[11px] tracking-[0.18em] text-foreground"
+            className="font-mono text-[10px] tracking-[0.22em] text-muted hover:text-foreground"
             data-cursor="→"
           >
             AL BELTRAN
           </Link>
 
           <nav
-            className="hidden items-center gap-1 md:flex"
+            className="hidden items-center gap-0.5 md:flex"
             aria-label="Primary"
           >
             {SECTION_NAV.map((link) => (
@@ -74,7 +74,7 @@ export function SiteNav() {
                 href={link.href}
                 data-cursor="→"
                 className={cn(
-                  "px-2.5 py-1.5 font-mono text-[11px] tracking-[0.14em] uppercase transition-colors",
+                  "px-2.5 py-1 font-mono text-[10px] tracking-[0.18em] uppercase transition-colors",
                   isHome && active === link.hash
                     ? "text-foreground"
                     : "text-muted hover:text-foreground",
@@ -85,19 +85,19 @@ export function SiteNav() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1">
             <Button
               type="button"
               variant="ghost"
               size="sm"
-              className="hidden h-8 font-mono text-[10px] tracking-wider text-muted lg:inline-flex"
+              className="hidden h-7 font-mono text-[10px] tracking-[0.16em] text-muted lg:inline-flex"
               onClick={openPalette}
               aria-label="Open command palette"
             >
               Ctrl K
             </Button>
-            <RecruiterToggle className="hidden font-mono text-[10px] uppercase tracking-wider text-muted xl:inline" />
-            <Button asChild size="sm" className="h-8 rounded-md px-3 text-xs">
+            <RecruiterToggle className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-muted xl:inline" />
+            <Button asChild size="sm" className="h-7 rounded-sm px-3 text-[11px]">
               <Link href="/#contact" data-cursor="→">
                 Contact
               </Link>
@@ -107,7 +107,7 @@ export function SiteNav() {
                 <Button
                   variant="secondary"
                   size="icon"
-                  className="h-8 w-8 md:hidden"
+              className="h-7 w-7 md:hidden"
                   aria-label="Open menu"
                 >
                   <Menu className="h-4 w-4" />

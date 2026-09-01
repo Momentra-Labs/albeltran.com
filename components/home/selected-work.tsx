@@ -7,20 +7,21 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { Container } from "@/components/shared/container";
 import { ProjectDrawer } from "@/components/projects/project-drawer";
+import { cn } from "@/lib/utils";
 
 export function SelectedWork({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState<Project | null>(null);
   const reduce = useReducedMotion();
 
   return (
-    <section id="work" className="py-24 sm:py-32">
+    <section id="work" className="border-t border-border py-24 sm:py-32">
       <Container>
-        <div className="mb-14 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-16 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-              Selected work
+              The work
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="mt-3 font-display text-4xl tracking-tight text-foreground sm:text-5xl">
               Systems that had to ship
             </h2>
           </div>
@@ -33,55 +34,74 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
           </Link>
         </div>
 
-        <div className="space-y-16">
-          {projects.map((project, index) => (
-            <article
-              key={project.slug}
-              className="grid gap-8 border-t border-border pt-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12"
-            >
-              <div>
-                <p className="font-mono text-[11px] text-muted-dim">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-                  {project.name}
-                </h3>
-                <p className="mt-4 text-muted">{project.tagline}</p>
-                <p className="mt-3 text-sm text-muted-dim">{project.role}</p>
-                <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-                  {project.techStack.join(" · ")}
-                </p>
-                <button
-                  type="button"
-                  data-cursor="VIEW"
-                  className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-accent hover:text-accent-hover"
-                  onClick={() => setActive(project)}
-                >
-                  Explore project
-                </button>
-              </div>
-              <motion.button
-                type="button"
-                className="group relative aspect-16/10 overflow-hidden border border-border"
-                onClick={() => setActive(project)}
-                data-cursor="VIEW"
-                whileHover={reduce ? undefined : { scale: 1.01 }}
-                transition={{ duration: 0.4 }}
+        <div className="space-y-20">
+          {projects.map((project, index) => {
+            const reverse = index % 2 === 1;
+            return (
+              <article
+                key={project.slug}
+                className="grid gap-8 border-t border-border pt-10 lg:grid-cols-2 lg:items-end lg:gap-16"
               >
-                <Image
-                  src={project.screenshots[0]?.src ?? "/og/default.jpg"}
-                  alt={project.screenshots[0]?.alt ?? project.name}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 55vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </motion.button>
-              <p className="sr-only">
-                {project.overview} Problem: {project.problem} Solution:{" "}
-                {project.solution}
-              </p>
-            </article>
-          ))}
+                <div className={cn(reverse && "lg:order-2")}>
+                  <p className="font-mono text-[11px] text-accent">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="mt-3 font-display text-3xl tracking-tight text-foreground sm:text-4xl">
+                    {project.name}
+                  </h3>
+                  <p className="mt-4 max-w-md text-muted">{project.tagline}</p>
+                  <dl className="mt-6 grid grid-cols-2 gap-4 font-mono text-[10px] uppercase tracking-[0.16em]">
+                    <div>
+                      <dt className="text-muted-dim">Category</dt>
+                      <dd className="mt-1 text-foreground">
+                        {project.kind === "lab" ? "Lab" : "Engineering"}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-muted-dim">Year</dt>
+                      <dd className="mt-1 text-foreground">{project.year}</dd>
+                    </div>
+                  </dl>
+                  <p className="mt-4 text-sm text-muted-dim">{project.role}</p>
+                  <button
+                    type="button"
+                    data-cursor="VIEW"
+                    className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-accent hover:text-accent-hover"
+                    onClick={() => setActive(project)}
+                  >
+                    Explore project
+                  </button>
+                </div>
+                <motion.button
+                  type="button"
+                  className={cn(
+                    "group relative aspect-16/10 overflow-hidden border border-border",
+                    reverse && "lg:order-1",
+                  )}
+                  onClick={() => setActive(project)}
+                  data-cursor="VIEW"
+                  whileHover={reduce ? undefined : { scale: 1.01 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Image
+                    src={project.screenshots[0]?.src ?? "/og/default.jpg"}
+                    alt={project.screenshots[0]?.alt ?? project.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className={
+                      reduce
+                        ? "object-cover"
+                        : "object-cover transition-transform duration-700 group-hover:scale-105"
+                    }
+                  />
+                </motion.button>
+                <p className="sr-only">
+                  {project.overview} Problem: {project.problem} Solution:{" "}
+                  {project.solution}
+                </p>
+              </article>
+            );
+          })}
         </div>
       </Container>
       <ProjectDrawer
