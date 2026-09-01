@@ -8,7 +8,7 @@ import { person } from "@/content/person";
 
 const coverLines = [
   `${person.jobTitle} · previously Tech Lead`,
-  `At ${person.currentCompany} ${person.currentEmployerNote}`,
+  `Currently Software Engineer at ${person.currentCompany} ${person.currentEmployerNote}`,
   person.founderTitle,
   `I solo develop ${person.personalProducts.join(" · ")}`,
 ] as const;
