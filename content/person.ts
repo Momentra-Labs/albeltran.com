@@ -10,7 +10,7 @@ export const person = {
   founderTitle: "Founder, Momentra Labs",
   personalProducts: ["RentaraH", "Gloves Up", "PocketPOS", "QuickCart"],
   headline:
-    "Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. Developer of RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+    "Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. Solo developer of RentaraH, Gloves Up, PocketPOS, and QuickCart.",
   location: "Manila, Metro Manila, Philippines",
   email: "al.andrew.p.beltran@gmail.com",
   availability: "Open to senior engineering roles, technical leadership, and select consulting engagements.",

@@ -29,8 +29,8 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
           Personal products from Momentra Labs
         </h2>
         <p className="mt-4 max-w-2xl text-muted">
-          I develop RentaraH, Gloves Up, PocketPOS, and QuickCart as founder of
-          Momentra Labs — independent products I own end to end.
+          I solo develop RentaraH, Gloves Up, PocketPOS, and QuickCart as founder
+          of Momentra Labs — independent products I own end to end.
         </p>
         {showFilters ? (
           <div className="mt-8 flex flex-wrap gap-2">

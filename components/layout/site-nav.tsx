@@ -60,8 +60,9 @@ export function SiteNav() {
             href="/"
             className="font-mono text-[10px] tracking-[0.22em] text-muted hover:text-foreground"
             data-cursor="→"
+            aria-label={`${person.brand} home`}
           >
-            AL BELTRAN
+            {person.brand}
           </Link>
 
           <nav
@@ -115,7 +116,7 @@ export function SiteNav() {
               </SheetTrigger>
               <SheetContent>
                 <SheetHeader>
-                  <SheetTitle>{person.shortName}</SheetTitle>
+                  <SheetTitle>{person.brand}</SheetTitle>
                 </SheetHeader>
                 <nav className="flex flex-col gap-1" aria-label="Mobile">
                   {SECTION_NAV.map((link) => (

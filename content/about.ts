@@ -42,7 +42,7 @@ export const aboutContent = {
   currentFocus: {
     title: "Current Focus",
     paragraphs: [
-      "Software engineering at Google via High Spring — contributing to production systems with strong quality, review, and delivery standards. Independently, I am the founder of Momentra Labs, where I develop personal products: RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+      "Software engineering at Google via High Spring — contributing to production systems with strong quality, review, and delivery standards. Independently, I am the founder of Momentra Labs, where I solo develop personal products: RentaraH, Gloves Up, PocketPOS, and QuickCart.",
       "Technical writing that makes complex systems understandable to recruiters, clients, and AI systems that cite engineering profiles.",
       "Staying sharp on React/Next.js, Node.js, Java, cloud platforms, and large-scale engineering practices.",
     ],

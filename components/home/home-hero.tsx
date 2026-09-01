@@ -1,15 +1,16 @@
 "use client";
 
+import { useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { person } from "@/content/person";
 
 const coverLines = [
-  person.jobTitle,
+  `${person.jobTitle} · previously Tech Lead`,
   `At ${person.currentCompany} ${person.currentEmployerNote}`,
   person.founderTitle,
-  person.personalProducts.join(" · "),
+  `I solo develop ${person.personalProducts.join(" · ")}`,
 ] as const;
 
 function CoverLines() {
@@ -47,20 +48,56 @@ function IssueLockup({ className = "" }: { className?: string }) {
 
 export function HomeHero() {
   const reduce = useReducedMotion();
+  const coverRef = useRef<HTMLElement>(null);
+  const spotRef = useRef<HTMLDivElement>(null);
+
+  const onPointerMove = useCallback(
+    (event: React.PointerEvent<HTMLElement>) => {
+      if (reduce || event.pointerType === "touch") return;
+      const cover = coverRef.current;
+      const spot = spotRef.current;
+      if (!cover || !spot) return;
+      const rect = cover.getBoundingClientRect();
+      spot.style.setProperty(
+        "--spot-x",
+        `${((event.clientX - rect.left) / rect.width) * 100}%`,
+      );
+      spot.style.setProperty(
+        "--spot-y",
+        `${((event.clientY - rect.top) / rect.height) * 100}%`,
+      );
+    },
+    [reduce],
+  );
 
   return (
-    <section className="magazine-cover relative min-h-dvh bg-background lg:h-dvh lg:max-h-dvh lg:overflow-hidden">
+    <section
+      ref={coverRef}
+      onPointerMove={onPointerMove}
+      className="magazine-cover relative min-h-dvh lg:h-dvh lg:max-h-dvh lg:overflow-hidden"
+    >
+      <div className="magazine-cover-stage" aria-hidden>
+        <div className="magazine-cover-wash" />
+        <div ref={spotRef} className="magazine-cover-spot" />
+        <div className="magazine-cover-grid hidden lg:block" />
+        {reduce ? null : <div className="magazine-cover-grain" />}
+      </div>
       <div
         className="pointer-events-none absolute inset-3 z-20 hidden border border-border lg:block"
         aria-hidden
-      />
+      >
+        <span className="magazine-crop magazine-crop-tl" />
+        <span className="magazine-crop magazine-crop-tr" />
+        <span className="magazine-crop magazine-crop-bl" />
+        <span className="magazine-crop magazine-crop-br" />
+      </div>
 
       <p className="sr-only">
         I turn complex problems into scalable software — from enterprise
         platforms and financial systems to products I&apos;ve built from scratch
         as founder of {person.labs}. {person.name} ({person.shortName}), based in
         the Philippines. Software Engineer at Google via High Spring.
-        Products: {person.personalProducts.join(", ")}.
+        I solo develop {person.personalProducts.join(", ")}.
       </p>
 
       <motion.div
