@@ -1,21 +1,21 @@
-import Image from "next/image";
 import Link from "next/link";
 import { aboutContent } from "@/content/about";
-import { person } from "@/content/person";
 import { Container } from "@/components/shared/container";
 
 export function HomeAbout() {
   return (
-    <section id="about" className="py-24">
-      <Container className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+    <section id="about" className="border-t border-border py-24">
+      <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end lg:gap-16">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             About
           </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
+          <h2 className="mt-3 max-w-[12ch] font-display text-4xl tracking-tight text-foreground sm:text-5xl">
             Founder of Momentra Labs — still writing the code
           </h2>
-          <div className="mt-6 space-y-4 text-base leading-relaxed text-muted">
+        </div>
+        <div>
+          <div className="space-y-4 text-base leading-relaxed text-muted">
             {aboutContent.whoIAm.paragraphs.slice(0, 2).map((paragraph) => (
               <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}
@@ -29,17 +29,6 @@ export function HomeAbout() {
             Full about page
           </Link>
         </div>
-        <figure className="relative mx-auto w-full max-w-md">
-          <div className="relative aspect-4/5 overflow-hidden border border-border">
-            <Image
-              src={person.photo}
-              alt={`${person.name}, Senior Software Engineer and founder of ${person.labs}`}
-              fill
-              sizes="(max-width: 1024px) 90vw, 400px"
-              className="object-cover object-[center_18%]"
-            />
-          </div>
-        </figure>
       </Container>
     </section>
   );

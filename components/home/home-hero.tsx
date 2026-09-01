@@ -106,7 +106,7 @@ export function HomeHero() {
         transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
         className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_minmax(0,1fr)_auto] lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto]"
       >
-        <header className="flex items-start justify-between gap-6 px-5 pt-24 sm:px-8 lg:px-10">
+        <header className="flex items-start justify-between gap-6 px-5 pt-20 sm:px-8 lg:px-10">
           <p className="font-display text-[clamp(2.6rem,9vw,8.5rem)] leading-[0.82] tracking-tight text-foreground">
             AL BELTRAN
           </p>
@@ -121,21 +121,27 @@ export function HomeHero() {
 
         <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(17rem,42%)] lg:gap-10 lg:px-10 lg:py-0">
           <figure className="group relative flex min-h-0 flex-col lg:order-last lg:h-full">
-            <div className="editorial-grain relative aspect-[4/5] max-h-[42vh] overflow-hidden border border-border lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
+            <div className="magazine-portrait editorial-grain relative aspect-[3/4] max-h-[48vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
               <Image
                 src={person.photo}
                 alt="Al Andrew Paul Beltran (Al Beltran), Senior Software Engineer and founder of Momentra Labs"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className={`object-cover object-[center_18%] saturate-[0.92] ${
+                className={`magazine-portrait-img object-cover object-[center_8%] ${
                   reduce
                     ? ""
-                    : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    : "transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                 }`}
               />
+              <span className="magazine-portrait-ink" aria-hidden />
+              <span className="magazine-portrait-edge" aria-hidden />
             </div>
-            <figcaption className="mt-3 flex shrink-0 flex-wrap items-baseline justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+            <span
+              className="magazine-portrait-register hidden lg:block"
+              aria-hidden
+            />
+            <figcaption className="mt-3 flex shrink-0 flex-wrap items-baseline justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted lg:absolute lg:inset-x-3 lg:bottom-3 lg:z-[3] lg:mt-0 lg:bg-background/65 lg:px-3 lg:py-2 lg:backdrop-blur-[2px]">
               <span>Al Beltran / Manila</span>
               <span className="text-muted-dim">14.60° N / 120.98° E</span>
             </figcaption>

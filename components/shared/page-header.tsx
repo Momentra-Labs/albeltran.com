@@ -15,7 +15,7 @@ export function PageHeader({
   breadcrumbs,
 }: PageHeaderProps) {
   return (
-    <div className="border-b border-border pb-12 pt-32">
+    <div className="border-b border-border pb-12 pt-24">
       <Container>
         {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="mb-8" />}
         {label && (
