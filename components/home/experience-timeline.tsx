@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { ExperienceItem } from "@/content/experience";
 import { Container } from "@/components/shared/container";
 import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/shared/reveal";
 import Link from "next/link";
 
 export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
@@ -13,7 +14,7 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
   return (
     <section id="experience" className="py-16 sm:py-20">
       <Container>
-        <div className="mb-8 flex items-end justify-between gap-4">
+        <Reveal className="mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               Experience
@@ -29,7 +30,7 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
           >
             Full timeline
           </Link>
-        </div>
+        </Reveal>
         <ol className="relative border-l border-border pl-6 sm:pl-8">
           {visible.map((item, index) => (
             <motion.li

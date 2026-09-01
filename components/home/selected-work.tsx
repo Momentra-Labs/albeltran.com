@@ -7,6 +7,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { Container } from "@/components/shared/container";
 import { ProjectDrawer } from "@/components/projects/project-drawer";
+import { Reveal, RevealItem } from "@/components/shared/reveal";
 import { cn } from "@/lib/utils";
 
 export function SelectedWork({ projects }: { projects: Project[] }) {
@@ -16,7 +17,7 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
   return (
     <section id="work" className="py-16 sm:py-20">
       <Container>
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               The work
@@ -32,16 +33,14 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
           >
             All work
           </Link>
-        </div>
+        </Reveal>
 
         <div className="space-y-12">
           {projects.map((project, index) => {
             const reverse = index % 2 === 1;
             return (
-              <article
-                key={project.slug}
-                className="grid gap-6 border-t border-border pt-8 lg:grid-cols-2 lg:items-end lg:gap-12"
-              >
+              <RevealItem key={project.slug} index={index}>
+                <article className="grid gap-6 border-t border-border pt-8 lg:grid-cols-2 lg:items-end lg:gap-12">
                 <div className={cn(reverse && "lg:order-2")}>
                   <p className="font-mono text-[11px] text-accent">
                     {String(index + 1).padStart(2, "0")}
@@ -100,6 +99,7 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
                   {project.solution}
                 </p>
               </article>
+              </RevealItem>
             );
           })}
         </div>

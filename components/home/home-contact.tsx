@@ -5,12 +5,13 @@ import { Container } from "@/components/shared/container";
 import { homeFaqs } from "@/content/faqs";
 import { person } from "@/content/person";
 import { SOCIAL_LINKS } from "@/lib/constants";
+import { Reveal } from "@/components/shared/reveal";
 
 export function HomeContact() {
   return (
     <section id="contact" className="py-16 sm:py-20">
       <Container className="grid gap-14 lg:grid-cols-[1fr_1fr]">
-        <div>
+        <Reveal>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             Contact
           </p>
@@ -57,11 +58,11 @@ export function HomeContact() {
           <div className="mt-10 max-w-xl">
             <FAQ items={homeFaqs} title="Common questions" />
           </div>
-        </div>
-        <div className="border border-border p-6 sm:p-8">
+        </Reveal>
+        <Reveal delay={0.08} className="border border-border p-6 sm:p-8">
           <h3 className="mb-6 text-lg font-semibold text-foreground">Get in touch</h3>
           <ContactForm />
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

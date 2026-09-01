@@ -1,5 +1,6 @@
 import { now } from "@/content/now";
 import { Container } from "@/components/shared/container";
+import { Reveal, RevealItem } from "@/components/shared/reveal";
 import Link from "next/link";
 
 const groups = [
@@ -13,7 +14,7 @@ export function Currently() {
   return (
     <section id="now" className="py-16 sm:py-20">
       <Container>
-        <div className="mb-8 flex items-end justify-between">
+        <Reveal className="mb-8 flex items-end justify-between">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               Currently
@@ -30,13 +31,13 @@ export function Currently() {
           >
             Full now page
           </Link>
-        </div>
+        </Reveal>
         <div className="grid gap-8 sm:grid-cols-2">
-          {groups.map((group) => {
+          {groups.map((group, index) => {
             const section = now.sections.find((item) => item.title === group.source);
             if (!section) return null;
             return (
-              <div key={group.title}>
+              <RevealItem key={group.title} index={index}>
                 <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
                   {group.title}
                 </h3>
@@ -45,7 +46,7 @@ export function Currently() {
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-              </div>
+              </RevealItem>
             );
           })}
         </div>

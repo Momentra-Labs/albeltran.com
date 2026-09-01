@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { Project } from "@/content/projects";
 import { Container } from "@/components/shared/container";
 import { Badge } from "@/components/ui/badge";
+import { Reveal, RevealItem } from "@/components/shared/reveal";
 
 export function EngineeringLab({ projects }: { projects: Project[] }) {
   const tags = useMemo(
@@ -22,16 +23,18 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
   return (
     <section id="lab" className="py-16 sm:py-20">
       <Container>
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-          Engineering Lab
-        </p>
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
-          Personal products from Momentra Labs
-        </h2>
-        <p className="mt-4 max-w-2xl text-muted">
-          I solo develop RentaraH, Gloves Up, PocketPOS, and QuickCart as founder
-          of Momentra Labs — independent products I own end to end.
-        </p>
+        <Reveal>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+            Engineering Lab
+          </p>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground">
+            Personal products from Momentra Labs
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted">
+            I solo develop RentaraH, Gloves Up, PocketPOS, and QuickCart as founder
+            of Momentra Labs — independent products I own end to end.
+          </p>
+        </Reveal>
         {showFilters ? (
           <div className="mt-8 flex flex-wrap gap-2">
             <button
@@ -53,13 +56,13 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
           </div>
         ) : null}
         <div className="mt-8 grid gap-6 md:grid-cols-2">
-          {visible.map((project) => (
-            <Link
-              key={project.slug}
-              href={`/projects/${project.slug}/`}
-              data-cursor="VIEW"
-              className="group grid overflow-hidden border border-border transition-colors hover:border-border-bright"
-            >
+          {visible.map((project, index) => (
+            <RevealItem key={project.slug} index={index}>
+              <Link
+                href={`/projects/${project.slug}/`}
+                data-cursor="VIEW"
+                className="group grid overflow-hidden border border-border transition-colors hover:border-border-bright"
+              >
               <div className="relative aspect-16/10">
                 <Image
                   src={project.screenshots[0]?.src ?? "/og/default.jpg"}
@@ -87,8 +90,9 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
                     <Badge key={tech}>{tech}</Badge>
                   ))}
                 </div>
-              </div>
-            </Link>
+                </div>
+              </Link>
+            </RevealItem>
           ))}
         </div>
       </Container>

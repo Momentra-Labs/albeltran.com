@@ -6,6 +6,19 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { person } from "@/content/person";
 
+const coverEase = [0.23, 1, 0.32, 1] as const;
+
+function coverFade(delay: number, reduce: boolean | null) {
+  if (reduce) {
+    return { initial: false as const };
+  }
+  return {
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.7, ease: coverEase, delay },
+  };
+}
+
 const coverLines = [
   `${person.jobTitle} · previously Tech Lead`,
   `Currently Software Engineer at ${person.currentCompany} ${person.currentEmployerNote}`,
@@ -97,15 +110,18 @@ export function HomeHero() {
         <div className="magazine-cover-grid hidden lg:block" />
         {reduce ? null : <div className="magazine-cover-grain" />}
       </div>
-      <div
+      <motion.div
         className="pointer-events-none absolute inset-3 z-20 hidden border border-border lg:block"
         aria-hidden
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: coverEase, delay: 0.45 }}
       >
         <span className="magazine-crop magazine-crop-tl" />
         <span className="magazine-crop magazine-crop-tr" />
         <span className="magazine-crop magazine-crop-bl" />
         <span className="magazine-crop magazine-crop-br" />
-      </div>
+      </motion.div>
 
       <p className="sr-only">
         I turn complex problems into scalable software — from enterprise
@@ -115,27 +131,30 @@ export function HomeHero() {
         I solo develop {person.personalProducts.join(", ")}.
       </p>
 
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-        className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto]"
-      >
-        <header className="flex items-start justify-between gap-6 px-5 pt-20 sm:px-8 lg:px-10">
+      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto]">
+        <motion.header
+          className="flex items-start justify-between gap-6 px-5 pt-20 sm:px-8 lg:px-10"
+          {...coverFade(0, reduce)}
+        >
           <p className="font-display text-[clamp(2.6rem,9vw,8.5rem)] leading-[0.82] tracking-tight text-foreground">
             AL BELTRAN
           </p>
           <IssueLockup className="hidden shrink-0 pt-2 text-right lg:block" />
-        </header>
+        </motion.header>
 
-        <div className="px-5 pt-4 sm:px-8 lg:hidden">
+        <motion.div className="px-5 pt-4 sm:px-8 lg:hidden" {...coverFade(0.04, reduce)}>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
             <span className="text-accent">Vol. 01</span> / Manila
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(17rem,42%)] lg:gap-6 lg:px-10 lg:py-0">
-          <figure className="group relative flex min-h-0 flex-col lg:order-last lg:h-full lg:self-stretch">
+          <motion.figure
+            className="group relative flex min-h-0 origin-top flex-col lg:order-last lg:h-full lg:self-stretch"
+            initial={reduce ? false : { opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: coverEase, delay: 0.08 }}
+          >
             <div className="magazine-portrait editorial-grain relative aspect-[3/4] max-h-[48vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
               <Image
                 src={person.photo}
@@ -160,11 +179,13 @@ export function HomeHero() {
               <span>Al Beltran / Manila</span>
               <span className="text-muted-dim">14.60° N / 120.98° E</span>
             </figcaption>
-          </figure>
+          </motion.figure>
 
           <div className="flex min-h-0 flex-col justify-end gap-8 pb-2 lg:justify-between lg:gap-10 lg:pt-2 lg:pb-8">
-            <CoverEpigraph />
-            <div>
+            <motion.div {...coverFade(0.16, reduce)}>
+              <CoverEpigraph />
+            </motion.div>
+            <motion.div {...coverFade(0.24, reduce)}>
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
                 Cover story
               </p>
@@ -174,11 +195,14 @@ export function HomeHero() {
               <div className="mt-4">
                 <CoverLines />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        <footer className="relative z-10 mt-auto border-t border-border/80 px-5 py-3 sm:px-8 lg:mt-0 lg:px-10 lg:py-4">
+        <motion.footer
+          className="relative z-10 mt-auto border-t border-border/80 px-5 py-3 sm:px-8 lg:mt-0 lg:px-10 lg:py-4"
+          {...coverFade(0.32, reduce)}
+        >
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <nav
               className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em]"
@@ -203,8 +227,8 @@ export function HomeHero() {
               Software Engineer at Google via High Spring · {person.labs}
             </p>
           </div>
-        </footer>
-      </motion.div>
+        </motion.footer>
+      </div>
     </section>
   );
 }
