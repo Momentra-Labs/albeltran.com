@@ -87,6 +87,11 @@ export const metadata: Metadata = {
     "geo.region": "PH",
     "geo.placename": "Manila",
   },
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -105,6 +110,8 @@ export default function RootLayout({
             __html: `try{if(new URLSearchParams(location.search).get("view")==="recruiter"||localStorage.getItem("albeltran-recruiter")==="1")document.documentElement.classList.add("recruiter")}catch(e){}`,
           }}
         />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
         <link rel="me" href="https://www.linkedin.com/in/al-beltran/" />
         <link rel="me" href="https://github.com/codemoon2019" />
         <link rel="me" href="https://www.instagram.com/codebypawpu/" />
@@ -121,7 +128,7 @@ export default function RootLayout({
           href="/feed.xml"
         />
       </head>
-      <body className="bg-atmosphere flex min-h-full flex-col font-sans text-foreground">
+      <body className="bg-background flex min-h-full flex-col font-sans text-foreground">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-3 focus:py-2 focus:text-white"

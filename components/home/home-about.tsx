@@ -4,7 +4,7 @@ import { Container } from "@/components/shared/container";
 
 export function HomeAbout() {
   return (
-    <section id="about" className="border-t border-border py-24">
+    <section id="about" className="py-24">
       <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end lg:gap-16">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">

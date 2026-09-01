@@ -10,7 +10,7 @@ export function EngineeringSystem() {
   const current = systemNodes.find((node) => node.id === active);
 
   return (
-    <section id="system" className="border-y border-border py-20 sm:py-24">
+    <section id="system" className="border-t border-border py-20 sm:py-24">
       <Container>
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           Engineering system

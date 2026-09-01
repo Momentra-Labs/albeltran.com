@@ -4,7 +4,7 @@ import { Container } from "@/components/shared/container";
 
 export function LatestWriting({ posts }: { posts: BlogPost[] }) {
   return (
-    <section id="writing" className="border-y border-border py-24">
+    <section id="writing" className="py-24">
       <Container>
         <div className="mb-10 flex items-end justify-between">
           <div>

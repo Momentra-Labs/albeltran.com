@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Al Beltran">
+  <rect width="32" height="32" fill="#050507"/>
+  <rect x="4.25" y="4.25" width="23.5" height="23.5" fill="none" stroke="#f0f0f5" stroke-width="0.5" opacity="0.28"/>
+  <g fill="none" stroke="#4f8eff" stroke-width="0.85" stroke-linecap="square">
+    <path d="M3 8.5V3h5.5"/>
+    <path d="M29 8.5V3h-5.5"/>
+    <path d="M3 23.5V29h5.5"/>
+    <path d="M29 23.5V29h-5.5"/>
+  </g>
+  <path
+    fill="#f0f0f5"
+    fill-rule="evenodd"
+    d="M16 6.4 26.2 26h-3.55l-1.82-4.7H11.17L9.35 26H5.8L16 6.4Zm0 6.35-2.92 7.55h5.84L16 12.75Z"
+  />
+  <rect x="11.05" y="19.45" width="9.9" height="1.2" fill="#4f8eff"/>
+</svg>

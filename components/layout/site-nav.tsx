@@ -29,11 +29,29 @@ export function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("work");
+  const [scrolled, setScrolled] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const { recruiter, toggleRecruiter } = useRecruiter();
   const isHome = pathname === "/";
 
   const openPalette = useCallback(() => setOpen(true), []);
   usePaletteHotkey(openPalette);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncReduce = () => setReduceMotion(media.matches);
+    syncReduce();
+    media.addEventListener("change", syncReduce);
+
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      media.removeEventListener("change", syncReduce);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (!isHome) return;
@@ -57,10 +75,19 @@ export function SiteNav() {
   return (
     <>
       <header className="fixed left-3 right-3 top-3 z-40">
-        <div className="grid h-10 grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-border md:grid-cols-[1fr_auto_1fr]">
+        <div
+          className={cn(
+            "grid h-10 grid-cols-[auto_1fr_auto] items-center gap-3 border-b px-2 sm:px-5 md:grid-cols-[1fr_auto_1fr] lg:px-7",
+            scrolled
+              ? reduceMotion
+                ? "border-border bg-background"
+                : "border-border bg-background/90 backdrop-blur-md"
+              : "border-border bg-transparent",
+          )}
+        >
           <Link
             href="/"
-            className="font-mono text-[10px] tracking-[0.22em] text-muted hover:text-foreground"
+            className="py-2 font-mono text-[10px] tracking-[0.22em] text-muted hover:text-foreground"
             data-cursor="→"
             aria-label={`${person.brand} home`}
           >
@@ -68,7 +95,7 @@ export function SiteNav() {
           </Link>
 
           <nav
-            className="hidden items-center justify-center gap-x-3 lg:gap-x-5 md:flex"
+            className="hidden items-center justify-center gap-x-3 md:flex lg:gap-x-5"
             aria-label="Primary"
           >
             {SECTION_NAV.map((link, index) => (
@@ -77,7 +104,7 @@ export function SiteNav() {
                 href={link.href}
                 data-cursor="→"
                 className={cn(
-                  "whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.18em] transition-colors",
+                  "whitespace-nowrap py-2 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors",
                   isHome && active === link.hash
                     ? "text-foreground"
                     : "text-muted hover:text-foreground",
@@ -92,17 +119,17 @@ export function SiteNav() {
           <div className="flex items-center justify-end gap-4">
             <button
               type="button"
-              className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-muted hover:text-foreground lg:inline"
+              className="hidden py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted hover:text-foreground lg:inline"
               onClick={openPalette}
               aria-label="Open command palette"
             >
               Ctrl K
             </button>
-            <RecruiterToggle className="hidden font-mono text-[10px] uppercase tracking-[0.16em] text-muted lg:inline" />
+            <RecruiterToggle className="hidden py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted lg:inline" />
             <Link
               href="/#contact"
               data-cursor="→"
-              className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-foreground hover:text-accent md:inline"
+              className="hidden py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-foreground hover:text-accent md:inline"
             >
               Let&apos;s talk
             </Link>
@@ -110,7 +137,7 @@ export function SiteNav() {
               <SheetTrigger asChild>
                 <button
                   type="button"
-                  className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted hover:text-foreground md:hidden"
+                  className="py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted hover:text-foreground md:hidden"
                   aria-label="Open contents"
                 >
                   Index

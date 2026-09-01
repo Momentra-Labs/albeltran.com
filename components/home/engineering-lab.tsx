@@ -20,7 +20,7 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
   const showFilters = projects.length >= 2 && tags.length >= 2;
 
   return (
-    <section id="lab" className="border-y border-border py-24">
+    <section id="lab" className="py-24">
       <Container>
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           Engineering Lab

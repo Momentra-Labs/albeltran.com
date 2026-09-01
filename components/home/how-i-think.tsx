@@ -3,7 +3,7 @@ import { Container } from "@/components/shared/container";
 
 export function HowIThink() {
   return (
-    <section id="think" className="border-y border-border py-24" data-hide-recruiter>
+    <section id="think" className="py-24" data-hide-recruiter>
       <Container>
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           How I think

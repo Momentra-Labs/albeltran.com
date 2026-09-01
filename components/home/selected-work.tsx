@@ -14,7 +14,7 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
   const reduce = useReducedMotion();
 
   return (
-    <section id="work" className="border-t border-border py-24 sm:py-32">
+    <section id="work" className="py-24 sm:py-32">
       <Container>
         <div className="mb-16 flex flex-wrap items-end justify-between gap-4">
           <div>
