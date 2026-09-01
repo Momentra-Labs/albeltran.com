@@ -44,7 +44,7 @@ const overlaySvg = `
   <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#glow)"/>
   <rect x="0" y="0" width="720" height="${HEIGHT}" fill="url(#fade)"/>
 
-  <text x="72" y="168" fill="#8b8b9c" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="3">SENIOR SOFTWARE ENGINEER</text>
+  <text x="72" y="168" fill="#8b8b9c" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="3">FULL-STACK SOFTWARE ENGINEER</text>
   <text x="72" y="260" fill="#f0f0f5" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">Al Beltran</text>
   <text x="72" y="318" fill="#c8c8d4" font-family="Arial, Helvetica, sans-serif" font-size="28">Al Andrew Paul Beltran</text>
           <text x="72" y="380" fill="#9aa3b5" font-family="Arial, Helvetica, sans-serif" font-size="22">Founder, Momentra Labs · Philippines</text>

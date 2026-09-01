@@ -3,7 +3,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
 
 export const PRIMARY_TITLE =
-  "Al Beltran — Senior Software Engineer | Full-Stack Developer";
+  "Al Beltran — Full-Stack Software Engineer | Manila";
 
 type BuildMetadataInput = {
   title: string;

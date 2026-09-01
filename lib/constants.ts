@@ -4,7 +4,7 @@ export const SITE_URL =
 
 export const SITE_NAME = "Al Beltran — Portfolio";
 export const SITE_DESCRIPTION =
-  "Al Beltran (Al Andrew Paul Beltran) is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. He developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart. Portfolio covering React, Next.js, TypeScript, Node.js, Java, Spring Boot, Laravel, AEM, and cloud systems — https://albeltran.com";
+  "Al Beltran (Al Andrew Paul Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer in Manila. Senior Software Engineer, founder of Momentra Labs, and Software Engineer at Google via High Spring. He developed RentaraH, Gloves Up, PocketPOS, and QuickCart — https://albeltran.com";
 
 export const SECTION_NAV = [
   { href: "/#work", hash: "work", label: "Work" },

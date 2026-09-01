@@ -3,20 +3,30 @@ import { SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 export const person = {
   name: "Al Andrew Paul Beltran",
   shortName: "Al Beltran",
+  additionalName: "Teodosio",
+  legalName: "Al Andrew Paul Teodosio Beltran",
   brand: "Code by Pawpu",
+  occupation: "Full-Stack Software Engineer",
   jobTitle: "Senior Software Engineer",
   secondaryTitle: "Full-Stack Developer",
   labs: "Momentra Labs",
   founderTitle: "Founder, Momentra Labs",
   personalProducts: ["RentaraH", "Gloves Up", "PocketPOS", "QuickCart"],
+  aliases: [
+    "Al Beltran",
+    "Al Andrew Paul Beltran",
+    "Al Andrew Paul Teodosio Beltran",
+    "Code by Pawpu",
+    "pawpu",
+  ],
   headline:
-    "Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. Solo developer of RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+    "Full-stack software engineer in Manila — Senior Software Engineer, founder of Momentra Labs, and solo developer of RentaraH, Gloves Up, PocketPOS, and QuickCart.",
   location: "Manila, Metro Manila, Philippines",
   email: "al.andrew.p.beltran@gmail.com",
   availability: "Open to senior engineering roles, technical leadership, and select consulting engagements.",
   yearsExperience: 6,
   summary:
-    "Al Andrew Paul Beltran (Al Beltran) is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs, based in the Philippines. He currently works as a Software Engineer at Google via High Spring. He independently developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), enterprise delivery for Disney (Accenture), Asurion, technical leadership at Myridius, and full-stack consulting. Official portfolio: https://albeltran.com",
+    "Al Andrew Paul Beltran (Al Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. He currently works as a Software Engineer at Google via High Spring. He independently developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), enterprise delivery for Disney (Accenture), Asurion, technical leadership at Myridius, and full-stack consulting. Official portfolio: https://albeltran.com",
   currentCompany: "Google",
   currentEmployerNote: "via High Spring",
   knowsAbout: [

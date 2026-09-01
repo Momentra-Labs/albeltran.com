@@ -8,7 +8,8 @@ export function personSchema() {
     "@type": "Person",
     "@id": `${SITE_URL}/#person`,
     name: person.name,
-    alternateName: [person.shortName, person.brand, "pawpu"],
+    additionalName: person.additionalName,
+    alternateName: [...person.aliases],
     givenName: "Al Andrew Paul",
     familyName: "Beltran",
     url: SITE_URL,
@@ -17,9 +18,13 @@ export function personSchema() {
       "@type": "ImageObject",
       url: person.image,
       contentUrl: person.image,
-      caption: `${person.name} — Senior Software Engineer and founder of ${person.labs}`,
+      caption: `${person.name} (${person.legalName}) — ${person.occupation} and founder of ${person.labs}`,
     },
-    jobTitle: [person.jobTitle, person.secondaryTitle, person.founderTitle],
+    jobTitle: person.occupation,
+    hasOccupation: {
+      "@type": "Occupation",
+      name: person.occupation,
+    },
     description: person.summary,
     email: person.email,
     nationality: { "@type": "Country", name: "Philippines" },
@@ -110,10 +115,11 @@ export function websiteSchema() {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
-    name: "Al Beltran — Senior Software Engineer | Full-Stack Developer",
+    name: `${person.shortName} — ${person.occupation}`,
     alternateName: [
       "Al Beltran Portfolio",
       "Al Andrew Paul Beltran Portfolio",
+      `${person.legalName} Portfolio`,
       "Code by Pawpu",
     ],
     description: person.summary,
@@ -121,6 +127,25 @@ export function websiteSchema() {
     inLanguage: "en-PH",
     publisher: { "@id": `${SITE_URL}/#person` },
     copyrightHolder: { "@id": `${SITE_URL}/#person` },
+  };
+}
+
+export function profilePageSchema() {
+  return {
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/#profilepage`,
+    url: `${SITE_URL}/`,
+    name: `${person.shortName} — ${person.occupation}`,
+    description: person.summary,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#person` },
+    mainEntity: { "@id": `${SITE_URL}/#person` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: person.image,
+      contentUrl: person.image,
+      caption: `${person.name} (${person.legalName}) — ${person.occupation}`,
+    },
   };
 }
 

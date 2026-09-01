@@ -22,7 +22,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About Al Beltran",
-  description: `About Al Beltran (Al Andrew Paul Beltran): Senior Software Engineer, founder of Momentra Labs, and developer of RentaraH, Gloves Up, PocketPOS, and QuickCart. Background, technical expertise, experience, and how to connect — ${SITE_URL}/about/`,
+  description: `About Al Beltran (Al Andrew Paul Beltran; also Al Andrew Paul Teodosio Beltran): full-stack software engineer in Manila, Senior Software Engineer, founder of Momentra Labs, and developer of RentaraH, Gloves Up, PocketPOS, and QuickCart — ${SITE_URL}/about/`,
   path: "/about/",
 });
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
       <PageHeader
         label="About"
         title="About Al Beltran"
-        description="Al Andrew Paul Beltran is a Senior Software Engineer, founder of Momentra Labs, and the developer of RentaraH, Gloves Up, PocketPOS, and QuickCart. This page is the long-form profile for albeltran.com."
+        description="Al Andrew Paul Beltran (also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer in Manila, founder of Momentra Labs, and the developer of RentaraH, Gloves Up, PocketPOS, and QuickCart. This page is the long-form profile for albeltran.com."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "About" },

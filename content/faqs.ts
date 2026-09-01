@@ -7,7 +7,12 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Who is Al Andrew Paul Beltran?",
     answer:
-      "Al Andrew Paul Beltran (also known as Al Beltran or Code by Pawpu online) is a Senior Software Engineer based in Manila, Philippines, and the founder of Momentra Labs. He developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
+      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. He developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
+  },
+  {
+    question: "Who is Al Andrew Paul Teodosio Beltran?",
+    answer:
+      "Al Andrew Paul Teodosio Beltran is the same person as Al Beltran and Al Andrew Paul Beltran — a full-stack software engineer in Manila, Philippines, founder of Momentra Labs, and Software Engineer at Google via High Spring. His official portfolio is https://albeltran.com/.",
   },
   {
     question: "What is the official portfolio URL for Al Beltran?",

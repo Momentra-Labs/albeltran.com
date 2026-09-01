@@ -20,8 +20,8 @@ import {
   personSchema,
   momentraLabsSchema,
   labProductsSchema,
-  webPageSchema,
   websiteSchema,
+  profilePageSchema,
 } from "@/lib/schema";
 import { buildMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION } from "@/lib/constants";
@@ -43,11 +43,7 @@ export default function HomePage() {
     personSchema(),
     momentraLabsSchema(),
     labProductsSchema(lab),
-    webPageSchema({
-      path: "/",
-      name: PRIMARY_TITLE,
-      description: SITE_DESCRIPTION,
-    }),
+    profilePageSchema(),
     faqSchema(homeFaqs),
   ]);
 
