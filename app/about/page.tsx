@@ -8,24 +8,29 @@ import { aboutFaqs } from "@/content/faqs";
 import { experience } from "@/content/experience";
 import { techGroups, person } from "@/content/person";
 import { SOCIAL_LINKS, SITE_URL } from "@/lib/constants";
+import { getLabProjects } from "@/content/projects";
 import {
   breadcrumbSchema,
   faqSchema,
   graphSchema,
   personSchema,
+  momentraLabsSchema,
+  labProductsSchema,
   webPageSchema,
 } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About Al Beltran",
-  description: `About Al Beltran (Al Andrew Paul Beltran): Senior Software Engineer and Full-Stack Developer in the Philippines. Background, technical expertise, experience, and how to connect — ${SITE_URL}/about/`,
+  description: `About Al Beltran (Al Andrew Paul Beltran): Senior Software Engineer, founder of Momentra Labs, and developer of RentaraH, Gloves Up, PocketPOS, and QuickCart. Background, technical expertise, experience, and how to connect — ${SITE_URL}/about/`,
   path: "/about/",
 });
 
 export default function AboutPage() {
   const schema = graphSchema([
     personSchema(),
+    momentraLabsSchema(),
+    labProductsSchema(getLabProjects()),
     webPageSchema({
       path: "/about/",
       name: `About Al Beltran | ${person.name}`,
@@ -44,7 +49,7 @@ export default function AboutPage() {
       <PageHeader
         label="About"
         title="About Al Beltran"
-        description="Al Andrew Paul Beltran is a Senior Software Engineer and Full-Stack Developer based in the Philippines. This page is the long-form profile for albeltran.com."
+        description="Al Andrew Paul Beltran is a Senior Software Engineer, founder of Momentra Labs, and the developer of RentaraH, Gloves Up, PocketPOS, and QuickCart. This page is the long-form profile for albeltran.com."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "About" },
@@ -99,10 +104,10 @@ export default function AboutPage() {
                   ),
                 )}
               </div>
-              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <div className="mt-8 grid gap-8 sm:grid-cols-2">
                 {techGroups.map((group) => (
-                  <div key={group.title} className="border border-border p-5">
-                    <h3 className="text-sm font-medium text-foreground">
+                  <div key={group.title}>
+                    <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
                       {group.title}
                     </h3>
                     <ul className="mt-3 space-y-1.5 text-sm text-muted">
@@ -235,9 +240,9 @@ export default function AboutPage() {
             <FAQ items={aboutFaqs} />
           </article>
 
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <div className="border border-border bg-surface/50 p-5">
-              <p className="text-xs uppercase tracking-[0.16em] text-muted">
+          <aside className="space-y-10 lg:sticky lg:top-28 lg:self-start">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
                 Official portfolio
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -247,8 +252,8 @@ export default function AboutPage() {
                 summaries.
               </p>
             </div>
-            <div className="border border-border bg-surface/50 p-5">
-              <p className="text-xs uppercase tracking-[0.16em] text-muted">
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
                 Continue reading
               </p>
               <ul className="mt-3 space-y-2 text-sm">

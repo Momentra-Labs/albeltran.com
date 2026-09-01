@@ -15,7 +15,7 @@ export function FAQ({
 }) {
   return (
     <div>
-      <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
+      <h2 className="mb-6 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
         {title}
       </h2>
       <Accordion type="single" collapsible className="w-full">

@@ -17,9 +17,9 @@ export function personSchema() {
       "@type": "ImageObject",
       url: person.image,
       contentUrl: person.image,
-      caption: `${person.name} — Senior Software Engineer`,
+      caption: `${person.name} — Senior Software Engineer and founder of ${person.labs}`,
     },
-    jobTitle: [person.jobTitle, person.secondaryTitle],
+    jobTitle: [person.jobTitle, person.secondaryTitle, person.founderTitle],
     description: person.summary,
     email: person.email,
     nationality: { "@type": "Country", name: "Philippines" },
@@ -42,6 +42,20 @@ export function personSchema() {
       name: "Google",
       description: "Software Engineer engagement via High Spring",
     },
+    affiliation: {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#momentra-labs`,
+      name: person.labs,
+      founder: { "@id": `${SITE_URL}/#person` },
+      description:
+        "Independent studio founded by Al Andrew Paul Beltran for personal products RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+    },
+    owns: person.personalProducts.map((name) => ({
+      "@type": "SoftwareApplication",
+      name,
+      creator: { "@id": `${SITE_URL}/#person` },
+      author: { "@id": `${SITE_URL}/#person` },
+    })),
     sameAs: [...person.sameAs],
     knowsAbout: [...person.knowsAbout],
     contactPoint: {
@@ -51,6 +65,43 @@ export function personSchema() {
       url: `${SITE_URL}/contact/`,
       availableLanguage: ["English", "Filipino"],
     },
+  };
+}
+
+export function momentraLabsSchema() {
+  return {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#momentra-labs`,
+    name: person.labs,
+    founder: { "@id": `${SITE_URL}/#person` },
+    description:
+      "Independent studio founded by Al Andrew Paul Beltran for personal products RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+  };
+}
+
+export function labProductsSchema(projects: Project[]) {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/#momentra-products`,
+    name: "Momentra Labs personal products by Al Beltran",
+    description:
+      "Personal products Al Andrew Paul Beltran developed as founder of Momentra Labs: RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+    numberOfItems: projects.length,
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: project.name,
+      url: `${SITE_URL}/projects/${project.slug}/`,
+      item: {
+        "@type": "SoftwareApplication",
+        name: project.name,
+        description: project.overview,
+        url: `${SITE_URL}/projects/${project.slug}/`,
+        author: { "@id": `${SITE_URL}/#person` },
+        creator: { "@id": `${SITE_URL}/#person` },
+        keywords: [project.name, person.labs, person.shortName].join(", "),
+      },
+    })),
   };
 }
 

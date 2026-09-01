@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Header } from "@/components/layout/header";
+import { SiteNav } from "@/components/layout/site-nav";
 import { Footer } from "@/components/layout/footer";
 import { PlausibleAnalytics } from "@/components/layout/plausible";
+import { RecruiterProvider } from "@/components/layout/recruiter-provider";
+import { CustomCursor } from "@/components/layout/custom-cursor";
 import { defaultMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
@@ -40,6 +42,12 @@ export const metadata: Metadata = {
     "Next.js",
     "Node.js",
     "TypeScript",
+    "Momentra Labs",
+    "Founder Momentra Labs",
+    "RentaraH",
+    "Gloves Up",
+    "PocketPOS",
+    "QuickCart",
   ],
   authors: [{ name: person.name, url: SITE_URL }],
   creator: person.name,
@@ -85,9 +93,20 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(new URLSearchParams(location.search).get("view")==="recruiter"||localStorage.getItem("albeltran-recruiter")==="1")document.documentElement.classList.add("recruiter")}catch(e){}`,
+          }}
+        />
         <link rel="me" href="https://www.linkedin.com/in/al-beltran/" />
         <link rel="me" href="https://github.com/codemoon2019" />
         <link rel="me" href="https://www.instagram.com/codebypawpu/" />
+        <link
+          rel="alternate"
+          type="text/plain"
+          title={`${person.shortName} identity for language models`}
+          href="/llms.txt"
+        />
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -102,11 +121,14 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <Header />
-        <main id="main-content" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <RecruiterProvider>
+          <CustomCursor />
+          <SiteNav />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </RecruiterProvider>
         <PlausibleAnalytics />
       </body>
     </html>

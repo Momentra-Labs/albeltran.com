@@ -43,17 +43,14 @@ export default function NowPage() {
           { name: "Now" },
         ]}
       />
-      <Container className="py-16">
-        <div className="grid gap-8 md:grid-cols-2">
+      <Container className="py-16 sm:py-20">
+        <div className="grid gap-12 md:grid-cols-2">
           {now.sections.map((section) => (
-            <section
-              key={section.title}
-              className="border border-border bg-surface/40 p-6"
-            >
-              <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            <section key={section.title}>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
                 {section.title}
               </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted">
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted">
                 {section.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}

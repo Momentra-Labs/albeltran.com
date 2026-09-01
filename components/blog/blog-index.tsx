@@ -82,42 +82,45 @@ export function BlogIndex({
         ))}
       </div>
 
-      <div className="grid gap-4">
+      <ol className="divide-y divide-border border-y border-border">
         {filtered.map((post) => (
-          <article
-            key={post.slug}
-            className="border border-border bg-surface/40 p-6 transition-colors hover:border-border-bright"
-          >
-            <div className="mb-3 flex flex-wrap items-center gap-3 text-xs text-muted-dim">
-              <Badge variant="accent">{post.category}</Badge>
-              <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </time>
-              <span>{post.readingTime}</span>
-            </div>
-            <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-              <Link href={`/blog/${post.slug}/`} className="hover:text-accent">
-                {post.title}
-              </Link>
-            </h2>
-            <p className="mt-3 text-muted">{post.description}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {post.tags.map((item) => (
-                <span key={item} className="text-xs text-muted-dim">
-                  #{item}
-                </span>
-              ))}
-            </div>
-          </article>
+          <li key={post.slug}>
+            <article className="py-8">
+              <div className="mb-3 flex flex-wrap items-center gap-3 font-mono text-[11px] text-muted-dim">
+                <Badge variant="accent">{post.category}</Badge>
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+                <span>{post.readingTime}</span>
+              </div>
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                <Link
+                  href={`/blog/${post.slug}/`}
+                  className="hover:text-accent"
+                  data-cursor="→"
+                >
+                  {post.title}
+                </Link>
+              </h2>
+              <p className="mt-3 max-w-2xl text-muted">{post.description}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {post.tags.map((item) => (
+                  <span key={item} className="text-xs text-muted-dim">
+                    #{item}
+                  </span>
+                ))}
+              </div>
+            </article>
+          </li>
         ))}
         {filtered.length === 0 && (
-          <p className="text-muted">No articles match those filters.</p>
+          <li className="py-8 text-muted">No articles match those filters.</li>
         )}
-      </div>
+      </ol>
     </div>
   );
 }

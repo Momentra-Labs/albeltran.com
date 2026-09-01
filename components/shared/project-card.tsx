@@ -14,13 +14,13 @@ export function ProjectCard({
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col border border-border bg-surface/50 p-6 transition-colors hover:border-border-bright hover:bg-surface sm:p-8",
+        "group relative flex h-full flex-col border border-border p-6 transition-colors hover:border-border-bright sm:p-8",
         featured && "sm:col-span-2",
       )}
     >
       <div className="mb-4 flex items-start justify-between gap-4">
-        <p className="text-xs font-medium uppercase tracking-[0.16em] text-accent">
-          {project.year}
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+          {project.kind === "lab" ? "Lab" : project.year}
         </p>
         <ArrowUpRight className="h-4 w-4 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
       </div>
@@ -28,6 +28,7 @@ export function ProjectCard({
         <Link
           href={`/projects/${project.slug}/`}
           className="after:absolute after:inset-0"
+          data-cursor="VIEW"
         >
           {project.name}
         </Link>

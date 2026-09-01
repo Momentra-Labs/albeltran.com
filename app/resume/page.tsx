@@ -17,7 +17,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Resume",
-  description: `Resume summary for ${person.name}, Senior Software Engineer — download PDF and review experience highlights.`,
+  description: `Resume summary for ${person.name}, Senior Software Engineer and founder of ${person.labs} — download PDF and review experience highlights.`,
   path: "/resume/",
 });
 
@@ -41,7 +41,7 @@ export default function ResumePage() {
       <PageHeader
         label="Resume"
         title={`${person.name}`}
-        description={`${person.jobTitle} · ${person.location}`}
+        description={`${person.jobTitle} · ${person.founderTitle} · ${person.location}`}
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "Resume" },
@@ -54,21 +54,25 @@ export default function ResumePage() {
               <Download className="h-4 w-4" /> Download PDF
             </a>
           </Button>
-          <Button asChild variant="secondary">
+          <Button asChild variant="hairline">
             <Link href="/contact/">Contact</Link>
           </Button>
         </div>
 
         <div className="space-y-12 print:space-y-8">
           <section>
-            <h2 className="text-xl font-semibold text-foreground">Summary</h2>
+            <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+              Summary
+            </h2>
             <p className="mt-3 max-w-3xl leading-relaxed text-muted">
               {person.summary}
             </p>
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-foreground">Experience</h2>
+            <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+              Experience
+            </h2>
             <ul className="mt-5 space-y-6">
               {experience.map((item) => (
                 <li key={item.id} className="border-b border-border pb-6">
@@ -90,7 +94,9 @@ export default function ResumePage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold text-foreground">Skills</h2>
+            <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+              Skills
+            </h2>
             <div className="mt-4 space-y-4">
               {techGroups.map((group) => (
                 <div key={group.title}>

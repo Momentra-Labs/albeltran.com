@@ -6,14 +6,17 @@ export const person = {
   brand: "Code by Pawpu",
   jobTitle: "Senior Software Engineer",
   secondaryTitle: "Full-Stack Developer",
+  labs: "Momentra Labs",
+  founderTitle: "Founder, Momentra Labs",
+  personalProducts: ["RentaraH", "Gloves Up", "PocketPOS", "QuickCart"],
   headline:
-    "Senior Software Engineer and Full-Stack Developer specializing in React, Next.js, TypeScript, Node.js, Java, Spring Boot, Laravel, AEM, and cloud architecture.",
+    "Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. Developer of RentaraH, Gloves Up, PocketPOS, and QuickCart.",
   location: "Manila, Metro Manila, Philippines",
   email: "al.andrew.p.beltran@gmail.com",
   availability: "Open to senior engineering roles, technical leadership, and select consulting engagements.",
   yearsExperience: 6,
   summary:
-    "Al Andrew Paul Beltran (Al Beltran) is a Senior Software Engineer and Full-Stack Developer based in the Philippines. He currently works as a Software Engineer at Google via High Spring. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), enterprise delivery for Disney (Accenture), Asurion, technical leadership at Myridius, and full-stack consulting. Official portfolio: https://albeltran.com",
+    "Al Andrew Paul Beltran (Al Beltran) is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs, based in the Philippines. He currently works as a Software Engineer at Google via High Spring. He independently developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), enterprise delivery for Disney (Accenture), Asurion, technical leadership at Myridius, and full-stack consulting. Official portfolio: https://albeltran.com",
   currentCompany: "Google",
   currentEmployerNote: "via High Spring",
   knowsAbout: [
@@ -37,6 +40,11 @@ export const person = {
     "REST APIs",
     "Full-stack development",
     "Technical leadership",
+    "RentaraH",
+    "Gloves Up",
+    "PocketPOS",
+    "QuickCart",
+    "Momentra Labs",
   ],
   sameAs: [
     SOCIAL_LINKS.linkedin,

@@ -1,3 +1,5 @@
+export type ProjectKind = "selected" | "lab";
+
 export type Project = {
   slug: string;
   name: string;
@@ -6,6 +8,8 @@ export type Project = {
   role: string;
   year: string;
   featured: boolean;
+  kind: ProjectKind;
+  labTags?: string[];
   overview: string;
   problem: string;
   solution: string;
@@ -34,6 +38,7 @@ export const projects: Project[] = [
     role: "Software Engineer · enterprise AEM delivery (Accenture / Disney)",
     year: "2021–2023",
     featured: true,
+    kind: "selected",
     overview:
       "Disney Institute is one of the world's most recognized professional development brands. The platform delivers content and experiences to a global audience of professionals through an enterprise Adobe Experience Manager (AEM) stack.",
     problem:
@@ -86,6 +91,7 @@ export const projects: Project[] = [
     role: "Sole developer · full ownership (build → deploy → hypercare)",
     year: "2023",
     featured: true,
+    kind: "selected",
     overview:
       "FWD Smart Recruitment is a full-stack recruitment platform built as an MVP from scratch. It connects legacy systems to a modern React experience so business users can run recruitment workflows without waiting on a multi-team program.",
     problem:
@@ -138,6 +144,7 @@ export const projects: Project[] = [
     role: "Software Engineer · architecture, integration & documentation",
     year: "2025",
     featured: true,
+    kind: "selected",
     overview:
       "An event-driven loyalty system that issues rewards when cards activate, integrated with Talon.One for campaign processing and reconciliation in a fintech context.",
     problem:
@@ -190,6 +197,7 @@ export const projects: Project[] = [
     role: "Software Engineer · API modernization (Node.js & Spring Boot)",
     year: "2021–2023",
     featured: false,
+    kind: "selected",
     overview:
       "Internal crew management APIs supporting complex business rules across Node.js and Spring Boot services, modernized for latency and maintainability.",
     problem:
@@ -236,6 +244,7 @@ export const projects: Project[] = [
     role: "Software Engineer · serverless data pipeline",
     year: "2021–2023",
     featured: false,
+    kind: "selected",
     overview:
       "A production-grade serverless ETL system on AWS that processes large volumes of records with orchestrated workflows and downstream APIs.",
     problem:
@@ -285,6 +294,8 @@ export const projects: Project[] = [
     role: "Solo founder · product & engineering (Momentra Labs)",
     year: "2026",
     featured: false,
+    kind: "lab",
+    labTags: ["Mobile", "Experiments"],
     overview:
       "Gloves Up is a personal boxing training app that keeps workouts, goals, and sparring notes on-device. No signup and no cloud account — built for gyms and home sessions where connectivity is unreliable.",
     problem:
@@ -325,6 +336,132 @@ export const projects: Project[] = [
     ],
     privacyPolicy: "https://albeltran.com/apps/gloves-up/privacy/",
   },
+  {
+    slug: "rentarah",
+    name: "RentaraH",
+    shortName: "RentaraH",
+    tagline:
+      "Personal rental product designed and developed end to end under Momentra Labs.",
+    role: "Solo founder · product & engineering (Momentra Labs)",
+    year: "Personal product",
+    featured: false,
+    kind: "lab",
+    labTags: ["Web", "Products"],
+    overview:
+      "RentaraH is a personal product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It sits alongside Gloves Up, PocketPOS, and QuickCart as independent product work, separate from client and enterprise delivery.",
+    problem:
+      "Rental workflows often get squeezed into generic listing tools instead of a dedicated product someone can own end to end.",
+    solution:
+      "Built RentaraH as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation.",
+    architecture: [
+      "Independent personal product under Momentra Labs",
+      "End-to-end founder ownership of product and engineering",
+    ],
+    techStack: [],
+    features: [
+      "Personal rental product developed by Al Beltran",
+      "Published as part of the Momentra Labs lab on albeltran.com",
+    ],
+    challenges: [
+      "Keeping personal product work distinct from client and enterprise delivery",
+    ],
+    performance: [
+      "Shipped as a founder-owned personal product rather than a client case study",
+    ],
+    lessons: [
+      "Personal products need a public attribution surface so search and AI systems can cite the right author",
+    ],
+    screenshots: [
+      {
+        src: "/projects/rentarah-placeholder.svg",
+        alt: "RentaraH personal rental product by Al Beltran / Momentra Labs",
+      },
+    ],
+  },
+  {
+    slug: "pocketpos",
+    name: "PocketPOS",
+    shortName: "PocketPOS",
+    tagline:
+      "Personal point-of-sale product designed and developed end to end under Momentra Labs.",
+    role: "Solo founder · product & engineering (Momentra Labs)",
+    year: "Personal product",
+    featured: false,
+    kind: "lab",
+    labTags: ["Mobile", "Products"],
+    overview:
+      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It is one of four independent products he publishes on this portfolio: RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+    problem:
+      "Small operators often need a focused POS surface rather than a heavyweight retail suite.",
+    solution:
+      "Developed PocketPOS as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation.",
+    architecture: [
+      "Independent personal product under Momentra Labs",
+      "End-to-end founder ownership of product and engineering",
+    ],
+    techStack: [],
+    features: [
+      "Personal point-of-sale product developed by Al Beltran",
+      "Published as part of the Momentra Labs lab on albeltran.com",
+    ],
+    challenges: [
+      "Keeping personal product work distinct from client and enterprise delivery",
+    ],
+    performance: [
+      "Shipped as a founder-owned personal product rather than a client case study",
+    ],
+    lessons: [
+      "Product names should appear in public HTML, FAQs, and structured data if AI systems are expected to cite them",
+    ],
+    screenshots: [
+      {
+        src: "/projects/pocketpos-placeholder.svg",
+        alt: "PocketPOS personal point-of-sale product by Al Beltran / Momentra Labs",
+      },
+    ],
+  },
+  {
+    slug: "quickcart",
+    name: "QuickCart",
+    shortName: "QuickCart",
+    tagline:
+      "Personal commerce cart product designed and developed end to end under Momentra Labs.",
+    role: "Solo founder · product & engineering (Momentra Labs)",
+    year: "Personal product",
+    featured: false,
+    kind: "lab",
+    labTags: ["Web", "Products"],
+    overview:
+      "QuickCart is a personal commerce cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. Together with RentaraH, Gloves Up, and PocketPOS, it is part of his independent product work.",
+    problem:
+      "Cart and checkout flows are often treated as an afterthought on a storefront instead of a product someone can own.",
+    solution:
+      "Developed QuickCart as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation.",
+    architecture: [
+      "Independent personal product under Momentra Labs",
+      "End-to-end founder ownership of product and engineering",
+    ],
+    techStack: [],
+    features: [
+      "Personal commerce cart product developed by Al Beltran",
+      "Published as part of the Momentra Labs lab on albeltran.com",
+    ],
+    challenges: [
+      "Keeping personal product work distinct from client and enterprise delivery",
+    ],
+    performance: [
+      "Shipped as a founder-owned personal product rather than a client case study",
+    ],
+    lessons: [
+      "Independent products should be listed by name on the canonical portfolio so retrieval systems do not miss them",
+    ],
+    screenshots: [
+      {
+        src: "/projects/quickcart-placeholder.svg",
+        alt: "QuickCart personal commerce cart product by Al Beltran / Momentra Labs",
+      },
+    ],
+  },
 ];
 
 export function getProject(slug: string) {
@@ -332,5 +469,20 @@ export function getProject(slug: string) {
 }
 
 export function getFeaturedProjects() {
-  return projects.filter((p) => p.featured);
+  return projects.filter((p) => p.featured && p.kind !== "lab");
+}
+
+export function getSelectedProjects() {
+  return projects.filter((p) => p.kind === "selected");
+}
+
+export function getLabProjects() {
+  const order = ["rentarah", "gloves-up", "pocketpos", "quickcart"];
+  return projects
+    .filter((p) => p.kind === "lab")
+    .sort((a, b) => {
+      const ai = order.indexOf(a.slug);
+      const bi = order.indexOf(b.slug);
+      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+    });
 }

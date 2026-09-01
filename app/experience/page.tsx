@@ -44,7 +44,7 @@ export default function ExperiencePage() {
           { name: "Experience" },
         ]}
       />
-      <Container className="py-16">
+      <Container className="py-16 sm:py-20">
         <Timeline items={experience} />
       </Container>
     </>

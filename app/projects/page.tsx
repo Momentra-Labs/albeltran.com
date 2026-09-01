@@ -2,7 +2,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { ProjectCard } from "@/components/shared/project-card";
 import { JsonLd } from "@/components/shared/json-ld";
-import { projects } from "@/content/projects";
+import { getLabProjects, getSelectedProjects } from "@/content/projects";
 import { person } from "@/content/person";
 import {
   breadcrumbSchema,
@@ -19,6 +19,8 @@ export const metadata = buildMetadata({
 });
 
 export default function ProjectsPage() {
+  const selected = getSelectedProjects();
+  const lab = getLabProjects();
   const schema = graphSchema([
     personSchema(),
     webPageSchema({
@@ -44,12 +46,29 @@ export default function ProjectsPage() {
           { name: "Projects" },
         ]}
       />
-      <Container className="py-16">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
-          ))}
-        </div>
+      <Container className="space-y-16 py-16">
+        <section>
+          <h2 className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+            Selected work
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {selected.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </div>
+        </section>
+        {lab.length > 0 && (
+          <section>
+            <h2 className="mb-6 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+              Engineering lab
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {lab.map((project) => (
+                <ProjectCard key={project.slug} project={project} />
+              ))}
+            </div>
+          </section>
+        )}
       </Container>
     </>
   );

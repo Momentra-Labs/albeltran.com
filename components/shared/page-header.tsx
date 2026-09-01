@@ -15,11 +15,11 @@ export function PageHeader({
   breadcrumbs,
 }: PageHeaderProps) {
   return (
-    <div className="border-b border-border pb-12 pt-28 sm:pt-32">
+    <div className="border-b border-border pb-12 pt-32">
       <Container>
         {breadcrumbs && <Breadcrumbs items={breadcrumbs} className="mb-8" />}
         {label && (
-          <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+          <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             {label}
           </p>
         )}

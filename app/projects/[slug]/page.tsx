@@ -19,6 +19,7 @@ import {
   webPageSchema,
 } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { ArchitectureFlow } from "@/components/projects/architecture-flow";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -77,17 +78,19 @@ export default async function ProjectDetailPage({ params }: Props) {
           { name: project.shortName },
         ]}
       />
-      <Container className="py-16">
-        <p className="mb-4 text-sm text-muted-dim">{project.role}</p>
+      <Container className="py-16 sm:py-20">
+        <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-dim">
+          {project.kind === "lab" ? "Lab" : "Case study"} · {project.role}
+        </p>
         <p className="mb-10 max-w-3xl text-base leading-relaxed text-muted">
-          Case study by{" "}
+          Written by{" "}
           <Link href="/about/" className="text-accent hover:underline">
             Al Beltran
           </Link>{" "}
-          ({person.name}), Senior Software Engineer and Full-Stack Developer.
+          ({person.name}), Senior Software Engineer.
         </p>
 
-        <div className="mb-10 flex flex-wrap gap-3">
+        <div className="mb-12 flex flex-wrap gap-3">
           {project.demo && (
             <Button asChild>
               <a href={project.demo} target="_blank" rel="noopener noreferrer">
@@ -96,7 +99,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </Button>
           )}
           {project.repository && (
-            <Button asChild variant="secondary">
+            <Button asChild variant="hairline">
               <a
                 href={project.repository}
                 target="_blank"
@@ -107,49 +110,53 @@ export default async function ProjectDetailPage({ params }: Props) {
             </Button>
           )}
           {project.privacyPolicy && (
-            <Button asChild variant="secondary">
+            <Button asChild variant="hairline">
               <a href={project.privacyPolicy}>Privacy policy</a>
             </Button>
           )}
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-[1fr_280px]">
-          <article className="space-y-12">
+        <div className="grid gap-16 lg:grid-cols-[1fr_240px]">
+          <article className="space-y-14">
             <section>
-              <h2 className="text-2xl font-semibold text-foreground">Overview</h2>
-              <p className="mt-4 leading-relaxed text-muted">{project.overview}</p>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                01 · Problem
+              </h2>
+              <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">
+                {project.problem}
+              </p>
+              <p className="mt-4 max-w-2xl leading-relaxed text-muted">
+                {project.overview}
+              </p>
             </section>
             <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                The problem
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                02 · Solution
               </h2>
-              <p className="mt-4 leading-relaxed text-muted">{project.problem}</p>
+              <p className="mt-4 max-w-2xl leading-relaxed text-muted">
+                {project.solution}
+              </p>
             </section>
+            {project.architecture.length > 0 && (
+              <section>
+                <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                  03 · Architecture
+                </h2>
+                <ArchitectureFlow
+                  className="mt-6"
+                  steps={project.architecture}
+                />
+              </section>
+            )}
             <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                The solution
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                Implementation
               </h2>
-              <p className="mt-4 leading-relaxed text-muted">{project.solution}</p>
-            </section>
-            <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                Architecture & engineering decisions
-              </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
-                {project.architecture.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-            <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                Screenshots
-              </h2>
-              <div className="mt-4 grid gap-4">
+              <div className="mt-6 grid gap-4">
                 {project.screenshots.map((shot) => (
                   <div
                     key={shot.src}
-                    className="relative aspect-video w-full overflow-hidden border border-border bg-surface"
+                    className="relative aspect-video w-full overflow-hidden border border-border"
                   >
                     <Image
                       src={shot.src}
@@ -161,42 +168,44 @@ export default async function ProjectDetailPage({ params }: Props) {
                   </div>
                 ))}
               </div>
-            </section>
-            <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                Key features
-              </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
+              <ul className="mt-8 space-y-3 text-muted">
                 {project.features.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="border-b border-border pb-3">
+                    {item}
+                  </li>
                 ))}
               </ul>
             </section>
             <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                Technical challenges
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                Challenges & outcomes
               </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
-                {project.challenges.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-            <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                Performance improvements
-              </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
-                {project.performance.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-            <section>
-              <h2 className="text-2xl font-semibold text-foreground">
-                Lessons learned
-              </h2>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-muted">
+              <div className="mt-6 grid gap-10 sm:grid-cols-2">
+                <div>
+                  <h3 className="text-sm font-medium text-foreground">
+                    Challenges
+                  </h3>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted">
+                    {project.challenges.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-foreground">
+                    Outcomes
+                  </h3>
+                  <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted">
+                    {project.performance.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <h3 className="mt-10 text-sm font-medium text-foreground">
+                Lessons
+              </h3>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted">
                 {project.lessons.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -204,19 +213,19 @@ export default async function ProjectDetailPage({ params }: Props) {
             </section>
             {relatedArticles.length > 0 && (
               <section>
-                <h2 className="text-2xl font-semibold text-foreground">
-                  Related articles
+                <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                  Related writing
                 </h2>
-                <ul className="mt-4 space-y-2">
+                <ul className="mt-4 space-y-4">
                   {relatedArticles.map((post) => (
-                    <li key={post.slug}>
+                    <li key={post.slug} className="border-b border-border pb-4">
                       <Link
                         href={`/blog/${post.slug}/`}
-                        className="text-accent hover:underline"
+                        className="text-foreground hover:text-accent"
                       >
                         {post.title}
                       </Link>
-                      <p className="text-sm text-muted">{post.description}</p>
+                      <p className="mt-1 text-sm text-muted">{post.description}</p>
                     </li>
                   ))}
                 </ul>
@@ -224,9 +233,11 @@ export default async function ProjectDetailPage({ params }: Props) {
             )}
           </article>
 
-          <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <div className="border border-border bg-surface/50 p-5">
-              <h3 className="text-sm font-medium text-foreground">Tech stack</h3>
+          <aside className="space-y-10 lg:sticky lg:top-28 lg:self-start">
+            <div>
+              <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                Stack
+              </h3>
               <div className="mt-3 flex flex-wrap gap-2">
                 {project.techStack.map((tech) => (
                   <Badge key={tech}>{tech}</Badge>
@@ -234,18 +245,20 @@ export default async function ProjectDetailPage({ params }: Props) {
               </div>
             </div>
             {relatedRoles.length > 0 && (
-              <div className="border border-border bg-surface/50 p-5 text-sm">
-                <h3 className="font-medium text-foreground">Related experience</h3>
-                <ul className="mt-3 space-y-2 text-muted">
+              <div>
+                <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                  Related experience
+                </h3>
+                <ul className="mt-3 space-y-3 text-sm text-muted">
                   {relatedRoles.map((role) => (
                     <li key={role.id}>
                       <Link
                         href="/experience/"
-                        className="text-accent hover:underline"
+                        className="text-foreground hover:text-accent"
                       >
                         {role.role} at {role.company}
                       </Link>
-                      <span className="block text-xs text-muted-dim">
+                      <span className="mt-1 block font-mono text-[11px] text-muted-dim">
                         {role.duration}
                       </span>
                     </li>
@@ -253,26 +266,21 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </ul>
               </div>
             )}
-            <div className="border border-border bg-surface/50 p-5 text-sm text-muted">
-              <p>
-                More about{" "}
-                <Link href="/about/" className="text-accent hover:underline">
-                  Al Beltran
-                </Link>
-                , the full{" "}
-                <Link
-                  href="/experience/"
-                  className="text-accent hover:underline"
-                >
-                  experience timeline
-                </Link>
-                , and{" "}
-                <Link href="/blog/" className="text-accent hover:underline">
-                  engineering writing
-                </Link>
-                .
-              </p>
-            </div>
+            <p className="text-sm leading-relaxed text-muted">
+              More about{" "}
+              <Link href="/about/" className="text-accent hover:underline">
+                Al Beltran
+              </Link>
+              , the{" "}
+              <Link href="/experience/" className="text-accent hover:underline">
+                experience timeline
+              </Link>
+              , and{" "}
+              <Link href="/blog/" className="text-accent hover:underline">
+                engineering writing
+              </Link>
+              .
+            </p>
           </aside>
         </div>
       </Container>

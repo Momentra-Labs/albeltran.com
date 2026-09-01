@@ -3,10 +3,10 @@
 :root {
   --background: #050507;
   --foreground: #f0f0f5;
-  --surface: #0c0c12;
-  --surface-2: #12121a;
+  --surface: #0a0a0f;
+  --surface-2: #101018;
   --border: rgba(255, 255, 255, 0.08);
-  --border-bright: rgba(255, 255, 255, 0.14);
+  --border-bright: rgba(255, 255, 255, 0.16);
   --muted: #8b8b9c;
   --muted-dim: #555566;
   --accent: #4f8eff;
@@ -65,9 +65,13 @@ body {
 .bg-atmosphere {
   background-color: var(--background);
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(79, 142, 255, 0.16), transparent),
-    radial-gradient(ellipse 50% 40% at 100% 0%, rgba(56, 217, 169, 0.06), transparent),
-    linear-gradient(180deg, #050507 0%, #0a0a10 50%, #050507 100%);
+    radial-gradient(ellipse 70% 40% at 50% -10%, rgba(79, 142, 255, 0.1), transparent 60%),
+    linear-gradient(180deg, #050507 0%, #07070c 40%, #050507 100%);
+}
+
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
 }
 
 .prose-portfolio {
@@ -123,25 +127,23 @@ body {
   list-style: decimal;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.recruiter [data-hide-recruiter] {
+  display: none;
 }
 
-.animate-marquee {
-  animation: marquee 40s linear infinite;
+.recruiter-only {
+  display: none;
 }
 
-.animate-marquee:hover {
-  animation-play-state: paused;
+.recruiter .recruiter-only {
+  display: block;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
-  }
+.recruiter section {
+  padding-block: 3rem;
+}
+
+.recruiter #experience ul,
+.recruiter #experience .flex.flex-wrap {
+  display: none;
 }

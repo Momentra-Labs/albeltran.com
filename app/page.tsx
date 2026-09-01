@@ -1,18 +1,25 @@
-import { Hero } from "@/components/home/hero";
-import { TechMarquee } from "@/components/home/tech-marquee";
-import { FeaturedProjects } from "@/components/home/featured-projects";
-import { LatestPosts } from "@/components/home/latest-posts";
-import { Testimonials } from "@/components/home/testimonials";
-import { HomeCTA } from "@/components/home/home-cta";
-import { FAQ } from "@/components/shared/faq";
+import { HomeHero } from "@/components/home/home-hero";
+import { EngineeringSystem } from "@/components/home/engineering-system";
+import { SelectedWork } from "@/components/home/selected-work";
+import { EngineeringLab } from "@/components/home/engineering-lab";
+import { ExperienceTimeline } from "@/components/home/experience-timeline";
+import { HowIThink } from "@/components/home/how-i-think";
+import { Currently } from "@/components/home/currently";
+import { LatestWriting } from "@/components/home/latest-writing";
+import { HomeAbout } from "@/components/home/home-about";
+import { HomeContact } from "@/components/home/home-contact";
+import { RecruiterStrip } from "@/components/home/recruiter-strip";
 import { JsonLd } from "@/components/shared/json-ld";
-import { Section } from "@/components/shared/section";
 import { homeFaqs } from "@/content/faqs";
-import { person } from "@/content/person";
+import { experience } from "@/content/experience";
+import { getFeaturedProjects, getLabProjects } from "@/content/projects";
+import { getAllPosts } from "@/lib/mdx";
 import {
   faqSchema,
   graphSchema,
   personSchema,
+  momentraLabsSchema,
+  labProductsSchema,
   webPageSchema,
   websiteSchema,
 } from "@/lib/schema";
@@ -28,9 +35,14 @@ export const metadata = buildMetadata({
 });
 
 export default function HomePage() {
+  const featured = getFeaturedProjects();
+  const lab = getLabProjects();
+  const posts = getAllPosts().slice(0, 5);
   const schema = graphSchema([
     websiteSchema(),
     personSchema(),
+    momentraLabsSchema(),
+    labProductsSchema(lab),
     webPageSchema({
       path: "/",
       name: PRIMARY_TITLE,
@@ -42,19 +54,17 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={schema} />
-      <Hero />
-      <TechMarquee />
-      <FeaturedProjects />
-      <LatestPosts />
-      <Testimonials />
-      <Section
-        label="Discoverability"
-        title="Common questions about Al Beltran"
-        description="Straight answers for search engines, assistants, and visitors verifying the right engineering profile."
-      >
-        <FAQ items={homeFaqs} title="FAQ" />
-      </Section>
-      <HomeCTA />
+      <RecruiterStrip />
+      <HomeHero />
+      <EngineeringSystem />
+      <SelectedWork projects={featured} />
+      <EngineeringLab projects={lab} />
+      <ExperienceTimeline items={experience} />
+      <HowIThink />
+      <Currently />
+      <LatestWriting posts={posts} />
+      <HomeAbout />
+      <HomeContact />
     </>
   );
 }

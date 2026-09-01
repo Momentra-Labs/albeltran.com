@@ -43,19 +43,16 @@ export default function UsesPage() {
           { name: "Uses" },
         ]}
       />
-      <Container className="py-16">
-        <div className="grid gap-8 md:grid-cols-2">
+      <Container className="py-16 sm:py-20">
+        <div className="grid gap-12 md:grid-cols-2">
           {uses.categories.map((category) => (
-            <section
-              key={category.title}
-              className="border border-border bg-surface/40 p-6"
-            >
-              <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            <section key={category.title}>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
                 {category.title}
               </h2>
               <ul className="mt-5 space-y-5">
                 {category.items.map((item) => (
-                  <li key={item.name}>
+                  <li key={item.name} className="border-b border-border pb-4">
                     <h3 className="text-sm font-medium text-foreground">
                       {item.name}
                     </h3>

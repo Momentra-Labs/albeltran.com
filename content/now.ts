@@ -7,6 +7,7 @@ export const now = {
       title: "Current work",
       items: [
         "Software Engineer at Google via High Spring",
+        "Founder of Momentra Labs — RentaraH, Gloves Up, PocketPOS, and QuickCart",
         "Contributing to production software delivery in a large-scale engineering environment",
         "Maintaining this portfolio as the canonical public engineering profile",
       ],
