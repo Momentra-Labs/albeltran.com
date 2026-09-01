@@ -2,7 +2,6 @@ import Link from "next/link";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import { person } from "@/content/person";
 import { Container } from "@/components/shared/container";
-import { RecruiterToggle } from "@/components/layout/recruiter-toggle";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -43,7 +42,6 @@ export function Footer() {
           <Link href="/resume/" data-cursor="→" className="hover:text-foreground">
             Resume
           </Link>
-          <RecruiterToggle />
         </nav>
         <p className="text-xs text-muted-dim">
           © {year} {person.name}

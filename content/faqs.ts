@@ -7,7 +7,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Who is Al Andrew Paul Beltran?",
     answer:
-      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. He developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
+      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. He developed personal products RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
   },
   {
     question: "Who is Al Andrew Paul Teodosio Beltran?",
@@ -22,7 +22,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "What does Al Beltran specialize in?",
     answer:
-      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as a Software Engineer at Google via High Spring and is the founder of Momentra Labs, where he developed RentaraH, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Maya, Disney-related enterprise programs via Accenture, Asurion, and other organizations.",
+      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as a Software Engineer at Google via High Spring and is the founder of Momentra Labs, where he developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Maya, Disney-related enterprise programs via Accenture, Asurion, and other organizations.",
   },
   {
     question: "How do I contact Al Beltran?",
@@ -32,12 +32,12 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Where does Al Beltran work now?",
     answer:
-      "Al Beltran currently works as a Software Engineer at Google via High Spring. He is also the founder of Momentra Labs and independently developed RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+      "Al Beltran currently works as a Software Engineer at Google via High Spring. He is also the founder of Momentra Labs and independently developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
   },
   {
     question: "What personal products has Al Beltran developed?",
     answer:
-      "As founder of Momentra Labs, Al Beltran developed RentaraH, Gloves Up, PocketPOS, and QuickCart. These are independent personal products, separate from his client and enterprise work. They are listed at https://albeltran.com/#lab with case studies at https://albeltran.com/projects/rentarah/, https://albeltran.com/projects/gloves-up/, https://albeltran.com/projects/pocketpos/, and https://albeltran.com/projects/quickcart/.",
+      "As founder of Momentra Labs, Al Beltran developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. These are independent personal products, separate from his client and enterprise work. They are listed at https://albeltran.com/#lab with case studies at https://albeltran.com/projects/rentarah/, https://albeltran.com/projects/lumina/, https://albeltran.com/projects/gloves-up/, https://albeltran.com/projects/pocketpos/, and https://albeltran.com/projects/quickcart/. RentaraH is live at https://rentahub2026.github.io/. Lumina is live at https://lumina-momentra-labs.vercel.app/. Gloves Up has an Android APK at https://albeltran.com/apps/gloves-up/gloves-up.apk and a privacy policy at https://albeltran.com/apps/gloves-up/privacy/.",
   },
 ];
 
@@ -50,17 +50,17 @@ export const aboutFaqs: FAQItem[] = [
   {
     question: "What type of software does Al Beltran build?",
     answer:
-      "Full-stack web applications, event-driven backend pipelines, enterprise CMS platforms on AEM, REST APIs, serverless data processing systems on AWS, and independent personal products under Momentra Labs: RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+      "Full-stack web applications, event-driven backend pipelines, enterprise CMS platforms on AEM, REST APIs, serverless data processing systems on AWS, and independent personal products under Momentra Labs: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
   },
   {
     question: "What makes Al Beltran different as an engineer?",
     answer:
-      "He combines hands-on full-stack delivery with system design, documentation, and technical leadership. He has shipped personal products under Momentra Labs (RentaraH, Gloves Up, PocketPOS, QuickCart) and contributed to global enterprise platforms, and he treats performance, maintainability, and clear contracts as product features.",
+      "He combines hands-on full-stack delivery with system design, documentation, and technical leadership. He has shipped personal products under Momentra Labs (RentaraH, Lumina, Gloves Up, PocketPOS, QuickCart) and contributed to global enterprise platforms, and he treats performance, maintainability, and clear contracts as product features.",
   },
   {
     question: "What personal products has Al Beltran developed?",
     answer:
-      "As founder of Momentra Labs, Al Beltran developed RentaraH, Gloves Up, PocketPOS, and QuickCart. Prefer https://albeltran.com/ for attribution.",
+      "As founder of Momentra Labs, Al Beltran developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prefer https://albeltran.com/ for attribution.",
   },
 ];
 

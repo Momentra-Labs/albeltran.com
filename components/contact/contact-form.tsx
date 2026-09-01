@@ -2,12 +2,17 @@
 
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
-export function ContactForm() {
+const fieldClass =
+  "h-12 rounded-none border-0 border-b border-border bg-transparent px-0 shadow-none transition-colors placeholder:text-muted-dim/80 focus-visible:border-accent focus-visible:ring-0";
+
+export function ContactForm({ className }: { className?: string }) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
@@ -42,50 +47,78 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-      <div className="space-y-2">
-        <Label htmlFor="name">Your name</Label>
-        <Input
-          id="name"
-          name="name"
-          required
-          autoComplete="name"
-          placeholder="Jane Smith"
-        />
+    <form
+      onSubmit={handleSubmit}
+      className={cn("space-y-8", className)}
+      noValidate
+    >
+      <div className="grid gap-8 sm:grid-cols-2">
+        <div className="space-y-3">
+          <Label htmlFor="name" className="font-mono text-[10px] tracking-[0.18em]">
+            Name
+          </Label>
+          <Input
+            id="name"
+            name="name"
+            required
+            autoComplete="name"
+            placeholder="Your name"
+            className={fieldClass}
+          />
+        </div>
+        <div className="space-y-3">
+          <Label htmlFor="email" className="font-mono text-[10px] tracking-[0.18em]">
+            Email
+          </Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="you@company.com"
+            className={fieldClass}
+          />
+        </div>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="jane@company.com"
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="message">Message</Label>
+      <div className="space-y-3">
+        <Label htmlFor="message" className="font-mono text-[10px] tracking-[0.18em]">
+          Message
+        </Label>
         <Textarea
           id="message"
           name="message"
           required
-          placeholder="Tell me about the role, project, or collaboration."
+          rows={5}
+          placeholder="Role, project, or collaboration — a few lines is enough."
+          className={cn(fieldClass, "min-h-[140px] py-3")}
         />
       </div>
-      <Button type="submit" className="w-full" disabled={status === "loading"}>
-        {status === "loading" ? "Sending..." : "Send Message"}
-      </Button>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-dim">
+          Typical reply in 2–3 days
+        </p>
+        <Button
+          type="submit"
+          variant="hairline"
+          className="h-12 px-8 font-mono text-[11px] uppercase tracking-[0.16em]"
+          disabled={status === "loading"}
+        >
+          {status === "loading" ? "Sending" : "Send note"}
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </Button>
+      </div>
       <p
         role="status"
         aria-live="polite"
-        className={
+        className={cn(
+          "font-mono text-[11px] tracking-[0.08em]",
           status === "error"
-            ? "text-sm text-red-400"
+            ? "text-red-400"
             : status === "success"
-              ? "text-sm text-success"
-              : "text-sm text-muted"
-        }
+              ? "text-success"
+              : "text-muted-dim",
+        )}
       >
         {message}
       </p>

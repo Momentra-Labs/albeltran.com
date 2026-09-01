@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/content/projects";
 import { Container } from "@/components/shared/container";
+import { ProjectCover } from "@/components/shared/project-cover";
 import { Badge } from "@/components/ui/badge";
 import { Reveal, RevealItem } from "@/components/shared/reveal";
+import { ProjectCtas } from "@/components/projects/project-ctas";
 
 export function EngineeringLab({ projects }: { projects: Project[] }) {
   const tags = useMemo(
@@ -31,8 +32,27 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
             Personal products from Momentra Labs
           </h2>
           <p className="mt-4 max-w-2xl text-muted">
-            I solo develop RentaraH, Gloves Up, PocketPOS, and QuickCart as founder
-            of Momentra Labs — independent products I own end to end.
+            I solo develop RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart
+            as founder of Momentra Labs — independent products I own end to end.
+            Try{" "}
+            <a
+              href="https://rentahub2026.github.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline-offset-4 hover:underline"
+            >
+              RentaraH live
+            </a>
+            ,{" "}
+            <a
+              href="https://lumina-momentra-labs.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline-offset-4 hover:underline"
+            >
+              Lumina live
+            </a>
+            , or download the Gloves Up Android APK from the card below.
           </p>
         </Reveal>
         {showFilters ? (
@@ -58,26 +78,31 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {visible.map((project, index) => (
             <RevealItem key={project.slug} index={index}>
+              <article className="group grid overflow-hidden border border-border transition-colors hover:border-border-bright">
               <Link
                 href={`/projects/${project.slug}/`}
                 data-cursor="VIEW"
-                className="group grid overflow-hidden border border-border transition-colors hover:border-border-bright"
+                className="contents"
               >
               <div className="relative aspect-16/10">
-                <Image
-                  src={project.screenshots[0]?.src ?? "/og/default.jpg"}
-                  alt={project.screenshots[0]?.alt ?? project.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                <ProjectCover
+                  project={project}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
+              </Link>
               <div className="p-6 sm:p-8">
                 <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-dim">
                   {project.year}
                 </p>
                 <h3 className="mt-2 text-2xl font-semibold text-foreground">
-                  {project.name}
+                  <Link
+                    href={`/projects/${project.slug}/`}
+                    data-cursor="VIEW"
+                    className="hover:text-accent"
+                  >
+                    {project.name}
+                  </Link>
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
                   {project.tagline}
@@ -90,8 +115,9 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
                     <Badge key={tech}>{tech}</Badge>
                   ))}
                 </div>
+                <ProjectCtas project={project} className="mt-5" />
                 </div>
-              </Link>
+              </article>
             </RevealItem>
           ))}
         </div>

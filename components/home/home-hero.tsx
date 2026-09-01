@@ -19,25 +19,41 @@ function coverFade(delay: number, reduce: boolean | null) {
   };
 }
 
-const coverLines = [
-  `${person.jobTitle} · previously Tech Lead`,
-  `Currently Software Engineer at ${person.currentCompany} ${person.currentEmployerNote}`,
-  person.founderTitle,
-  `I solo develop ${person.personalProducts.join(" · ")}`,
+const coverEntries = [
+  {
+    title: "Software engineer",
+    dek: `${person.currentCompany} · ${person.currentEmployerNote}`,
+  },
+  {
+    title: "Tech lead",
+    dek: "Previously led engineering delivery",
+  },
+  {
+    title: "Founder",
+    dek: person.labs,
+  },
+  {
+    title: "Independent builder",
+    dek: person.personalProducts.join(" · "),
+  },
 ] as const;
 
 function CoverLines() {
   return (
-    <ol className="space-y-2">
-      {coverLines.map((line, index) => (
-        <li
-          key={line}
-          className="flex gap-3 font-mono text-[10px] uppercase leading-snug tracking-[0.16em] text-foreground/85 sm:text-[11px]"
-        >
-          <span className="shrink-0 text-accent">
+    <ol className="space-y-2.5">
+      {coverEntries.map((entry, index) => (
+        <li key={entry.title} className="flex gap-3">
+          <span className="shrink-0 font-mono text-[10px] text-accent sm:text-[11px]">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span>{line}</span>
+          <span>
+            <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-foreground sm:text-[11px]">
+              {entry.title}
+            </span>
+            <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+              {entry.dek}
+            </span>
+          </span>
         </li>
       ))}
     </ol>
@@ -49,10 +65,9 @@ function IssueLockup({ className = "" }: { className?: string }) {
     <div
       className={`font-mono text-[10px] uppercase leading-relaxed tracking-[0.2em] text-muted ${className}`}
     >
-      <p>
-        <span className="text-accent">01</span> Issue
-      </p>
-      <p>Vol. 01</p>
+      <p className="text-accent">01</p>
+      <p>Issue</p>
+      <p className="mt-2">Vol. 01</p>
       <p>Manila / PH</p>
       <p>2026</p>
     </div>
@@ -61,18 +76,21 @@ function IssueLockup({ className = "" }: { className?: string }) {
 
 function CoverEpigraph() {
   return (
-    <blockquote className="max-w-[26rem] border-l border-accent/70 pl-4">
-      <p className="font-display text-[1.15rem] leading-[1.25] tracking-tight text-foreground/88 italic sm:text-[1.35rem] lg:text-[1.45rem]">
+    <blockquote className="max-w-[22rem] border-l border-accent/50 pl-3">
+      <p className="font-display text-[1.05rem] leading-snug tracking-tight text-muted italic lg:text-[1.2rem]">
         The best way to predict the future is to invent it.
       </p>
-      <footer className="mt-3">
-        <cite className="font-mono text-[10px] uppercase not-italic tracking-[0.22em] text-muted">
+      <footer className="mt-2">
+        <cite className="font-mono text-[10px] uppercase not-italic tracking-[0.22em] text-muted-dim">
           — Alan Kay
         </cite>
       </footer>
     </blockquote>
   );
 }
+
+const ctaClass =
+  "rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent";
 
 export function HomeHero() {
   const reduce = useReducedMotion();
@@ -124,25 +142,27 @@ export function HomeHero() {
       </motion.div>
 
       <p className="sr-only">
-        I turn complex problems into scalable software — from enterprise
-        platforms and financial systems to products I&apos;ve built from scratch
-        as founder of {person.labs}. {person.name} ({person.shortName}), based in
-        the Philippines. Software Engineer at Google via High Spring.
-        I solo develop {person.personalProducts.join(", ")}.
+        {person.legalName} ({person.shortName}) is a {person.occupation} in
+        Manila. {person.jobTitle}. Software Engineer at Google via High Spring.
+        Founder of {person.labs}. Independent products:{" "}
+        {person.personalProducts.join(", ")}.
       </p>
 
-      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto]">
+      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden lg:grid-rows-[auto_minmax(0,1fr)_auto]">
         <motion.header
           className="flex items-start justify-between gap-6 px-5 pt-20 sm:px-8 lg:px-10"
           {...coverFade(0, reduce)}
         >
-          <p className="font-display text-[clamp(2.6rem,9vw,8.5rem)] leading-[0.82] tracking-tight text-foreground">
+          <h1 className="font-display text-[clamp(2.4rem,8vw,7.2rem)] leading-[0.82] tracking-tight text-foreground">
             AL BELTRAN
-          </p>
-          <IssueLockup className="hidden shrink-0 pt-2 text-right lg:block" />
+          </h1>
+          <IssueLockup className="hidden shrink-0 pt-1 text-right lg:block" />
         </motion.header>
 
-        <motion.div className="px-5 pt-4 sm:px-8 lg:hidden" {...coverFade(0.04, reduce)}>
+        <motion.div
+          className="px-5 pt-3 sm:px-8 lg:hidden"
+          {...coverFade(0.04, reduce)}
+        >
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted">
             <span className="text-accent">Vol. 01</span> / Manila
           </p>
@@ -150,19 +170,19 @@ export function HomeHero() {
 
         <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(17rem,42%)] lg:gap-6 lg:px-10 lg:py-0">
           <motion.figure
-            className="group relative flex min-h-0 origin-top flex-col lg:order-last lg:h-full lg:self-stretch"
+            className="group relative order-2 flex min-h-0 origin-top flex-col lg:order-last lg:h-full lg:min-h-0 lg:self-stretch"
             initial={reduce ? false : { opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: coverEase, delay: 0.08 }}
+            transition={{ duration: 0.8, ease: coverEase, delay: 0.28 }}
           >
             <div className="magazine-portrait editorial-grain relative aspect-[3/4] max-h-[48vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
               <Image
                 src={person.photo}
-                alt="Al Andrew Paul Beltran (Al Beltran), Senior Software Engineer and founder of Momentra Labs"
+                alt="Al Andrew Paul Beltran (Al Beltran), full-stack software engineer and founder of Momentra Labs"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className={`magazine-portrait-img object-cover object-[center_8%] ${
+                className={`magazine-portrait-img object-cover object-[center_12%] ${
                   reduce
                     ? ""
                     : "transition-transform duration-700 ease-out group-hover:scale-[1.04]"
@@ -181,17 +201,21 @@ export function HomeHero() {
             </figcaption>
           </motion.figure>
 
-          <div className="flex min-h-0 flex-col justify-end gap-8 pb-2 lg:justify-between lg:gap-10 lg:pt-2 lg:pb-8">
-            <motion.div {...coverFade(0.16, reduce)}>
+          <div className="order-1 flex min-h-0 flex-col justify-end gap-6 pb-2 lg:justify-between lg:gap-8 lg:pt-2 lg:pb-6">
+            <motion.div {...coverFade(0.12, reduce)}>
               <CoverEpigraph />
             </motion.div>
-            <motion.div {...coverFade(0.24, reduce)}>
+            <motion.div {...coverFade(0.2, reduce)}>
               <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
                 Cover story
               </p>
-              <h1 className="mt-3 max-w-[12ch] font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.9] tracking-tight text-foreground">
-                I build systems, products, and experiences.
-              </h1>
+              <p className="mt-3 max-w-[12em] font-display text-[clamp(1.7rem,4.2vw,3.15rem)] leading-[0.94] tracking-tight text-foreground">
+                I design, build, and ship digital products from idea to
+                production.
+              </p>
+              <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:text-[11px]">
+                Software engineer · Tech lead · Product builder
+              </p>
               <div className="mt-4">
                 <CoverLines />
               </div>
@@ -200,8 +224,8 @@ export function HomeHero() {
         </div>
 
         <motion.footer
-          className="relative z-10 mt-auto border-t border-border/80 px-5 py-3 sm:px-8 lg:mt-0 lg:px-10 lg:py-4"
-          {...coverFade(0.32, reduce)}
+          className="relative z-10 mt-auto border-t border-border/80 px-5 py-3 sm:px-8 lg:mt-0 lg:px-10 lg:py-3"
+          {...coverFade(0.36, reduce)}
         >
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <nav
@@ -211,20 +235,20 @@ export function HomeHero() {
               <Link
                 href="#work"
                 data-cursor="VIEW"
-                className="text-foreground hover:text-accent"
+                className={`${ctaClass} text-foreground hover:text-accent`}
               >
-                Explore my work
+                Explore my work →
               </Link>
               <Link
                 href="#contact"
                 data-cursor="→"
-                className="text-muted hover:text-foreground"
+                className={`${ctaClass} text-muted hover:text-foreground`}
               >
-                Let&apos;s talk
+                Let&apos;s talk ↗
               </Link>
             </nav>
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted lg:text-[11px]">
-              Software Engineer at Google via High Spring · {person.labs}
+              Software engineering · Product development · Web · Mobile · Cloud
             </p>
           </div>
         </motion.footer>

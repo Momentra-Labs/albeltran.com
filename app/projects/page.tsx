@@ -14,7 +14,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Projects by Al Beltran",
-  description: `Software engineering case studies by Al Beltran (Al Andrew Paul Beltran): Disney Institute AEM platform, FWD Smart Recruitment, Maya card loyalty, Disney Crew APIs, and serverless ETL systems.`,
+  description: `Software engineering case studies by Al Beltran (Al Andrew Paul Beltran): National Geographic, Disney Experiences, Disney Institute, DocIndy, Disney Crew APIs, and serverless ETL systems.`,
   path: "/projects/",
 });
 

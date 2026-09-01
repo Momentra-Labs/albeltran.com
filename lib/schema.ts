@@ -1,5 +1,5 @@
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
-import { person } from "@/content/person";
+import { person, oxfordJoin } from "@/content/person";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
 
@@ -53,7 +53,7 @@ export function personSchema() {
       name: person.labs,
       founder: { "@id": `${SITE_URL}/#person` },
       description:
-        "Independent studio founded by Al Andrew Paul Beltran for personal products RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+        `Independent studio founded by Al Andrew Paul Beltran for personal products ${oxfordJoin(person.personalProducts)}.`,
     },
     owns: person.personalProducts.map((name) => ({
       "@type": "SoftwareApplication",
@@ -80,7 +80,7 @@ export function momentraLabsSchema() {
     name: person.labs,
     founder: { "@id": `${SITE_URL}/#person` },
     description:
-      "Independent studio founded by Al Andrew Paul Beltran for personal products RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+      `Independent studio founded by Al Andrew Paul Beltran for personal products ${oxfordJoin(person.personalProducts)}.`,
   };
 }
 
@@ -90,18 +90,26 @@ export function labProductsSchema(projects: Project[]) {
     "@id": `${SITE_URL}/#momentra-products`,
     name: "Momentra Labs personal products by Al Beltran",
     description:
-      "Personal products Al Andrew Paul Beltran developed as founder of Momentra Labs: RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+      `Personal products Al Andrew Paul Beltran developed as founder of Momentra Labs: ${oxfordJoin(person.personalProducts)}.`,
     numberOfItems: projects.length,
     itemListElement: projects.map((project, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: project.name,
       url: `${SITE_URL}/projects/${project.slug}/`,
-      item: {
+        item: {
         "@type": "SoftwareApplication",
         name: project.name,
         description: project.overview,
-        url: `${SITE_URL}/projects/${project.slug}/`,
+        url: project.demo ?? `${SITE_URL}/projects/${project.slug}/`,
+        ...(project.apk
+          ? {
+              installUrl: project.apk.startsWith("http")
+                ? project.apk
+                : `${SITE_URL}${project.apk}`,
+              operatingSystem: "Android",
+            }
+          : {}),
         author: { "@id": `${SITE_URL}/#person` },
         creator: { "@id": `${SITE_URL}/#person` },
         keywords: [project.name, person.labs, person.shortName].join(", "),

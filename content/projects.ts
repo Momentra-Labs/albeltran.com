@@ -22,6 +22,8 @@ export type Project = {
   screenshots: { src: string; alt: string }[];
   repository?: string;
   demo?: string;
+  /** Direct Android APK download path or URL. */
+  apk?: string;
   /** Public privacy policy URL (e.g. for store-listed apps). */
   privacyPolicy?: string;
   relatedArticles?: string[];
@@ -29,6 +31,55 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "docindy",
+    name: "DocIndy",
+    shortName: "DocIndy",
+    tagline:
+      "Live telehealth web product at docindy.ivisitdoc.com — care discovery, patient start flows, and checkout.",
+    role: "Software Engineer · professional product delivery",
+    year: "2026",
+    featured: true,
+    kind: "selected",
+    overview:
+      "DocIndy is a public telehealth product at docindy.ivisitdoc.com. The site presents weight-loss and related care journeys, a BMI starting point, partner wellness apps, and login/get-started paths into intake. I contributed professional product delivery on this patient-facing web product.",
+    problem:
+      "A multi-specialty telehealth brand has to move people from care discovery into intake and checkout without fragmenting the journey across weight loss, sexual health, and adjacent specialties.",
+    solution:
+      "Contributed to the production Vite web product: public care surfaces, patient start flows, and the live frontend that ships at docindy.ivisitdoc.com. Clinical claims on the marketing site are the product's — not personal performance metrics.",
+    architecture: [
+      "Public Vite SPA at docindy.ivisitdoc.com",
+      "Care-category marketing and shop surfaces",
+      "Patient login and get-started paths into intake and checkout",
+      "Partner wellness app surfaces on the same public site",
+    ],
+    techStack: ["React", "TypeScript", "Vite"],
+    features: [
+      "Homepage care journeys spanning weight loss and related specialties",
+      "Shop and get-started paths into patient intake",
+      "BMI starting-point tool on the public site",
+      "Partner wellness apps: Vita247, HealthScan247, and MedTracker",
+    ],
+    challenges: [
+      "Keeping a multi-specialty care story coherent on one public start path",
+      "Shipping patient-facing flows without treating marketing copy as clinical proof",
+    ],
+    performance: [
+      "Live production site at https://docindy.ivisitdoc.com/",
+      "Shipped as professional product delivery, separate from Momentra Labs personal products",
+    ],
+    lessons: [
+      "Healthcare product sites need a hard line between UI delivery and clinical claims",
+      "Multi-specialty journeys still need one obvious next step for patients",
+    ],
+    screenshots: [
+      {
+        src: "/covers/docindy.jpg",
+        alt: "DocIndy homepage at docindy.ivisitdoc.com — telehealth care journeys and patient start flows",
+      },
+    ],
+    demo: "https://docindy.ivisitdoc.com/",
+  },
   {
     slug: "disney-institute",
     name: "Disney Institute Platform",
@@ -74,8 +125,8 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/disney-institute-placeholder.svg",
-        alt: "Disney Institute enterprise AEM platform case study cover for Al Beltran",
+        src: "/covers/disney-institute.jpg",
+        alt: "Disney Institute homepage at disneyinstitute.com — professional development courses and keynotes on the enterprise AEM platform",
       },
     ],
     demo: "https://www.disneyinstitute.com/",
@@ -83,110 +134,110 @@ export const projects: Project[] = [
     relatedExperience: ["accenture"],
   },
   {
-    slug: "fwd-smart-recruitment",
-    name: "FWD Smart Recruitment",
-    shortName: "FWD Smart Recruitment",
+    slug: "national-geographic",
+    name: "National Geographic",
+    shortName: "National Geographic",
     tagline:
-      "Solo-built MVP recruitment platform integrating legacy systems with a modern UX.",
-    role: "Sole developer · full ownership (build → deploy → hypercare)",
-    year: "2023",
+      "Global digital publishing platform for science, exploration, and storytelling.",
+    role: "Software Engineer · enterprise web delivery (Accenture / Disney)",
+    year: "2021–2023",
     featured: true,
     kind: "selected",
     overview:
-      "FWD Smart Recruitment is a full-stack recruitment platform built as an MVP from scratch. It connects legacy systems to a modern React experience so business users can run recruitment workflows without waiting on a multi-team program.",
+      "National Geographic is one of the world's most recognized science, exploration, and storytelling brands. The digital platform at nationalgeographic.com delivers journalism, photography, and video to a global audience.",
     problem:
-      "Recruitment workflows depended on legacy systems that were hard to use day to day. The business needed a working product—not a prototype—on a constrained timeline.",
+      "A flagship publishing site has to move stories, photography, and video at global scale without fragmenting the reader experience or slowing editorial teams.",
     solution:
-      "Owned architecture, implementation, testing, deployment, and production support end to end. Built a React + Node.js application with REST integrations for near real-time sync against legacy systems.",
+      "Contributed to enterprise web delivery on a high-visibility Disney-related program. Collaborated with design, QA, and delivery on the public National Geographic experience, with attention to reusable front-end patterns and production-quality publishing workflows.",
     architecture: [
-      "React frontend for recruiter-facing workflows",
-      "Node.js REST API layer for business logic and integrations",
-      "Legacy system adapters for near real-time synchronization",
-      "Deployed MVP with production hypercare after launch",
+      "Public web experience at nationalgeographic.com",
+      "Story, photography, and video surfaces for a global audience",
+      "Reusable front-end patterns shared across publishing pages",
+      "Structured delivery with design, QA, and multi-team coordination",
     ],
-    techStack: ["React", "Node.js", "REST API"],
+    techStack: ["React", "Node.js", "JavaScript"],
     features: [
-      "End-to-end recruitment workflows for business users",
-      "REST integration with legacy systems",
-      "Near real-time sync for operational data",
-      "Solo delivery from architecture through hypercare",
+      "Homepage and story surfaces for a global readership",
+      "Photography-forward layouts that keep editorial hierarchy clear",
+      "Reusable UI patterns for publishing teams",
+      "Cross-functional delivery with design and QA",
     ],
     challenges: [
-      "Integrating legacy contracts without rewriting upstream systems",
-      "Shipping a production-ready MVP with sole ownership",
-      "Balancing UX polish against hard delivery deadlines",
+      "Shipping on a high-visibility brand without breaking reader trust",
+      "Keeping component patterns consistent across a large publishing surface",
+      "Working inside structured client frameworks without blocking progress",
     ],
     performance: [
-      "Delivered a working product used by business users rather than a throwaway demo",
-      "Kept sync paths practical for operational recruitment use",
+      "Supported a flagship Disney-related publishing experience used worldwide",
+      "Improved maintainability of shared front-end patterns on a large content site",
     ],
     lessons: [
-      "MVP success is measured by business users completing real work",
-      "Legacy integration is mostly contract design and careful failure handling",
-      "Hypercare is part of delivery, not an afterthought",
+      "Editorial platforms succeed when engineering respects story hierarchy",
+      "Reusable UI only sticks when teams agree on naming and contracts",
+      "High-visibility clients reward clarity in documentation and demos",
     ],
     screenshots: [
       {
-        src: "/projects/fwd-placeholder.svg",
-        alt: "FWD Smart Recruitment full-stack MVP case study cover",
+        src: "/covers/national-geographic.jpg",
+        alt: "National Geographic homepage at nationalgeographic.com — science, exploration, and storytelling platform",
       },
     ],
-    demo: "https://smart-recruitment.fwd.com.ph/login",
+    demo: "https://www.nationalgeographic.com/",
     relatedArticles: ["ai-augmented-engineering"],
-    relatedExperience: ["yondu"],
+    relatedExperience: ["accenture"],
   },
   {
-    slug: "maya-card-loyalty",
-    name: "Maya Card Activation & Loyalty",
-    shortName: "Maya Card Loyalty",
+    slug: "disney-experiences",
+    name: "Disney Experiences",
+    shortName: "Disney Experiences",
     tagline:
-      "Event-driven card activation rewards integrated with Talon.One for real-time campaigns.",
-    role: "Software Engineer · architecture, integration & documentation",
-    year: "2025",
+      "Global parks, resorts, cruise, and consumer products platform for Disney Experiences.",
+    role: "Software Engineer · enterprise web delivery (Accenture / Disney)",
+    year: "2021–2023",
     featured: true,
     kind: "selected",
     overview:
-      "An event-driven loyalty system that issues rewards when cards activate, integrated with Talon.One for campaign processing and reconciliation in a fintech context.",
+      "Disney Experiences brings Disney stories to life through theme parks, resorts, cruise ships, vacation experiences, and consumer products worldwide. The public platform at disneyexperiences.com presents that portfolio to guests, press, and partners.",
     problem:
-      "Card activation and loyalty rewards need reliable, auditable flows. Synchronous coupling makes campaigns brittle and harder to operate under load.",
+      "A flagship experiences brand has to present parks, cruise, products, and news in one coherent public site without fragmenting the story across teams and properties.",
     solution:
-      "Designed an AWS-based event pipeline (SQS/SNS/Lambda) from activation to reward issuance, integrated Talon.One through custom APIs, and authored system design documentation for engineering and stakeholders.",
+      "Contributed to enterprise web delivery on a high-visibility Disney-related program. Collaborated with design, QA, and delivery on the public Disney Experiences experience, with attention to reusable front-end patterns and production-quality publishing workflows.",
     architecture: [
-      "Card activation as the event producer",
-      "SQS / SNS as the message bus for decoupling",
-      "Lambda processors for reward orchestration",
-      "Talon.One loyalty engine for campaign evaluation",
-      "Downstream reward issuance and reconciliation paths",
+      "Public web experience at disneyexperiences.com",
+      "Parks, cruise, consumer products, and signature experience surfaces",
+      "Reusable front-end patterns shared across brand pages",
+      "Structured delivery with design, QA, and multi-team coordination",
     ],
-    techStack: ["Node.js", "Event-Driven", "AWS", "SQS", "SNS", "Lambda", "Talon.One"],
+    techStack: ["React", "Node.js", "JavaScript"],
     features: [
-      "Activation-triggered reward pipeline",
-      "Talon.One campaign integration",
-      "Custom APIs for campaigns and reconciliation",
-      "System design docs for shared understanding",
+      "Homepage and portfolio surfaces for a global guest audience",
+      "Parks, cruise, products, and news in one brand hierarchy",
+      "Reusable UI patterns for enterprise publishing teams",
+      "Cross-functional delivery with design and QA",
     ],
     challenges: [
-      "Keeping loyalty flows resilient under asynchronous failure modes",
-      "Aligning campaign rules with engineering contracts",
-      "Documenting fintech systems clearly for mixed audiences",
+      "Shipping on a high-visibility brand without breaking guest trust",
+      "Keeping component patterns consistent across a large brand surface",
+      "Working inside structured client frameworks without blocking progress",
     ],
     performance: [
-      "Decoupled activation from reward processing for better isolation",
-      "Enabled real-time campaign processing without hardcoding every promotion path",
+      "Supported a flagship Disney Experiences public site used worldwide",
+      "Improved maintainability of shared front-end patterns on a large brand site",
     ],
     lessons: [
-      "Event-driven loyalty systems need explicit idempotency and reconciliation",
-      "Good design docs are a delivery artifact, not optional polish",
-      "Third-party loyalty engines still need strong boundary APIs",
+      "Experience brands succeed when engineering respects story hierarchy",
+      "Reusable UI only sticks when teams agree on naming and contracts",
+      "High-visibility clients reward clarity in documentation and demos",
     ],
     screenshots: [
       {
-        src: "/projects/maya-loyalty-placeholder.svg",
-        alt: "Maya card activation and loyalty event-driven architecture diagram cover",
+        src: "/covers/disney-experiences.jpg",
+        alt: "Disney Experiences homepage at disneyexperiences.com — parks, cruise, and consumer products platform",
       },
     ],
-    relatedArticles: ["event-driven-loyalty"],
-    relatedExperience: ["maya"],
+    demo: "https://disneyexperiences.com/",
+    relatedArticles: ["aem-reusable-components"],
+    relatedExperience: ["accenture"],
   },
   {
     slug: "disney-crew-apis",
@@ -315,6 +366,7 @@ export const projects: Project[] = [
       "Macros calculator and training history",
       "Optional training video recording with round timer HUD",
       "Optional local notifications and sparring photo references",
+      "Android APK available to download from this site",
     ],
     challenges: [
       "Keeping UX simple for non-technical athletes",
@@ -334,6 +386,7 @@ export const projects: Project[] = [
         alt: "Gloves Up boxing training app case study cover",
       },
     ],
+    apk: "/apps/gloves-up/gloves-up.apk",
     privacyPolicy: "https://albeltran.com/apps/gloves-up/privacy/",
   },
   {
@@ -341,42 +394,103 @@ export const projects: Project[] = [
     name: "RentaraH",
     shortName: "RentaraH",
     tagline:
-      "Personal rental product designed and developed end to end under Momentra Labs.",
+      "Philippines car and motorcycle rental marketplace — search, book, and host in PHP.",
     role: "Solo founder · product & engineering (Momentra Labs)",
-    year: "Personal product",
+    year: "2026",
     featured: false,
     kind: "lab",
     labTags: ["Web", "Products"],
     overview:
-      "RentaraH is a personal product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It sits alongside Gloves Up, PocketPOS, and QuickCart as independent product work, separate from client and enterprise delivery.",
+      "RentaraH is a peer-to-peer vehicle rental marketplace Al Andrew Paul Beltran (Al Beltran) designed and developed as founder of Momentra Labs. Renters search cars and two-wheelers by area and dates, compare PHP daily rates, and book verified hosts. Hosts can list a vehicle and earn. The public customer app is at rentahub2026.github.io.",
     problem:
-      "Rental workflows often get squeezed into generic listing tools instead of a dedicated product someone can own end to end.",
+      "Trip rental in the Philippines often means opaque rates, mixed listing tools, and no single place to compare cars, motorcycles, scooters, and big bikes with a clear host flow.",
     solution:
-      "Built RentaraH as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation.",
+      "Shipped a React + TypeScript customer marketplace with browse, map, host listing, and booking flows. Backend and admin live in sibling repos; the public web app is the Momentra Labs customer surface.",
     architecture: [
-      "Independent personal product under Momentra Labs",
+      "Customer web SPA (React, Vite, TypeScript) at rentahub2026.github.io",
+      "Express + Prisma API in a sibling rentarah-api service",
+      "Operations console in a sibling rentarah-admin app",
       "End-to-end founder ownership of product and engineering",
     ],
-    techStack: [],
+    techStack: ["React", "TypeScript", "Vite", "Node.js"],
     features: [
-      "Personal rental product developed by Al Beltran",
-      "Published as part of the Momentra Labs lab on albeltran.com",
+      "Search cars, motorcycles, scooters, and big bikes by city and dates",
+      "Clear PHP daily rates and host booking flow",
+      "Map explore and become-a-host listing path",
+      "Public demo at rentahub2026.github.io",
     ],
     challenges: [
-      "Keeping personal product work distinct from client and enterprise delivery",
+      "Keeping a Pages-hosted customer app separate from API and admin",
+      "Designing a Philippines-first rental flow without a generic listing clone",
     ],
     performance: [
-      "Shipped as a founder-owned personal product rather than a client case study",
+      "Public customer marketplace live at https://rentahub2026.github.io/",
+      "Shipped as a founder-owned Momentra Labs product, not a client case study",
     ],
     lessons: [
-      "Personal products need a public attribution surface so search and AI systems can cite the right author",
+      "Marketplace products need a public URL so people can try the actual flow",
+      "Splitting web, API, and admin keeps a GitHub Pages demo honest about what it hosts",
     ],
     screenshots: [
       {
-        src: "/projects/rentarah-placeholder.svg",
-        alt: "RentaraH personal rental product by Al Beltran / Momentra Labs",
+        src: "/covers/rentarah.jpg",
+        alt: "RentaraH car rental marketplace homepage at rentahub2026.github.io",
       },
     ],
+    demo: "https://rentahub2026.github.io/",
+    repository: "https://github.com/rentahub2026/rentahub2026.github.io",
+  },
+  {
+    slug: "lumina",
+    name: "Lumina",
+    shortName: "Lumina",
+    tagline:
+      "Daily motivation dashboard with a Gemini coach and optional spoken voice.",
+    role: "Solo founder · product & engineering (Momentra Labs)",
+    year: "2026",
+    featured: false,
+    kind: "lab",
+    labTags: ["Web", "Products"],
+    overview:
+      "Lumina is a personal daily motivation dashboard Al Andrew Paul Beltran (Al Beltran) designed and developed as founder of Momentra Labs. It opens with a quiet check-in — warm, not clinical — then a Gemini-backed coach and optional spoken voice. API keys stay on the server. The public app is at lumina-momentra-labs.vercel.app.",
+    problem:
+      "Most AI chat UIs dump you into a blank prompt. Lumina needed a calmer first moment, on-device intro memory, and a coach API that never ships secrets in the browser bundle.",
+    solution:
+      "Shipped a React + Vite + Tailwind dashboard with Framer Motion, a Vercel serverless POST /api/coach (Gemini generateContent), and optional POST /api/lumina-tts (ElevenLabs) with Web Speech fallback. Preferred name lives in localStorage; copy is grounding, not therapy.",
+    architecture: [
+      "React + Vite SPA with Tailwind CSS and Framer Motion",
+      "Vercel serverless /api/coach (Gemini) and /api/lumina-tts (ElevenLabs)",
+      "API keys stay in server env — never VITE_-prefixed into the client bundle",
+      "Optional Open-Meteo weather widgets; intro handshake in localStorage",
+    ],
+    techStack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
+    features: [
+      "Soft first-visit handshake, then a daily motivation dashboard",
+      "Gemini coach via POST /api/coach with keys server-side only",
+      "Optional Lumina Voice (ElevenLabs) with Web Speech fallback",
+      "Public demo at lumina-momentra-labs.vercel.app",
+    ],
+    challenges: [
+      "Keeping Gemini and ElevenLabs keys off the client while deploying a Vite SPA on Vercel",
+      "Writing check-in copy that stays warm without sounding like therapy",
+    ],
+    performance: [
+      "Public app live at https://lumina-momentra-labs.vercel.app/",
+      "Shipped as a founder-owned Momentra Labs product, not a client case study",
+    ],
+    lessons: [
+      "SPA + serverless /api routes only work if rewrites keep /api/* off the index.html fallback",
+      "Voice and coach features need a privacy-honest story: keys server-side, intro data local",
+    ],
+    screenshots: [
+      {
+        src: "/covers/lumina.jpg",
+        alt: "Lumina daily motivation dashboard at lumina-momentra-labs.vercel.app — quiet check-in before the coach",
+      },
+    ],
+    demo: "https://lumina-momentra-labs.vercel.app/",
+    repository: "https://github.com/codemoon2019/lumina",
+    relatedArticles: ["ai-augmented-engineering"],
   },
   {
     slug: "pocketpos",
@@ -390,7 +504,7 @@ export const projects: Project[] = [
     kind: "lab",
     labTags: ["Mobile", "Products"],
     overview:
-      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It is one of four independent products he publishes on this portfolio: RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It is one of the independent products he publishes on this portfolio: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
     problem:
       "Small operators often need a focused POS surface rather than a heavyweight retail suite.",
     solution:
@@ -432,7 +546,7 @@ export const projects: Project[] = [
     kind: "lab",
     labTags: ["Web", "Products"],
     overview:
-      "QuickCart is a personal commerce cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. Together with RentaraH, Gloves Up, and PocketPOS, it is part of his independent product work.",
+      "QuickCart is a personal commerce cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. Together with RentaraH, Lumina, Gloves Up, and PocketPOS, it is part of his independent product work.",
     problem:
       "Cart and checkout flows are often treated as an afterthought on a storefront instead of a product someone can own.",
     solution:
@@ -468,21 +582,42 @@ export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
 
+const FEATURED_ORDER = [
+  "national-geographic",
+  "disney-experiences",
+  "disney-institute",
+  "docindy",
+];
+
+const LAB_ORDER = ["rentarah", "lumina", "gloves-up", "pocketpos", "quickcart"];
+
+function sortBySlugOrder<T extends { slug: string }>(items: T[], order: string[]) {
+  return [...items].sort((a, b) => {
+    const ai = order.indexOf(a.slug);
+    const bi = order.indexOf(b.slug);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
+}
+
 export function getFeaturedProjects() {
-  return projects.filter((p) => p.featured && p.kind !== "lab");
+  return sortBySlugOrder(
+    projects.filter((p) => p.featured && p.kind !== "lab"),
+    FEATURED_ORDER,
+  );
 }
 
 export function getSelectedProjects() {
-  return projects.filter((p) => p.kind === "selected");
+  const selected = projects.filter((p) => p.kind === "selected");
+  const featured = FEATURED_ORDER
+    .map((slug) => selected.find((p) => p.slug === slug))
+    .filter((p): p is Project => Boolean(p));
+  const rest = selected.filter((p) => !FEATURED_ORDER.includes(p.slug));
+  return [...featured, ...rest];
 }
 
 export function getLabProjects() {
-  const order = ["rentarah", "gloves-up", "pocketpos", "quickcart"];
-  return projects
-    .filter((p) => p.kind === "lab")
-    .sort((a, b) => {
-      const ai = order.indexOf(a.slug);
-      const bi = order.indexOf(b.slug);
-      return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
-    });
+  return sortBySlugOrder(
+    projects.filter((p) => p.kind === "lab"),
+    LAB_ORDER,
+  );
 }

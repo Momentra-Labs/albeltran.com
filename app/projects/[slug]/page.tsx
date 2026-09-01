@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ProjectCover } from "@/components/shared/project-cover";
 import { notFound } from "next/navigation";
-import { ExternalLink, Code2 } from "lucide-react";
+import { Download, ExternalLink, Code2 } from "lucide-react";
 import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -94,7 +94,15 @@ export default async function ProjectDetailPage({ params }: Props) {
           {project.demo && (
             <Button asChild>
               <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                Live demo <ExternalLink className="h-4 w-4" />
+                {project.kind === "lab" ? "Open live site" : "Live demo"}{" "}
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </Button>
+          )}
+          {project.apk && (
+            <Button asChild>
+              <a href={project.apk} download>
+                Download APK <Download className="h-4 w-4" />
               </a>
             </Button>
           )}
@@ -153,17 +161,19 @@ export default async function ProjectDetailPage({ params }: Props) {
                 Implementation
               </h2>
               <div className="mt-6 grid gap-4">
-                {project.screenshots.map((shot) => (
+                {(project.screenshots.length > 0
+                  ? project.screenshots
+                  : [{ src: "", alt: `${project.name} cover` }]
+                ).map((shot) => (
                   <div
-                    key={shot.src}
+                    key={shot.src || project.slug}
                     className="relative aspect-video w-full overflow-hidden border border-border"
                   >
-                    <Image
-                      src={shot.src}
-                      alt={shot.alt}
-                      fill
+                    <ProjectCover
+                      project={project}
+                      shot={shot}
                       sizes="(max-width: 1024px) 100vw, 720px"
-                      className="object-cover"
+                      priority
                     />
                   </div>
                 ))}

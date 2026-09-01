@@ -62,7 +62,6 @@ export const experience: ExperienceItem[] = [
     technologies: ["Node.js", "AWS", "SQS", "SNS", "Lambda", "Talon.One", "REST APIs"],
     businessImpact:
       "Supported reliable card activation rewards at fintech scale, with clearer campaign operations for product and engineering.",
-    relatedProjects: ["maya-card-loyalty"],
   },
   {
     id: "myridius",
@@ -128,7 +127,6 @@ export const experience: ExperienceItem[] = [
     technologies: ["React", "Node.js", "Full-stack web"],
     businessImpact:
       "Accelerated client delivery by reusing UI and API patterns across engagements.",
-    relatedProjects: ["fwd-smart-recruitment"],
   },
   {
     id: "accenture",
@@ -140,7 +138,7 @@ export const experience: ExperienceItem[] = [
     summary:
       "Delivered enterprise AEM and API work on high-visibility Disney-related programs.",
     responsibilities: [
-      "Deliver Disney Institute and Disney Crew Management project workstreams",
+      "Deliver Disney Institute, National Geographic, Disney Experiences, and Disney Crew Management project workstreams",
       "Build enterprise AEM components and improve v2 APIs at global scale",
       "Operate within structured delivery frameworks with high-profile clients",
       "Contribute reusable architecture patterns adopted by multiple teams",
@@ -151,8 +149,8 @@ export const experience: ExperienceItem[] = [
     ],
     technologies: ["AEM", "React", "Node.js", "Java", "Spring Boot"],
     businessImpact:
-      "Supported global professional-development and crew platforms with more maintainable content and API surfaces.",
-    relatedProjects: ["disney-institute", "disney-crew-apis"],
+      "Supported global professional-development, publishing, experiences, and crew platforms with more maintainable content and API surfaces.",
+    relatedProjects: ["disney-institute", "national-geographic", "disney-experiences", "disney-crew-apis"],
   },
   {
     id: "upwork",

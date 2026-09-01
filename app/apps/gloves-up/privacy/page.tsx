@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
+import { Button } from "@/components/ui/button";
 import { person } from "@/content/person";
 import {
   breadcrumbSchema,
@@ -50,6 +51,14 @@ export default function GlovesUpPrivacyPage() {
       <Container className="py-16">
         <article className="prose-portfolio mx-auto max-w-3xl space-y-8 text-muted">
           <p className="text-sm text-foreground/70">Last updated: {UPDATED}</p>
+
+          <p>
+            <Button asChild>
+              <a href="/apps/gloves-up/gloves-up.apk" download>
+                Download Gloves Up APK
+              </a>
+            </Button>
+          </p>
 
           <p>
             <strong className="text-foreground">{APP_NAME}</strong> (“the App”)
@@ -200,6 +209,16 @@ export default function GlovesUpPrivacyPage() {
               Store listings &amp; purchases
             </h2>
             <p>
+              You can also install {APP_NAME} from the Android APK on this site
+              at{" "}
+              <a
+                href="/apps/gloves-up/gloves-up.apk"
+                download
+                className="text-accent hover:underline"
+              >
+                /apps/gloves-up/gloves-up.apk
+              </a>
+              . Sideloading uses your device&apos;s install-unknown-apps setting.
               If you download {APP_NAME} from Google Play or the App Store, those
               stores may process installation and (when available) subscription or
               purchase transactions under their own privacy policies. {APP_NAME}{" "}

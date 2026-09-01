@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { Container } from "@/components/shared/container";
+import { ProjectCover } from "@/components/shared/project-cover";
 import { ProjectDrawer } from "@/components/projects/project-drawer";
 import { Reveal, RevealItem } from "@/components/shared/reveal";
 import { cn } from "@/lib/utils";
@@ -82,16 +82,9 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
                   whileHover={reduce ? undefined : { scale: 1.01 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Image
-                    src={project.screenshots[0]?.src ?? "/og/default.jpg"}
-                    alt={project.screenshots[0]?.alt ?? project.name}
-                    fill
+                  <ProjectCover
+                    project={project}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className={
-                      reduce
-                        ? "object-cover"
-                        : "object-cover transition-transform duration-700 group-hover:scale-105"
-                    }
                   />
                 </motion.button>
                 <p className="sr-only">

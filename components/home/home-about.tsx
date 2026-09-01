@@ -6,17 +6,24 @@ import { Reveal } from "@/components/shared/reveal";
 export function HomeAbout() {
   return (
     <section id="about" className="py-16 sm:py-20">
-      <Container className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end lg:gap-12">
+      <Container className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
         <Reveal>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             About
           </p>
-          <h2 className="mt-3 max-w-[12ch] font-display text-4xl tracking-tight text-foreground sm:text-5xl">
-            Founder of Momentra Labs — still writing the code
+          <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-foreground sm:text-5xl">
+            <span className="block">Founder of Momentra Labs</span>
+            <span className="mt-2 block text-muted">still writing the code</span>
           </h2>
         </Reveal>
         <Reveal delay={0.08}>
-          <div className="space-y-4 text-base leading-relaxed text-muted">
+          <p
+            aria-hidden
+            className="hidden font-mono text-[11px] uppercase tracking-[0.2em] lg:block lg:invisible"
+          >
+            About
+          </p>
+          <div className="space-y-4 text-base leading-relaxed text-muted lg:mt-3">
             {aboutContent.whoIAm.paragraphs.slice(0, 2).map((paragraph) => (
               <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}
@@ -24,7 +31,7 @@ export function HomeAbout() {
           </div>
           <Link
             href="/about/"
-            className="mt-6 inline-block font-mono text-[11px] uppercase tracking-[0.16em] text-accent"
+            className="mt-8 inline-block font-mono text-[11px] uppercase tracking-[0.16em] text-accent"
             data-cursor="→"
           >
             Full about page

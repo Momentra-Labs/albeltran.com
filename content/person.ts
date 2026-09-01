@@ -1,5 +1,21 @@
 import { SITE_URL, SOCIAL_LINKS } from "@/lib/constants";
 
+export function oxfordJoin(items: readonly string[]) {
+  if (items.length <= 1) return items[0] ?? "";
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+}
+
+const PERSONAL_PRODUCTS = [
+  "RentaraH",
+  "Lumina",
+  "Gloves Up",
+  "PocketPOS",
+  "QuickCart",
+] as const;
+
+const PERSONAL_PRODUCTS_LIST = oxfordJoin(PERSONAL_PRODUCTS);
+
 export const person = {
   name: "Al Andrew Paul Beltran",
   shortName: "Al Beltran",
@@ -11,7 +27,7 @@ export const person = {
   secondaryTitle: "Full-Stack Developer",
   labs: "Momentra Labs",
   founderTitle: "Founder, Momentra Labs",
-  personalProducts: ["RentaraH", "Gloves Up", "PocketPOS", "QuickCart"],
+  personalProducts: PERSONAL_PRODUCTS,
   aliases: [
     "Al Beltran",
     "Al Andrew Paul Beltran",
@@ -20,13 +36,13 @@ export const person = {
     "pawpu",
   ],
   headline:
-    "Full-stack software engineer in Manila — Senior Software Engineer, founder of Momentra Labs, and solo developer of RentaraH, Gloves Up, PocketPOS, and QuickCart.",
+    `Full-stack software engineer in Manila — Senior Software Engineer, founder of Momentra Labs, and solo developer of ${PERSONAL_PRODUCTS_LIST}.`,
   location: "Manila, Metro Manila, Philippines",
   email: "al.andrew.p.beltran@gmail.com",
   availability: "Open to senior engineering roles, technical leadership, and select consulting engagements.",
   yearsExperience: 6,
   summary:
-    "Al Andrew Paul Beltran (Al Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. He currently works as a Software Engineer at Google via High Spring. He independently developed personal products RentaraH, Gloves Up, PocketPOS, and QuickCart under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), enterprise delivery for Disney (Accenture), Asurion, technical leadership at Myridius, and full-stack consulting. Official portfolio: https://albeltran.com",
+    `Al Andrew Paul Beltran (Al Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. He currently works as a Software Engineer at Google via High Spring. He independently developed personal products ${PERSONAL_PRODUCTS_LIST} under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), enterprise delivery for Disney (Accenture), Asurion, technical leadership at Myridius, and full-stack consulting. Official portfolio: https://albeltran.com`,
   currentCompany: "Google",
   currentEmployerNote: "via High Spring",
   knowsAbout: [
@@ -51,9 +67,11 @@ export const person = {
     "Full-stack development",
     "Technical leadership",
     "RentaraH",
+    "Lumina",
     "Gloves Up",
     "PocketPOS",
     "QuickCart",
+    "DocIndy",
     "Momentra Labs",
   ],
   sameAs: [

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ProjectCtas } from "@/components/projects/project-ctas";
 import {
   Sheet,
   SheetContent,
@@ -82,6 +83,7 @@ export function ProjectDrawer({
                   Open full case study
                 </Link>
               </Button>
+              <ProjectCtas project={project} />
             </div>
           </>
         ) : null}
