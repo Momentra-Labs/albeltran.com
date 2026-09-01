@@ -3,7 +3,7 @@ import { Container } from "@/components/shared/container";
 
 export function HowIThink() {
   return (
-    <section id="think" className="py-24" data-hide-recruiter>
+    <section id="think" className="py-16 sm:py-20" data-hide-recruiter>
       <Container>
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           How I think
@@ -11,7 +11,7 @@ export function HowIThink() {
         <h2 className="mt-3 max-w-xl text-3xl font-semibold tracking-tight text-foreground">
           Senior work is a sequence, not a stack
         </h2>
-        <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-5">
+        <ol className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
           {philosophy.map((item) => (
             <li key={item.index}>
               <p className="font-mono text-[11px] text-accent">{item.index}</p>

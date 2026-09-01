@@ -20,7 +20,7 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
   const showFilters = projects.length >= 2 && tags.length >= 2;
 
   return (
-    <section id="lab" className="py-24">
+    <section id="lab" className="py-16 sm:py-20">
       <Container>
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           Engineering Lab
@@ -52,7 +52,7 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
             ))}
           </div>
         ) : null}
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
           {visible.map((project) => (
             <Link
               key={project.slug}

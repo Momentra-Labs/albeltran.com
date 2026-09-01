@@ -46,6 +46,21 @@ function IssueLockup({ className = "" }: { className?: string }) {
   );
 }
 
+function CoverEpigraph() {
+  return (
+    <blockquote className="max-w-[26rem] border-l border-accent/70 pl-4">
+      <p className="font-display text-[1.15rem] leading-[1.25] tracking-tight text-foreground/88 italic sm:text-[1.35rem] lg:text-[1.45rem]">
+        The best way to predict the future is to invent it.
+      </p>
+      <footer className="mt-3">
+        <cite className="font-mono text-[10px] uppercase not-italic tracking-[0.22em] text-muted">
+          — Alan Kay
+        </cite>
+      </footer>
+    </blockquote>
+  );
+}
+
 export function HomeHero() {
   const reduce = useReducedMotion();
   const coverRef = useRef<HTMLElement>(null);
@@ -104,7 +119,7 @@ export function HomeHero() {
         initial={reduce ? false : { opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-        className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_minmax(0,1fr)_auto] lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto]"
+        className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:grid-rows-[auto_minmax(0,1fr)_auto]"
       >
         <header className="flex items-start justify-between gap-6 px-5 pt-20 sm:px-8 lg:px-10">
           <p className="font-display text-[clamp(2.6rem,9vw,8.5rem)] leading-[0.82] tracking-tight text-foreground">
@@ -119,8 +134,8 @@ export function HomeHero() {
           </p>
         </div>
 
-        <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(17rem,42%)] lg:gap-10 lg:px-10 lg:py-0">
-          <figure className="group relative flex min-h-0 flex-col lg:order-last lg:h-full">
+        <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(17rem,42%)] lg:gap-6 lg:px-10 lg:py-0">
+          <figure className="group relative flex min-h-0 flex-col lg:order-last lg:h-full lg:self-stretch">
             <div className="magazine-portrait editorial-grain relative aspect-[3/4] max-h-[48vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
               <Image
                 src={person.photo}
@@ -147,20 +162,23 @@ export function HomeHero() {
             </figcaption>
           </figure>
 
-          <div className="flex min-h-0 flex-col justify-end pb-2 lg:pb-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
-              Cover story
-            </p>
-            <h1 className="mt-3 max-w-[12ch] font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.9] tracking-tight text-foreground">
-              I build systems, products, and experiences.
-            </h1>
-            <div className="mt-6 lg:mt-8">
-              <CoverLines />
+          <div className="flex min-h-0 flex-col justify-end gap-8 pb-2 lg:justify-between lg:gap-10 lg:pt-2 lg:pb-8">
+            <CoverEpigraph />
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
+                Cover story
+              </p>
+              <h1 className="mt-3 max-w-[12ch] font-display text-[clamp(2rem,5.5vw,4.25rem)] leading-[0.9] tracking-tight text-foreground">
+                I build systems, products, and experiences.
+              </h1>
+              <div className="mt-4">
+                <CoverLines />
+              </div>
             </div>
           </div>
         </div>
 
-        <footer className="relative z-10 border-t border-border/80 px-5 py-3 sm:px-8 lg:px-10 lg:py-4">
+        <footer className="relative z-10 mt-auto border-t border-border/80 px-5 py-3 sm:px-8 lg:mt-0 lg:px-10 lg:py-4">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <nav
               className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em]"

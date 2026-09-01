@@ -4,8 +4,8 @@ import { Container } from "@/components/shared/container";
 
 export function HomeAbout() {
   return (
-    <section id="about" className="py-24">
-      <Container className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end lg:gap-16">
+    <section id="about" className="py-16 sm:py-20">
+      <Container className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-end lg:gap-12">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             About

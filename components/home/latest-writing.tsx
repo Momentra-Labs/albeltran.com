@@ -4,9 +4,9 @@ import { Container } from "@/components/shared/container";
 
 export function LatestWriting({ posts }: { posts: BlogPost[] }) {
   return (
-    <section id="writing" className="py-24">
+    <section id="writing" className="py-16 sm:py-20">
       <Container>
-        <div className="mb-10 flex items-end justify-between">
+        <div className="mb-8 flex items-end justify-between">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               Latest writing

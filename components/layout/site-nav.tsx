@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
 import { SECTION_NAV } from "@/lib/constants";
 import { person } from "@/content/person";
 import { cn } from "@/lib/utils";
@@ -18,8 +19,6 @@ import {
   CommandPalette,
   usePaletteHotkey,
 } from "@/components/layout/command-palette";
-import { RecruiterToggle } from "@/components/layout/recruiter-toggle";
-import { useRecruiter } from "@/components/layout/recruiter-provider";
 
 function folioIndex(index: number) {
   return String(index + 1).padStart(2, "0");
@@ -31,7 +30,6 @@ export function SiteNav() {
   const [active, setActive] = useState("work");
   const [scrolled, setScrolled] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const { recruiter, toggleRecruiter } = useRecruiter();
   const isHome = pathname === "/";
 
   const openPalette = useCallback(() => setOpen(true), []);
@@ -125,7 +123,6 @@ export function SiteNav() {
             >
               Ctrl K
             </button>
-            <RecruiterToggle className="hidden py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted lg:inline" />
             <Link
               href="/#contact"
               data-cursor="→"
@@ -137,10 +134,10 @@ export function SiteNav() {
               <SheetTrigger asChild>
                 <button
                   type="button"
-                  className="py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted hover:text-foreground md:hidden"
-                  aria-label="Open contents"
+                  className="flex h-8 w-8 items-center justify-center text-muted hover:text-foreground md:hidden"
+                  aria-label="Open menu"
                 >
-                  Index
+                  <Menu className="h-4 w-4" strokeWidth={1.5} />
                 </button>
               </SheetTrigger>
               <SheetContent className="shadow-none">
@@ -173,18 +170,6 @@ export function SiteNav() {
                       <span>Let&apos;s talk</span>
                     </Link>
                   </SheetClose>
-                  <button
-                    type="button"
-                    className="flex items-baseline gap-4 py-4 text-left font-mono text-sm uppercase tracking-[0.16em] text-muted hover:text-foreground"
-                    onClick={() => {
-                      toggleRecruiter();
-                    }}
-                  >
-                    <span className="text-accent">07</span>
-                    <span>
-                      {recruiter ? "Default view" : "Recruiter view"}
-                    </span>
-                  </button>
                 </nav>
               </SheetContent>
             </Sheet>

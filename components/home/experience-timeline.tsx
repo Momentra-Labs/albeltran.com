@@ -11,9 +11,9 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
   const visible = items;
 
   return (
-    <section id="experience" className="py-24 sm:py-32">
+    <section id="experience" className="py-16 sm:py-20">
       <Container>
-        <div className="mb-12 flex items-end justify-between gap-4">
+        <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               Experience

@@ -8,7 +8,7 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 
 export function HomeContact() {
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="py-16 sm:py-20">
       <Container className="grid gap-14 lg:grid-cols-[1fr_1fr]">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
