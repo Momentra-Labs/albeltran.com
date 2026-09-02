@@ -4,15 +4,16 @@ import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
 export const ISSUE_SPREADS = [
-  { id: "work", label: "Work", index: "02" },
-  { id: "lab", label: "Lab", index: "03" },
-  { id: "system", label: "Stack", index: "04" },
-  { id: "experience", label: "Experience", index: "05" },
-  { id: "think", label: "Think", index: "06" },
-  { id: "now", label: "Now", index: "07" },
-  { id: "writing", label: "Writing", index: "08" },
-  { id: "about", label: "About", index: "09" },
-  { id: "contact", label: "Contact", index: "10" },
+  { id: "record", label: "Record", index: "02" },
+  { id: "work", label: "Work", index: "03" },
+  { id: "lab", label: "Lab", index: "04" },
+  { id: "system", label: "Stack", index: "05" },
+  { id: "experience", label: "Experience", index: "06" },
+  { id: "think", label: "Think", index: "07" },
+  { id: "now", label: "Now", index: "08" },
+  { id: "writing", label: "Writing", index: "09" },
+  { id: "about", label: "About", index: "10" },
+  { id: "contact", label: "Contact", index: "11" },
 ] as const;
 
 export function IssueFolio() {

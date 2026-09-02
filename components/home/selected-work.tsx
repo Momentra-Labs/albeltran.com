@@ -127,6 +127,10 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
             <h2 className="mt-3 font-display text-4xl tracking-tight text-foreground sm:text-5xl">
               Systems that had to ship
             </h2>
+            <p className="mt-3 max-w-lg text-muted">
+              National Geographic, Disney Experiences, Disney Institute, and
+              live product delivery.
+            </p>
           </div>
           <Link
             href="/projects/"

@@ -34,6 +34,7 @@ export function CommandPalette({
 
   const items = useMemo<PaletteItem[]>(() => {
     const nav: PaletteItem[] = [
+      { id: "record", label: "Go to The record", href: "/#record" },
       { id: "work", label: "Go to Work", href: "/#work" },
       { id: "lab", label: "Go to Lab", href: "/#lab" },
       { id: "experience", label: "Go to Experience", href: "/#experience" },

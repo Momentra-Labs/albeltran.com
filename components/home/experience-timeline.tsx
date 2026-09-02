@@ -61,7 +61,8 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
             return (
               <motion.li
                 key={item.id}
-                className="relative"
+                className="relative scroll-mt-24"
+                id={item.id}
                 initial={reduce ? false : { opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}

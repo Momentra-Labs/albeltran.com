@@ -1,4 +1,5 @@
 import { HomeHero } from "@/components/home/home-hero";
+import { WorldMarks } from "@/components/home/world-marks";
 import { IssueContents } from "@/components/home/issue-contents";
 import { IssueFolio } from "@/components/home/issue-folio";
 import { EngineeringSystem } from "@/components/home/engineering-system";
@@ -24,6 +25,7 @@ import {
   labProductsSchema,
   websiteSchema,
   profilePageSchema,
+  worldMarksSchema,
 } from "@/lib/schema";
 import { buildMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION } from "@/lib/constants";
@@ -46,6 +48,7 @@ export default function HomePage() {
     momentraLabsSchema(),
     labProductsSchema(lab),
     profilePageSchema(),
+    worldMarksSchema(),
     faqSchema(homeFaqs),
   ]);
 
@@ -54,6 +57,7 @@ export default function HomePage() {
       <JsonLd data={schema} />
       <RecruiterStrip />
       <HomeHero />
+      <WorldMarks />
       <IssueContents features={featured.map((project) => project.name)} />
       <SelectedWork projects={featured} />
       <EngineeringLab projects={lab} />

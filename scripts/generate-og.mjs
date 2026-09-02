@@ -44,11 +44,11 @@ const overlaySvg = `
   <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#glow)"/>
   <rect x="0" y="0" width="720" height="${HEIGHT}" fill="url(#fade)"/>
 
-  <text x="72" y="168" fill="#8b8b9c" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="3">FULL-STACK SOFTWARE ENGINEER</text>
-  <text x="72" y="260" fill="#f0f0f5" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">Al Beltran</text>
-  <text x="72" y="318" fill="#c8c8d4" font-family="Arial, Helvetica, sans-serif" font-size="28">Al Andrew Paul Beltran</text>
-          <text x="72" y="380" fill="#9aa3b5" font-family="Arial, Helvetica, sans-serif" font-size="22">Founder, Momentra Labs · Philippines</text>
-  <text x="72" y="450" fill="#4f8eff" font-family="Arial, Helvetica, sans-serif" font-size="22">React · Next.js · Node.js · Java · AWS · AEM</text>
+  <text x="72" y="148" fill="#8b8b9c" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="3">SOFTWARE ENGINEER AT GOOGLE VIA HIGH SPRING</text>
+  <text x="72" y="248" fill="#f0f0f5" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">Al Beltran</text>
+  <text x="72" y="306" fill="#c8c8d4" font-family="Arial, Helvetica, sans-serif" font-size="26">Al Andrew Paul Beltran</text>
+  <text x="72" y="368" fill="#9aa3b5" font-family="Arial, Helvetica, sans-serif" font-size="22">Founder, Momentra Labs · Manila, Philippines</text>
+  <text x="72" y="430" fill="#4f8eff" font-family="Arial, Helvetica, sans-serif" font-size="20">National Geographic · Disney · Maya</text>
   <text x="72" y="560" fill="#6b7280" font-family="Arial, Helvetica, sans-serif" font-size="22">albeltran.com</text>
 </svg>
 `;

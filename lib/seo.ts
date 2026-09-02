@@ -3,7 +3,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
 
 export const PRIMARY_TITLE =
-  "Al Beltran — Full-Stack Software Engineer | Manila";
+  "Al Beltran — Software Engineer at Google via High Spring";
 
 type BuildMetadataInput = {
   title: string;
@@ -67,6 +67,7 @@ export function buildMetadata({
           url,
           siteName: SITE_NAME,
           locale: "en_PH" as const,
+          alternateLocale: ["en_US"],
           type: "article" as const,
           publishedTime,
           modifiedTime: modifiedTime ?? publishedTime,
@@ -80,6 +81,7 @@ export function buildMetadata({
           url,
           siteName: SITE_NAME,
           locale: "en_PH" as const,
+          alternateLocale: ["en_US"],
           type: "website" as const,
           images: [ogImage],
         };

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { experience } from "@/content/experience";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
 import { person, technologies } from "@/content/person";
+import { worldMarksLine } from "@/content/marks";
 import { Container } from "@/components/shared/container";
 import { RecruiterToggle } from "@/components/layout/recruiter-toggle";
 import { SOCIAL_LINKS } from "@/lib/constants";
@@ -21,8 +22,11 @@ export function RecruiterStrip() {
           <RecruiterToggle className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted" />
         </div>
         <h2 className="mt-2 text-2xl font-semibold text-foreground">
-          {person.shortName} · {person.jobTitle} · {person.founderTitle}
+          {person.shortName} · {person.currentRole} · {person.founderTitle}
         </h2>
+        <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.12em] text-accent">
+          {worldMarksLine}
+        </p>
         <p className="mt-3 max-w-2xl text-sm text-muted">{person.summary}</p>
         <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
           {technologies.join(" · ")}

@@ -7,7 +7,7 @@ export function Timeline({ items }: { items: ExperienceItem[] }) {
   return (
     <ol className="relative space-y-0 border-l border-border pl-6 sm:pl-8">
       {items.map((item) => (
-        <li key={item.id} className="relative pb-12 last:pb-0">
+        <li key={item.id} id={item.id} className="relative scroll-mt-24 pb-12 last:pb-0">
           <span className="absolute -left-[1.9rem] top-1.5 h-3 w-3 rounded-full border-2 border-accent bg-background sm:-left-[2.15rem]" />
           <div className="grid gap-4 lg:grid-cols-[200px_1fr]">
             <div>

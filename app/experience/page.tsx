@@ -14,7 +14,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Experience — Al Beltran",
-  description: `Career timeline for Al Beltran (Al Andrew Paul Beltran), Senior Software Engineer: Google via High Spring, Maya, Myridius, Asurion, Yondu, Accenture, freelance, and GoETU.`,
+  description: `Career timeline for Al Beltran (Al Andrew Paul Beltran): Software Engineer at Google via High Spring, Maya, National Geographic and Disney via Accenture, Myridius, Asurion, Yondu, freelance, and GoETU.`,
   path: "/experience/",
 });
 
@@ -37,8 +37,8 @@ export default function ExperiencePage() {
       <JsonLd data={schema} />
       <PageHeader
         label="Experience"
-        title="6+ years of engineering impact"
-        description="A timeline of roles from junior delivery to fintech event-driven systems, with responsibilities, achievements, technologies, and business impact."
+        title="Google, Maya, Accenture — and the path here"
+        description="Software Engineer at Google via High Spring. Fintech at Maya. National Geographic and Disney via Accenture. Technical leadership, enterprise AEM, and full-stack delivery from Manila."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "Experience" },

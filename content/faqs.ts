@@ -7,7 +7,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Who is Al Andrew Paul Beltran?",
     answer:
-      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. He developed personal products RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
+      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. Through Accenture he contributed to National Geographic and Disney platforms. He developed personal products RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
   },
   {
     question: "Who is Al Andrew Paul Teodosio Beltran?",
@@ -22,7 +22,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "What does Al Beltran specialize in?",
     answer:
-      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as a Software Engineer at Google via High Spring and is the founder of Momentra Labs, where he developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Maya, Disney-related enterprise programs via Accenture, Asurion, and other organizations.",
+      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as a Software Engineer at Google via High Spring and is the founder of Momentra Labs, where he developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Maya (fintech) and National Geographic and Disney enterprise programs via Accenture.",
   },
   {
     question: "How do I contact Al Beltran?",
@@ -33,6 +33,11 @@ export const homeFaqs: FAQItem[] = [
     question: "Where does Al Beltran work now?",
     answer:
       "Al Beltran currently works as a Software Engineer at Google via High Spring. He is also the founder of Momentra Labs and independently developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
+  },
+  {
+    question: "Has Al Beltran worked with National Geographic or Disney?",
+    answer:
+      "Yes. Through Accenture he contributed to enterprise web delivery for National Geographic, Disney Experiences, and Disney Institute. Case studies are at https://albeltran.com/projects/national-geographic/, https://albeltran.com/projects/disney-experiences/, and https://albeltran.com/projects/disney-institute/. This is client delivery via Accenture — not employment by Disney or National Geographic.",
   },
   {
     question: "What personal products has Al Beltran developed?",

@@ -17,7 +17,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Resume",
-  description: `Resume summary for ${person.name}, Senior Software Engineer and founder of ${person.labs} — download PDF and review experience highlights.`,
+  description: `Resume for ${person.name}, ${person.currentRole} and founder of ${person.labs} — download PDF and review experience highlights.`,
   path: "/resume/",
 });
 
@@ -41,7 +41,7 @@ export default function ResumePage() {
       <PageHeader
         label="Resume"
         title={`${person.name}`}
-        description={`${person.jobTitle} · ${person.founderTitle} · ${person.location}`}
+        description={`${person.currentRole} · ${person.founderTitle} · ${person.location}`}
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "Resume" },

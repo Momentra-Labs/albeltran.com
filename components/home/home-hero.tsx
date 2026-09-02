@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { person } from "@/content/person";
+import { coverMarksLine } from "@/content/marks";
 
 const coverEase = [0.23, 1, 0.32, 1] as const;
 
@@ -22,7 +23,7 @@ function coverFade(delay: number, reduce: boolean | null) {
 const coverEntries = [
   {
     title: "Software engineer",
-    dek: `${person.currentCompany} · ${person.currentEmployerNote}`,
+    dek: `${person.currentCompany} ${person.currentEmployerNote}`,
   },
   {
     title: "Tech lead",
@@ -143,9 +144,9 @@ export function HomeHero() {
 
       <p className="sr-only">
         {person.legalName} ({person.shortName}) is a {person.occupation} in
-        Manila. {person.jobTitle}. Software Engineer at Google via High Spring.
-        Founder of {person.labs}. Independent products:{" "}
-        {person.personalProducts.join(", ")}.
+        Manila. {person.currentRole}. Founder of {person.labs}. Independent
+        products: {person.personalProducts.join(", ")}. National Geographic and
+        Disney via Accenture. Maya fintech.
       </p>
 
       <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden lg:grid-rows-[auto_minmax(0,1fr)_auto]">
@@ -182,7 +183,7 @@ export function HomeHero() {
             <div className="magazine-portrait editorial-grain relative aspect-[3/4] max-h-[48vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
               <Image
                 src={person.photo}
-                alt="Al Andrew Paul Beltran (Al Beltran), full-stack software engineer and founder of Momentra Labs"
+                alt={`${person.name} (${person.shortName}), ${person.currentRole} and founder of ${person.labs}`}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 42vw"
@@ -230,7 +231,7 @@ export function HomeHero() {
                 production.
               </p>
               <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:text-[11px]">
-                Software engineer · Tech lead · Product builder
+                {person.currentRole} · {person.founderTitle}
               </p>
               <div className="mt-4">
                 <CoverLines />
@@ -249,9 +250,16 @@ export function HomeHero() {
               aria-label="Cover actions"
             >
               <Link
-                href="#work"
+                href="#record"
                 data-cursor="VIEW"
                 className={`${ctaClass} text-foreground hover:text-accent`}
+              >
+                The record →
+              </Link>
+              <Link
+                href="#work"
+                data-cursor="VIEW"
+                className={`${ctaClass} text-muted hover:text-foreground`}
               >
                 Explore my work →
               </Link>
@@ -264,7 +272,7 @@ export function HomeHero() {
               </Link>
             </nav>
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted lg:text-[11px]">
-              Software engineering · Product development · Web · Mobile · Cloud
+              {coverMarksLine}
             </p>
           </div>
         </motion.footer>

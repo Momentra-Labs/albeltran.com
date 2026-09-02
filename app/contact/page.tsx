@@ -17,7 +17,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Contact Al Beltran",
-  description: `Contact Al Beltran (Al Andrew Paul Beltran) — Senior Software Engineer and Full-Stack Developer in the Philippines. Email, LinkedIn, GitHub, and availability.`,
+  description: `Contact Al Beltran (Al Andrew Paul Beltran) — ${person.currentRole} and founder of Momentra Labs. Manila, Philippines.`,
   path: "/contact/",
 });
 

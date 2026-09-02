@@ -4,7 +4,7 @@ export const SITE_URL =
 
 export const SITE_NAME = "Al Beltran — Portfolio";
 export const SITE_DESCRIPTION =
-  "Al Beltran (Al Andrew Paul Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer in Manila. Senior Software Engineer, founder of Momentra Labs, and Software Engineer at Google via High Spring. He developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart — https://albeltran.com";
+  "Al Beltran (Al Andrew Paul Beltran) is a software engineer in Manila — Software Engineer at Google via High Spring, founder of Momentra Labs, and contributor to National Geographic and Disney platforms via Accenture. Personal products: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart — https://albeltran.com";
 
 export const SECTION_NAV = [
   { href: "/#work", hash: "work", label: "Work" },

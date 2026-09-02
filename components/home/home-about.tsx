@@ -13,8 +13,8 @@ export function HomeAbout() {
             About
           </p>
           <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-            <span className="block">Founder of Momentra Labs</span>
-            <span className="mt-2 block text-muted">still writing the code</span>
+            <span className="block">Software Engineer at Google</span>
+            <span className="mt-2 block text-muted">via High Spring</span>
           </h2>
         </Reveal>
         <Reveal delay={0.08} variant="ink">

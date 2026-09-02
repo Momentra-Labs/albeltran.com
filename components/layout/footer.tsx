@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import { person } from "@/content/person";
+import { coverMarksLine } from "@/content/marks";
 import { Container } from "@/components/shared/container";
 
 export function Footer() {
@@ -14,8 +15,12 @@ export function Footer() {
             AL BELTRAN
           </p>
           <p className="mt-2 text-sm text-muted">
-            {person.jobTitle} · {person.founderTitle}
+            {person.currentRole} · {person.founderTitle}
           </p>
+          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-dim">
+            {coverMarksLine}
+          </p>
+          <p className="mt-1 text-sm text-muted-dim">Manila, Philippines</p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
           <a

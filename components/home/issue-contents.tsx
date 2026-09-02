@@ -11,7 +11,7 @@ export function IssueContents({ features }: { features: readonly string[] }) {
         <div className="flex items-end justify-between gap-4">
           <Reveal variant="folio">
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
-              02 / After the cover
+              After the record
             </p>
             <p className="mt-3 font-display text-3xl tracking-tight text-foreground sm:text-4xl">
               The well

@@ -1,7 +1,27 @@
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person, oxfordJoin } from "@/content/person";
+import { worldMarks } from "@/content/marks";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
+
+export function worldMarksSchema() {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/#record`,
+    name: "Recognizable work by Al Beltran",
+    description: person.headline,
+    numberOfItems: worldMarks.length,
+    itemListElement: worldMarks.map((mark, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: mark.name,
+      description: mark.note,
+      url: mark.href.startsWith("http")
+        ? mark.href
+        : `${SITE_URL}${mark.href}`,
+    })),
+  };
+}
 
 export function personSchema() {
   return {
@@ -18,14 +38,19 @@ export function personSchema() {
       "@type": "ImageObject",
       url: person.image,
       contentUrl: person.image,
-      caption: `${person.name} (${person.legalName}) — ${person.occupation} and founder of ${person.labs}`,
+      caption: `${person.name} (${person.legalName}) — ${person.currentRole} and founder of ${person.labs}`,
     },
-    jobTitle: person.occupation,
+    jobTitle: person.currentRole,
     hasOccupation: {
       "@type": "Occupation",
-      name: person.occupation,
+      name: "Software Engineer",
+      occupationLocation: {
+        "@type": "City",
+        name: "Manila",
+      },
     },
     description: person.summary,
+    disambiguatingDescription: person.headline,
     email: person.email,
     nationality: { "@type": "Country", name: "Philippines" },
     address: {
@@ -42,11 +67,20 @@ export function personSchema() {
         addressLocality: "Manila",
       },
     },
-    worksFor: {
-      "@type": "Organization",
-      name: "Google",
-      description: "Software Engineer engagement via High Spring",
-    },
+    worksFor: [
+      {
+        "@type": "Organization",
+        name: "High Spring",
+        description:
+          "Employer of record for a Software Engineer engagement at Google.",
+      },
+      {
+        "@type": "Organization",
+        name: "Google",
+        description:
+          "Software Engineer engagement via High Spring. Contractor — not a Google full-time employee.",
+      },
+    ],
     affiliation: {
       "@type": "Organization",
       "@id": `${SITE_URL}/#momentra-labs`,
@@ -123,7 +157,7 @@ export function websiteSchema() {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     url: `${SITE_URL}/`,
-    name: `${person.shortName} — ${person.occupation}`,
+    name: `${person.shortName} — ${person.currentRole}`,
     alternateName: [
       "Al Beltran Portfolio",
       "Al Andrew Paul Beltran Portfolio",
@@ -143,7 +177,7 @@ export function profilePageSchema() {
     "@type": "ProfilePage",
     "@id": `${SITE_URL}/#profilepage`,
     url: `${SITE_URL}/`,
-    name: `${person.shortName} — ${person.occupation}`,
+    name: `${person.shortName} — ${person.currentRole}`,
     description: person.summary,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     about: { "@id": `${SITE_URL}/#person` },
@@ -152,7 +186,7 @@ export function profilePageSchema() {
       "@type": "ImageObject",
       url: person.image,
       contentUrl: person.image,
-      caption: `${person.name} (${person.legalName}) — ${person.occupation}`,
+      caption: `${person.name} (${person.legalName}) — ${person.currentRole}`,
     },
   };
 }

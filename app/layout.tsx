@@ -52,6 +52,15 @@ export const metadata: Metadata = {
     "Next.js",
     "Node.js",
     "TypeScript",
+    "Google",
+    "Google via High Spring",
+    "National Geographic",
+    "Disney",
+    "Disney Experiences",
+    "Disney Institute",
+    "Accenture",
+    "Maya",
+    "High Spring",
     "Momentra Labs",
     "Founder Momentra Labs",
     "RentaraH",
@@ -106,7 +115,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-PH"
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} dark h-full antialiased`}
     >
       <head>
