@@ -170,11 +170,15 @@ export function HomeHero() {
 
         <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(17rem,42%)] lg:gap-6 lg:px-10 lg:py-0">
           <motion.figure
-            className="group relative order-2 flex min-h-0 origin-top flex-col lg:order-last lg:h-full lg:min-h-0 lg:self-stretch"
+            className="magazine-plate group relative order-2 flex min-h-0 origin-top flex-col lg:order-last lg:h-full lg:min-h-0 lg:self-stretch"
             initial={reduce ? false : { opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: coverEase, delay: 0.28 }}
           >
+            <span className="magazine-plate-back" aria-hidden />
+            <p className="magazine-plate-spine hidden lg:block">
+              Cover portrait · 01
+            </p>
             <div className="magazine-portrait editorial-grain relative aspect-[3/4] max-h-[48vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
               <Image
                 src={person.photo}
@@ -185,19 +189,31 @@ export function HomeHero() {
                 className={`magazine-portrait-img object-cover object-[center_12%] ${
                   reduce
                     ? ""
-                    : "transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 }`}
               />
               <span className="magazine-portrait-ink" aria-hidden />
+              <span className="magazine-portrait-glow" aria-hidden />
               <span className="magazine-portrait-edge" aria-hidden />
+              <span className="magazine-portrait-mat" aria-hidden />
+              <span className="magazine-portrait-meta" aria-hidden>
+                <span>Plate 01</span>
+                <span>Vol. 01</span>
+              </span>
+              <span className="magazine-register-mark hidden lg:block" aria-hidden />
+              <span className="magazine-crop magazine-crop-tl left-4 top-4 z-[4] hidden lg:block" />
+              <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
             </div>
             <span
               className="magazine-portrait-register hidden lg:block"
               aria-hidden
             />
-            <figcaption className="mt-3 flex shrink-0 flex-wrap items-baseline justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted lg:absolute lg:inset-x-3 lg:bottom-3 lg:z-[3] lg:mt-0 lg:bg-background/65 lg:px-3 lg:py-2 lg:backdrop-blur-[2px]">
-              <span>Al Beltran / Manila</span>
-              <span className="text-muted-dim">14.60° N / 120.98° E</span>
+            <figcaption className="magazine-plate-caption mt-3 lg:mt-0">
+              <span>
+                <span className="text-accent">Cover</span>
+                <span className="text-muted-dim"> / Al Beltran</span>
+              </span>
+              <span className="text-muted-dim">Manila · 14.60° N / 120.98° E</span>
             </figcaption>
           </motion.figure>
 

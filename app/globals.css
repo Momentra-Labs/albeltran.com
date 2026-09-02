@@ -35,6 +35,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.75rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -90,58 +91,215 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.14;
+  z-index: 2;
+  opacity: 0.1;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
 }
 
+.magazine-plate {
+  isolation: isolate;
+}
+
+.magazine-plate-back {
+  pointer-events: none;
+  position: absolute;
+  inset: 0.4rem 0.15rem 1.15rem 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--accent) 34%, transparent), color-mix(in srgb, var(--accent) 8%, transparent));
+  clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
+  transform: translate(-0.55rem, 0.55rem);
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.magazine-plate:hover .magazine-plate-back {
+  transform: translate(-0.85rem, 0.7rem);
+}
+
+.magazine-plate-spine {
+  pointer-events: none;
+  position: absolute;
+  left: 0.15rem;
+  top: 14%;
+  z-index: 4;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .magazine-portrait {
   isolation: isolate;
+  z-index: 1;
   clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
+  box-shadow:
+    -1.25rem 1.5rem 3.5rem rgba(0, 0, 0, 0.38),
+    0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent);
 }
 
 .magazine-portrait-img {
-  filter: grayscale(0.18) contrast(1.12) saturate(0.78) brightness(1.06);
+  filter: grayscale(0.05) contrast(1.08) saturate(0.94) brightness(1.03);
 }
 
 .magazine-portrait-ink,
-.magazine-portrait-edge {
+.magazine-portrait-edge,
+.magazine-portrait-glow,
+.magazine-portrait-mat {
   pointer-events: none;
   position: absolute;
   inset: 0;
 }
 
 .magazine-portrait-ink {
-  background: var(--background);
+  z-index: 1;
+  background:
+    linear-gradient(180deg, transparent 8%, rgba(18, 16, 14, 0.12) 100%),
+    linear-gradient(90deg, rgba(5, 5, 7, 0.16), transparent 22%);
   mix-blend-mode: multiply;
-  opacity: 0.28;
+}
+
+.magazine-portrait-glow {
+  z-index: 1;
+  background: radial-gradient(
+    ellipse 58% 46% at 48% 22%,
+    rgba(255, 236, 214, 0.2),
+    transparent 68%
+  );
+  mix-blend-mode: screen;
 }
 
 .magazine-portrait-edge {
+  z-index: 2;
   background:
-    linear-gradient(90deg, var(--background) 0%, transparent 12%),
-    linear-gradient(180deg, var(--background) 0%, transparent 12%, transparent 82%, var(--background) 100%);
+    linear-gradient(90deg, var(--background) 0%, transparent 10%),
+    linear-gradient(180deg, var(--background) 0%, transparent 10%, transparent 78%, var(--background) 100%);
+}
+
+.magazine-portrait-mat {
+  z-index: 3;
+  inset: 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 22%, transparent);
+  mix-blend-mode: overlay;
+}
+
+.magazine-portrait-meta {
+  pointer-events: none;
+  position: absolute;
+  top: 0.85rem;
+  right: 0.9rem;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 82%, transparent);
+  text-shadow: 0 1px 8px rgba(5, 5, 7, 0.45);
 }
 
 .magazine-portrait-register {
   pointer-events: none;
   position: absolute;
-  inset: 0.85rem 0.35rem 2.75rem 1.1rem;
+  inset: 0.55rem -0.15rem 1.35rem 0.85rem;
   z-index: 2;
-  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
-  transform: translate(0.55rem, 0.7rem);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  transform: translate(0.7rem, 0.85rem);
+}
+
+.magazine-register-mark {
+  pointer-events: none;
+  position: absolute;
+  right: 0.85rem;
+  bottom: 3.1rem;
+  z-index: 4;
+  width: 18px;
+  height: 18px;
+}
+
+.magazine-register-mark::before,
+.magazine-register-mark::after {
+  content: "";
+  position: absolute;
+  background: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
+.magazine-register-mark::before {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.magazine-register-mark::after {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.magazine-plate-caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 @media (min-width: 1024px) {
+  .magazine-plate-back {
+    inset: 0;
+    clip-path: polygon(7% 0, 100% 0, 100% 100%, 0 100%);
+    transform: translate(-0.85rem, 0.7rem);
+  }
+
+  .magazine-plate:hover .magazine-plate-back {
+    transform: translate(-1.1rem, 0.85rem);
+  }
+
+  .magazine-plate-spine {
+    left: 0.05rem;
+    top: 16%;
+  }
+
   .magazine-portrait {
     clip-path: polygon(7% 0, 100% 0, 100% 100%, 0 100%);
   }
 
   .magazine-portrait-edge {
     background:
-      linear-gradient(90deg, var(--background) 0%, transparent 16%),
-      linear-gradient(180deg, rgba(5, 5, 7, 0.32) 0%, transparent 12%, transparent 86%, var(--background) 100%);
+      linear-gradient(90deg, var(--background) 0%, transparent 14%),
+      linear-gradient(180deg, rgba(5, 5, 7, 0.18) 0%, transparent 12%, transparent 72%, var(--background) 100%);
+  }
+
+  .magazine-portrait-mat {
+    clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .magazine-plate-caption {
+    position: absolute;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    left: 11%;
+    z-index: 4;
+    padding: 0.7rem 0 0;
+    border-top: 1px solid color-mix(in srgb, var(--foreground) 28%, transparent);
+    color: var(--foreground);
+    text-shadow: 0 1px 10px rgba(5, 5, 7, 0.55);
   }
 }
 
@@ -313,6 +471,12 @@ body {
   .magazine-cover-wash,
   .magazine-cover-grain {
     animation: none;
+  }
+
+  .magazine-plate-back,
+  .magazine-plate:hover .magazine-plate-back {
+    transition: none;
+    transform: translate(-0.55rem, 0.55rem);
   }
 }
 
