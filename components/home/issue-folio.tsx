@@ -27,6 +27,15 @@ export function IssueFolio() {
 
     const update = () => {
       const mark = window.innerHeight * 0.36;
+      const cover = document.querySelector(".magazine-cover");
+      if (cover) {
+        const coverRect = cover.getBoundingClientRect();
+        if (coverRect.top <= mark && coverRect.bottom > mark) {
+          setActive(null);
+          return;
+        }
+      }
+
       let current: (typeof ISSUE_SPREADS)[number] | null = null;
       for (const item of ISSUE_SPREADS) {
         const el = document.getElementById(item.id);
@@ -38,7 +47,7 @@ export function IssueFolio() {
         }
       }
       setActive((prev) => {
-        if (!current) return prev;
+        if (!current) return null;
         return prev?.id === current.id ? prev : current;
       });
     };
