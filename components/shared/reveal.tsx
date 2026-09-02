@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, type TargetAndTransition } from "framer-motion";
 
 const ease = [0.23, 1, 0.32, 1] as const;
 
@@ -8,7 +8,7 @@ export type RevealVariant = "ink" | "folio" | "rise";
 
 const motionFor: Record<
   RevealVariant,
-  { initial: object; animate: object; duration: number }
+  { initial: TargetAndTransition; animate: TargetAndTransition; duration: number }
 > = {
   ink: {
     initial: { opacity: 0.2, clipPath: "inset(0 0 88% 0)" },
