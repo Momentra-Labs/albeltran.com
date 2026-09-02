@@ -9,10 +9,11 @@ import { Reveal } from "@/components/shared/reveal";
 
 export function HomeContact() {
   return (
-    <section id="contact" className="py-16 sm:py-20">
+    <section id="contact" className="magazine-spread py-16 sm:py-20">
       <Container className="grid items-start gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-        <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+        <Reveal variant="folio">
+          <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             Contact
           </p>
           <h2 className="mt-3 font-display text-4xl tracking-tight text-foreground sm:text-5xl">
@@ -67,7 +68,7 @@ export function HomeContact() {
             <FAQ items={homeFaqs} title="Common questions" />
           </div>
         </Reveal>
-        <Reveal delay={0.08}>
+        <Reveal delay={0.08} variant="ink">
           <div className="relative overflow-hidden border border-border bg-surface/50 p-7 sm:p-10">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(79,142,255,0.08),transparent_46%)]" />
             <span className="magazine-crop magazine-crop-tl left-3 top-3" />

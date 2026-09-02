@@ -1,4 +1,6 @@
 import { HomeHero } from "@/components/home/home-hero";
+import { IssueContents } from "@/components/home/issue-contents";
+import { IssueFolio } from "@/components/home/issue-folio";
 import { EngineeringSystem } from "@/components/home/engineering-system";
 import { SelectedWork } from "@/components/home/selected-work";
 import { EngineeringLab } from "@/components/home/engineering-lab";
@@ -52,15 +54,17 @@ export default function HomePage() {
       <JsonLd data={schema} />
       <RecruiterStrip />
       <HomeHero />
-      <EngineeringSystem />
+      <IssueContents features={featured.map((project) => project.name)} />
       <SelectedWork projects={featured} />
       <EngineeringLab projects={lab} />
+      <EngineeringSystem />
       <ExperienceTimeline items={experience} />
       <HowIThink />
       <Currently />
       <LatestWriting posts={posts} />
       <HomeAbout />
       <HomeContact />
+      <IssueFolio />
     </>
   );
 }

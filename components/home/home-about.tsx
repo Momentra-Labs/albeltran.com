@@ -5,10 +5,11 @@ import { Reveal } from "@/components/shared/reveal";
 
 export function HomeAbout() {
   return (
-    <section id="about" className="py-16 sm:py-20">
+    <section id="about" className="magazine-spread py-16 sm:py-20">
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
-        <Reveal>
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+        <Reveal variant="folio">
+          <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             About
           </p>
           <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-foreground sm:text-5xl">
@@ -16,10 +17,16 @@ export function HomeAbout() {
             <span className="mt-2 block text-muted">still writing the code</span>
           </h2>
         </Reveal>
-        <Reveal delay={0.08}>
+        <Reveal delay={0.08} variant="ink">
           <p
             aria-hidden
-            className="hidden font-mono text-[11px] uppercase tracking-[0.2em] lg:block lg:invisible"
+            className="magazine-spread-kicker hidden lg:block lg:invisible"
+          >
+            Vol. 01 / Manila
+          </p>
+          <p
+            aria-hidden
+            className="mt-3 hidden font-mono text-[11px] uppercase tracking-[0.2em] lg:block lg:invisible"
           >
             About
           </p>

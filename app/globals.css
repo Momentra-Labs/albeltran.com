@@ -437,6 +437,100 @@ body {
   bottom: -6px;
 }
 
+.magazine-spread {
+  position: relative;
+}
+
+.magazine-spread-kicker {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+.magazine-ghost-folio {
+  pointer-events: none;
+  position: absolute;
+  left: -0.15em;
+  top: -0.42em;
+  z-index: 0;
+  font-family: var(--font-display), serif;
+  font-size: clamp(5.5rem, 14vw, 9.5rem);
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.magazine-scan {
+  position: relative;
+}
+
+.magazine-scan::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 42%,
+    color-mix(in srgb, var(--accent) 55%, transparent) 50%,
+    transparent 58%,
+    transparent 100%
+  );
+  background-size: 100% 240%;
+  background-position: 0 -30%;
+}
+
+.group:hover .magazine-scan::after {
+  opacity: 1;
+  animation: magazine-scan-move 1.05s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.magazine-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  animation: live-pulse 1.8s ease-in-out infinite;
+}
+
+.stack-ticker:hover .stack-ticker-track {
+  animation-play-state: paused;
+}
+
+.stack-ticker-track {
+  animation: issue-drift 46s linear infinite;
+}
+
+@keyframes issue-drift {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes magazine-scan-move {
+  from {
+    background-position: 0 -40%;
+  }
+  to {
+    background-position: 0 140%;
+  }
+}
+
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
 @keyframes cover-breathe {
   0%,
   100% {
@@ -477,6 +571,16 @@ body {
   .magazine-plate:hover .magazine-plate-back {
     transition: none;
     transform: translate(-0.55rem, 0.55rem);
+  }
+
+  .stack-ticker-track,
+  .magazine-live-dot {
+    animation: none;
+  }
+
+  .group:hover .magazine-scan::after {
+    animation: none;
+    opacity: 0;
   }
 }
 
