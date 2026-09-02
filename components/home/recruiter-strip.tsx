@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { experience } from "@/content/experience";
+import { featuredExperience } from "@/content/experience";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
 import { person, technologies } from "@/content/person";
 import { worldMarksLine } from "@/content/marks";
@@ -10,7 +10,7 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 export function RecruiterStrip() {
   const featured = getFeaturedProjects();
   const lab = getLabProjects();
-  const recent = experience.slice(0, 4);
+  const recent = featuredExperience;
 
   return (
     <section className="recruiter-only border-b border-border py-10">

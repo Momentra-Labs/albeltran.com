@@ -36,13 +36,13 @@ export const person = {
     "pawpu",
   ],
   headline:
-    "Software Engineer at Google via High Spring. Founder of Momentra Labs. Enterprise web delivery for National Geographic and Disney via Accenture. Based in Manila.",
+    "Software Engineer at Google via High Spring. Founder of Momentra Labs. National Geographic and Disney enterprise programs via Myridius. Based in Manila.",
   location: "Manila, Metro Manila, Philippines",
   email: "al.andrew.p.beltran@gmail.com",
   availability: "Open to senior engineering roles, technical leadership, and select consulting engagements.",
   yearsExperience: 6,
   summary:
-    `Al Andrew Paul Beltran (Al Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. He currently works as a Software Engineer at Google via High Spring. Through Accenture he contributed to National Geographic and Disney enterprise platforms. He independently developed personal products ${PERSONAL_PRODUCTS_LIST} under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), Asurion, technical leadership at Myridius, and full-stack consulting. Official portfolio: https://albeltran.com`,
+    `Al Andrew Paul Beltran (Al Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, Full-Stack Developer, and founder of Momentra Labs. He currently works as a Software Engineer at Google via High Spring. Through Myridius he contributed to National Geographic, Disney Experiences, Disney Institute, and Disney Crew Management platforms. He independently developed personal products ${PERSONAL_PRODUCTS_LIST} under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), Asurion, Accenture, and full-stack consulting. Official portfolio: https://albeltran.com`,
   currentCompany: "Google",
   currentEmployerNote: "via High Spring",
   currentRole: "Software Engineer at Google via High Spring",
@@ -53,6 +53,7 @@ export const person = {
     "Disney",
     "Disney Experiences",
     "Disney Institute",
+    "Myridius",
     "Accenture",
     "Maya",
     "Momentra Labs",

@@ -58,6 +58,7 @@ export const metadata: Metadata = {
     "Disney",
     "Disney Experiences",
     "Disney Institute",
+    "Myridius",
     "Accenture",
     "Maya",
     "High Spring",

@@ -25,9 +25,9 @@ const focusRing =
 
 const SECTION_PAGES: Record<string, string> = {
   work: "/projects/",
-  about: "/about/",
+  lab: "/projects/",
   experience: "/experience/",
-  now: "/now/",
+  contact: "/contact/",
 };
 
 function folioIndex(index: number) {
@@ -99,7 +99,7 @@ export function SiteNav() {
 
   useEffect(() => {
     if (!isHome) return;
-    const ids = [...SECTION_NAV.map((item) => item.hash), "contact"];
+    const ids = SECTION_NAV.map((item) => item.hash);
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries

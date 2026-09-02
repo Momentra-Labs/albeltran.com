@@ -5,7 +5,7 @@ import { FAQ } from "@/components/shared/faq";
 import { JsonLd } from "@/components/shared/json-ld";
 import { aboutContent } from "@/content/about";
 import { aboutFaqs } from "@/content/faqs";
-import { experience } from "@/content/experience";
+import { featuredExperience } from "@/content/experience";
 import { techGroups, person } from "@/content/person";
 import { SOCIAL_LINKS, SITE_URL } from "@/lib/constants";
 import { getLabProjects } from "@/content/projects";
@@ -22,7 +22,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About Al Beltran",
-  description: `About Al Beltran (Al Andrew Paul Beltran; also Al Andrew Paul Teodosio Beltran): ${person.currentRole}, founder of Momentra Labs, and contributor to National Geographic and Disney platforms via Accenture — ${SITE_URL}/about/`,
+  description: `About Al Beltran (Al Andrew Paul Beltran; also Al Andrew Paul Teodosio Beltran): ${person.currentRole}, founder of Momentra Labs, and contributor to National Geographic and Disney platforms via Myridius — ${SITE_URL}/about/`,
   path: "/about/",
 });
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
       <PageHeader
         label="About"
         title="About Al Beltran"
-        description="Al Andrew Paul Beltran is a Software Engineer at Google via High Spring, founder of Momentra Labs, and a contributor to National Geographic and Disney platforms via Accenture. Based in Manila. This page is the long-form profile for albeltran.com."
+        description="Al Andrew Paul Beltran is a Software Engineer at Google via High Spring, founder of Momentra Labs, and a contributor to National Geographic and Disney platforms via Myridius. Based in Manila. This page is the long-form profile for albeltran.com."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "About" },
@@ -144,7 +144,7 @@ export default function AboutPage() {
                 .
               </p>
               <ul className="mt-6 space-y-4">
-                {experience.slice(0, 4).map((item) => (
+                {featuredExperience.map((item) => (
                   <li key={item.id} className="border-b border-border pb-4">
                     <p className="font-medium text-foreground">
                       {item.role} · {item.company}

@@ -41,6 +41,7 @@ export function CommandPalette({
       { id: "writing", label: "Go to Writing", href: "/#writing" },
       { id: "about", label: "Go to About", href: "/#about" },
       { id: "now", label: "Go to Now", href: "/#now" },
+      { id: "notes", label: "Go to Notes", href: "/#notes" },
       { id: "contact", label: "Contact", href: "/#contact" },
       { id: "blog", label: "Blog", href: "/blog/" },
       { id: "projects", label: "All projects", href: "/projects/" },

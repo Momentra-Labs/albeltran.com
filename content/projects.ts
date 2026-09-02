@@ -86,8 +86,8 @@ export const projects: Project[] = [
     shortName: "Disney Institute",
     tagline:
       "Enterprise Adobe Experience Manager platform used globally by Disney Institute.",
-    role: "Software Engineer · enterprise AEM delivery (Accenture / Disney)",
-    year: "2021–2023",
+    role: "Technical Lead · enterprise AEM delivery (Myridius / Disney)",
+    year: "2024–2025",
     featured: true,
     kind: "selected",
     overview:
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     ],
     demo: "https://www.disneyinstitute.com/",
     relatedArticles: ["aem-reusable-components"],
-    relatedExperience: ["accenture"],
+    relatedExperience: ["myridius"],
   },
   {
     slug: "national-geographic",
@@ -139,8 +139,8 @@ export const projects: Project[] = [
     shortName: "National Geographic",
     tagline:
       "Global digital publishing platform for science, exploration, and storytelling.",
-    role: "Software Engineer · enterprise web delivery (Accenture / Disney)",
-    year: "2021–2023",
+    role: "Technical Lead · enterprise web delivery (Myridius)",
+    year: "2024–2025",
     featured: true,
     kind: "selected",
     overview:
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     problem:
       "A flagship publishing site has to move stories, photography, and video at global scale without fragmenting the reader experience or slowing editorial teams.",
     solution:
-      "Contributed to enterprise web delivery on a high-visibility Disney-related program. Collaborated with design, QA, and delivery on the public National Geographic experience, with attention to reusable front-end patterns and production-quality publishing workflows.",
+      "Contributed to enterprise web delivery on a high-visibility National Geographic program through Myridius. Collaborated with design, QA, and delivery on the public National Geographic experience, with attention to reusable front-end patterns and production-quality publishing workflows.",
     architecture: [
       "Public web experience at nationalgeographic.com",
       "Story, photography, and video surfaces for a global audience",
@@ -168,7 +168,7 @@ export const projects: Project[] = [
       "Working inside structured client frameworks without blocking progress",
     ],
     performance: [
-      "Supported a flagship Disney-related publishing experience used worldwide",
+      "Supported a flagship National Geographic publishing experience used worldwide",
       "Improved maintainability of shared front-end patterns on a large content site",
     ],
     lessons: [
@@ -184,7 +184,7 @@ export const projects: Project[] = [
     ],
     demo: "https://www.nationalgeographic.com/",
     relatedArticles: ["ai-augmented-engineering"],
-    relatedExperience: ["accenture"],
+    relatedExperience: ["myridius"],
   },
   {
     slug: "disney-experiences",
@@ -192,8 +192,8 @@ export const projects: Project[] = [
     shortName: "Disney Experiences",
     tagline:
       "Global parks, resorts, cruise, and consumer products platform for Disney Experiences.",
-    role: "Software Engineer · enterprise web delivery (Accenture / Disney)",
-    year: "2021–2023",
+    role: "Technical Lead · enterprise web delivery (Myridius / Disney)",
+    year: "2024–2025",
     featured: true,
     kind: "selected",
     overview:
@@ -201,7 +201,7 @@ export const projects: Project[] = [
     problem:
       "A flagship experiences brand has to present parks, cruise, products, and news in one coherent public site without fragmenting the story across teams and properties.",
     solution:
-      "Contributed to enterprise web delivery on a high-visibility Disney-related program. Collaborated with design, QA, and delivery on the public Disney Experiences experience, with attention to reusable front-end patterns and production-quality publishing workflows.",
+      "Contributed to enterprise web delivery on a high-visibility Disney program through Myridius. Collaborated with design, QA, and delivery on the public Disney Experiences experience, with attention to reusable front-end patterns and production-quality publishing workflows.",
     architecture: [
       "Public web experience at disneyexperiences.com",
       "Parks, cruise, consumer products, and signature experience surfaces",
@@ -237,7 +237,7 @@ export const projects: Project[] = [
     ],
     demo: "https://disneyexperiences.com/",
     relatedArticles: ["aem-reusable-components"],
-    relatedExperience: ["accenture"],
+    relatedExperience: ["myridius"],
   },
   {
     slug: "disney-crew-apis",
@@ -245,8 +245,8 @@ export const projects: Project[] = [
     shortName: "Disney Crew APIs",
     tagline:
       "Optimized v2 APIs for internal crew management with better throughput and maintainability.",
-    role: "Software Engineer · API modernization (Node.js & Spring Boot)",
-    year: "2021–2023",
+    role: "Technical Lead · API modernization (Myridius / Disney)",
+    year: "2024–2025",
     featured: false,
     kind: "selected",
     overview:
@@ -284,7 +284,7 @@ export const projects: Project[] = [
       },
     ],
     relatedArticles: ["performance-15s-to-2s"],
-    relatedExperience: ["accenture"],
+    relatedExperience: ["myridius"],
   },
   {
     slug: "etl-pipeline",

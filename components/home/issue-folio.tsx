@@ -9,11 +9,8 @@ export const ISSUE_SPREADS = [
   { id: "lab", label: "Lab", index: "04" },
   { id: "system", label: "Stack", index: "05" },
   { id: "experience", label: "Experience", index: "06" },
-  { id: "think", label: "Think", index: "07" },
-  { id: "now", label: "Now", index: "08" },
-  { id: "writing", label: "Writing", index: "09" },
-  { id: "about", label: "About", index: "10" },
-  { id: "contact", label: "Contact", index: "11" },
+  { id: "notes", label: "Notes", index: "07" },
+  { id: "contact", label: "Contact", index: "08" },
 ] as const;
 
 export function IssueFolio() {

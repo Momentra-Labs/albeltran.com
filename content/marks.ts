@@ -5,14 +5,19 @@ export const worldMarks = [
     href: "/experience/#google",
   },
   {
+    name: "Disney",
+    note: "Experiences and Institute · Myridius",
+    href: "/projects/disney-experiences/",
+  },
+  {
     name: "National Geographic",
-    note: "Enterprise web delivery · Accenture",
+    note: "Enterprise web delivery · Myridius",
     href: "/projects/national-geographic/",
   },
   {
-    name: "Disney",
-    note: "Experiences and Institute · Accenture",
-    href: "/projects/disney-experiences/",
+    name: "Accenture",
+    note: "Software Engineer · 2021–2023",
+    href: "/experience/#accenture",
   },
   {
     name: "Maya",
@@ -29,4 +34,4 @@ export const worldMarks = [
 export const worldMarksLine = worldMarks.map((mark) => mark.name).join(" · ");
 
 export const coverMarksLine =
-  "Google via High Spring · National Geographic · Disney · Maya · Momentra Labs";
+  "Google via High Spring · Disney · National Geographic · Maya · Momentra Labs";

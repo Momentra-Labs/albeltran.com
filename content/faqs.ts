@@ -7,7 +7,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Who is Al Andrew Paul Beltran?",
     answer:
-      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. Through Accenture he contributed to National Geographic and Disney platforms. He developed personal products RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
+      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. Through Myridius he contributed to National Geographic and Disney platforms. He developed personal products RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
   },
   {
     question: "Who is Al Andrew Paul Teodosio Beltran?",
@@ -22,7 +22,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "What does Al Beltran specialize in?",
     answer:
-      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as a Software Engineer at Google via High Spring and is the founder of Momentra Labs, where he developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Maya (fintech) and National Geographic and Disney enterprise programs via Accenture.",
+      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as a Software Engineer at Google via High Spring and is the founder of Momentra Labs, where he developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Maya (fintech) and National Geographic and Disney enterprise programs via Myridius.",
   },
   {
     question: "How do I contact Al Beltran?",
@@ -37,7 +37,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Has Al Beltran worked with National Geographic or Disney?",
     answer:
-      "Yes. Through Accenture he contributed to enterprise web delivery for National Geographic, Disney Experiences, and Disney Institute. Case studies are at https://albeltran.com/projects/national-geographic/, https://albeltran.com/projects/disney-experiences/, and https://albeltran.com/projects/disney-institute/. This is client delivery via Accenture — not employment by Disney or National Geographic.",
+      "Yes. Through Myridius he contributed to National Geographic, Disney Experiences, Disney Institute, and Disney Crew Management. Case studies are at https://albeltran.com/projects/national-geographic/, https://albeltran.com/projects/disney-experiences/, and https://albeltran.com/projects/disney-institute/. This is client delivery via Myridius — not employment by Disney or National Geographic.",
   },
   {
     question: "What personal products has Al Beltran developed?",
@@ -50,7 +50,7 @@ export const aboutFaqs: FAQItem[] = [
   {
     question: "What industries has Al Beltran worked in?",
     answer:
-      "Large-scale product engineering (Google via High Spring), independent products as founder of Momentra Labs, fintech (Maya), entertainment and enterprise professional development (Disney-related programs via Accenture), insurance technology (Asurion), enterprise consulting, and startup product delivery.",
+      "Large-scale product engineering (Google via High Spring), independent products as founder of Momentra Labs, fintech (Maya), publishing and entertainment platforms (National Geographic and Disney programs via Myridius), insurance technology (Asurion), enterprise consulting, and startup product delivery.",
   },
   {
     question: "What type of software does Al Beltran build?",

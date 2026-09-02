@@ -4,14 +4,13 @@ export const SITE_URL =
 
 export const SITE_NAME = "Al Beltran — Portfolio";
 export const SITE_DESCRIPTION =
-  "Al Beltran (Al Andrew Paul Beltran) is a software engineer in Manila — Software Engineer at Google via High Spring, founder of Momentra Labs, and contributor to National Geographic and Disney platforms via Accenture. Personal products: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart — https://albeltran.com";
+  "Al Beltran (Al Andrew Paul Beltran) is a software engineer in Manila — Software Engineer at Google via High Spring, founder of Momentra Labs, and contributor to National Geographic and Disney platforms via Myridius. Personal products: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart — https://albeltran.com";
 
 export const SECTION_NAV = [
   { href: "/#work", hash: "work", label: "Work" },
   { href: "/#lab", hash: "lab", label: "Lab" },
   { href: "/#experience", hash: "experience", label: "Experience" },
-  { href: "/#about", hash: "about", label: "About" },
-  { href: "/#now", hash: "now", label: "Now" },
+  { href: "/#contact", hash: "contact", label: "Contact" },
 ] as const;
 
 export const NAV_LINKS = [

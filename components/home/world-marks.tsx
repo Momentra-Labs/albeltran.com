@@ -8,33 +8,27 @@ export function WorldMarks() {
     <section
       id="record"
       aria-label="The record"
-      className="magazine-spread scroll-mt-24 border-b border-border py-16 sm:py-20"
+      className="magazine-spread scroll-mt-24 border-b border-border py-10 sm:py-12"
     >
       <Container>
-        <Reveal variant="folio">
-          <p className="magazine-spread-kicker">Vol. 01 / The record</p>
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-            Names you already know
-          </p>
-          <h2 className="mt-3 max-w-2xl font-display text-4xl tracking-tight text-foreground sm:text-5xl">
-            Work the world can place
-          </h2>
-          <p className="mt-4 max-w-xl text-muted">
-            Globally recognized rooms I have shipped in — with the engagement
-            stated plainly. Google via High Spring. National Geographic and
-            Disney via Accenture. Maya in fintech. Momentra Labs as founder.
-          </p>
+        <Reveal variant="folio" className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="magazine-spread-kicker">Vol. 01 / The record</p>
+            <h2 className="mt-2 font-display text-3xl tracking-tight text-foreground sm:text-4xl">
+              Names you already know
+            </h2>
+          </div>
         </Reveal>
-        <SpreadRule className="mt-8" />
-        <ol className="mt-2">
+        <SpreadRule className="mt-5" />
+        <ol>
           {worldMarks.map((mark, index) => (
             <li key={mark.name}>
               <RevealItem index={index} variant="ink">
-                <article className="grid gap-2 border-b border-border py-6 sm:grid-cols-[4.5rem_minmax(0,1fr)_minmax(0,1.1fr)] sm:items-baseline sm:gap-6">
+                <article className="grid gap-1 border-b border-border py-3 sm:grid-cols-[3.5rem_minmax(0,1fr)_minmax(0,1.2fr)] sm:items-baseline sm:gap-6">
                   <span className="font-mono text-[11px] text-accent">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[0.92] tracking-tight text-foreground">
+                  <h3 className="font-display text-2xl tracking-tight text-foreground sm:text-3xl">
                     <Link
                       href={mark.href}
                       data-cursor="→"

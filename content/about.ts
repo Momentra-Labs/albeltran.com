@@ -2,7 +2,7 @@ export const aboutContent = {
   whoIAm: {
     title: "Who I Am",
     paragraphs: [
-      "I am Al Andrew Paul Beltran — also Al Andrew Paul Teodosio Beltran — a full-stack software engineer based in Manila, Philippines. I currently work as a Software Engineer at Google via High Spring, and I am the founder of Momentra Labs. Independently I developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Through Accenture I contributed to National Geographic and Disney enterprise platforms. Online I also go by Al Beltran and Code by Pawpu. This site (albeltran.com) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
+      "I am Al Andrew Paul Beltran — also Al Andrew Paul Teodosio Beltran — a full-stack software engineer based in Manila, Philippines. I currently work as a Software Engineer at Google via High Spring, and I am the founder of Momentra Labs. Independently I developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Through Myridius I contributed to National Geographic and Disney enterprise platforms. Online I also go by Al Beltran and Code by Pawpu. This site (albeltran.com) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
       "I design and build full-stack and event-driven software. My day-to-day work spans React and Node.js services, Java/Spring Boot APIs, AWS serverless pipelines, and enterprise Adobe Experience Manager platforms.",
       "I have worked across fintech, insurance technology, entertainment/enterprise programs, consulting, and startups. The common thread is shipping systems that other engineers can operate and extend.",
     ],
@@ -11,8 +11,8 @@ export const aboutContent = {
     title: "My Story",
     paragraphs: [
       "I started professional engineering in 2019 at GoETU as a junior software engineer, learning how web products actually ship in a startup environment. Freelance work on Upwork followed, where end-to-end ownership became a habit rather than a slogan.",
-      "At Accenture I contributed to Disney-related enterprise programs — including National Geographic, Disney Experiences, Disney Institute on AEM, and crew management API modernization. That period taught me how global platforms balance governance, reuse, and delivery pressure.",
-      "Later roles at Yondu, Asurion, and Myridius stretched from full-stack client delivery to performance work (including a 15s→2s load-time improvement) and technical leadership. At Maya I built event-driven loyalty and card activation systems in fintech. Today I work as a Software Engineer at Google via High Spring.",
+      "At Accenture I delivered enterprise web, AEM, and serverless platforms inside structured client frameworks. That period taught me how large programs balance governance, reuse, and delivery pressure.",
+      "Later roles at Yondu, Asurion, and Myridius stretched from full-stack client delivery to performance work (including a 15s→2s load-time improvement) and technical leadership on National Geographic, Disney Experiences, Disney Institute, and Disney Crew Management. At Maya I built event-driven loyalty and card activation systems in fintech. Today I work as a Software Engineer at Google via High Spring.",
     ],
   },
   careerJourney: {

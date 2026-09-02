@@ -146,7 +146,7 @@ export function HomeHero() {
         {person.legalName} ({person.shortName}) is a {person.occupation} in
         Manila. {person.currentRole}. Founder of {person.labs}. Independent
         products: {person.personalProducts.join(", ")}. National Geographic and
-        Disney via Accenture. Maya fintech.
+        Disney via Myridius. Maya fintech.
       </p>
 
       <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden lg:grid-rows-[auto_minmax(0,1fr)_auto]">
@@ -169,47 +169,51 @@ export function HomeHero() {
           </p>
         </motion.div>
 
-        <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(17rem,42%)] lg:gap-6 lg:px-10 lg:py-0">
+        <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(20rem,48%)] lg:gap-6 lg:px-10 lg:py-0">
           <motion.figure
             className="magazine-plate group relative order-2 flex min-h-0 origin-top flex-col lg:order-last lg:h-full lg:min-h-0 lg:self-stretch"
             initial={reduce ? false : { opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: coverEase, delay: 0.28 }}
           >
-            <span className="magazine-plate-back" aria-hidden />
-            <p className="magazine-plate-spine hidden lg:block">
-              Cover portrait · 01
-            </p>
-            <div className="magazine-portrait editorial-grain relative aspect-[3/4] max-h-[48vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
-              <Image
-                src={person.photo}
-                alt={`${person.name} (${person.shortName}), ${person.currentRole} and founder of ${person.labs}`}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className={`magazine-portrait-img object-cover object-[center_12%] ${
-                  reduce
-                    ? ""
-                    : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                }`}
+            <div className="magazine-plate-print relative min-h-0 lg:flex-1">
+              <span className="magazine-plate-back" aria-hidden />
+              <p className="magazine-plate-spine hidden lg:block">
+                Cover portrait · 01
+              </p>
+              <div className="magazine-portrait relative aspect-[3/4] max-h-[62vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
+                <div className="magazine-portrait-well">
+                  <Image
+                    src={person.photo}
+                    alt={`${person.name} (${person.shortName}), ${person.currentRole} and founder of ${person.labs}`}
+                    fill
+                    priority
+                    quality={90}
+                    sizes="(max-width: 1024px) 100vw, 48vw"
+                    className={`magazine-portrait-img object-contain object-center ${
+                      reduce
+                        ? ""
+                        : "transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    }`}
+                  />
+                </div>
+                <span className="magazine-portrait-glow" aria-hidden />
+                <span className="magazine-portrait-edge" aria-hidden />
+                <span className="magazine-portrait-mat" aria-hidden />
+                <span className="magazine-portrait-meta" aria-hidden>
+                  <span>Plate 01</span>
+                  <span>Vol. 01</span>
+                </span>
+                <span className="magazine-register-mark hidden lg:block" aria-hidden />
+                <span className="magazine-crop magazine-crop-tl left-4 top-4 z-[4] hidden lg:block" />
+                <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
+              </div>
+              <span
+                className="magazine-portrait-register hidden lg:block"
+                aria-hidden
               />
-              <span className="magazine-portrait-ink" aria-hidden />
-              <span className="magazine-portrait-glow" aria-hidden />
-              <span className="magazine-portrait-edge" aria-hidden />
-              <span className="magazine-portrait-mat" aria-hidden />
-              <span className="magazine-portrait-meta" aria-hidden>
-                <span>Plate 01</span>
-                <span>Vol. 01</span>
-              </span>
-              <span className="magazine-register-mark hidden lg:block" aria-hidden />
-              <span className="magazine-crop magazine-crop-tl left-4 top-4 z-[4] hidden lg:block" />
-              <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
             </div>
-            <span
-              className="magazine-portrait-register hidden lg:block"
-              aria-hidden
-            />
-            <figcaption className="magazine-plate-caption mt-3 lg:mt-0">
+            <figcaption className="magazine-plate-caption mt-3">
               <span>
                 <span className="text-accent">Cover</span>
                 <span className="text-muted-dim"> / Al Beltran</span>
@@ -233,7 +237,7 @@ export function HomeHero() {
               <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:text-[11px]">
                 {person.currentRole} · {person.founderTitle}
               </p>
-              <div className="mt-4">
+              <div className="mt-4 hidden lg:block">
                 <CoverLines />
               </div>
             </motion.div>

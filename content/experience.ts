@@ -71,9 +71,10 @@ export const experience: ExperienceItem[] = [
     end: "2025",
     duration: "2024 — 2025",
     summary:
-      "Led engineering direction for multi-tenant product delivery, mentoring developers and hardening production quality.",
+      "Led engineering for multi-tenant product delivery and enterprise programs including National Geographic and Disney, mentoring developers and hardening production quality.",
     responsibilities: [
       "Own technical direction and delivery for the engineering team",
+      "Deliver National Geographic, Disney Institute, Disney Experiences, and Disney Crew Management workstreams",
       "Design architecture for scalable multi-tenant applications",
       "Establish coding standards, review processes, and mentoring rituals",
       "Prioritize and clear production technical debt with measurable outcomes",
@@ -81,10 +82,18 @@ export const experience: ExperienceItem[] = [
     achievements: [
       "Drove resolution of 50+ production technical debts",
       "Improved delivery consistency through clearer architecture and review standards",
+      "Shipped reusable AEM components and crew-management API improvements on Disney programs",
+      "Supported a flagship National Geographic publishing experience used worldwide",
     ],
-    technologies: ["React", "Node.js", "TypeScript", "System Design", "Multi-tenant architecture"],
+    technologies: ["React", "Node.js", "TypeScript", "AEM", "Java", "Spring Boot", "System Design", "Multi-tenant architecture"],
     businessImpact:
-      "Reduced operational drag from accumulated debt and raised team throughput on product features.",
+      "Reduced operational drag from accumulated debt and delivered maintainable National Geographic and Disney platform work at enterprise scale.",
+    relatedProjects: [
+      "national-geographic",
+      "disney-institute",
+      "disney-experiences",
+      "disney-crew-apis",
+    ],
   },
   {
     id: "asurion",
@@ -136,21 +145,20 @@ export const experience: ExperienceItem[] = [
     end: "2023",
     duration: "2021 — 2023",
     summary:
-      "Delivered enterprise AEM and API work on high-visibility Disney-related programs.",
+      "Delivered enterprise web, AEM, and serverless platforms inside structured client delivery frameworks.",
     responsibilities: [
-      "Deliver Disney Institute, National Geographic, Disney Experiences, and Disney Crew Management project workstreams",
-      "Build enterprise AEM components and improve v2 APIs at global scale",
-      "Operate within structured delivery frameworks with high-profile clients",
-      "Contribute reusable architecture patterns adopted by multiple teams",
+      "Build reusable front-end and AEM patterns at enterprise scale",
+      "Ship serverless ETL pipelines and APIs inside structured delivery frameworks",
+      "Contribute architecture patterns adopted by multiple teams",
     ],
     achievements: [
-      "Shipped reusable AEM components that cut duplicate authoring work",
-      "Improved crew management API latency and maintainability on v2 endpoints",
+      "Improved maintainability of shared front-end patterns on large content sites",
+      "Shipped serverless data pipelines with production monitoring",
     ],
-    technologies: ["AEM", "React", "Node.js", "Java", "Spring Boot"],
+    technologies: ["AEM", "React", "Node.js", "Java", "AWS", "Spring Boot"],
     businessImpact:
-      "Supported global professional-development, publishing, experiences, and crew platforms with more maintainable content and API surfaces.",
-    relatedProjects: ["disney-institute", "national-geographic", "disney-experiences", "disney-crew-apis"],
+      "Supported enterprise content and data platforms with more maintainable surfaces.",
+    relatedProjects: ["etl-pipeline"],
   },
   {
     id: "upwork",
@@ -193,3 +201,9 @@ export const experience: ExperienceItem[] = [
       "Supported early product iteration while developing reliable engineering fundamentals.",
   },
 ];
+
+const FEATURED_EXPERIENCE_IDS = ["google", "maya", "myridius", "accenture"] as const;
+
+export const featuredExperience = FEATURED_EXPERIENCE_IDS.map(
+  (id) => experience.find((item) => item.id === id)!,
+);
