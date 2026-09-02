@@ -182,24 +182,21 @@ export function HomeHero() {
                 Cover portrait · 01
               </p>
               <div className="magazine-portrait relative aspect-[3/4] max-h-[62vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
-                <div className="magazine-portrait-well">
-                  <Image
-                    src={person.photo}
-                    alt={`${person.name} (${person.shortName}), ${person.currentRole} and founder of ${person.labs}`}
-                    fill
-                    priority
-                    quality={90}
-                    sizes="(max-width: 1024px) 100vw, 48vw"
-                    className={`magazine-portrait-img object-contain object-center ${
-                      reduce
-                        ? ""
-                        : "transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                    }`}
-                  />
-                </div>
+                <Image
+                  src={person.photo}
+                  alt={`${person.name} (${person.shortName}), ${person.currentRole} and founder of ${person.labs}`}
+                  fill
+                  priority
+                  quality={90}
+                  sizes="(max-width: 1024px) 100vw, 48vw"
+                  className={`magazine-portrait-img object-cover object-top ${
+                    reduce
+                      ? ""
+                      : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  }`}
+                />
                 <span className="magazine-portrait-glow" aria-hidden />
-                <span className="magazine-portrait-edge" aria-hidden />
-                <span className="magazine-portrait-mat" aria-hidden />
+                <span className="magazine-portrait-fade" aria-hidden />
                 <span className="magazine-portrait-meta" aria-hidden>
                   <span>Plate 01</span>
                   <span>Vol. 01</span>
@@ -208,10 +205,6 @@ export function HomeHero() {
                 <span className="magazine-crop magazine-crop-tl left-4 top-4 z-[4] hidden lg:block" />
                 <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
               </div>
-              <span
-                className="magazine-portrait-register hidden lg:block"
-                aria-hidden
-              />
             </div>
             <figcaption className="magazine-plate-caption mt-3">
               <span>
