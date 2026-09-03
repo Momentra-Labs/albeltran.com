@@ -485,7 +485,7 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/covers/lumina.jpg",
-        alt: "Lumina daily motivation dashboard at lumina-momentra-labs.vercel.app — quiet check-in before the coach",
+        alt: "Lumina daily message cover — glass card with today's note from Lumina",
       },
     ],
     demo: "https://lumina-momentra-labs.vercel.app/",
