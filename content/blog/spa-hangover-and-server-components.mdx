@@ -1,0 +1,37 @@
+---
+title: "The SPA Hangover and What Server Components Are For"
+description: "Client-rendered apps solved a 2015 shipping problem. They also shipped empty shells and waterfalls. Server Components are a boundary tool, not a rewrite religion."
+date: "2026-04-21"
+category: "Frontend"
+tags: ["react", "rsc", "next.js", "frontend"]
+image: "/blog/spa-hangover-and-server-components.jpg"
+imageAlt: "A split dark interior: empty storefront glass on one side, a lit workshop on the other"
+---
+
+The single-page app was a reasonable response to jQuery soup and full-page reloads. Then we used it for marketing pages, settings forms, and documents that did not need a client runtime the size of a small OS.
+
+React Server Components, islands, and boring server-rendered HTML are the hangover cure: **send the bytes the user needs, hydrate the parts that are actually interactive.**
+
+## What I use the server for
+
+- Data that is already available at request time
+- Markup that search and AI crawlers should see without executing your bundle
+- Auth-aware first paint that does not flash a login skeleton
+
+This site is a static export. That is a constraint I chose. The principle still holds: do not make the browser reconstruct a page you could have sent as HTML.
+
+## What still belongs on the client
+
+- Filters, palettes, and anything that must feel instant after the first load
+- Recruiter toggles and other personalization that should not wait on a round trip
+- Editors, canvases, and true app surfaces
+
+A "we rewrote in RSC" slide is not an architecture. A map of which trees are server, which are client, and why, is an architecture.
+
+If your Next app is `"use client"` at the root, you did not adopt Server Components. You adopted a new compiler and kept the SPA.
+
+## Takeaways
+
+- Default to HTML for documents.
+- Hydrate interactions, not the whole magazine.
+- Use RSC as a boundary, not a brand.

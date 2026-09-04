@@ -609,6 +609,13 @@ body {
   list-style: decimal;
 }
 
+.prose-portfolio img {
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  width: 100%;
+  height: auto;
+}
+
 .recruiter [data-hide-recruiter] {
   display: none;
 }

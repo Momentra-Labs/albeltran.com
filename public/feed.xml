@@ -6,11 +6,151 @@
     <description>Articles on architecture, performance, cloud, and engineering workflows by Al Andrew Paul Beltran.</description>
     <language>en-ph</language>
   <item>
+    <title>When the GPU Vendor Owns the Model Hub</title>
+    <link>https://albeltran.com/blog/chip-vendor-model-hub/</link>
+    <guid>https://albeltran.com/blog/chip-vendor-model-hub/</guid>
+    <pubDate>Thu, 03 Sep 2026 00:00:00 GMT</pubDate>
+    <description>If the company that sells the chips also owns the default place engineers pull open models, pinning, licensing, and exit plans stop being theoretical.</description>
+  </item>
+  <item>
+    <title>Your Agent Is Missing the Monitoring Layer the Labs Shipped</title>
+    <link>https://albeltran.com/blog/agents-need-monitoring-layers/</link>
+    <guid>https://albeltran.com/blog/agents-need-monitoring-layers/</guid>
+    <pubDate>Tue, 01 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Frontier models are being wrapped in eval gates and misalignment monitors. Most product agents still log prompts and hope. That gap is now the production problem.</description>
+  </item>
+  <item>
+    <title>SQLite Is Back, and the Edge Is Why</title>
+    <link>https://albeltran.com/blog/sqlite-at-the-edge/</link>
+    <guid>https://albeltran.com/blog/sqlite-at-the-edge/</guid>
+    <pubDate>Sat, 22 Aug 2026 00:00:00 GMT</pubDate>
+    <description>D1, Turso, LiteFS, and a decade of Postgres-by-default have teams rediscovering a file database. The win is locality. The bill is replication and migration discipline.</description>
+  </item>
+  <item>
+    <title>Why Most RAG Demos Die in Production</title>
+    <link>https://albeltran.com/blog/rag-demos-die-in-production/</link>
+    <guid>https://albeltran.com/blog/rag-demos-die-in-production/</guid>
+    <pubDate>Wed, 12 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Retrieval-augmented generation looks finished in a notebook. In production it is a search problem, a freshness problem, and an evaluation problem wearing a chat UI.</description>
+  </item>
+  <item>
+    <title>Idempotency Keys Are the Real API Contract</title>
+    <link>https://albeltran.com/blog/idempotency-keys-are-the-contract/</link>
+    <guid>https://albeltran.com/blog/idempotency-keys-are-the-contract/</guid>
+    <pubDate>Sat, 01 Aug 2026 00:00:00 GMT</pubDate>
+    <description>Retries are not an edge case. If a client can double-submit a payment, a reward, or a provision call, the header that names the attempt is the interface.</description>
+  </item>
+  <item>
+    <title>Post-Quantum TLS Is an Operations Problem</title>
+    <link>https://albeltran.com/blog/post-quantum-tls-is-an-ops-problem/</link>
+    <guid>https://albeltran.com/blog/post-quantum-tls-is-an-ops-problem/</guid>
+    <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
+    <description>Hybrid key exchange is landing in browsers and CDNs. The engineering work is inventory, dual-stack certificates, and not breaking the middleboxes you forgot you had.</description>
+  </item>
+  <item>
+    <title>Platform Engineering Is Not a Portal</title>
+    <link>https://albeltran.com/blog/platform-engineering-is-not-a-portal/</link>
+    <guid>https://albeltran.com/blog/platform-engineering-is-not-a-portal/</guid>
+    <pubDate>Thu, 09 Jul 2026 00:00:00 GMT</pubDate>
+    <description>A golden path is paved workflows, paved defaults, and a team that owns the pavement. A catalog of links with a search bar is a bookmark manager.</description>
+  </item>
+  <item>
+    <title>Serverless Still Has a Latency Budget</title>
+    <link>https://albeltran.com/blog/serverless-still-has-a-latency-budget/</link>
+    <guid>https://albeltran.com/blog/serverless-still-has-a-latency-budget/</guid>
+    <pubDate>Sat, 27 Jun 2026 00:00:00 GMT</pubDate>
+    <description>Managed functions removed capacity planning. They did not remove tail latency, cold starts, or the cost of chatty downstreams. You still have a budget. It is just itemized differently.</description>
+  </item>
+  <item>
+    <title>Observability Without SLOs Is Expensive Logging</title>
+    <link>https://albeltran.com/blog/observability-without-slos/</link>
+    <guid>https://albeltran.com/blog/observability-without-slos/</guid>
+    <pubDate>Tue, 16 Jun 2026 00:00:00 GMT</pubDate>
+    <description>Dashboards that cannot tell you whether to wake someone up are decoration. Start from the user promise, then buy traces.</description>
+  </item>
+  <item>
+    <title>TypeScript Won the Integration Layer</title>
+    <link>https://albeltran.com/blog/typescript-won-the-integration-layer/</link>
+    <guid>https://albeltran.com/blog/typescript-won-the-integration-layer/</guid>
+    <pubDate>Thu, 04 Jun 2026 00:00:00 GMT</pubDate>
+    <description>The interesting TypeScript story is not frontend fashion. It is the language teams use to glue APIs, workers, and infrastructure code that used to be a pile of untyped scripts.</description>
+  </item>
+  <item>
+    <title>CSS Finally Caught Up to the Layout We Hacked</title>
+    <link>https://albeltran.com/blog/css-caught-up-to-layout/</link>
+    <guid>https://albeltran.com/blog/css-caught-up-to-layout/</guid>
+    <pubDate>Sun, 24 May 2026 00:00:00 GMT</pubDate>
+    <description>Container queries, :has(), and nested CSS removed a generation of JavaScript measuring hacks. The remaining work is restraint: not every layout needs a new primitive.</description>
+  </item>
+  <item>
+    <title>Feature Flags Beat Long-Lived Branches</title>
+    <link>https://albeltran.com/blog/feature-flags-beat-long-lived-branches/</link>
+    <guid>https://albeltran.com/blog/feature-flags-beat-long-lived-branches/</guid>
+    <pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate>
+    <description>A flag in production is a smaller, reversible risk than a branch that only exists on one laptop. Trunk-based delivery is an operations choice, not a Git fashion.</description>
+  </item>
+  <item>
+    <title>Supply Chain Security Is a Runtime Problem Now</title>
+    <link>https://albeltran.com/blog/supply-chain-security-is-runtime/</link>
+    <guid>https://albeltran.com/blog/supply-chain-security-is-runtime/</guid>
+    <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+    <description>xz and a decade of npm incidents taught the same lesson: you run other people&apos;s code. Pinning, provenance, and a small dependency graph beat a PDF named policy.</description>
+  </item>
+  <item>
+    <title>The SPA Hangover and What Server Components Are For</title>
+    <link>https://albeltran.com/blog/spa-hangover-and-server-components/</link>
+    <guid>https://albeltran.com/blog/spa-hangover-and-server-components/</guid>
+    <pubDate>Tue, 21 Apr 2026 00:00:00 GMT</pubDate>
+    <description>Client-rendered apps solved a 2015 shipping problem. They also shipped empty shells and waterfalls. Server Components are a boundary tool, not a rewrite religion.</description>
+  </item>
+  <item>
+    <title>Local-First Sync Is a Product Problem</title>
+    <link>https://albeltran.com/blog/local-first-sync-is-a-product-problem/</link>
+    <guid>https://albeltran.com/blog/local-first-sync-is-a-product-problem/</guid>
+    <pubDate>Sat, 11 Apr 2026 00:00:00 GMT</pubDate>
+    <description>CRDTs and sync engines are impressive. Users still need a story for conflict, offline writes, and what happens when two cashiers sell the last seat.</description>
+  </item>
+  <item>
+    <title>SQL Is Still the Skill That Compounds</title>
+    <link>https://albeltran.com/blog/sql-still-compounds/</link>
+    <guid>https://albeltran.com/blog/sql-still-compounds/</guid>
+    <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
+    <description>Models can draft a query. They cannot own the index, the cardinality, or the 2 a.m. plan that scans the wrong partition. Relational literacy is still leverage.</description>
+  </item>
+  <item>
+    <title>Rate Limits Are Product Design</title>
+    <link>https://albeltran.com/blog/rate-limits-are-product-design/</link>
+    <guid>https://albeltran.com/blog/rate-limits-are-product-design/</guid>
+    <pubDate>Thu, 26 Mar 2026 00:00:00 GMT</pubDate>
+    <description>429s are not just a WAF rule. They encode who gets capacity, what a client should do next, and whether your API is a partner or a trap.</description>
+  </item>
+  <item>
+    <title>Wasm on the Server Is a Boundary Tool</title>
+    <link>https://albeltran.com/blog/wasm-on-the-server/</link>
+    <guid>https://albeltran.com/blog/wasm-on-the-server/</guid>
+    <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
+    <description>WebAssembly in the data center is useful when you need isolation, multi-language plugins, or a portable sandbox. It is not a replacement for a well-run service.</description>
+  </item>
+  <item>
     <title>Designing Event-Driven Loyalty Rewards for Card Activation</title>
     <link>https://albeltran.com/blog/event-driven-loyalty/</link>
     <guid>https://albeltran.com/blog/event-driven-loyalty/</guid>
     <pubDate>Thu, 12 Mar 2026 00:00:00 GMT</pubDate>
     <description>How an activation-to-reward pipeline using SQS, SNS, Lambda, and Talon.One keeps fintech loyalty flows decoupled and operable.</description>
+  </item>
+  <item>
+    <title>Event Sourcing Without the Religion</title>
+    <link>https://albeltran.com/blog/event-sourcing-without-religion/</link>
+    <guid>https://albeltran.com/blog/event-sourcing-without-religion/</guid>
+    <pubDate>Thu, 26 Feb 2026 00:00:00 GMT</pubDate>
+    <description>An event log is a tool for audit and replay. It is not a requirement for every domain object. Most systems need durable facts and a projection, not a conference architecture.</description>
+  </item>
+  <item>
+    <title>WebGPU Makes the Browser a Compute Node</title>
+    <link>https://albeltran.com/blog/webgpu-browser-as-compute/</link>
+    <guid>https://albeltran.com/blog/webgpu-browser-as-compute/</guid>
+    <pubDate>Wed, 18 Feb 2026 00:00:00 GMT</pubDate>
+    <description>When the tab can run serious GPU work, the architecture question is not &apos;can we?&apos; It is &apos;should this run next to the user&apos;s passwords, and what is the fallback?&apos;</description>
   </item>
   <item>
     <title>AI-Augmented Engineering Without Outsourcing Judgment</title>

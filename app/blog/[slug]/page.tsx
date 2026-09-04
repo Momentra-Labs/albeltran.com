@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Badge } from "@/components/ui/badge";
+import { BlogCover } from "@/components/blog/blog-cover";
 import {
   getPostBySlug,
   getPostSlugs,
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: Props) {
       description: post.description,
       path: `/blog/${post.slug}/`,
       type: "article",
+      image: post.image,
       publishedTime: post.date,
       modifiedTime: post.updated ?? post.date,
       tags: post.tags,
@@ -74,6 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
       datePublished: post.date,
       dateModified: post.updated,
       tags: post.tags,
+      image: post.image,
     }),
   ]);
 
@@ -107,6 +110,20 @@ export default async function BlogPostPage({ params }: Props) {
             ))}
           </div>
         </div>
+
+        {post.image ? (
+          <div className="mb-10 max-w-3xl">
+            <BlogCover
+              title={post.title}
+              category={post.category}
+              image={post.image}
+              imageAlt={post.imageAlt}
+              className="aspect-[16/9]"
+              sizes="(min-width: 768px) 768px, 100vw"
+              priority
+            />
+          </div>
+        ) : null}
 
         <article className="prose-portfolio max-w-3xl">
           <MDXRemote source={post.content} />

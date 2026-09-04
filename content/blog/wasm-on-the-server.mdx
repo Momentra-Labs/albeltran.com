@@ -1,0 +1,35 @@
+---
+title: "Wasm on the Server Is a Boundary Tool"
+description: "WebAssembly in the data center is useful when you need isolation, multi-language plugins, or a portable sandbox. It is not a replacement for a well-run service."
+date: "2026-03-18"
+category: "Engineering"
+tags: ["wasm", "architecture", "isolation", "platforms"]
+image: "/blog/wasm-on-the-server.jpg"
+imageAlt: "A sealed glass capsule on a dark bench with circuitry faintly visible inside"
+---
+
+Wasm left the browser for the same reason containers did: **a portable unit with a tighter ABI than "whatever this Linux has installed."** On the server, that is interesting for plugins, policy engines, and untrusted tenant code.
+
+It is less interesting as a way to rewrite a working Node service because a conference talk said the future is Wasm.
+
+## When I would reach for it
+
+- A plugin that must not take down the host process
+- Multi-language teams that want one sandbox instead of one sidecar per language
+- Edge functions where the cold-start story and the isolation story are the same story
+
+## When I would not
+
+- Replacing a JVM service that already has the ops story the org knows
+- CPU-heavy numeric work you already run well on a native worker
+- Anything that needs a mature ecosystem of DB drivers on day one
+
+The value is the **boundary**: capabilities, fuel/gas meters, a deny-by-default filesystem. If you are not using the boundary, you bought a new runtime for the logo.
+
+I will keep watching WASI and component models. I will ship them when they delete a class of incident, not when they add a bullet to an architecture diagram.
+
+## Takeaways
+
+- Use Wasm for isolation and portability.
+- Do not use it as a personality.
+- If the host still has the keys, the sandbox is theater.

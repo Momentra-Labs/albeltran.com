@@ -1,0 +1,34 @@
+---
+title: "SQL Is Still the Skill That Compounds"
+description: "Models can draft a query. They cannot own the index, the cardinality, or the 2 a.m. plan that scans the wrong partition. Relational literacy is still leverage."
+date: "2026-04-02"
+category: "Engineering"
+tags: ["sql", "databases", "performance", "engineering"]
+image: "/blog/sql-still-compounds.jpg"
+imageAlt: "A dark ledger book open under a precise blue desk lamp"
+---
+
+AI tools made it cheap to generate a JOIN. They did not make it cheap to understand **why the query is slow in production** when the table is 80 million rows and the filter is on a JSON field somebody indexed in a panic.
+
+I still want engineers who can read a query plan. Not because I am nostalgic. Because the database is where the product's truth lives, and the plan is how the truth is accessed.
+
+## What compounds
+
+- Knowing when an ORM is hiding an N+1
+- Knowing when a covering index is cheaper than a cache
+- Knowing when the model is lying about DISTINCT
+- Knowing that `SELECT *` in a hot path is a future incident
+
+You can prompt your way to a syntactically valid query. You cannot prompt your way to the production statistics without looking.
+
+## How I use models here
+
+I let them draft. I make them explain the indexes they assume exist. Then I run `EXPLAIN` on a realistic dataset. If the draft cannot survive that, it does not ship.
+
+SQL is not "old." JSON APIs are still projections of tables, events, and constraints. If you cannot think in sets, you will think in loops, and the loops will be in Lambda.
+
+## Takeaways
+
+- Read the plan. Do not trust the autocomplete.
+- Indexes are part of the product.
+- Use AI to draft, humans to own cardinality.

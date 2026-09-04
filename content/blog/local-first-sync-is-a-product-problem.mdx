@@ -1,0 +1,34 @@
+---
+title: "Local-First Sync Is a Product Problem"
+description: "CRDTs and sync engines are impressive. Users still need a story for conflict, offline writes, and what happens when two cashiers sell the last seat."
+date: "2026-04-11"
+category: "Architecture"
+tags: ["local-first", "sync", "offline", "product"]
+image: "/blog/local-first-sync-is-a-product-problem.jpg"
+imageAlt: "Two notebooks overlapping on a dark desk, one page catching a blue edge light"
+---
+
+Local-first is the right default for tools people use on bad networks: a POS, a training log, a field form. The demo is "it works on a plane." The product is **what you show when two replicas disagree.**
+
+CRDTs merge text. They do not merge "inventory is 1" and "two people checked out." That is a business rule wearing a sync engine.
+
+## Questions that have to be answered in writing
+
+- Who wins a conflict: last write, first write, or a human?
+- Can the user see they are offline, or do we pretend?
+- When does a local write become "real" for money and stock?
+- How do you debug a replica that diverged three days ago?
+
+I built offline-first behavior into Gloves Up because a boxing session should not depend on a cell tower. That is a closed, personal dataset. A marketplace like RentaraH is the opposite: availability is a shared ledger. Pretending those are the same "local-first architecture" is how you double-book a vehicle.
+
+## A practical split
+
+Use local-first for **user-owned state** (drafts, prefs, caches, session logs). Use a server as source of truth for **shared scarce resources**. Sync the former. Transaction the latter.
+
+Libraries will get better. The product questions will not go away.
+
+## Takeaways
+
+- Offline is a UX contract, not a library choice.
+- Shared inventory is not a CRDT default.
+- Write the conflict rule before you pick the sync engine.

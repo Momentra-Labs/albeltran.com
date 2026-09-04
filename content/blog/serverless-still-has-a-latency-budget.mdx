@@ -1,0 +1,36 @@
+---
+title: "Serverless Still Has a Latency Budget"
+description: "Managed functions removed capacity planning. They did not remove tail latency, cold starts, or the cost of chatty downstreams. You still have a budget. It is just itemized differently."
+date: "2026-06-27"
+category: "Cloud"
+tags: ["serverless", "aws", "lambda", "performance"]
+image: "/blog/serverless-still-has-a-latency-budget.jpg"
+imageAlt: "A stopwatch and a thin server blade on black, with a blue second-hand highlight"
+---
+
+Serverless is a good default for bursty workloads and for glue that should not own a box. It is a bad place to hide an N+1 call pattern and a 400ms SDK handshake.
+
+I have shipped Lambda-heavy paths in ETL and in event processors. The ones that stayed fast had a **latency budget** written down. The ones that got mysterious had "it's serverless" as the architecture.
+
+## Where the time actually goes
+
+- Cold start, still, especially with fat runtimes and VPC ENIs you did not need
+- Init that downloads config on every new execution environment
+- Downstream timeouts that are longer than the user will wait
+- JSON parsing of a 2MB event because nobody capped the payload
+
+Provisioned concurrency and snap start help. They do not excuse a handler that does four sequential secrets lookups.
+
+## How I budget it
+
+1. Put a number on p95 for the user-visible path. If the path is async, put a number on time-to-first-durable-write.
+2. Measure init separately from invoke. If you cannot see it, you will argue about it.
+3. Keep the handler boring. Move heavy work to a path that can retry without the user watching a spinner.
+
+Serverless is an operations model. Performance is still a design problem.
+
+## Takeaways
+
+- Write the latency budget before you write the SAM template.
+- Treat init as production traffic.
+- Async is not an excuse to ignore duration. It is a different SLO.

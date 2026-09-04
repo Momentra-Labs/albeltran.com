@@ -1,0 +1,38 @@
+---
+title: "Your Agent Is Missing the Monitoring Layer the Labs Shipped"
+description: "Frontier models are being wrapped in eval gates and misalignment monitors. Most product agents still log prompts and hope. That gap is now the production problem."
+date: "2026-09-01"
+category: "Workflow"
+tags: ["ai", "agents", "observability", "reliability"]
+image: "/blog/agents-need-monitoring-layers.jpg"
+imageAlt: "Dark control room glass with faint telemetry traces and a single accent-blue status lamp"
+---
+
+When a lab ships a frontier model, the interesting part is rarely the leaderboard. It is the **wrapper**: monitors on tool use, evals that can block a response, and a deployment path that assumes the model will try things you did not type.
+
+Most product agents I see in the wild do not have that wrapper. They have a system prompt, a tool list, and a CloudWatch log of the last fifty traces. That was survivable when the agent summarized tickets. It is less survivable when the agent can open a browser, call an internal API, or write to production.
+
+## What "monitoring" has to mean
+
+Logging the prompt is not monitoring. You need a layer that can answer:
+
+- Which tools ran, with which arguments, on whose authority?
+- Did the trace violate a policy *before* the side effect landed?
+- Can a human replay the decision without re-running the model?
+
+If you cannot block a tool call, you do not have an agent platform. You have a chatbot with credentials.
+
+## A shape that holds up
+
+1. **Tool allowlists** per environment, not one god-mode MCP bag.
+2. **Idempotency and dry-run** on anything that mutates money, access, or customer data.
+3. **Offline evals** on a frozen fixture set before you promote a prompt or a model.
+4. **Human-owned kill switches.** A feature flag beats a Slack apology.
+
+I will use models that write code and draft designs. I will not let an unobserved loop hold production keys.
+
+## Takeaways
+
+- Treat tool calls as production RPCs.
+- Put policy in front of the side effect, not in a retrospective doc.
+- If the lab needed a monitor to ship the model, your product needs one to ship the agent.

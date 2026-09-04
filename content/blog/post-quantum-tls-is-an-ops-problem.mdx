@@ -1,0 +1,39 @@
+---
+title: "Post-Quantum TLS Is an Operations Problem"
+description: "Hybrid key exchange is landing in browsers and CDNs. The engineering work is inventory, dual-stack certificates, and not breaking the middleboxes you forgot you had."
+date: "2026-07-21"
+category: "Security"
+tags: ["security", "tls", "cryptography", "operations"]
+image: "/blog/post-quantum-tls-is-an-ops-problem.jpg"
+imageAlt: "Layered glass plates with a faint lattice, lit by a cold blue edge"
+---
+
+"Post-quantum" sounds like a research seminar. For a team that ships TLS in front of an API, it is a **rollout**: new groups in the handshake, larger ClientHellos, and a long tail of appliances that still parse the old shape.
+
+I am not asking every engineer to pick a lattice. I am asking them to know **where their TLS is terminated** and who can change it.
+
+## What actually lands in production
+
+Browsers and hyperscalers are moving toward hybrid handshakes: classical plus a post-quantum KEM, so a break of one does not instantly break the session. Your problem is everything in between:
+
+- Corporate proxies and "SSL inspection" boxes
+- Old load balancers with handshake size limits
+- mTLS between services that pin cipher suites in a ConfigMap from 2021
+- Client SDKs you do not control
+
+If you only test in a modern Chrome against CloudFront, you will learn about the long tail from a partner integration ticket.
+
+## A practical sequence
+
+1. Inventory terminators: CDN, ingress, service mesh, mobile apps.
+2. Turn on hybrid where you control both ends. Measure handshake bytes and CPU.
+3. Keep a rollback. Cryptography migrations that cannot roll back become outages with extra steps.
+4. Do not wait for a calendar date to become a war room.
+
+I care about this the same way I care about certificate expiry: it is operations with a math label.
+
+## Takeaways
+
+- Know every place you terminate TLS.
+- Hybrid is a migration, not a checkbox.
+- Test the oldest client you still promise to support.

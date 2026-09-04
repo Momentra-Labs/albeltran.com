@@ -1,0 +1,35 @@
+---
+title: "TypeScript Won the Integration Layer"
+description: "The interesting TypeScript story is not frontend fashion. It is the language teams use to glue APIs, workers, and infrastructure code that used to be a pile of untyped scripts."
+date: "2026-06-04"
+category: "Engineering"
+tags: ["typescript", "node.js", "architecture", "tooling"]
+image: "/blog/typescript-won-the-integration-layer.jpg"
+imageAlt: "Interlocking dark geometric blocks forming a bridge, with a blue connecting pin"
+---
+
+I still write Java when the domain is a long-lived service with a type system the org already standardized. I write TypeScript when the work is **gluing**: AWS SDK calls, webhook handlers, Next.js servers, CDK, scripts that used to be bash with extra steps.
+
+That is not a culture war. It is where the types pay rent.
+
+## Why integration code wants types
+
+Integration code fails at the boundaries: a field renamed in a vendor payload, a date that is sometimes a string, an enum the docs lied about. Untyped glue accumulates `as any` until an incident becomes a JSON archaeology session.
+
+Shared types across the handler, the test fixtures, and the client are the cheapest contract you will ever write. Zod (or similar) at the edge is not ceremony. It is how you stop trusting the network.
+
+## Where I will not force it
+
+- A two-line Lambda that will die in a month
+- A data plane that is already Java and should stay one runtime
+- Generated code you should not hand-edit
+
+The win is **one typed boundary** around money, identity, and events. Not a mandate that every internal tool is a React app.
+
+On teams that already live in Node for lambdas and frontends, TypeScript is the integration language whether you admit it or not. You can keep writing `index.js` and rediscover the bugs, or you can let the compiler be the first code review.
+
+## Takeaways
+
+- Put types on the payload you do not control.
+- Share types across producer and consumer tests.
+- Do not confuse "we use TypeScript" with "we have an architecture."

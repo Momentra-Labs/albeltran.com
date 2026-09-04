@@ -1,0 +1,35 @@
+---
+title: "CSS Finally Caught Up to the Layout We Hacked"
+description: "Container queries, :has(), and nested CSS removed a generation of JavaScript measuring hacks. The remaining work is restraint: not every layout needs a new primitive."
+date: "2026-05-24"
+category: "Frontend"
+tags: ["css", "frontend", "design-systems", "web"]
+image: "/blog/css-caught-up-to-layout.jpg"
+imageAlt: "Overlapping translucent frames on a dark table forming a precise grid"
+---
+
+For a decade we measured elements in JavaScript because CSS could not see its container. We built hover menus that needed three wrappers. We shipped design systems that were really `window.matchMedia` with extra steps.
+
+That era is over if you let it be. **Container queries and `:has()` are not trivia.** They are how a card can respond to the column it is in, not the viewport the marketing page was designed at.
+
+## What I actually use
+
+- Container queries for cards in a magazine grid that is 1, 2, or 3 columns depending on the spread, not the phone.
+- `:has()` for states that used to require a class on a parent from React.
+- Native nesting to keep component CSS readable without a preprocessor ceremony.
+
+The portfolio you are reading is a layout problem: type, rules, and crops. Fighting the cascade with inline styles is how you get a site that cannot be restyled without a rewrite.
+
+## What I still will not do
+
+- Animate layout with JS because a designer asked for a bounce on every pixel
+- Replace a well-tested grid with a one-off subgrid experiment the week before launch
+- Assume every browser in an enterprise allowlist is current
+
+Progressive enhancement still exists. The difference is the baseline got good.
+
+## Takeaways
+
+- Prefer CSS for layout questions CSS can now answer.
+- Keep JS for state that is actually state.
+- Design systems should encode the new primitives, not freeze 2018 flex hacks.

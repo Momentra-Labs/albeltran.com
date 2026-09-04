@@ -1,0 +1,36 @@
+---
+title: "Observability Without SLOs Is Expensive Logging"
+description: "Dashboards that cannot tell you whether to wake someone up are decoration. Start from the user promise, then buy traces."
+date: "2026-06-16"
+category: "Reliability"
+tags: ["slo", "observability", "reliability", "operations"]
+image: "/blog/observability-without-slos.jpg"
+imageAlt: "A dark instrument panel with one illuminated needle and unused gauges in shadow"
+---
+
+It is easy to spend a quarter on OpenTelemetry and still not know if checkout is healthy. You will have traces. You will have a heatmap. You will have a Slack bot that fires because a pod restarted in a batch job nobody uses.
+
+**SLOs turn telemetry into a decision.** Without them, observability is a museum of charts.
+
+## The order that works
+
+1. Name the user-facing promises. "Activate a card in under N seconds" is a promise. "CPU < 70%" is not.
+2. Pick a few SLIs that actually move when the promise breaks.
+3. Alert on burn rate, not on every 5xx.
+4. Use traces to *debug* the burn, not to *define* health.
+
+I have sat in incident calls where the room was staring at a distributed trace of a request that was fine while the real failure was a queue that stopped draining. High cardinality is useful. It is not a substitute for knowing which graph means "customers are stuck."
+
+## What I refuse to page on
+
+- Disk usage on a cache node that is doing its job
+- A cron that failed and will succeed on the next hour
+- Error rates on an endpoint we deprecated but never deleted
+
+If everything is red, nothing is. That is not a tooling problem. That is a product problem wearing a Grafana theme.
+
+## Takeaways
+
+- Promises first, vendors second.
+- Page on user pain, not on infrastructure gossip.
+- Traces are for the investigation, not the definition of up.

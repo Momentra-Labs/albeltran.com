@@ -1,0 +1,35 @@
+---
+title: "Why Most RAG Demos Die in Production"
+description: "Retrieval-augmented generation looks finished in a notebook. In production it is a search problem, a freshness problem, and an evaluation problem wearing a chat UI."
+date: "2026-08-12"
+category: "Workflow"
+tags: ["ai", "rag", "search", "evaluation"]
+image: "/blog/rag-demos-die-in-production.jpg"
+imageAlt: "Scattered paper indices and a focused blue reading lamp over a dark desk"
+---
+
+A RAG demo is a vector index, a happy path question, and a model that quotes the right paragraph. A production RAG system is closer to **search**: stale documents, overlapping chunks, permissions, and users who ask questions the corpus cannot answer.
+
+I have watched teams ship the demo and then spend a quarter discovering they built a chatbot that hallucinates with citations.
+
+## The failure modes that do not show up in the notebook
+
+- **Wrong chunking.** Headings split from the table they explain. The model cites a fragment and sounds confident.
+- **No access control in retrieval.** The index does not know the user cannot see that Confluence space.
+- **No freshness.** The embedding of last quarter's runbook is still the nearest neighbor.
+- **No "I don't know."** If retrieval is weak, a good model will still write a fluent paragraph.
+
+## What I would ship instead of a demo
+
+1. Treat retrieval as a ranked search stack. Hybrid search (keyword + vectors) beats vectors-only for ops docs and tickets.
+2. Store document ACLs next to chunks. Filter *before* generation.
+3. Evaluate with a frozen question set and graded answers. If you cannot fail a prompt change in CI, you will fail it in Slack.
+4. Show the retrieved passages in the UI. If engineers cannot see what the model saw, you cannot debug it.
+
+Generation is the cheap part now. **Indexing and evaluation are the product.**
+
+## Takeaways
+
+- RAG is information retrieval with a language model on top.
+- Permissions and freshness are not phase two.
+- If you cannot measure retrieval, you do not have a system. You have a vibe.

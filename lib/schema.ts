@@ -288,6 +288,7 @@ export function articleSchema({
   datePublished,
   dateModified,
   tags,
+  image,
 }: {
   title: string;
   description: string;
@@ -295,6 +296,7 @@ export function articleSchema({
   datePublished: string;
   dateModified?: string;
   tags?: string[];
+  image?: string;
 }) {
   const url = `${SITE_URL}${path}`;
   return {
@@ -315,7 +317,11 @@ export function articleSchema({
       url: SITE_URL,
       image: person.image,
     },
-    image: person.image,
+    image: image
+      ? image.startsWith("http")
+        ? image
+        : `${SITE_URL}${image}`
+      : person.image,
     keywords: tags?.join(", "),
     inLanguage: "en-PH",
     isPartOf: {

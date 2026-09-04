@@ -12,6 +12,8 @@ export type BlogFrontmatter = {
   updated?: string;
   category: string;
   tags: string[];
+  image?: string;
+  imageAlt?: string;
   draft?: boolean;
 };
 
@@ -52,6 +54,8 @@ export function getPostBySlug(slug: string): BlogPost {
     updated: frontmatter.updated,
     category: frontmatter.category,
     tags: frontmatter.tags ?? [],
+    image: frontmatter.image,
+    imageAlt: frontmatter.imageAlt,
     draft: frontmatter.draft ?? false,
     readingTime: stats.text,
     readingMinutes: Math.ceil(stats.minutes),

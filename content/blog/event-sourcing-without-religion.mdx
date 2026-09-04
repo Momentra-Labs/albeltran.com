@@ -1,0 +1,35 @@
+---
+title: "Event Sourcing Without the Religion"
+description: "An event log is a tool for audit and replay. It is not a requirement for every domain object. Most systems need durable facts and a projection, not a conference architecture."
+date: "2026-02-26"
+category: "Architecture"
+tags: ["event-sourcing", "architecture", "audit", "messaging"]
+image: "/blog/event-sourcing-without-religion.jpg"
+imageAlt: "A long dark film strip of sequential frames with one frame lit blue"
+---
+
+Event-driven and event-sourced get collapsed in slide decks. They are not the same. **Publishing events** so other systems can react is a good default for loyalty, notifications, and ETL. **Storing every mutation as the source of truth** is a different commitment: replay, versioning, and a projection that will drift.
+
+I have used event-driven pipelines because activation cannot wait on a campaign engine. I have not event-sourced a settings page because someone read a blog.
+
+## When the log is the point
+
+- You must answer "what happened?" for money, eligibility, or compliance
+- You need to rebuild a read model after a bug
+- Multiple writers must not clobber a shared document without a history
+
+## When a table is the point
+
+- CRUD with a last-write-wins admin UI
+- Data that is not a fact stream
+- Teams that cannot staff "how do we migrate event v3 to v4?"
+
+If you keep events, treat schemas as APIs. Version them. Keep consumers tolerant. Do not let a Kafka topic become an undocumented database.
+
+CQRS can be a pair of SQL tables. It does not require a shrine.
+
+## Takeaways
+
+- Decouple with messages when the producer should not wait.
+- Source-of-truth events only when replay is a real requirement.
+- Version the facts. The religion is optional.

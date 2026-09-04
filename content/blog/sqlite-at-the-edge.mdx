@@ -1,0 +1,35 @@
+---
+title: "SQLite Is Back, and the Edge Is Why"
+description: "D1, Turso, LiteFS, and a decade of Postgres-by-default have teams rediscovering a file database. The win is locality. The bill is replication and migration discipline."
+date: "2026-08-22"
+category: "Architecture"
+tags: ["sqlite", "edge", "databases", "architecture"]
+image: "/blog/sqlite-at-the-edge.jpg"
+imageAlt: "A single compact storage module glowing on a dark metal bench"
+---
+
+For years the default answer was a managed Postgres somewhere in `us-east-1` and a CDN in front of HTML. That shape still wins for a lot of products. It is a poor fit when the read path is a worker 20 milliseconds from the user and the write path is a form submit that cannot wait on a cross-ocean round trip.
+
+SQLite never left. The edge made it fashionable again.
+
+## Why the file database showed up in 2026 architecture decks
+
+- **Reads want to be local.** A replica next to the worker beats a chatty ORM to a primary you do not control.
+- **The operational surface is small.** One file, one process, fewer moving parts than a cluster you pretend to understand.
+- **Serverless hates chatty connections.** A library that opens a file (or a strongly consistent HTTP API in front of one) fits the billing model.
+
+Cloudflare D1, Turso, LiteFS, and similar products are not "SQLite but magic." They are **replication and routing products** with SQLite as the storage engine.
+
+## What still bites
+
+- Schema migrations at the edge are still migrations. You need a story for expand/contract.
+- Global uniqueness and multi-region writes are not free because the engine is cute.
+- Backup and point-in-time recovery are your problem until you prove they are not.
+
+I like SQLite when the product is read-heavy, the consistency story is explicit, and someone owns the replica topology. I do not like it as a personality. "We use SQLite" is not an architecture. "Reads are local, writes go through this queue, this is the conflict rule" is an architecture.
+
+## Takeaways
+
+- Pick SQLite for locality, not nostalgia.
+- Write the replication and migration story first.
+- Keep Postgres (or whatever your source of truth is) when the domain is a shared ledger, not a cache with feelings.

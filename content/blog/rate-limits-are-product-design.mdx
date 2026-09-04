@@ -1,0 +1,34 @@
+---
+title: "Rate Limits Are Product Design"
+description: "429s are not just a WAF rule. They encode who gets capacity, what a client should do next, and whether your API is a partner or a trap."
+date: "2026-03-26"
+category: "Architecture"
+tags: ["apis", "rate-limiting", "product", "reliability"]
+image: "/blog/rate-limits-are-product-design.jpg"
+imageAlt: "A narrow dark corridor with a measured blue light bar like a capacity gauge"
+---
+
+A rate limit looks like infrastructure: tokens in Redis, a header, a 429. In practice it is **product**. You are choosing which clients degrade first, how they recover, and whether a mobile app on a flaky network is treated like an attacker.
+
+I have seen "unlimited" partner APIs become an outage because one dashboard polling loop found the lack of a limit. I have also seen limits so aggressive that a legitimate retry storm looked identical to abuse.
+
+## Design the 429
+
+- Return `Retry-After` and mean it.
+- Scope limits by API key, tenant, and route, not one global bucket that punishes a health check.
+- Distinguish burst vs sustained. A page load is not a scraper.
+- Document the budget. If partners have to discover it in production, you will spend the quarter in email.
+
+Idempotent POSTs plus a 429 without a retry policy is how you get duplicate side effects *and* angry clients.
+
+## Where I put the limiter
+
+As close to the edge as you can without lying. If the expensive work is a downstream loyalty call, a generous edge limit and a tighter inner limit is honest. If you only protect the edge, a cheap authenticated request can still melt the thing that costs money.
+
+Rate limiting is capacity allocation. Treat it like a product spec.
+
+## Takeaways
+
+- Write the budget into the API contract.
+- Make retry instructions machine-readable.
+- Limit the expensive path, not just the URL.

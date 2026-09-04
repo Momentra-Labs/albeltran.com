@@ -1,0 +1,37 @@
+---
+title: "Idempotency Keys Are the Real API Contract"
+description: "Retries are not an edge case. If a client can double-submit a payment, a reward, or a provision call, the header that names the attempt is the interface."
+date: "2026-08-01"
+category: "Architecture"
+tags: ["apis", "idempotency", "reliability", "fintech"]
+image: "/blog/idempotency-keys-are-the-contract.jpg"
+imageAlt: "Two identical brass keys on a dark slate, one catching a thin blue highlight"
+---
+
+Every production API will be retried. Timeouts, mobile networks, message redelivery, "the button spun so I clicked it again." If your handler is not idempotent, you do not have an integration. You have a raffle.
+
+In loyalty and payments work, the question is never "did we send the event?" It is **which attempt is this, and have we already committed the side effect?**
+
+## What the key has to guarantee
+
+An idempotency key is not a request ID you log. It is a **dedupe token** with a stored outcome:
+
+- Same key, same request body → same result, no second side effect.
+- Same key, different body → a loud 409, not a silent merge.
+- Expired key → a documented window, not folklore.
+
+Store the response envelope, not just a boolean. The client that retried needs the original `rewardId`, not a new one and a shrug.
+
+## Where teams cheat
+
+- Hashing the whole payload and calling it a key, then changing a metadata field and double-charging.
+- Scoping keys to a single replica so two Lambdas both "win."
+- Forgetting the outbound call. Your API can be idempotent while the third-party loyalty engine is not. You still need a reconciliation story.
+
+I treat idempotency the way I treat auth: it is in the contract, the tests, and the runbook. If it is only in a wiki, it will not be there at 2 a.m.
+
+## Takeaways
+
+- Name the attempt. Persist the outcome.
+- Make conflicting replays fail closed.
+- Assume every client retries, because they will.

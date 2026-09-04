@@ -1,0 +1,37 @@
+---
+title: "Feature Flags Beat Long-Lived Branches"
+description: "A flag in production is a smaller, reversible risk than a branch that only exists on one laptop. Trunk-based delivery is an operations choice, not a Git fashion."
+date: "2026-05-13"
+category: "Workflow"
+tags: ["feature-flags", "delivery", "git", "release"]
+image: "/blog/feature-flags-beat-long-lived-branches.jpg"
+imageAlt: "A dark rail switch with one track lit blue and the other in shadow"
+---
+
+Long-lived branches feel safe because the mess is hidden. They are expensive because merge day is when you discover the mess, in a diff nobody can review.
+
+I would rather ship dark. A feature flag lets you merge small, test in production with a cohort, and turn the thing off without a revert archaeology session.
+
+## What flags are for
+
+- Incomplete UI that should not be in the default path
+- A migration that needs a percentage rollout
+- A kill switch for a third-party that will fail on a holiday
+
+## What flags are not for
+
+- Permanent configuration that should be a setting
+- Hiding dead code for two years
+- Replacing a conversation about whether the work should exist
+
+If every flag lives forever, you built a second routing table in the app. Clean them up. Put an expiry on the ticket.
+
+In regulated and high-traffic systems I have worked on, the release process that survived contact with reality was: **small diffs, flags, observe, then delete the flag.** The process that produced incidents was a three-week branch named `feature/new-checkout`.
+
+Git is not the problem. Isolation without a plan to integrate is the problem.
+
+## Takeaways
+
+- Merge to trunk behind a flag.
+- Roll out with a cohort, not a prayer.
+- Delete flags the way you delete feature branches: on purpose, with a date.

@@ -1,0 +1,35 @@
+---
+title: "WebGPU Makes the Browser a Compute Node"
+description: "When the tab can run serious GPU work, the architecture question is not 'can we?' It is 'should this run next to the user's passwords, and what is the fallback?'"
+date: "2026-02-18"
+category: "Frontend"
+tags: ["webgpu", "graphics", "performance", "web"]
+image: "/blog/webgpu-browser-as-compute.jpg"
+imageAlt: "A dark glass pane with a faint volumetric light field behind it, studio still life"
+---
+
+WebGPU is how the browser stops pretending it is only for DOM. You can run compute shaders, inference snippets, and visual work that used to mean a native app or a WASM-shaped apology.
+
+That is exciting for creative tools and for on-device ML that should not round-trip. It is also a new way to melt a laptop and a new surface for complexity you now have to support.
+
+## The questions I ask before adopting it
+
+- What is the CPU/WebGL/Canvas fallback when WebGPU is blocked by enterprise policy?
+- Does this work belong on the user's GPU, or did we just not want to pay for a server?
+- How do we test it in CI without a GPU farm fantasy?
+
+A magazine site does not need WebGPU. A photo editor, a CAD viewer, or a local inference toy might. **Match the API to the job.**
+
+## What I will not do
+
+- Ship a 20MB shader stack for a hover effect
+- Assume mobile thermal limits are a desktop problem
+- Treat "it works in Chrome Canary" as a browser matrix
+
+The web platform getting real compute is good. The discipline is the same as any acceleration: measure, provide a fallback, and do not put the product on a path only 40% of users can walk.
+
+## Takeaways
+
+- Use WebGPU for real compute and graphics, not decoration.
+- Design the fallback first.
+- Respect the device. The tab is not a datacenter.

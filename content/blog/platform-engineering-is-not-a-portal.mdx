@@ -1,0 +1,39 @@
+---
+title: "Platform Engineering Is Not a Portal"
+description: "A golden path is paved workflows, paved defaults, and a team that owns the pavement. A catalog of links with a search bar is a bookmark manager."
+date: "2026-07-09"
+category: "Workflow"
+tags: ["platform", "devops", "developer-experience", "delivery"]
+image: "/blog/platform-engineering-is-not-a-portal.jpg"
+imageAlt: "A dark workshop bench with aligned metal tools and a single blue work light"
+---
+
+Every company that has been on Kubernetes for three years eventually announces a developer portal. Then the portal fills with stale docs, two competing "create service" buttons, and a Slack channel that is the real platform.
+
+I like platform engineering. I do not like **portal theater**.
+
+## What a golden path actually is
+
+A golden path is the default way to:
+
+- Start a service with logging, metrics, auth, and a pipeline that can reach production
+- Roll forward and back without a custom YAML dialect
+- Get a preview environment that dies when the PR dies
+
+If those paths are not the easiest paths, developers will invent worse ones. That is not insubordination. That is the system working as designed.
+
+## What I would measure
+
+- Time from empty repo to a URL a PM can click
+- Number of services *not* on the paved path, and why
+- How often the platform team is a ticket queue versus a product team
+
+Self-service only counts if the self is not filling out a 14-field form to get a namespace.
+
+In delivery org work, the platform is successful when squads stop asking for cluster access and start asking for better defaults. If they still need a human to ship a hello-world, you built a concierge, not a platform.
+
+## Takeaways
+
+- Own the workflow, not the wallpaper.
+- Make the paved path the fastest path.
+- Count unofficial stacks. They are your real backlog.

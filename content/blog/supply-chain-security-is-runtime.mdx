@@ -1,0 +1,32 @@
+---
+title: "Supply Chain Security Is a Runtime Problem Now"
+description: "xz and a decade of npm incidents taught the same lesson: you run other people's code. Pinning, provenance, and a small dependency graph beat a PDF named policy."
+date: "2026-05-02"
+category: "Security"
+tags: ["security", "supply-chain", "npm", "operations"]
+image: "/blog/supply-chain-security-is-runtime.jpg"
+imageAlt: "A sealed crate on a dark loading dock with a broken seal catching blue light"
+---
+
+Everyone has a software bill of materials slide. Fewer teams can answer **which package actually ran in last night's deploy**, and whether that tarball is the one they reviewed.
+
+The xz incident was not "use more scanners." It was a reminder that maintainers, build machines, and install scripts are in your trust boundary. npm's long history of typosquats and hijacked maintainer accounts is the same boundary with a different package manager.
+
+## What I actually do
+
+- Pin lockfiles and fail CI if they drift without a review.
+- Prefer packages with provenance when the ecosystem supports it. Not as a religion. As a higher bar than a README badge.
+- Keep the runtime graph small. A frontend that pulls 2,000 packages to render a form is a larger attack surface than a clever XSS you will find in a pentest.
+- Treat `postinstall` as untrusted code, because it is.
+
+I will not pretend a scanner score is a substitute for knowing why `left-pad` energy still exists in 2026. We still install strangers on the build agent.
+
+## The boring controls that work
+
+Allowlists for registries. No surprise git dependencies in production lockfiles. Rebuild from source when the binary is the product. Rotate tokens so a leaked `NPM_TOKEN` is an incident, not a lifestyle.
+
+## Takeaways
+
+- You ship your dependencies.
+- Lockfiles and provenance are controls, not decoration.
+- Shrink the graph. It is the cheapest security work you will do this quarter.
