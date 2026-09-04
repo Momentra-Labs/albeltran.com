@@ -16,8 +16,10 @@ export function HomeContact() {
               About
             </p>
             <h2 className="mt-2 font-display text-3xl tracking-tight text-foreground sm:text-4xl">
-              Software Engineer at Google
-              <span className="mt-1 block text-muted">via High Spring</span>
+              {person.jobTitle}
+              <span className="mt-1 block text-muted">
+                {person.currentCompany}
+              </span>
             </h2>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
               {person.headline}

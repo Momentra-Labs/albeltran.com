@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { aboutContent } from "@/content/about";
+import { person } from "@/content/person";
 import { Container } from "@/components/shared/container";
 import { Reveal } from "@/components/shared/reveal";
 
@@ -13,8 +14,10 @@ export function HomeAbout() {
             About
           </p>
           <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-tight text-foreground sm:text-5xl">
-            <span className="block">Software Engineer at Google</span>
-            <span className="mt-2 block text-muted">via High Spring</span>
+            <span className="block">{person.jobTitle}</span>
+            <span className="mt-2 block text-muted">
+              {person.currentCompany}
+            </span>
           </h2>
         </Reveal>
         <Reveal delay={0.08} variant="ink">

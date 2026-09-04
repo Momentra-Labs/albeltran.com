@@ -7,12 +7,12 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Who is Al Andrew Paul Beltran?",
     answer:
-      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Senior Software Engineer, the founder of Momentra Labs, and currently a Software Engineer at Google via High Spring. Through Myridius he contributed to National Geographic and Disney platforms. He developed personal products RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
+      "Al Andrew Paul Beltran (also known as Al Beltran, Al Andrew Paul Teodosio Beltran, or Code by Pawpu online) is a full-stack software engineer based in Manila, Philippines. He is a Software Engineering Lead, the founder of Momentra Labs, and currently Software Engineering Lead at Anglian Dental in the United Kingdom. Previously he was a Software Engineer at Google via High Spring. Through Myridius he contributed to National Geographic and Disney platforms. He developed personal products RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. His official portfolio is published at https://albeltran.com/.",
   },
   {
     question: "Who is Al Andrew Paul Teodosio Beltran?",
     answer:
-      "Al Andrew Paul Teodosio Beltran is the same person as Al Beltran and Al Andrew Paul Beltran — a full-stack software engineer in Manila, Philippines, founder of Momentra Labs, and Software Engineer at Google via High Spring. His official portfolio is https://albeltran.com/.",
+      "Al Andrew Paul Teodosio Beltran is the same person as Al Beltran and Al Andrew Paul Beltran — a full-stack software engineer in Manila, Philippines, founder of Momentra Labs, and Software Engineering Lead at Anglian Dental in the United Kingdom. His official portfolio is https://albeltran.com/.",
   },
   {
     question: "What is the official portfolio URL for Al Beltran?",
@@ -22,7 +22,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "What does Al Beltran specialize in?",
     answer:
-      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as a Software Engineer at Google via High Spring and is the founder of Momentra Labs, where he developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Maya (fintech) and National Geographic and Disney enterprise programs via Myridius.",
+      "Full-stack development with React, Node.js, and Java; AWS and serverless systems; event-driven architecture; Adobe Experience Manager (AEM) at enterprise scale; and technical leadership. He currently works as Software Engineering Lead at Anglian Dental in the United Kingdom and is the founder of Momentra Labs, where he developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Prior experience includes Google via High Spring, Maya (fintech), and National Geographic and Disney enterprise programs via Myridius.",
   },
   {
     question: "How do I contact Al Beltran?",
@@ -32,7 +32,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "Where does Al Beltran work now?",
     answer:
-      "Al Beltran currently works as a Software Engineer at Google via High Spring. He is also the founder of Momentra Labs and independently developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
+      "Al Beltran currently works as Software Engineering Lead at Anglian Dental in the United Kingdom. He is also the founder of Momentra Labs and independently developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Previously he was a Software Engineer at Google via High Spring.",
   },
   {
     question: "Has Al Beltran worked with National Geographic or Disney?",
@@ -50,7 +50,7 @@ export const aboutFaqs: FAQItem[] = [
   {
     question: "What industries has Al Beltran worked in?",
     answer:
-      "Large-scale product engineering (Google via High Spring), independent products as founder of Momentra Labs, fintech (Maya), publishing and entertainment platforms (National Geographic and Disney programs via Myridius), insurance technology (Asurion), enterprise consulting, and startup product delivery.",
+      "Software engineering leadership (Anglian Dental, United Kingdom), large-scale product engineering (Google via High Spring), independent products as founder of Momentra Labs, fintech (Maya), publishing and entertainment platforms (National Geographic and Disney programs via Myridius), insurance technology (Asurion), enterprise consulting, and startup product delivery.",
   },
   {
     question: "What type of software does Al Beltran build?",
@@ -73,7 +73,7 @@ export const contactFaqs: FAQItem[] = [
   {
     question: "What is Al Beltran currently available for?",
     answer:
-      "Senior engineering roles, technical leadership, and select consulting engagements focused on full-stack delivery, cloud architecture, and event-driven systems.",
+      "Senior engineering and technical leadership conversations, and select consulting focused on full-stack delivery, cloud architecture, and event-driven systems.",
   },
   {
     question: "Where is Al Beltran based?",

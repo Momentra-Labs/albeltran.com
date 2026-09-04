@@ -49,7 +49,7 @@ export default function AboutPage() {
       <PageHeader
         label="About"
         title="About Al Beltran"
-        description="Al Andrew Paul Beltran is a Software Engineer at Google via High Spring, founder of Momentra Labs, and a contributor to National Geographic and Disney platforms via Myridius. Based in Manila. This page is the long-form profile for albeltran.com."
+        description="Al Andrew Paul Beltran is Software Engineering Lead at Anglian Dental in the United Kingdom, founder of Momentra Labs, previously a Software Engineer at Google via High Spring, and a contributor to National Geographic and Disney platforms via Myridius. Based in Manila. This page is the long-form profile for albeltran.com."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "About" },
@@ -131,7 +131,7 @@ export default function AboutPage() {
                 Experience
               </h2>
               <p className="mt-4 text-base leading-relaxed text-muted">
-                Recent and prior roles span Google (via High Spring), Maya,
+                Recent and prior roles span Anglian Dental, Google (via High Spring), Maya,
                 Myridius, Asurion, Yondu, Accenture, freelance delivery, and
                 early-career work at GoETU. For responsibilities, achievements,
                 technologies, and business impact, see the full{" "}

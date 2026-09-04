@@ -2,7 +2,7 @@ export const aboutContent = {
   whoIAm: {
     title: "Who I Am",
     paragraphs: [
-      "I am Al Andrew Paul Beltran — also Al Andrew Paul Teodosio Beltran — a full-stack software engineer based in Manila, Philippines. I currently work as a Software Engineer at Google via High Spring, and I am the founder of Momentra Labs. Independently I developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Through Myridius I contributed to National Geographic and Disney enterprise platforms. Online I also go by Al Beltran and Code by Pawpu. This site (albeltran.com) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
+      "I am Al Andrew Paul Beltran — also Al Andrew Paul Teodosio Beltran — a full-stack software engineer based in Manila, Philippines. I currently work as Software Engineering Lead at Anglian Dental in the United Kingdom, and I am the founder of Momentra Labs. Independently I developed RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart. Previously I was a Software Engineer at Google via High Spring. Through Myridius I contributed to National Geographic and Disney enterprise platforms. Online I also go by Al Beltran and Code by Pawpu. This site (albeltran.com) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
       "I design and build full-stack and event-driven software. My day-to-day work spans React and Node.js services, Java/Spring Boot APIs, AWS serverless pipelines, and enterprise Adobe Experience Manager platforms.",
       "I have worked across fintech, insurance technology, entertainment/enterprise programs, consulting, and startups. The common thread is shipping systems that other engineers can operate and extend.",
     ],
@@ -12,13 +12,13 @@ export const aboutContent = {
     paragraphs: [
       "I started professional engineering in 2019 at GoETU as a junior software engineer, learning how web products actually ship in a startup environment. Freelance work on Upwork followed, where end-to-end ownership became a habit rather than a slogan.",
       "At Accenture I delivered enterprise web, AEM, and serverless platforms inside structured client frameworks. That period taught me how large programs balance governance, reuse, and delivery pressure.",
-      "Later roles at Yondu, Asurion, and Myridius stretched from full-stack client delivery to performance work (including a 15s→2s load-time improvement) and technical leadership on National Geographic, Disney Experiences, Disney Institute, and Disney Crew Management. At Maya I built event-driven loyalty and card activation systems in fintech. Today I work as a Software Engineer at Google via High Spring.",
+      "Later roles at Yondu, Asurion, and Myridius stretched from full-stack client delivery to performance work (including a 15s→2s load-time improvement) and technical leadership on National Geographic, Disney Experiences, Disney Institute, and Disney Crew Management. At Maya I built event-driven loyalty and card activation systems in fintech. I then worked as a Software Engineer at Google via High Spring. Today I am Software Engineering Lead at Anglian Dental in the United Kingdom.",
     ],
   },
   careerJourney: {
     title: "Career Journey",
     paragraphs: [
-      "My path is not a straight line through one stack. It is a progression from feature work to ownership: junior delivery → freelance end-to-end builds → enterprise AEM and APIs → performance-sensitive services → technical leadership → fintech event-driven systems → engineering at Google via High Spring.",
+      "My path is not a straight line through one stack. It is a progression from feature work to ownership: junior delivery → freelance end-to-end builds → enterprise AEM and APIs → performance-sensitive services → technical leadership → fintech event-driven systems → engineering at Google via High Spring → software engineering lead at Anglian Dental.",
       "That progression matters for how I work. I still write production code, but I also design contracts, document decisions, and help teams reduce the kind of technical debt that quietly taxes every sprint.",
     ],
   },
@@ -42,7 +42,7 @@ export const aboutContent = {
   currentFocus: {
     title: "Current Focus",
     paragraphs: [
-      "Software engineering at Google via High Spring — contributing to production systems with strong quality, review, and delivery standards. Independently, I am the founder of Momentra Labs, where I solo develop personal products: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
+      "Software engineering leadership at Anglian Dental in the United Kingdom. Independently, I am the founder of Momentra Labs, where I solo develop personal products: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
       "Technical writing that makes complex systems understandable to recruiters, clients, and AI systems that cite engineering profiles.",
       "Staying sharp on React/Next.js, Node.js, Java, cloud platforms, and large-scale engineering practices.",
     ],

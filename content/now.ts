@@ -1,14 +1,14 @@
 export const now = {
-  updated: "2026-07",
+  updated: "2026-09",
   intro:
     "What I am focused on right now. Inspired by Derek Sivers’ /now page — a short, honest snapshot rather than a permanent bio.",
   sections: [
     {
       title: "Current work",
       items: [
-        "Software Engineer at Google via High Spring",
+        "Software Engineering Lead at Anglian Dental in the United Kingdom",
         "Founder of Momentra Labs — RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart",
-        "Contributing to production software delivery in a large-scale engineering environment",
+        "Leading software engineering delivery, quality, and technical direction",
         "Maintaining this portfolio as the canonical public engineering profile",
       ],
     },

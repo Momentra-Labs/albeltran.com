@@ -43,7 +43,7 @@ export function personSchema() {
     jobTitle: person.currentRole,
     hasOccupation: {
       "@type": "Occupation",
-      name: "Software Engineer",
+      name: "Software Engineering Lead",
       occupationLocation: {
         "@type": "City",
         name: "Manila",
@@ -70,15 +70,15 @@ export function personSchema() {
     worksFor: [
       {
         "@type": "Organization",
-        name: "High Spring",
+        name: "Anglian Dental",
+        legalName: "Anglian Dental Engineering Ltd",
+        url: "https://www.angliandental.co.uk",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "GB",
+        },
         description:
-          "Employer of record for a Software Engineer engagement at Google.",
-      },
-      {
-        "@type": "Organization",
-        name: "Google",
-        description:
-          "Software Engineer engagement via High Spring. Contractor — not a Google full-time employee.",
+          "UK dental equipment and surgery specialist. Al Beltran is Software Engineering Lead.",
       },
     ],
     affiliation: {

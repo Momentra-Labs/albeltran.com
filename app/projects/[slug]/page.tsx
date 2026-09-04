@@ -87,7 +87,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <Link href="/about/" className="text-accent hover:underline">
             Al Beltran
           </Link>{" "}
-          ({person.name}), Senior Software Engineer.
+          ({person.name}), {person.jobTitle}.
         </p>
 
         <div className="mb-12 flex flex-wrap gap-3">

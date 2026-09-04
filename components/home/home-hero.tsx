@@ -22,8 +22,8 @@ function coverFade(delay: number, reduce: boolean | null) {
 
 const coverEntries = [
   {
-    title: "Software engineer",
-    dek: `${person.currentCompany} ${person.currentEmployerNote}`,
+    title: "Engineering lead",
+    dek: `${person.currentCompany} · ${person.currentEmployerNote}`,
   },
   {
     title: "Tech lead",

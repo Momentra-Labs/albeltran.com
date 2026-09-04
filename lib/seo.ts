@@ -3,7 +3,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
 
 export const PRIMARY_TITLE =
-  "Al Beltran — Software Engineer at Google via High Spring";
+  "Al Beltran — Software Engineering Lead at Anglian Dental";
 
 type BuildMetadataInput = {
   title: string;

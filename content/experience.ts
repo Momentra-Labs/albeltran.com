@@ -16,13 +16,35 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
+    id: "anglian-dental",
+    company: "Anglian Dental",
+    role: "Software Engineering Lead",
+    location: "United Kingdom",
+    start: "2026",
+    end: "Present",
+    duration: "2026 — Present",
+    summary:
+      "Software Engineering Lead at Anglian Dental, a UK dental equipment and surgery specialist.",
+    responsibilities: [
+      "Lead software engineering for Anglian Dental",
+      "Set technical direction, delivery standards, and engineering quality",
+      "Work with stakeholders on systems that support the business",
+    ],
+    achievements: [
+      "Appointed Software Engineering Lead at Anglian Dental",
+    ],
+    technologies: ["Software engineering", "Technical leadership"],
+    businessImpact:
+      "Leads software engineering for a UK dental equipment and surgery business.",
+  },
+  {
     id: "google",
     company: "Google (via High Spring)",
     role: "Software Engineer",
     location: "Philippines",
     start: "2026",
-    end: "Present",
-    duration: "2026 — Present",
+    end: "2026",
+    duration: "2026",
     summary:
       "Software Engineer at Google through High Spring, contributing to production software delivery in a large-scale engineering environment.",
     responsibilities: [
@@ -33,11 +55,11 @@ export const experience: ExperienceItem[] = [
     ],
     achievements: [
       "Engaged as a Software Engineer at Google via High Spring",
-      "Operating in a high-scale product and platform engineering context",
+      "Operated in a high-scale product and platform engineering context",
     ],
     technologies: ["Software engineering", "Distributed systems", "Code review", "Production delivery"],
     businessImpact:
-      "Supports Google product and platform delivery through reliable engineering contribution under High Spring engagement.",
+      "Supported Google product and platform delivery through reliable engineering contribution under High Spring engagement.",
   },
   {
     id: "maya",
@@ -202,7 +224,12 @@ export const experience: ExperienceItem[] = [
   },
 ];
 
-const FEATURED_EXPERIENCE_IDS = ["google", "maya", "myridius", "accenture"] as const;
+const FEATURED_EXPERIENCE_IDS = [
+  "anglian-dental",
+  "google",
+  "maya",
+  "myridius",
+] as const;
 
 export const featuredExperience = FEATURED_EXPERIENCE_IDS.map(
   (id) => experience.find((item) => item.id === id)!,

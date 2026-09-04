@@ -1,5 +1,10 @@
 export const worldMarks = [
   {
+    name: "Anglian Dental",
+    note: "Software Engineering Lead · United Kingdom",
+    href: "/experience/#anglian-dental",
+  },
+  {
     name: "Google",
     note: "Software Engineer via High Spring",
     href: "/experience/#google",
@@ -34,4 +39,4 @@ export const worldMarks = [
 export const worldMarksLine = worldMarks.map((mark) => mark.name).join(" · ");
 
 export const coverMarksLine =
-  "Google via High Spring · Disney · National Geographic · Maya · Momentra Labs";
+  "Anglian Dental · Google via High Spring · Disney · National Geographic · Maya";

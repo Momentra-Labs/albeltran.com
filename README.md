@@ -1,6 +1,6 @@
 # Al Beltran — Portfolio
 
-Senior Software Engineer portfolio for **Al Andrew Paul Beltran** (Code by Pawpu).
+Software Engineering Lead portfolio for **Al Andrew Paul Beltran** (Code by Pawpu).
 
 **Canonical site:** [https://albeltran.com](https://albeltran.com)
 

@@ -27,7 +27,7 @@ export function Hero() {
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs text-muted">
               <span className="h-1.5 w-1.5 rounded-full bg-success" />
-              Software Engineer at Google via High Spring
+              {person.currentRole}
             </div>
             <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Al Beltran
@@ -37,7 +37,7 @@ export function Hero() {
               <strong className="font-medium text-foreground">
                 Al Andrew Paul Beltran
               </strong>
-              , a Senior Software Engineer and Full-Stack Developer based in the
+              , a {person.jobTitle} and Full-Stack Developer based in the
               Philippines.
             </p>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-dim">
@@ -94,7 +94,7 @@ export function Hero() {
               <div className="relative aspect-4/5">
                 <Image
                   src={person.photo}
-                  alt="Al Andrew Paul Beltran (Al Beltran), Senior Software Engineer, speaking on leadership"
+                  alt={`${person.name} (${person.shortName}), ${person.jobTitle}, speaking on leadership`}
                   fill
                   priority
                   sizes="(max-width: 768px) 90vw, 384px"

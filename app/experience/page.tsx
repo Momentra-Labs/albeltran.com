@@ -14,7 +14,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Experience — Al Beltran",
-  description: `Career timeline for Al Beltran (Al Andrew Paul Beltran): Software Engineer at Google via High Spring, Maya, National Geographic and Disney via Myridius, Accenture, Asurion, Yondu, freelance, and GoETU.`,
+  description: `Career timeline for Al Beltran (Al Andrew Paul Beltran): Software Engineering Lead at Anglian Dental, Software Engineer at Google via High Spring, Maya, National Geographic and Disney via Myridius, Accenture, Asurion, Yondu, freelance, and GoETU.`,
   path: "/experience/",
 });
 
@@ -24,7 +24,7 @@ export default function ExperiencePage() {
     webPageSchema({
       path: "/experience/",
       name: `Experience · ${person.shortName}`,
-      description: `Professional experience for ${person.name}, Senior Software Engineer.`,
+      description: `Professional experience for ${person.name}, ${person.jobTitle}.`,
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
@@ -37,8 +37,8 @@ export default function ExperiencePage() {
       <JsonLd data={schema} />
       <PageHeader
         label="Experience"
-        title="Google, Maya, Myridius, Accenture — and the path here"
-        description="Software Engineer at Google via High Spring. Fintech at Maya. National Geographic and Disney via Myridius. Technical leadership, enterprise AEM, and full-stack delivery from Manila."
+        title="Anglian Dental, Google, Maya, Myridius — and the path here"
+        description="Software Engineering Lead at Anglian Dental in the United Kingdom. Previously Software Engineer at Google via High Spring. Fintech at Maya. National Geographic and Disney via Myridius. Technical leadership, enterprise AEM, and full-stack delivery from Manila."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "Experience" },
