@@ -1,19 +1,21 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
+import { useMemo, useState, type ReactNode } from "react";
 import type { BlogPost } from "@/lib/mdx";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { BlogPostList } from "@/components/blog/blog-post-list";
 
 export function BlogIndex({
   posts,
   categories,
   tags,
+  children,
 }: {
   posts: BlogPost[];
   categories: string[];
   tags: string[];
+  children: ReactNode;
 }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string | null>(null);
@@ -32,6 +34,8 @@ export function BlogIndex({
       return matchesQuery && matchesCategory && matchesTag;
     });
   }, [posts, query, category, tag]);
+
+  const isDefault = !query.trim() && !category && !tag;
 
   return (
     <div className="space-y-8">
@@ -82,45 +86,7 @@ export function BlogIndex({
         ))}
       </div>
 
-      <ol className="divide-y divide-border border-y border-border">
-        {filtered.map((post) => (
-          <li key={post.slug}>
-            <article className="py-8">
-              <div className="mb-3 flex flex-wrap items-center gap-3 font-mono text-[11px] text-muted-dim">
-                <Badge variant="accent">{post.category}</Badge>
-                <time dateTime={post.date}>
-                  {new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </time>
-                <span>{post.readingTime}</span>
-              </div>
-              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-                <Link
-                  href={`/blog/${post.slug}/`}
-                  className="hover:text-accent"
-                  data-cursor="→"
-                >
-                  {post.title}
-                </Link>
-              </h2>
-              <p className="mt-3 max-w-2xl text-muted">{post.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {post.tags.map((item) => (
-                  <span key={item} className="text-xs text-muted-dim">
-                    #{item}
-                  </span>
-                ))}
-              </div>
-            </article>
-          </li>
-        ))}
-        {filtered.length === 0 && (
-          <li className="py-8 text-muted">No articles match those filters.</li>
-        )}
-      </ol>
+      {isDefault ? children : <BlogPostList posts={filtered} />}
     </div>
   );
 }

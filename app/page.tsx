@@ -14,6 +14,7 @@ import { featuredExperience } from "@/content/experience";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
 import { getAllPosts } from "@/lib/mdx";
 import {
+  blogItemListSchema,
   faqSchema,
   graphSchema,
   personSchema,
@@ -37,7 +38,7 @@ export const metadata = buildMetadata({
 export default function HomePage() {
   const featured = getFeaturedProjects();
   const lab = getLabProjects();
-  const posts = getAllPosts().slice(0, 3);
+  const posts = getAllPosts();
   const schema = graphSchema([
     websiteSchema(),
     personSchema(),
@@ -46,6 +47,7 @@ export default function HomePage() {
     profilePageSchema(),
     worldMarksSchema(),
     faqSchema(homeFaqs),
+    blogItemListSchema(posts),
   ]);
 
   return (
@@ -58,7 +60,7 @@ export default function HomePage() {
       <EngineeringLab projects={lab} />
       <EngineeringSystem />
       <ExperienceTimeline items={featuredExperience} />
-      <HomeNotes posts={posts} />
+      <HomeNotes />
       <HomeContact />
       <IssueFolio />
     </>

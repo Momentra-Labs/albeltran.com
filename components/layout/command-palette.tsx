@@ -38,7 +38,7 @@ export function CommandPalette({
       { id: "work", label: "Go to Work", href: "/#work" },
       { id: "lab", label: "Go to Lab", href: "/#lab" },
       { id: "experience", label: "Go to Experience", href: "/#experience" },
-      { id: "writing", label: "Go to Writing", href: "/#writing" },
+      { id: "writing", label: "Go to Writing", href: "/blog/" },
       { id: "about", label: "Go to About", href: "/#about" },
       { id: "now", label: "Go to Now", href: "/#now" },
       { id: "notes", label: "Go to Notes", href: "/#notes" },

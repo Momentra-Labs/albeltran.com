@@ -261,6 +261,26 @@ export function projectSchema(project: Project) {
   };
 }
 
+export function blogItemListSchema(
+  posts: { slug: string; title: string; date: string; description: string }[],
+) {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/blog/#posts`,
+    name: "Engineering articles by Al Beltran",
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    numberOfItems: posts.length,
+    itemListElement: posts.map((post, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: post.title,
+      description: post.description,
+      url: `${SITE_URL}/blog/${post.slug}/`,
+      datePublished: post.date,
+    })),
+  };
+}
+
 export function articleSchema({
   title,
   description,

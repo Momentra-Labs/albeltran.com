@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { BlogPost } from "@/lib/mdx";
 import { philosophy } from "@/content/philosophy";
 import { now } from "@/content/now";
 import { Container } from "@/components/shared/container";
@@ -12,7 +11,7 @@ const nowGroups = [
   { title: "Thinking about", source: "Goals" },
 ] as const;
 
-export function HomeNotes({ posts }: { posts: BlogPost[] }) {
+export function HomeNotes() {
   return (
     <section id="notes" className="magazine-spread scroll-mt-24 py-10 sm:py-12">
       <Container>
@@ -28,7 +27,7 @@ export function HomeNotes({ posts }: { posts: BlogPost[] }) {
           </div>
         </Reveal>
         <SpreadRule className="mb-6" />
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 lg:grid-cols-2">
           <div id="think" className="scroll-mt-24" data-hide-recruiter>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               How I think
@@ -80,40 +79,6 @@ export function HomeNotes({ posts }: { posts: BlogPost[] }) {
                 );
               })}
             </ul>
-          </div>
-          <div id="writing" className="scroll-mt-24">
-            <div className="flex items-baseline justify-between gap-3">
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-                Writing
-              </p>
-              <Link
-                href="/blog/"
-                className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted hover:text-foreground"
-                data-cursor="→"
-              >
-                All articles
-              </Link>
-            </div>
-            <ol className="mt-4 space-y-3">
-              {posts.map((post, index) => (
-                <li key={post.slug}>
-                  <RevealItem index={index} variant="ink">
-                    <Link
-                      href={`/blog/${post.slug}/`}
-                      className="group flex gap-3"
-                      data-cursor="→"
-                    >
-                      <span className="font-mono text-[11px] text-muted-dim group-hover:text-accent">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-sm text-foreground group-hover:text-accent">
-                        {post.title}
-                      </span>
-                    </Link>
-                  </RevealItem>
-                </li>
-              ))}
-            </ol>
           </div>
         </div>
       </Container>

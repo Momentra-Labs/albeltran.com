@@ -10,6 +10,7 @@ export const SECTION_NAV = [
   { href: "/#work", hash: "work", label: "Work" },
   { href: "/#lab", hash: "lab", label: "Lab" },
   { href: "/#experience", hash: "experience", label: "Experience" },
+  { href: "/blog/", hash: "blog", label: "Writing" },
   { href: "/#contact", hash: "contact", label: "Contact" },
 ] as const;
 

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { SECTION_NAV } from "@/lib/constants";
 import { person } from "@/content/person";
@@ -27,6 +27,7 @@ const SECTION_PAGES: Record<string, string> = {
   work: "/projects/",
   lab: "/projects/",
   experience: "/experience/",
+  blog: "/blog/",
   contact: "/contact/",
 };
 
@@ -38,20 +39,21 @@ function sectionFromPath(pathname: string) {
   if (pathname.startsWith("/about")) return "about";
   if (pathname.startsWith("/experience")) return "experience";
   if (pathname.startsWith("/now")) return "now";
-  if (pathname.startsWith("/projects") || pathname.startsWith("/blog")) {
-    return "work";
-  }
+  if (pathname.startsWith("/blog")) return "blog";
+  if (pathname.startsWith("/projects")) return "work";
   if (pathname.startsWith("/contact")) return "contact";
   return null;
 }
 
 function sectionHref(hash: string, isHome: boolean) {
+  if (hash === "blog") return "/blog/";
   if (isHome) return `/#${hash}`;
   return SECTION_PAGES[hash] ?? `/#${hash}`;
 }
 
 export function SiteNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("work");
@@ -96,6 +98,19 @@ export function SiteNav() {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isHome) return;
+    const redirectWriting = () => {
+      const hash = window.location.hash.replace(/^#/, "");
+      if (hash === "blog" || hash === "writing") {
+        router.replace("/blog/");
+      }
+    };
+    redirectWriting();
+    window.addEventListener("hashchange", redirectWriting);
+    return () => window.removeEventListener("hashchange", redirectWriting);
+  }, [isHome, router]);
 
   useEffect(() => {
     if (!isHome) return;

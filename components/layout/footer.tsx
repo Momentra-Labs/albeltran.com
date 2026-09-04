@@ -44,6 +44,9 @@ export function Footer() {
           <a href={SOCIAL_LINKS.email} data-cursor="→" className="hover:text-foreground">
             Email
           </a>
+          <Link href="/blog/" data-cursor="→" className="hover:text-foreground">
+            Blog
+          </Link>
           <Link href="/resume/" data-cursor="→" className="hover:text-foreground">
             Resume
           </Link>

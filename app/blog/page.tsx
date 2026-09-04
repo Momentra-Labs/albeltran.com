@@ -1,10 +1,12 @@
 import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { BlogIndex } from "@/components/blog/blog-index";
+import { BlogPostList } from "@/components/blog/blog-post-list";
 import { JsonLd } from "@/components/shared/json-ld";
 import { getAllCategories, getAllPosts, getAllTags } from "@/lib/mdx";
 import { person } from "@/content/person";
 import {
+  blogItemListSchema,
   breadcrumbSchema,
   graphSchema,
   personSchema,
@@ -42,6 +44,7 @@ export default function BlogPage() {
       url: `${SITE_URL}/blog/`,
       author: { "@id": `${SITE_URL}/#person` },
     },
+    blogItemListSchema(posts),
   ]);
 
   return (
@@ -57,7 +60,9 @@ export default function BlogPage() {
         ]}
       />
       <Container className="py-16">
-        <BlogIndex posts={posts} categories={categories} tags={tags} />
+        <BlogIndex posts={posts} categories={categories} tags={tags}>
+          <BlogPostList posts={posts} />
+        </BlogIndex>
       </Container>
     </>
   );
