@@ -26,8 +26,8 @@ const coverEntries = [
     dek: `${person.currentCompany} · ${person.currentEmployerNote}`,
   },
   {
-    title: "Tech lead",
-    dek: "Previously led engineering delivery",
+    title: "Software engineer",
+    dek: "Previously Google via High Spring",
   },
   {
     title: "Founder",
@@ -144,9 +144,10 @@ export function HomeHero() {
 
       <p className="sr-only">
         {person.legalName} ({person.shortName}) is a {person.occupation} in
-        Manila. {person.currentRole}. Founder of {person.labs}. Independent
-        products: {person.personalProducts.join(", ")}. National Geographic and
-        Disney via Myridius. Maya fintech.
+        Manila. {person.currentRole}. Founder of {person.labs}. Previously
+        Software Engineer at Google via High Spring. Independent products:{" "}
+        {person.personalProducts.join(", ")}. National Geographic and Disney via
+        Myridius. Maya fintech.
       </p>
 
       <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden lg:grid-rows-[auto_minmax(0,1fr)_auto]">
@@ -184,7 +185,7 @@ export function HomeHero() {
               <div className="magazine-portrait relative aspect-[3/4] max-h-[62vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
                 <Image
                   src={person.photo}
-                  alt={`${person.name} (${person.shortName}), ${person.currentRole} and founder of ${person.labs}`}
+                  alt={person.imageAlt}
                   fill
                   priority
                   quality={90}
@@ -247,9 +248,16 @@ export function HomeHero() {
               aria-label="Cover actions"
             >
               <Link
-                href="#record"
+                href="/about/"
                 data-cursor="VIEW"
                 className={`${ctaClass} text-foreground hover:text-accent`}
+              >
+                About Al Beltran →
+              </Link>
+              <Link
+                href="#record"
+                data-cursor="VIEW"
+                className={`${ctaClass} text-muted hover:text-foreground`}
               >
                 The record →
               </Link>

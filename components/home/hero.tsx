@@ -94,7 +94,7 @@ export function Hero() {
               <div className="relative aspect-4/5">
                 <Image
                   src={person.photo}
-                  alt={`${person.name} (${person.shortName}), ${person.jobTitle}, speaking on leadership`}
+                  alt={person.imageAlt}
                   fill
                   priority
                   sizes="(max-width: 768px) 90vw, 384px"

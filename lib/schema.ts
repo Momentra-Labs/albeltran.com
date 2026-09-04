@@ -30,20 +30,35 @@ export function personSchema() {
     name: person.name,
     additionalName: person.additionalName,
     alternateName: [...person.aliases],
-    givenName: "Al Andrew Paul",
-    familyName: "Beltran",
+    givenName: person.givenName,
+    familyName: person.familyName,
     url: SITE_URL,
-    mainEntityOfPage: `${SITE_URL}/`,
-    image: {
-      "@type": "ImageObject",
-      url: person.image,
-      contentUrl: person.image,
-      caption: `${person.name} (${person.legalName}) — ${person.currentRole} and founder of ${person.labs}`,
-    },
+    mainEntityOfPage: `${SITE_URL}/about/`,
+    image: [
+      {
+        "@type": "ImageObject",
+        url: person.image,
+        contentUrl: person.image,
+        width: person.imageWidth,
+        height: person.imageHeight,
+        caption: person.imageAlt,
+        description: `${person.shortName} is a ${person.occupation} and ${person.jobTitle}.`,
+        encodingFormat: "image/webp",
+      },
+      {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/assets/al-beltran-software-engineer.jpg`,
+        contentUrl: `${SITE_URL}/assets/al-beltran-software-engineer.jpg`,
+        width: person.imageWidth,
+        height: person.imageHeight,
+        caption: person.imageAlt,
+        encodingFormat: "image/jpeg",
+      },
+    ],
     jobTitle: person.currentRole,
     hasOccupation: {
       "@type": "Occupation",
-      name: "Software Engineering Lead",
+      name: person.jobTitle,
       occupationLocation: {
         "@type": "City",
         name: "Manila",
@@ -70,8 +85,7 @@ export function personSchema() {
     worksFor: [
       {
         "@type": "Organization",
-        name: "Anglian Dental",
-        legalName: "Anglian Dental Engineering Ltd",
+        name: person.currentCompany,
         url: "https://www.angliandental.co.uk",
         address: {
           "@type": "PostalAddress",
@@ -95,12 +109,9 @@ export function personSchema() {
       creator: { "@id": `${SITE_URL}/#person` },
       author: { "@id": `${SITE_URL}/#person` },
     })),
-    sameAs: [
-      ...person.sameAs,
-      `${SITE_URL}/author/al-beltran/`,
-      `${SITE_URL}/about/`,
-    ],
+    sameAs: [...person.sameAs],
     knowsAbout: [...person.knowsAbout],
+    knowsLanguage: ["en", "fil"],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "professional",
@@ -176,12 +187,16 @@ export function websiteSchema() {
   };
 }
 
-export function profilePageSchema() {
+export function profilePageSchema(options?: { path?: string; name?: string }) {
+  const path = options?.path ?? "/";
+  const url = path.startsWith("http") ? path : `${SITE_URL}${path}`;
+  const fragment =
+    path === "/" ? `${SITE_URL}/#profilepage` : `${url}#profilepage`;
   return {
     "@type": "ProfilePage",
-    "@id": `${SITE_URL}/#profilepage`,
-    url: `${SITE_URL}/`,
-    name: `${person.shortName} — ${person.currentRole}`,
+    "@id": fragment,
+    url,
+    name: options?.name ?? `${person.shortName} — ${person.occupation}`,
     description: person.summary,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     about: { "@id": `${SITE_URL}/#person` },
@@ -190,7 +205,7 @@ export function profilePageSchema() {
       "@type": "ImageObject",
       url: person.image,
       contentUrl: person.image,
-      caption: `${person.name} (${person.legalName}) — ${person.currentRole}`,
+      caption: person.imageAlt,
     },
   };
 }
@@ -199,10 +214,12 @@ export function webPageSchema({
   path,
   name,
   description,
+  mainEntity = "person",
 }: {
   path: string;
   name: string;
   description: string;
+  mainEntity?: "person" | "none";
 }) {
   const url = path.startsWith("http") ? path : `${SITE_URL}${path}`;
   return {
@@ -216,8 +233,11 @@ export function webPageSchema({
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: person.image,
+      caption: person.imageAlt,
     },
-    mainEntity: { "@id": `${SITE_URL}/#person` },
+    ...(mainEntity === "person"
+      ? { mainEntity: { "@id": `${SITE_URL}/#person` } }
+      : {}),
   };
 }
 
@@ -329,7 +349,7 @@ export function authorProfilePageSchema() {
       "@type": "ImageObject",
       url: person.image,
       contentUrl: person.image,
-      caption: `${person.name} — ${person.currentRole}`,
+      caption: person.imageAlt,
     },
   };
 }
@@ -372,6 +392,7 @@ export function articleSchema({
     },
     publisher: {
       "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
       name: person.name,
       url: `${SITE_URL}/author/al-beltran/`,
       image: person.image,

@@ -7,34 +7,35 @@ import { aboutContent } from "@/content/about";
 import { aboutFaqs } from "@/content/faqs";
 import { featuredExperience } from "@/content/experience";
 import { techGroups, person } from "@/content/person";
-import { SOCIAL_LINKS, SITE_URL } from "@/lib/constants";
+import { SOCIAL_LINKS } from "@/lib/constants";
 import { getLabProjects } from "@/content/projects";
 import {
   breadcrumbSchema,
   faqSchema,
   graphSchema,
   personSchema,
+  profilePageSchema,
   momentraLabsSchema,
   labProductsSchema,
-  webPageSchema,
+  websiteSchema,
 } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "About Al Beltran",
-  description: `About Al Beltran (Al Andrew Paul Beltran; also Al Andrew Paul Teodosio Beltran): ${person.currentRole}, founder of Momentra Labs, and contributor to National Geographic and Disney platforms via Myridius — ${SITE_URL}/about/`,
+  title: "Al Beltran — Software Engineer",
+  description: `Al Beltran (Al Andrew Paul Beltran) is a software engineer and Software Engineering Lead at Anglian Dental, based in Manila. Read his background, stack, projects, and writing.`,
   path: "/about/",
 });
 
 export default function AboutPage() {
   const schema = graphSchema([
+    websiteSchema(),
     personSchema(),
     momentraLabsSchema(),
     labProductsSchema(getLabProjects()),
-    webPageSchema({
+    profilePageSchema({
       path: "/about/",
-      name: `About Al Beltran | ${person.name}`,
-      description: person.summary,
+      name: `Al Beltran — Software Engineer`,
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
@@ -48,8 +49,8 @@ export default function AboutPage() {
       <JsonLd data={schema} />
       <PageHeader
         label="About"
-        title="About Al Beltran"
-        description="Al Andrew Paul Beltran is Software Engineering Lead at Anglian Dental in the United Kingdom, founder of Momentra Labs, previously a Software Engineer at Google via High Spring, and a contributor to National Geographic and Disney platforms via Myridius. Based in Manila. This page is the long-form profile for albeltran.com."
+        title="Al Beltran — Software Engineer"
+        description="Al Andrew Paul Beltran is a software engineer and Software Engineering Lead at Anglian Dental in the United Kingdom, founder of Momentra Labs, previously a Software Engineer at Google via High Spring, and a contributor to National Geographic and Disney platforms via Myridius. Based in Manila. This page is the long-form profile for albeltran.com."
         breadcrumbs={[
           { name: "Home", href: "/" },
           { name: "About" },
@@ -166,6 +167,45 @@ export default function AboutPage() {
                 </Link>
                 , including National Geographic, Disney Experiences, Disney
                 Institute, DocIndy, and serverless ETL work.
+              </p>
+            </section>
+
+            <section id="engineering-interests">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Engineering interests
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted">
+                Al Beltran writes and builds around production systems: React
+                and TypeScript product UI, Node.js and Java services, SQL data
+                models, AWS serverless pipelines, and Adobe Experience Manager
+                authoring platforms. The through-line is contracts, failure
+                modes, and work other engineers can operate.
+              </p>
+            </section>
+
+            <section id="technical-writing">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Technical writing
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted">
+                Published notes live in the{" "}
+                <Link href="/blog/" className="text-accent hover:underline">
+                  engineering journal
+                </Link>
+                . Interview preparation is collected in the{" "}
+                <Link href="/interviews/" className="text-accent hover:underline">
+                  Interview Lab
+                </Link>
+                . Topic clusters — React, TypeScript, Java, AEM, AWS, and
+                system design — are mapped at{" "}
+                <Link href="/topics/" className="text-accent hover:underline">
+                  /topics
+                </Link>
+                . The byline on every article is{" "}
+                <Link href="/author/al-beltran/" className="text-accent hover:underline">
+                  Al Beltran
+                </Link>
+                .
               </p>
             </section>
 

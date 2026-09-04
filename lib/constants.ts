@@ -4,7 +4,7 @@ export const SITE_URL =
 
 export const SITE_NAME = "Al Beltran — Portfolio";
 export const SITE_DESCRIPTION =
-  "Al Beltran (Al Andrew Paul Beltran) is a software engineer in Manila — Software Engineering Lead at Anglian Dental in the United Kingdom, founder of Momentra Labs, previously Software Engineer at Google via High Spring, and contributor to National Geographic and Disney platforms via Myridius. Personal products: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart — https://albeltran.com";
+  "Al Beltran (Al Andrew Paul Beltran) is a software engineer in Manila and Software Engineering Lead at Anglian Dental. He works with React, TypeScript, Java, Node.js, AEM, and AWS. Previously Software Engineer at Google via High Spring.";
 
 export const SECTION_NAV = [
   { href: "/#work", hash: "work", label: "Work" },

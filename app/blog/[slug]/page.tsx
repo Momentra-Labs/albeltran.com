@@ -67,6 +67,7 @@ export default async function BlogPostPage({ params }: Props) {
       path,
       name: post.title,
       description: post.description,
+      mainEntity: "none",
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },

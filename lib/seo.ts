@@ -44,9 +44,11 @@ export function buildMetadata({
     : image.endsWith(".webp")
       ? "image/webp"
       : "image/jpeg";
+  const alreadyNamed =
+    title.includes(person.shortName) || title.includes(person.name);
   const fullTitle = absoluteTitle
     ? title
-    : title === SITE_NAME || title === PRIMARY_TITLE
+    : title === SITE_NAME || title === PRIMARY_TITLE || alreadyNamed
       ? title
       : `${title} · ${person.shortName}`;
 

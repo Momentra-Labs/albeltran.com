@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { Timeline } from "@/components/shared/timeline";
@@ -45,6 +46,21 @@ export default function ExperiencePage() {
         ]}
       />
       <Container className="py-16 sm:py-20">
+        <p className="mb-10 max-w-2xl text-base leading-relaxed text-muted">
+          This timeline is the employment record for{" "}
+          <Link href="/about/" className="text-accent hover:underline">
+            Al Beltran, software engineer
+          </Link>
+          . Related case studies are on the{" "}
+          <Link href="/projects/" className="text-accent hover:underline">
+            projects page
+          </Link>
+          . Notes from that work appear in the{" "}
+          <Link href="/blog/" className="text-accent hover:underline">
+            engineering journal
+          </Link>
+          .
+        </p>
         <Timeline items={experience} />
       </Container>
     </>

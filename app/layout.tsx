@@ -40,37 +40,26 @@ export const metadata: Metadata = {
     "Al Beltran",
     "Al Andrew Paul Beltran",
     "Al Andrew Paul Teodosio Beltran",
-    "Al Beltran full-stack software engineer",
-    "Al Beltran Software Engineering Lead",
-    "Al Beltran Developer",
-    "Al Beltran Philippines",
-    "Full-Stack Software Engineer",
-    "Full Stack Developer",
+    "Software Engineer",
     "Software Engineering Lead",
+    "Full-Stack Software Engineer",
     "Software Engineer Philippines",
     "React",
-    "Next.js",
-    "Node.js",
     "TypeScript",
+    "JavaScript",
+    "Java",
+    "Spring Boot",
+    "Node.js",
+    "Next.js",
+    "PHP",
+    "Laravel",
+    "AEM",
+    "Adobe Experience Manager",
+    "AWS",
     "Anglian Dental",
-    "Google",
     "Google via High Spring",
-    "National Geographic",
-    "Disney",
-    "Disney Experiences",
-    "Disney Institute",
     "Myridius",
-    "Accenture",
-    "Maya",
-    "High Spring",
     "Momentra Labs",
-    "Founder Momentra Labs",
-    "RentaraH",
-    "Lumina",
-    "Gloves Up",
-    "PocketPOS",
-    "QuickCart",
-    "DocIndy",
   ],
   authors: [{ name: person.name, url: `${SITE_URL}/author/al-beltran/` }],
   creator: person.name,
@@ -106,7 +95,7 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
     shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -127,7 +116,8 @@ export default function RootLayout({
           }}
         />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="me" href="https://www.linkedin.com/in/al-beltran/" />
         <link rel="me" href="https://github.com/codemoon2019" />
         <link rel="me" href="https://www.instagram.com/codebypawpu/" />

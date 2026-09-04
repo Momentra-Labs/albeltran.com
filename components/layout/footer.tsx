@@ -23,6 +23,18 @@ export function Footer() {
           <p className="mt-1 text-sm text-muted-dim">Manila, Philippines</p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+          <Link href="/about/" data-cursor="→" className="hover:text-foreground">
+            About
+          </Link>
+          <Link href="/experience/" data-cursor="→" className="hover:text-foreground">
+            Experience
+          </Link>
+          <Link href="/projects/" data-cursor="→" className="hover:text-foreground">
+            Projects
+          </Link>
+          <Link href="/contact/" data-cursor="→" className="hover:text-foreground">
+            Contact
+          </Link>
           <a
             href={SOCIAL_LINKS.github}
             target="_blank"

@@ -60,6 +60,7 @@ export default async function InterviewArticlePage({ params }: Props) {
       path,
       name: post.title,
       description: post.description,
+      mainEntity: "none",
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
