@@ -603,6 +603,51 @@ body {
   font-weight: 600;
 }
 
+.prose-portfolio :not(pre) > code {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.875em;
+  color: var(--foreground);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 0.1em 0.35em;
+}
+
+.prose-portfolio pre {
+  margin: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  color: #d7d7e2;
+}
+
+.prose-portfolio h2,
+.prose-portfolio h3 {
+  scroll-margin-top: 6rem;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color: #7aa7ff;
+}
+
+.hljs-string,
+.hljs-attr {
+  color: #9ecbff;
+}
+
+.hljs-number,
+.hljs-built_in {
+  color: #38d9a9;
+}
+
+.hljs-comment {
+  color: #6b6b7c;
+}
+
+.hljs-function,
+.hljs-title {
+  color: #f0f0f5;
+}
+
 .prose-portfolio ol {
   margin: 1rem 0 1.25rem;
   padding-left: 1.25rem;

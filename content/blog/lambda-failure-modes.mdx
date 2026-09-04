@@ -1,0 +1,128 @@
+---
+title: "AWS Lambda Failure Modes You Should Budget For"
+description: "Timeouts, retries, partial batch failure, and the handler that is not idempotent."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Cloud"
+kind: article
+tags: ["aws", "lambda"]
+takeaways:
+  - "Lambda retries are a feature. If the handler is not idempotent, retries are a defect amplifier."
+  - "Timeout must be larger than the work and smaller than the downstream patience. Both numbers are the design."
+  - "A batch that fails as a unit will replay successes. Partial batch failure exists so you do not have to."
+  - "Cold starts, reserved concurrency, and payload size are capacity problems. Treat them like SLOs, not folklore."
+---
+
+Lambda looks like "upload a function, forget the server." The operational surface moves to **timeouts, retries, identity, and what happens when the same event arrives twice**. If you do not budget for those, you have not designed a function. You have designed a demo.
+
+This note is about failure modes. Pipeline shape and Step Functions belong in [Lessons from serverless ETL on AWS](/blog/serverless-etl-lessons/).
+
+## The handler is not the unit of work
+
+The unit of work is **an invocation plus every automatic retry AWS will perform** for that trigger.
+
+| Trigger | Typical retry behavior | What you must assume |
+| --- | --- | --- |
+| Synchronous API Gateway / Function URL | Caller retries if they want to | The client will click twice and timeout |
+| Asynchronous invoke | Two more attempts by default | The same payload can run three times |
+| SQS | Until max receive count, then DLQ | Visibility timeout vs work duration |
+| EventBridge | Retry with backoff, then DLQ if configured | At-least-once |
+| Stream (Kinesis / DynamoDB) | Block the shard on failure unless you bisect or use partial batch | One poison record can stall the rest |
+
+"We log the error and return 200" is not resilience. It is how you lose the retry that would have saved you, or how you ack a message you did not process.
+
+## Timeouts are a product decision
+
+A 30-second Lambda timeout with a 10-second downstream HTTP client is a self-inflicted retry storm: the function is still running when the caller has already retried.
+
+Budget three numbers and write them down:
+
+1. **Downstream deadline** — how long the dependency is allowed to run.
+2. **Function timeout** — slightly above the worst legitimate work, not "just put 15 minutes."
+3. **Caller patience** — API Gateway, the browser, the queue visibility timeout.
+
+If processing an SQS message can take 40 seconds, a 30-second visibility timeout will deliver the same message to a second worker. That is not an AWS bug. That is two handlers and one side effect.
+
+```ts
+export async function handler(event: SQSEvent) {
+  for (const record of event.Records) {
+    const payload = JSON.parse(record.body) as unknown;
+    await processOnce(payload, record.messageId);
+  }
+}
+```
+
+`processOnce` must key off a durable idempotency token (message id, or a business key inside the payload). Returning after a successful write is not enough if the write is "increment balance" and the process dies before SQS deletes the message.
+
+## Partial batch failure
+
+With SQS or streams, a handler that throws after record 7 of 10 will, by default, make AWS retry the **whole batch**. Records 1–6 run again. If those were not idempotent, you doubled a payment.
+
+Report the failures instead of throwing the batch:
+
+```ts
+export async function handler(event: SQSEvent): Promise<SQSBatchResponse> {
+  const batchItemFailures: { itemIdentifier: string }[] = [];
+
+  await Promise.all(
+    event.Records.map(async (record) => {
+      try {
+        await processOnce(JSON.parse(record.body), record.messageId);
+      } catch {
+        batchItemFailures.push({ itemIdentifier: record.messageId });
+      }
+    }),
+  );
+
+  return { batchItemFailures };
+}
+```
+
+You still need a dead-letter queue for the records that never succeed. Partial failure without a DLQ is a retry infinite loop with extra steps.
+
+## Common mistakes
+
+- Catching all errors, logging, and exiting 0 so "the function stays green" while the queue silently drains bad data.
+- Sharing a database connection stored in the module scope without understanding that containers are reused **and** that connection limits are per container times reserved concurrency.
+- Putting secrets in environment variables that every engineer can read in the console, then rotating nothing. Prefer a secrets manager and a short cache.
+- Setting reserved concurrency to 1 to "be safe" on a hot queue. You have created a latency cliff.
+
+## Interview questions this note answers
+
+**Does Lambda guarantee exactly-once execution?** No. Design for at-least-once and make side effects idempotent.
+
+**What is a cold start?** A new execution environment. It is a latency budget item, not a reason to abandon the platform. Provisioned concurrency is a paid way to buy a warmer pool.
+
+**Why did the same SQS message process twice?** Visibility timeout expired, or the handler failed after a successful side effect, or two consumers existed.
+
+More scored questions will land in the planned AWS interview set. Until then, [Node.js interview questions](/interviews/nodejs-interview-questions/) cover the runtime inside the handler.
+
+## Senior-level considerations
+
+The senior conversation is about **blast radius**. A Lambda with `*:*` IAM can turn a code bug into an account incident. A function that writes to the same table as an interactive API can take down checkout during a backfill.
+
+On the ETL program documented on this site, the durable parts were not the transform snippets. They were orchestration, retries, and the API the rest of the company could call without speaking S3 keys. See the [ETL case study](/projects/etl-pipeline/).
+
+Also decide what "failure" means to the business: retry, compensate, or page. A loyalty grant and a thumbnail resize do not deserve the same runbook.
+
+## Performance considerations
+
+Memory is CPU on Lambda. Starving a CPU-bound transform to save a few cents will cost you timeout retries. Measure duration at p95, not averages. Watch iterator age on streams; it is the lag SLO.
+
+Payloads have size limits. Oversized events get you into S3 claim-check patterns. That is a design, not a surprise at 6 MB.
+
+## Security considerations
+
+The execution role is the function's identity. Scope it to the bucket prefix and the queue ARN it needs. Do not attach AdministratorAccess "until we tighten it." You will not.
+
+Validate the event. EventBridge and SQS are not a trusted type system. Parse the body the same way you would parse HTTP, as in [TypeScript as an API contract](/blog/typescript-api-contracts/).
+
+## When to use Lambda
+
+Spiky or idle-most-of-the-day work, glue between AWS services, webhooks, and pipelines where paying for idle boxes is the actual cost.
+
+## When not to use it
+
+Long-lived connections, steady high-QPS workloads that are cheaper on a service you already operate, or a process that must run for 20 minutes with a debugger attached. Those constraints are legitimate. Do not pretend Lambda is a VM.
+
+Related: [Serverless still has a latency budget](/blog/serverless-still-has-a-latency-budget/).

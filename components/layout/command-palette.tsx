@@ -43,7 +43,10 @@ export function CommandPalette({
       { id: "now", label: "Go to Now", href: "/#now" },
       { id: "notes", label: "Go to Notes", href: "/#notes" },
       { id: "contact", label: "Contact", href: "/#contact" },
-      { id: "blog", label: "Blog", href: "/blog/" },
+      { id: "blog", label: "Engineering Journal", href: "/blog/" },
+      { id: "topics", label: "Topics", href: "/topics/" },
+      { id: "interviews", label: "Interview Lab", href: "/interviews/" },
+      { id: "author", label: "Author: Al Beltran", href: "/author/al-beltran/" },
       { id: "projects", label: "All projects", href: "/projects/" },
       { id: "resume", label: "Download Resume", href: "/resume.pdf" },
       {

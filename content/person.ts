@@ -75,6 +75,7 @@ export const person = {
     "Event-driven architecture",
     "Adobe Experience Manager",
     "System design",
+    "Technical interviews",
     "REST APIs",
     "Full-stack development",
     "Technical leadership",

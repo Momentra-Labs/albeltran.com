@@ -230,7 +230,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                   {relatedArticles.map((post) => (
                     <li key={post.slug} className="border-b border-border pb-4">
                       <Link
-                        href={`/blog/${post.slug}/`}
+                        href={post.href}
                         className="text-foreground hover:text-accent"
                       >
                         {post.title}

@@ -25,8 +25,12 @@ const posts = files
   .map((file) => {
     const raw = fs.readFileSync(path.join(BLOG_DIR, file), "utf8");
     const { data } = matter(raw);
+    const slug = file.replace(/\.mdx$/, "");
+    const href =
+      data.kind === "interview" ? `/interviews/${slug}/` : `/blog/${slug}/`;
     return {
-      slug: file.replace(/\.mdx$/, ""),
+      slug,
+      href,
       title: data.title,
       description: data.description,
       date: data.date,
@@ -40,8 +44,8 @@ const items = posts
   .map(
     (post) => `  <item>
     <title>${escapeXml(post.title)}</title>
-    <link>${SITE_URL}/blog/${post.slug}/</link>
-    <guid>${SITE_URL}/blog/${post.slug}/</guid>
+    <link>${SITE_URL}${post.href}</link>
+    <guid>${SITE_URL}${post.href}</guid>
     <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     <description>${escapeXml(post.description)}</description>
   </item>`,
@@ -51,9 +55,9 @@ const items = posts
 const feed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Al Beltran — Engineering Blog</title>
+    <title>Al Beltran — Engineering Journal</title>
     <link>${SITE_URL}/blog/</link>
-    <description>Articles on architecture, performance, cloud, and engineering workflows by Al Andrew Paul Beltran.</description>
+    <description>Engineering notes and interview prep by Al Andrew Paul Beltran. Published articles only.</description>
     <language>en-ph</language>
 ${items}
   </channel>

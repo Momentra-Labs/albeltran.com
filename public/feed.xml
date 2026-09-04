@@ -1,10 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Al Beltran — Engineering Blog</title>
+    <title>Al Beltran — Engineering Journal</title>
     <link>https://albeltran.com/blog/</link>
-    <description>Articles on architecture, performance, cloud, and engineering workflows by Al Andrew Paul Beltran.</description>
+    <description>Engineering notes and interview prep by Al Andrew Paul Beltran. Published articles only.</description>
     <language>en-ph</language>
+  <item>
+    <title>TypeScript Interview Questions, With the Reasoning</title>
+    <link>https://albeltran.com/interviews/typescript-interview-questions/</link>
+    <guid>https://albeltran.com/interviews/typescript-interview-questions/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Types at boundaries, narrowing, generics, and the questions that separate autocomplete from design.</description>
+  </item>
+  <item>
+    <title>TypeScript as an API Contract, Not a Costume</title>
+    <link>https://albeltran.com/blog/typescript-api-contracts/</link>
+    <guid>https://albeltran.com/blog/typescript-api-contracts/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Share types across producer and consumer, validate at the edge, and stop trusting JSON because it compiled once.</description>
+  </item>
+  <item>
+    <title>System Design Interview Questions, With the Reasoning</title>
+    <link>https://albeltran.com/interviews/system-design-interview-questions/</link>
+    <guid>https://albeltran.com/interviews/system-design-interview-questions/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>A small set of design prompts with the tradeoffs interviewers listen for — not a 50-box diagram.</description>
+  </item>
+  <item>
+    <title>SQL Interview Questions, With the Reasoning</title>
+    <link>https://albeltran.com/interviews/sql-interview-questions/</link>
+    <guid>https://albeltran.com/interviews/sql-interview-questions/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Joins, indexes, NULL, and transactions — answered the way a production engineer talks about plans.</description>
+  </item>
+  <item>
+    <title>React Interview Questions, With the Reasoning</title>
+    <link>https://albeltran.com/interviews/react-interview-questions/</link>
+    <guid>https://albeltran.com/interviews/react-interview-questions/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>A compact React interview set: hooks, rendering, state, and architecture — with what interviewers are actually scoring.</description>
+  </item>
+  <item>
+    <title>A Mental Model for React Hooks That Survives Production</title>
+    <link>https://albeltran.com/blog/react-hooks-mental-model/</link>
+    <guid>https://albeltran.com/blog/react-hooks-mental-model/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Treat hooks as subscriptions to render, not lifecycle methods with new names. The model that prevents stale state and mystery effects.</description>
+  </item>
+  <item>
+    <title>Node.js Interview Questions, With the Reasoning</title>
+    <link>https://albeltran.com/interviews/nodejs-interview-questions/</link>
+    <guid>https://albeltran.com/interviews/nodejs-interview-questions/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>The event loop, errors, streams, and production habits — not a list of module names.</description>
+  </item>
+  <item>
+    <title>AWS Lambda Failure Modes You Should Budget For</title>
+    <link>https://albeltran.com/blog/lambda-failure-modes/</link>
+    <guid>https://albeltran.com/blog/lambda-failure-modes/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Timeouts, retries, partial batch failure, and the handler that is not idempotent.</description>
+  </item>
+  <item>
+    <title>JavaScript Interview Questions, With the Reasoning</title>
+    <link>https://albeltran.com/interviews/javascript-interview-questions/</link>
+    <guid>https://albeltran.com/interviews/javascript-interview-questions/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Closures, the event loop, equality, and this — explained as runtime behavior, not trivia.</description>
+  </item>
+  <item>
+    <title>The AEM Author–Developer Contract</title>
+    <link>https://albeltran.com/blog/aem-author-developer-contract/</link>
+    <guid>https://albeltran.com/blog/aem-author-developer-contract/</guid>
+    <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
+    <description>A component is successful when an author can use it without a Slack thread. Dialogs, names, and defaults are the product.</description>
+  </item>
   <item>
     <title>When the GPU Vendor Owns the Model Hub</title>
     <link>https://albeltran.com/blog/chip-vendor-model-hub/</link>

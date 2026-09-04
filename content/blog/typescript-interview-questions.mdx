@@ -1,0 +1,154 @@
+---
+title: "TypeScript Interview Questions, With the Reasoning"
+description: "Types at boundaries, narrowing, generics, and the questions that separate autocomplete from design."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Interview Lab"
+kind: interview
+tags: ["typescript", "interviews"]
+takeaways:
+  - "TypeScript interviews score whether you treat types as design at the edge, not as decoration on working JavaScript."
+  - "unknown, never, and generics are useful when you can show a decision they force."
+  - "A strong answer admits what the type checker cannot see: the network, the database, and time."
+---
+
+TypeScript interviews go badly when they become a quiz of utility type names. They go well when you can **place a type on a boundary** and explain what happens when the value is wrong.
+
+Read with [TypeScript as an API contract](/blog/typescript-api-contracts/). Runtime questions that are not about types are in [JavaScript interview questions](/interviews/javascript-interview-questions/).
+
+## What interviewers are actually evaluating
+
+- Can you model a real payload, including the ugly unions?
+- Do you know the difference between a compile-time guarantee and a runtime check?
+- Can you read an error and change the design, not add `as any`?
+- Do you keep types out of the way of the domain once the edge is safe?
+
+A candidate who can write `Partial<T>` but cannot explain why `offset` and `limit` should not both be optional on a public query is not ready to own an API.
+
+## Beginner
+
+### What do `interface` and `type` each do well?
+
+**A strong answer:** Both describe object shapes. `interface` can merge (declaration merging) and is the usual choice for public object contracts. `type` aliases can name unions, tuples, and mapped types. In application code, pick one style for objects and do not debate it in a PR. In library `.d.ts` files, merging matters.
+
+**What they are scoring:** Judgment, not a holy war.
+
+**Follow-up:** When does declaration merging surprise you? Augmenting a third-party module you do not control — do it on purpose or not at all.
+
+### Why is `any` a problem if the code "still works"?
+
+**A strong answer:** `any` turns off checking for that value **and** anything derived from it. A single `any` at a `fetch` response can poison a whole feature. `unknown` is the honest type for "I have a value I have not inspected."
+
+**What they are scoring:** Whether you treat the checker as optional.
+
+**Follow-up:** How do you migrate a file full of `any`? Start at the I/O boundary and walk inward. Do not sprinkle `unknown` in helpers that already have a domain type.
+
+### What is narrowing?
+
+**A strong answer:** Control flow that makes a union smaller: `typeof`, `in`, equality checks, `instanceof`, and custom predicates (`value is Foo`). After `if (res.status === "ok")`, TypeScript should know `res.value` exists if you modeled the union that way.
+
+```ts
+type Result = { ok: true; value: string } | { ok: false; error: string };
+
+function unwrap(result: Result): string {
+  if (result.ok) return result.value;
+  throw new Error(result.error);
+}
+```
+
+**What they are scoring:** Discriminated unions — the workhorse of API types.
+
+**Follow-up:** What happens if you use `error?: string` on a single object instead? You lose exhaustiveness. Both fields can be present. The union is the design.
+
+## Intermediate
+
+### Explain `unknown` versus `never`.
+
+**A strong answer:** `unknown` is "could be anything; you must narrow." `never` is "this should not exist." A `switch` that returns `never` in the exhaustiveness check proves you handled every variant. A function that always throws can return `never`.
+
+**What they are scoring:** You are not mixing them up with `any` and `void`.
+
+**Follow-up:** Where does `never` appear in `Array.filter`? It does not, unless you write a predicate wrong. People confuse this with `strictNullChecks`.
+
+### When do you write a generic, and when do you just use a union?
+
+**A strong answer:** A generic **relates** two types: the input element and the output element, or the key and the picked object. If there is no relationship, a union or a concrete type is clearer. `function wrap<T>(value: T): T` is a generic. `function handle(event: Click | Submit)` is a union.
+
+```ts
+function pick<T, K extends keyof T>(object: T, keys: K[]): Pick<T, K> {
+  const result = {} as Pick<T, K>;
+  for (const key of keys) result[key] = object[key];
+  return result;
+}
+```
+
+**What they are scoring:** Generics as constraints, not as "I used a T."
+
+**Follow-up:** Why `K extends keyof T`? So callers cannot pick a key the object does not have.
+
+### How do you type `JSON.parse`?
+
+**A strong answer:** `JSON.parse` returns `any` in the default lib. That is a historical hole. Treat the result as `unknown` and parse it with a schema or a type guard. Do not `as MyType` unless you are in a test fixture you control.
+
+**What they are scoring:** Boundary honesty. This is the same lesson as the [API contract note](/blog/typescript-api-contracts/).
+
+**Follow-up:** Would you use Zod in the browser? Yes for forms and client-persisted state. No for every inner function.
+
+## Senior
+
+### How do you version types when two services deploy independently?
+
+**A strong answer:** The type package version is not the wire version. You need a protocol version (URL, header, or event name), additive changes first, and a runtime parser that can fail closed. Generating types from OpenAPI is useful if CI breaks on drift. Sharing a Git submodule of interfaces with no parser is how "it compiled on my machine" ships a outage.
+
+**What they are scoring:** Distributed systems, not `tsc`.
+
+**Follow-up:** What is a branded type good for? Distinguishing `UserId` from `string` inside one process. It does not validate the wire.
+
+### Variance — why can't you assign `List<Dog>` to `List<Animal>` when writing?
+
+**A strong answer (practical, not academic):** If the list lets you `.push`, a `List<Animal>` might receive a `Cat`. Callers who thought they had only dogs are wrong. That is why mutable containers are invariant. Readonly arrays are safer to widen. In TypeScript, function parameter types are checked more strictly under `--strictFunctionTypes`.
+
+You do not need the word "contravariant" if you can explain the `push` problem.
+
+**What they are scoring:** Whether you can reason about mutability and safety.
+
+**Follow-up:** How does this show up in React `setState`? Callback props that take a narrower event can be painful. Don't fight it with `any`. Adjust the prop type.
+
+### What belongs in the type system versus tests versus runtime checks?
+
+**A strong answer:** Types: shape, nullability, forbidden states via unions. Runtime: untrusted input, feature flags, environment. Tests: examples the checker cannot see (time, concurrency, the real HTTP fixture). Trying to encode every business rule in types produces unreadable conditional types and still misses fraud.
+
+**What they are scoring:** Taste. Staff engineers leave some checks in tests on purpose.
+
+## Practical and scenario
+
+### A teammate added `// @ts-expect-error` on a line that is now valid. What do you do?
+
+**A strong answer:** `ts-expect-error` fails if the next line is *not* an error. If the code became valid, the comment is now a compile error — delete it. If they used `@ts-ignore`, the suppression can hide a new bug forever. Prefer `expect-error` with a one-line reason.
+
+**What they are scoring:** Tooling hygiene.
+
+### The API returns `{ data: T } | { error: string }` but sometimes both keys. How do you model it?
+
+**A strong answer:** Do not model the wish. Model the mess at the edge (`unknown` + parse), then map to a clean discriminated union internally. If you own the API, fix the payload. If you do not, a parser that rejects the illegal shape is better than a type that pretends it cannot happen.
+
+**What they are scoring:** You did not "fix" it with optional fields on one object.
+
+## Architecture
+
+### Where should shared types live in a full-stack TypeScript repo?
+
+**A strong answer:** A `contracts` (or generated) package used by server parsers and client SDK. Domain types that include behavior stay in the service. UI props stay in the UI. Do not import server-only modules into the client to "reuse a type" if that pulls in Node APIs. Duplicate a 5-field DTO before you create a circular package graph.
+
+**What they are scoring:** Repo design. Related: [TypeScript won the integration layer](/blog/typescript-won-the-integration-layer/).
+
+**Follow-up:** How do Java and PHP services participate? JSON Schema or OpenAPI as the source, not a `.ts` file they cannot compile.
+
+## Common mistakes in TypeScript interviews
+
+- Claiming TypeScript is a security control. It is not.
+- Using `enum` by default. Union of string literals is usually enough and serializes cleanly.
+- Writing 40-line inferred types in the function signature because you would not name the alias.
+- Saying "we use any in tests" as if tests were not the place types catch fixture drift.
+
+The best closer: **"I would parse this at the edge and keep the domain boring."** That sentence is the job.

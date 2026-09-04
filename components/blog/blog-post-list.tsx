@@ -24,7 +24,7 @@ export function BlogPostList({
         <li key={post.slug}>
           <article className="grid gap-6 py-8 sm:grid-cols-[13.5rem_minmax(0,1fr)] sm:items-start">
             <Link
-              href={`/blog/${post.slug}/`}
+              href={post.href}
               className="block"
               data-cursor="→"
             >
@@ -45,7 +45,7 @@ export function BlogPostList({
               </div>
               <h2 className="text-2xl font-semibold tracking-tight text-foreground">
                 <Link
-                  href={`/blog/${post.slug}/`}
+                  href={post.href}
                   className="hover:text-accent"
                   data-cursor="→"
                 >

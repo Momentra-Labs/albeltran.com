@@ -274,8 +274,18 @@ export default function AboutPage() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/author/al-beltran/" className="text-accent hover:underline">
+                    Author page
+                  </Link>
+                </li>
+                <li>
                   <Link href="/blog/" className="text-accent hover:underline">
-                    Engineering blog
+                    Engineering journal
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/interviews/" className="text-accent hover:underline">
+                    Interview Lab
                   </Link>
                 </li>
                 <li>

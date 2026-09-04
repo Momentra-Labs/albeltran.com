@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import readingTime from "reading-time";
+import { articleHref } from "@/content/journal";
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
 
@@ -15,10 +16,13 @@ export type BlogFrontmatter = {
   image?: string;
   imageAlt?: string;
   draft?: boolean;
+  kind?: "article" | "interview";
+  takeaways?: string[];
 };
 
 export type BlogPost = BlogFrontmatter & {
   slug: string;
+  href: string;
   content: string;
   readingTime: string;
   readingMinutes: number;
@@ -47,6 +51,7 @@ export function getPostBySlug(slug: string): BlogPost {
 
   return {
     slug,
+    href: articleHref(slug),
     content,
     title: frontmatter.title,
     description: frontmatter.description,
@@ -57,6 +62,8 @@ export function getPostBySlug(slug: string): BlogPost {
     image: frontmatter.image,
     imageAlt: frontmatter.imageAlt,
     draft: frontmatter.draft ?? false,
+    kind: frontmatter.kind,
+    takeaways: frontmatter.takeaways,
     readingTime: stats.text,
     readingMinutes: Math.ceil(stats.minutes),
   };

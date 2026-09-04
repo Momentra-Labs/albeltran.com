@@ -1,0 +1,136 @@
+---
+title: "System Design Interview Questions, With the Reasoning"
+description: "A small set of design prompts with the tradeoffs interviewers listen for — not a 50-box diagram."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Interview Lab"
+kind: interview
+tags: ["system-design", "interviews"]
+takeaways:
+  - "System design interviews score how you bound the problem, pick a bottleneck, and name what you are willing to break."
+  - "A strong answer is a conversation: requirements, a simple path, then one scale axis."
+  - "Diagrams without numbers are decoration. Numbers without a failure mode are fiction."
+---
+
+System design interviews fail when they become a product pitch or a cloud logo collage. They work when you and the interviewer **agree on a bottleneck** and design around it.
+
+This set is compact on purpose. Deeper notes on this site include [Idempotency keys](/blog/idempotency-keys-are-the-contract/), [Observability without SLOs](/blog/observability-without-slos/), and [Rate limits are product design](/blog/rate-limits-are-product-design/).
+
+## What interviewers are actually evaluating
+
+- Do you **clarify** users, writes, reads, and what "down" means before you draw?
+- Can you keep a **simple path** that would work at 1% of scale, then change one piece?
+- Do you name **consistency, latency, and cost** as tradeoffs, not as vibes?
+- Do you leave time for failure: retries, poison messages, hot keys, operator story?
+
+They are not scoring whether you remembered the exact default of a managed queue. They are scoring whether you would be safe in a design review on Monday.
+
+A 50-box diagram in 35 minutes is a smell. A sequence of "we will start with one database, and here is the first split" is the job.
+
+## Beginner
+
+### How do you start any design prompt?
+
+**A strong answer:** Users and use cases. Read/write ratio. Size of objects. Latency target. Consistency ("can a user see their own write?"). Traffic peak versus average. What we will not build (search, admin, ML). Repeat the constraints back.
+
+**What they are scoring:** You do not invent a social network when they asked for a URL shortener.
+
+**Follow-up:** What if the interviewer is vague? Propose reasonable numbers and ask them to correct you. Silence is worse.
+
+### URL shortener — what is actually hard?
+
+**A strong answer:** The write path is easy (generate an id, store a mapping). The hard parts are **collision policy**, **hot keys** on popular links, **redirect latency**, and **abuse**. A single table `(code, url, created_at)` plus a cache on the read path is enough to start. Encoding a counter versus hashing: counters need a generator; hashes need collision handling.
+
+**What they are scoring:** You did not start with Kafka.
+
+**Follow-up:** How do you delete or expire? TTL and a background job, or `expires_at` checked on read. GDPR-style delete is a product requirement, not a cache flush.
+
+### Why is a load balancer not a design?
+
+**A strong answer:** It is a box you will almost certainly have. The design is **what is behind it**, how sessions work (or do not), and how you deploy without dropping in-flight requests. Saying "ALB" does not explain the application.
+
+**What they are scoring:** Substance over brand.
+
+## Intermediate
+
+### Design a feed. Where do you push versus pull?
+
+**A strong answer:** Pull (read fan-out) is simpler: query follow graph + posts at read time. It hurts celebrities (huge graphs) and makes ranking heavier per request. Push (write fan-out) precomputes timelines; writes get expensive and storage multiplies. Hybrids push for normal users and pull for celebrities. State the follow-graph size before you pick.
+
+**What they are scoring:** You know this is a **fan-out** problem.
+
+**Follow-up:** Where does ranking live? If it is cheap, on read. If it is a model, async and cached. Do not pretend you will run a 200ms model on every scroll.
+
+### How do you design uploads of large files?
+
+**A strong answer:** Client to object storage with a signed URL. Metadata in the database. Virus scan and processing as async jobs. Do not stream 2 GB through the app server. Completion is an event; the UI polls or subscribes. Failure means a partial object and a row that says "incomplete."
+
+**What they are scoring:** You kept the API server off the byte path.
+
+**Follow-up:** How do you prevent the signed URL from becoming a public bucket? Short TTL, content-type constraints, and never a world-writable prefix.
+
+### Rate limiting — what are you protecting?
+
+**A strong answer:** The expensive resource: login, search, SMS, a downstream quota. Token bucket or sliding window per key (ip + user + route). Return 429 with a retry hint. Limits are a **product** decision (who gets headroom). See [Rate limits are product design](/blog/rate-limits-are-product-design/).
+
+**What they are scoring:** You named the key and the fail mode (false positives on NAT).
+
+**Follow-up:** Global versus per-node counters? Per-node is approximate and cheap. Global needs Redis or the edge. Say which accuracy you need.
+
+## Senior
+
+### Exactly-once delivery across two systems — what do you actually promise?
+
+**A strong answer:** You promise **effectively once** at the business layer: an idempotency key, a unique constraint, and a stored outcome. Networks deliver at-least-once. "Exactly-once" as a transport slogan is how teams skip the table. Walk a double-click and a timeout. See [Idempotency keys](/blog/idempotency-keys-are-the-contract/) and [Lambda failure modes](/blog/lambda-failure-modes/).
+
+**What they are scoring:** Intellectual honesty.
+
+**Follow-up:** Outbox versus dual write? Outbox if losing a publish is worse than extra moving parts.
+
+### How do you add a search box to a system that was CRUD?
+
+**A strong answer:** You do not put `LIKE '%term%'` on the primary when it is a product feature. An index (Postgres FTS, OpenSearch, etc.) updated asynchronously. Accept delay. Define relevance poorly at first and measure. The primary stays the source of truth.
+
+**What they are scoring:** You did not put Elasticsearch in front of checkout.
+
+**Follow-up:** What if search must be transactional with the write? Then you are in a harder product. Say no, or use the primary's FTS for a while.
+
+### You have a hot partition. What now?
+
+**A strong answer:** Name why it is hot (one tenant, one celebrity key, one time bucket). Split the key (hash suffix, time shards), cache the read, or isolate the tenant. Throwing replicas at a single hot row does not help if they all hit the same page.
+
+**What they are scoring:** You have seen skewed traffic.
+
+## Practical and scenario
+
+### The interviewer says "design Twitter." You have 40 minutes. What do you cut?
+
+**A strong answer:** One core loop: post and read a home timeline for a typical user. Skip DMs, ads, live video, and the full recommendation stack unless they insist. Write numbers for QPS and storage. Draw the simple path, then celebrity fan-out as the extension.
+
+**What they are scoring:** Scope control. This is a senior skill.
+
+### An incident: p99 is fine, a few customers are on fire. What did the design miss?
+
+**A strong answer:** Averages hide tenants. You need per-tenant SLOs, isolation, and a way to shed load for one customer without a global brownout. Observability that only has global RPS is how this happens. See [Observability without SLOs](/blog/observability-without-slos/).
+
+**What they are scoring:** Multi-tenant thinking.
+
+## Architecture
+
+### When is event-driven the wrong default?
+
+**A strong answer:** When the user is waiting on the result of the next step, when the team cannot operate a bus, or when you turned a function call into a mystery. Events are excellent for fan-out and decoupling write models. They are expensive for "then show the confirmation on the same request" unless you hide the async well. Related: [Event sourcing without religion](/blog/event-sourcing-without-religion/) and [Event-driven loyalty](/blog/event-driven-loyalty/).
+
+**What they are scoring:** Taste.
+
+**Follow-up:** How do you document the design? A sequence diagram for the happy path and one for retry. Not a mural.
+
+## Common mistakes in system design interviews
+
+- Starting with microservices for a team of four.
+- Using every AWS service you can remember.
+- Never asking about data size.
+- Treating CAP as a personality test instead of a specific failure (partition + this write).
+- Forgetting the operator: how do we replay, how do we block a bad actor, how do we migrate the schema?
+
+The sentence that saves most interviews: **"Here is the simplest system that meets the stated numbers. Here is the first thing I would split when this number moves."** That is design. The rest is boxes.

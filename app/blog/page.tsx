@@ -3,63 +3,72 @@ import { Container } from "@/components/shared/container";
 import { BlogIndex } from "@/components/blog/blog-index";
 import { BlogPostList } from "@/components/blog/blog-post-list";
 import { JsonLd } from "@/components/shared/json-ld";
-import { getAllCategories, getAllPosts, getAllTags } from "@/lib/mdx";
+import { JournalNav } from "@/components/journal/journal-nav";
+import { listPublishedNotes } from "@/lib/journal";
 import { person } from "@/content/person";
 import {
   blogItemListSchema,
   breadcrumbSchema,
+  collectionPageSchema,
   graphSchema,
   personSchema,
-  webPageSchema,
+  websiteSchema,
 } from "@/lib/schema";
 import { SITE_URL } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Blog",
-  description: `Engineering articles by ${person.name} on event-driven architecture, AEM, performance, serverless ETL, and AI-augmented workflows.`,
+  title: "Engineering Journal",
+  description: `Al Beltran's engineering journal — production notes on React, TypeScript, Node.js, Java, Laravel, SQL, AWS, AEM, and system design. Written by ${person.name}.`,
   path: "/blog/",
 });
 
 export default function BlogPage() {
-  const posts = getAllPosts();
-  const categories = getAllCategories();
-  const tags = getAllTags();
+  const posts = listPublishedNotes();
+  const categories = [...new Set(posts.map((post) => post.category))].sort();
+  const tags = [...new Set(posts.flatMap((post) => post.tags))].sort();
 
   const schema = graphSchema([
+    websiteSchema(),
     personSchema(),
-    webPageSchema({
+    collectionPageSchema({
       path: "/blog/",
-      name: `Blog · ${person.shortName}`,
-      description: `Engineering blog by ${person.name}.`,
+      name: `Engineering Journal · ${person.shortName}`,
+      description: `Engineering journal by ${person.name}.`,
     }),
     breadcrumbSchema([
       { name: "Home", path: "/" },
-      { name: "Blog", path: "/blog/" },
+      { name: "Journal", path: "/blog/" },
     ]),
     {
       "@type": "Blog",
       "@id": `${SITE_URL}/blog/#blog`,
-      name: `${person.shortName} Blog`,
+      name: `${person.shortName}'s Engineering Journal`,
       url: `${SITE_URL}/blog/`,
       author: { "@id": `${SITE_URL}/#person` },
+      publisher: { "@id": `${SITE_URL}/#person` },
     },
-    blogItemListSchema(posts),
+    blogItemListSchema(posts, {
+      name: "Published engineering notes by Al Beltran",
+    }),
   ]);
 
   return (
     <>
       <JsonLd data={schema} />
       <PageHeader
-        label="Blog"
+        label="Engineering Journal"
         title="Notes on systems that have to work in production"
-        description="Searchable articles with categories, tags, and estimated reading time. Written to be useful to engineers and understandable to AI retrieval systems."
+        description="A reviewable knowledge base beside the portfolio. Published notes only. Interview prep lives in the Interview Lab. Planned titles stay in the topic map until they are written."
         breadcrumbs={[
           { name: "Home", href: "/" },
-          { name: "Blog" },
+          { name: "Journal" },
         ]}
       />
       <Container className="py-16">
+        <div className="mb-10">
+          <JournalNav current="/blog/" />
+        </div>
         <BlogIndex posts={posts} categories={categories} tags={tags}>
           <BlogPostList posts={posts} />
         </BlogIndex>

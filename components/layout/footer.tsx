@@ -45,7 +45,16 @@ export function Footer() {
             Email
           </a>
           <Link href="/blog/" data-cursor="→" className="hover:text-foreground">
-            Blog
+            Journal
+          </Link>
+          <Link href="/topics/" data-cursor="→" className="hover:text-foreground">
+            Topics
+          </Link>
+          <Link href="/interviews/" data-cursor="→" className="hover:text-foreground">
+            Interviews
+          </Link>
+          <Link href="/author/al-beltran/" data-cursor="→" className="hover:text-foreground">
+            Author
           </Link>
           <Link href="/resume/" data-cursor="→" className="hover:text-foreground">
             Resume

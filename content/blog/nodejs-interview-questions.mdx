@@ -1,0 +1,138 @@
+---
+title: "Node.js Interview Questions, With the Reasoning"
+description: "The event loop, errors, streams, and production habits — not a list of module names."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Interview Lab"
+kind: interview
+tags: ["nodejs", "interviews"]
+takeaways:
+  - "Node interviews score I/O, errors, and backpressure — not whether you can name twenty core modules."
+  - "Unhandled rejections and swallowed callback errors are still how services die quietly."
+  - "A strong answer ties the event loop to a production failure: a blocked thread, a piled queue, a retry storm."
+---
+
+Node interviews should feel like operating a service, not listing `fs` methods. The language underneath is in [JavaScript interview questions](/interviews/javascript-interview-questions/). Failure modes that show up in AWS are in [Lambda failure modes](/blog/lambda-failure-modes/).
+
+## What interviewers are actually evaluating
+
+- Can you keep the event loop **free enough** to stay healthy?
+- Do you know how errors propagate in callbacks, promises, and streams?
+- Can you design an HTTP handler that validates, times out, and does not leak?
+- Do you understand that "async" is not "fast"?
+
+A candidate who recites the event loop phases but cannot explain why a synchronous `JSON.parse` of a 20 MB body is an incident is not ready.
+
+## Beginner
+
+### What is the event loop doing in a Node HTTP server?
+
+**A strong answer:** The main thread runs JavaScript. I/O is initiated and completed through libuv. When a socket has data or a timer fires, a callback is queued. If your handler runs CPU work for 80ms, you have delayed every other connection on that thread. Clustering or extra processes add more loops; they do not make a blocking handler cheap.
+
+**What they are scoring:** Single-threaded JS plus I/O offload — stated without mythology.
+
+**Follow-up:** What goes to the thread pool? Certain fs, crypto, and DNS operations. Your `while (true)` loop does not.
+
+### Error-first callbacks versus promises — what still matters?
+
+**A strong answer:** Legacy APIs pass `(err, value)`. Forgetting to handle `err` is a silent success path. Promises reject; `async` functions return promises. Mixing them without wrapping (`fs.promises`, `util.promisify`) is how you lose an error. In 2026, prefer promises at the application boundary and wrap the rest.
+
+**What they are scoring:** You will not ship a callback that ignores `err`.
+
+**Follow-up:** What does `throw` inside an async function do? Rejects the promise. What about `throw` inside a plain event emitter callback? It can crash the process if nothing listens for `error`.
+
+### How do you read environment configuration without lying to the process?
+
+**A strong answer:** Parse `process.env` once at boot into a typed object. Fail fast if a required secret is missing. Do not scatter `process.env.FOO!` through request handlers. Distinguish "missing in production" from "default for local."
+
+**What they are scoring:** Operability.
+
+**Follow-up:** Why not put secrets in the image? Rotation, leaks in registries, and the next intern's laptop. Use the platform secret store.
+
+## Intermediate
+
+### What is backpressure, and where do you feel it?
+
+**A strong answer:** A producer faster than a consumer. In streams, `pipe` and `pipeline` handle pause/resume. If you `await readable.toArray()` on an unbounded upload, you have chosen to buffer. HTTP response streams to a slow client must not queue the whole file in memory.
+
+```js
+import { pipeline } from "node:stream/promises";
+import { createReadStream } from "node:fs";
+
+await pipeline(createReadStream(path), res);
+```
+
+**What they are scoring:** Memory as a function of traffic.
+
+**Follow-up:** Why is `res.json(huge)` a smell? It serializes and buffers. Stream or paginate.
+
+### `process.on("unhandledRejection")` — what is the production policy?
+
+**A strong answer:** An unhandled rejection is a bug. In modern Node, the default is to crash, which is correct for most services: you want the orchestrator to restart a bad state. Logging and continuing is how you run for weeks with a half-dead connection pool. If you catch at the HTTP layer, return 500 and keep going. Do not swallow in a global handler and call it resilience.
+
+**What they are scoring:** Failure philosophy.
+
+**Follow-up:** What about `uncaughtException`? The process is already in an unknown state. Log and exit. Do not resume.
+
+### How do you time out an outbound HTTP call?
+
+**A strong answer:** Use a client that supports abort (`AbortSignal.timeout`, or a wrapper). Timeouts must be **shorter than the caller's** timeout. Retry only when the method is idempotent. A hung socket without a timeout is a leaked concurrency slot.
+
+**What they are scoring:** You have been in a waiting-on-vendor incident.
+
+**Follow-up:** Retry-After and jitter? Yes for 429/503. No for 400.
+
+## Senior
+
+### A Node service's latency p99 explodes but CPU is 30%. What do you look at?
+
+**A strong answer:** Event loop delay (blocked JS, giant GC, sync fs). Downstream wait — you are idle on CPU because you are waiting. Connection pool exhaustion. Lock contention in Redis/Postgres. Too much logging of large objects. "Add more instances" is a last resort after you know which queue is building.
+
+**What they are scoring:** You did not say "Node is slow."
+
+**Follow-up:** How do you measure loop delay? `perf_hooks.monitorEventLoopDelay` or an APM. Not feelings.
+
+### When do you split a Node process versus stay in one?
+
+**A strong answer:** Split when blast radius, scaling axis, or language needs differ (CPU worker, separate deploy cadence, different secrets). Stay together when the split would be a network hop for a 2ms function call and a distributed transaction you cannot afford. Related: [Platform engineering is not a portal](/blog/platform-engineering-is-not-a-portal/) for the "we need a mesh" temptation.
+
+**What they are scoring:** Service boundaries, not resume keywords.
+
+### How do you handle graceful shutdown?
+
+**A strong answer:** Stop accepting new connections (`server.close`), finish in-flight requests with a deadline, close pools, then `process.exit`. Kubernetes will send SIGTERM. If you ignore it, you get SIGKILL and dropped work. For queues, visibility timeout and idempotency matter more than a polite goodbye.
+
+**What they are scoring:** You have read a runbook.
+
+## Practical and scenario
+
+### The handler works locally and hangs on Lambda. What is different?
+
+**A strong answer:** The process is frozen between invokes. You may have a leftover timer, an open connection that is stale, or a callback you never invoked so the runtime waits until timeout. Return a promise and let it settle. Do not depend on `process.on("beforeExit")` as your transaction commit. See [Lambda failure modes](/blog/lambda-failure-modes/).
+
+**What they are scoring:** Runtime differences.
+
+### You need to process a 2 GB file. What API do you not use?
+
+**A strong answer:** `fs.readFile` / `readFileSync`. Use streams, or process in the object store in parts. Node can stream; your RAM cannot pretend to be a disk.
+
+**What they are scoring:** Basic I/O judgment.
+
+## Architecture
+
+### How would you structure a Node API that also publishes events?
+
+**A strong answer:** HTTP handler validates and authorizes, writes the source of truth in a transaction, then publishes (outbox if you cannot lose the event). Do not "fire and forget" a Kafka send before the commit. Keep publishers behind an interface so tests do not need a broker. Idempotency keys on the command. This is the same shape as loyalty-style event work described in [Idempotency keys](/blog/idempotency-keys-are-the-contract/) and [Event-driven loyalty](/blog/event-driven-loyalty/).
+
+**What they are scoring:** Consistency, not Express folder trivia.
+
+**Follow-up:** Why might you choose Java or Go for the writer? Team skill, transaction needs, or CPU. Not because Node "isn't backend."
+
+## Common mistakes in Node interviews
+
+- Treating Express middleware order as architecture.
+- Saying "Node is non-blocking" while calling `readFileSync` in a request.
+- Clustering as the first answer to a lock in Redis.
+- Ignoring `npm` supply chain: pin, audit, and do not run postinstall from strangers. Related: [Supply chain security is runtime](/blog/supply-chain-security-is-runtime/).
+
+Practice describing **one incident**: what blocked, what queued, what you changed. That story beats a list of modules.

@@ -1,0 +1,105 @@
+---
+title: "The AEM Author–Developer Contract"
+description: "A component is successful when an author can use it without a Slack thread. Dialogs, names, and defaults are the product."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "AEM"
+kind: article
+tags: ["aem", "authoring"]
+takeaways:
+  - "The dialog is the API. Field names, defaults, and validation are the contract with authors."
+  - "Name components after the authoring job, not the React tree."
+  - "A flexible component that needs a wiki is slower than a narrower one with a clear purpose."
+  - "Policy and template design decide whether a page stays governable as teams scale."
+---
+
+On an Adobe Experience Manager program, developers do not ship "a React component." They ship a **thing an author will configure a hundred times a week**. If that thing needs a Slack thread, the component is unfinished — even if the markup is clean.
+
+This note is the author–developer contract. Implementation patterns for reuse are in [Reusable AEM components](/blog/aem-reusable-components/).
+
+## Authors are the users
+
+Developers see a Sling model and a HTL file. Authors see a dialog, a component title in the side rail, and whatever appears on the page after they press Done.
+
+The contract is:
+
+1. **Intent** — what this component is for, in one sentence the author would say.
+2. **Fields** — only the decisions the author must make. Everything else is a default or a policy.
+3. **Failure** — empty states, missing assets, and unpublished references must look intentional, not like a broken page.
+4. **Change** — if you rename a dialog field, existing content does not silently drop a heading.
+
+If you cannot write the intent without saying "flexible" or "generic," you do not have a component yet. You have a junk drawer.
+
+## Dialogs are APIs
+
+Treat `cq:dialog` the way you treat an HTTP schema.
+
+- Labels say what the field **does on the page**, not the property name (`./heading` is not a label).
+- Help text is for the one rule authors cannot see (character limits, required CTA pairing, which image rendition is used).
+- Defaults should produce a publishable block. A component that renders nothing until six fields are filled will be copied from a "working" page and mutated, which is how content drift starts.
+- Validation belongs in the dialog when the mistake is cheap to catch there. Do not wait for a dispatcher cache to show a missing alt attribute.
+
+```xml
+<heading
+  jcr:primaryType="nt:unstructured"
+  sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+  fieldLabel="Heading"
+  fieldDescription="Shown as the block title. Keep it under 80 characters."
+  name="./heading"
+  required="{Boolean}true"/>
+```
+
+The property name is an implementation detail. The label and description are the product.
+
+When a field is only there because a developer wanted a hook "just in case," delete it. Optional complexity is paid for by every author, forever.
+
+## Names that survive a redesign
+
+Call the component `Promo teaser` or `Course syllabus`, not `GenericCardV3`. Authors search the rail by job. Designers change visuals. The job stays.
+
+The same rule applies to template types and experience fragments. If two teams need the same block, they need a **shared name and a shared dialog**, not a copy in each app folder that diverged in week three.
+
+On Disney Institute platform work, reusable components mattered because multiple teams authored for a global professional audience. Consistency was not a style preference. It was the delivery requirement. The case study is [Disney Institute Platform](/projects/disney-institute/).
+
+## Common mistakes
+
+- Shipping a "layout container" that accepts any child, then wondering why pages cannot be redesigned without a content migration.
+- Putting business logic in HTL because "it is only one if." The next if will be a campaign exception that only one author knows.
+- Changing a resource type without a compatibility plan. Old pages keep the old type. You now have two components and a support queue.
+- Documenting the component in Confluence and never in the dialog. Authors do not read Confluence at 5 p.m. on a publish deadline.
+
+## Interview questions this note answers
+
+**What is the difference between a template and a component?** A template (and its policies) decides what may be placed and what is locked. A component is a placeable unit with its own dialog.
+
+**Why do editable templates have policies?** So design and engineering can constrain options without a code deploy for every new page type.
+
+**When should something be an experience fragment?** When the same authored content must appear in multiple places and be updated once — not when a developer wants to reuse markup.
+
+## Senior-level considerations
+
+At program scale, the contract includes **governance**: who may create templates, who may add components to a policy, and how a breaking dialog change is rolled out. Without that, every squad forks the library.
+
+Dispatcher cache keys, vanity URLs, and "the page looks different on publish" are also part of the contract. Authors do not distinguish "author preview" from "CDN." If preview lies, they stop trusting the platform.
+
+AEM work on this site also includes National Geographic enterprise delivery via Myridius. The authoring constraints were the same shape: many authors, long-lived content, little patience for tribal knowledge. See [National Geographic](/projects/national-geographic/).
+
+## Performance considerations
+
+Authors feel performance as dialog load time and page editor lag, not as Lighthouse. Huge dialogs with a dozen tabs, clientlibs on every field, and unoptimized preview HTML will get the component disabled in favor of a text component and an embedded HTML field — the worst outcome.
+
+On publish, unused optional features still cost if they pull clientlibs. Feature-flag in the dialog, not with a hidden div that still ships JavaScript.
+
+## Security considerations
+
+Rich text and "embed HTML" fields are XSS surfaces. If a component allows raw markup, that is a trust decision, not a convenience. Restrict the RTE, sanitize on publish, and keep admin-only components out of the default policy.
+
+## When to use this contract
+
+Any AEM component that non-engineers will configure. Any template more than one team will inherit.
+
+## When not to use it
+
+Do not invent a 40-field dialog for a one-off campaign page that will be unpublished in two weeks. A locked template and a single experience fragment can be the honest design.
+
+Related planned notes (not published yet): AEM dialogs, editable templates, and dispatcher caching — listed on the [AEM topic page](/topics/aem/).

@@ -1,0 +1,157 @@
+---
+title: "React Interview Questions, With the Reasoning"
+description: "A compact React interview set: hooks, rendering, state, and architecture — with what interviewers are actually scoring."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Interview Lab"
+kind: interview
+tags: ["react", "interviews", "hooks"]
+takeaways:
+  - "Interviewers score the model: render snapshots, ownership of state, and when work belongs in an event versus an effect."
+  - "A strong answer names a tradeoff and a follow-up you would measure, not a list of hook APIs."
+  - "Senior questions are about boundaries: server data, client interaction, and what re-renders when a value changes."
+---
+
+This set is for engineers preparing a React interview and for interviewers who want signal instead of trivia. It is not 100 questions. It is a scored loop: **model → example → tradeoff → follow-up**.
+
+The companion note is [A mental model for React hooks](/blog/react-hooks-mental-model/).
+
+## What interviewers are actually evaluating
+
+They are not grading whether you memorized the `useEffect` dependency table. They are listening for:
+
+- Whether you can explain **why** a UI showed the wrong value.
+- Whether you put state in the right component, or in a global store because it was convenient.
+- Whether you know when React is the wrong place to load data.
+- Whether you stay calm when the problem is incomplete — that is the job.
+
+A candidate who says "I would wrap it in `useMemo`" without saying what identity or cost they are protecting is waving a flag. A candidate who asks "how often does this value change, and who else reads it?" is already senior.
+
+## Beginner
+
+### Why do the rules of hooks exist?
+
+**A strong answer:** React stores hook state in a list keyed by **call order** for that component. Conditional or looped hook calls shift the list, so `useState` on line 12 can receive another hook's slot after a re-render. The rule is a runtime constraint, not a style guide.
+
+**What they are scoring:** Do you understand hooks as a protocol with the renderer, or as "functions I call"?
+
+**Follow-up:** How would you share stateful logic then? Custom hooks that still run unconditionally at the top of the component.
+
+### What happens when you call `setState` with the same value?
+
+**A strong answer:** React bails out of re-rendering if the new state is `Object.is`-equal to the previous state. For objects, a new object with the same fields is **not** the same value. Mutating an object and passing it back will often fail to update the UI.
+
+**What they are scoring:** Immutability as a rendering contract, not as a slogan.
+
+**Follow-up:** When would you use a functional updater `setCount(c => c + 1)`? When the next value depends on the previous one and multiple updates may batch.
+
+### Why are `key`s on lists not optional in production thinking?
+
+**A strong answer:** Keys tell React which child is which across renders. Index keys look fine until the list inserts, filters, or reorders — then input state and effects attach to the wrong row. A stable id from the data is the default.
+
+**What they are scoring:** Reconciliation, not "the console warning is annoying."
+
+**Follow-up:** When is an index key acceptable? Static lists that never reorder and have no per-row state.
+
+## Intermediate
+
+### Why is this `useEffect` fetching twice in development?
+
+**A strong answer:** React 18 Strict Mode mounts, runs effects, cleans up, and mounts again to prove the effect is resilient. A correct fetch effect aborts or ignores stale responses. A "fix" that disables Strict Mode or uses an empty ref to run once is hiding a production race.
+
+**What they are scoring:** Whether you treat double-invoke as a teacher.
+
+**Follow-up:** Where should this fetch live in a Next.js app? Often in a Server Component or a cache-aware loader, not in an effect at all.
+
+### Explain a stale closure without saying "it's a React bug."
+
+**A strong answer:** A callback created in render N closes over render N's props and state. Timers, subscriptions, and memoized children keep that function. If you needed render N+1's value, you needed a dependency, a ref, or a store subscription.
+
+Example: an interval started once with `[]` that prints `count` will print the first count forever.
+
+**What they are scoring:** JavaScript plus the hooks model. See [the hooks note](/blog/react-hooks-mental-model/).
+
+**Follow-up:** How do you subscribe to `window` events correctly? Effect with add/remove in setup/cleanup, and either latest-ref handlers or dependencies that re-subscribe.
+
+### `useMemo` versus `useCallback` versus `React.memo` — when is each the right tool?
+
+**A strong answer:**
+
+- `useMemo` — keep a **value** stable or avoid repeating expensive work. If removing it changes behavior, the code is wrong.
+- `useCallback` — keep a **function identity** stable for children that depend on reference equality.
+- `React.memo` — skip rendering a child when its props are shallow-equal.
+
+None of them fix a state-ownership problem. If a parent re-renders because it owns keystroke state, memoize the static siblings or move the state down.
+
+**What they are scoring:** Performance as a design of **who updates**, not a sprinkle of hooks.
+
+**Follow-up:** How would you measure it? React Profiler, not guesswork.
+
+## Senior
+
+### How do you decide client state vs server cache vs URL state?
+
+**A strong answer:**
+
+- **URL** — shareable, refresh-safe, back-button: filters, selected id, pagination.
+- **Server cache** — data that is the system's truth and can be stale: lists, permissions, prices. Use a loader, RSC, or a cache library with invalidation.
+- **Client state** — ephemeral UI: open menus, unsaved draft fields, drag position.
+
+Putting server data only in `useState` after a fetch is how you get two sources of truth and a "it works until refresh" demo.
+
+**What they are scoring:** Product thinking. Seniors design the state budget.
+
+**Follow-up:** What if two tabs must stay in sync? BroadcastChannel, storage events, or don't — say so.
+
+### Walk through rendering a large table that updates one cell per second.
+
+**A strong answer:** Do not store the whole grid in a context that every cell reads. Isolate the changing cell, or use a store with selectors so only subscribers to that cell render. Virtualize rows that are offscreen. If the table is mostly static, do not put the ticking clock in the table's parent.
+
+**What they are scoring:** Whether you reach for Context first (usually wrong here) or for ownership and subscriptions.
+
+**Follow-up:** Would you use signals or an external store? Yes, if the update rate and tree size justify leaving React state. No, if a local `useState` in the cell is enough.
+
+### Server Components versus client components — where is the boundary?
+
+**A strong answer:** Default to the server for data and static structure. Push `"use client"` to the **leaves** that need events, effects, or browser APIs. A client layout that wraps the whole page re-introduces the SPA bundle you were trying to leave. Props from server to client must be serializable.
+
+**What they are scoring:** Architecture, not framework cheerleading. Related: [The SPA hangover and server components](/blog/spa-hangover-and-server-components/).
+
+**Follow-up:** How do you pass a click handler from a server parent? You don't. The client child owns the handler; the server passes data and ids.
+
+## Practical and scenario
+
+### A form double-submits in production. What do you inspect first?
+
+**A strong answer:** Is submit in an effect gated by state (Strict Mode and retries will fire it again)? Is the button not disabled pending the request? Is the API idempotent? Fix the event path first, then the server. React cannot save a POST that is not safe to retry.
+
+**What they are scoring:** You did not start with "add debounce" as the whole answer.
+
+**Follow-up:** How would you design the API? Idempotency key. See [Idempotency keys are the real API contract](/blog/idempotency-keys-are-the-contract/).
+
+### The design system button re-renders a whole page. What happened?
+
+**A strong answer:** Someone put theme or user context at the root and the value is a new object every render. Or the button's `onClick` is an inline function in a memoized parent that wasn't actually memoizing children. Profile it; then stabilize the context value or split context into "theme tokens" versus "user that changes on login."
+
+**What they are scoring:** You can debug composition, not only toy counters.
+
+## Architecture
+
+### How would you structure a mid-size React app that will grow a second team?
+
+**A strong answer:** Routes own pages. Features own folders (UI + hooks + local types). Shared UI is dumb and documented. Cross-cutting data goes through a cache or server layer, not a god store. Feature flags wrap routes, not random divs. Testing targets behavior at the feature boundary.
+
+Avoid: a `components/` dump of 400 files and a Redux slice per input.
+
+**What they are scoring:** Boundaries you would defend in a review.
+
+**Follow-up:** Where do you put AEM or CMS-driven pages? Treat author-configured blocks as data. Keep the editor contract boring. That is the same idea as [the AEM author–developer contract](/blog/aem-author-developer-contract/), even when the renderer is React.
+
+## Common mistakes in React interviews
+
+- Reciting the virtual DOM as if it were the 2026 answer. Reconciliation and ownership matter more.
+- Saying "I never use `useEffect`" as a personality. External systems still exist.
+- Treating TypeScript props as runtime validation. They are not. See [TypeScript as an API contract](/blog/typescript-api-contracts/).
+- Jumping to micro-frontends when the problem is a messy folder.
+
+If you only practice one follow-up, practice this: **"What would you measure before changing it?"** That sentence is most of senior React.

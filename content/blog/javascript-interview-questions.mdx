@@ -1,0 +1,152 @@
+---
+title: "JavaScript Interview Questions, With the Reasoning"
+description: "Closures, the event loop, equality, and this — explained as runtime behavior, not trivia."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Interview Lab"
+kind: interview
+tags: ["javascript", "interviews"]
+takeaways:
+  - "JavaScript interviews score whether you can predict what the engine does, not whether you memorized a tweet-sized quiz."
+  - "Closures, the event loop, and equality explain most production bugs that look like framework bugs."
+  - "A strong answer walks a timeline: call stack, microtasks, then rendering or I/O."
+---
+
+JavaScript is the runtime under React, Node, and most of the TypeScript you will be asked to type. If the model is wrong here, the framework answers will be theater.
+
+Pair with [React interview questions](/interviews/react-interview-questions/) and [TypeScript interview questions](/interviews/typescript-interview-questions/).
+
+## What interviewers are actually evaluating
+
+- Can you draw a **timeline** of a click, a promise, and a timeout?
+- Do you know what is copied and what is shared (objects, closures)?
+- Can you explain a bug without blaming the framework first?
+- Do you know when JS is the wrong tool (CPU-heavy work on the main thread)?
+
+Trivia like "what does `typeof null` return" is a warm-up. The score is whether you know **why** that answer matters (legacy, document it, don't build a type system on it).
+
+## Beginner
+
+### What is a closure, in a sentence you would use in a review?
+
+**A strong answer:** A function that retains access to variables from the scope where it was created, even after that scope has finished running. Those variables live as long as the function is reachable.
+
+```js
+function makeCounter() {
+  let n = 0;
+  return () => {
+    n += 1;
+    return n;
+  };
+}
+```
+
+Two counters do not share `n`. That is the feature. It is also why a React callback can "see" an old `count`.
+
+**What they are scoring:** Ownership of state in functions, not the word "lexical."
+
+**Follow-up:** How do you accidentally leak memory with a closure? A long-lived listener that closes over a large object you thought was gone.
+
+### `==` versus `===` — when would you still use `==`?
+
+**A strong answer:** Almost never in application code. `===` does not coerce. `==` has a table of coercions that nobody wants to keep in working memory (`"" == 0`, `null == undefined`). The one intentional `== null` check (`value == null`) matches both `null` and `undefined`. If you use it, say so in the review.
+
+**What they are scoring:** You are not performing the coercion table for sport.
+
+**Follow-up:** Why does `NaN === NaN` fail? IEEE floats. Use `Number.isNaN`.
+
+### What does `this` refer to in a plain function versus an arrow?
+
+**A strong answer:** A `function` gets `this` from **how it is called** (object method, `call`/`apply`, `new`, or `undefined` in strict mode). An arrow function has no own `this`; it uses the enclosing scope. That is why class field arrows stay bound, and why `obj.method` extracted as a callback loses `this`.
+
+**What they are scoring:** Call-site vs definition-site.
+
+**Follow-up:** What about `class` methods passed to `addEventListener`? Bind them, wrap them, or use an arrow field. Don't shrug.
+
+## Intermediate
+
+### Walk through the event loop for this snippet.
+
+```js
+console.log("a");
+setTimeout(() => console.log("b"), 0);
+Promise.resolve().then(() => console.log("c"));
+console.log("d");
+```
+
+**A strong answer:** Call stack runs `a` and `d`. The timeout callback is a **macrotask**. The promise `then` is a **microtask**. After the stack clears, microtasks run (`c`), then the timer (`b`). Output: `a`, `d`, `c`, `b`.
+
+**What they are scoring:** Microtasks vs tasks. This is the same machinery as Node's loop, with different channel names. See [Node.js interview questions](/interviews/nodejs-interview-questions/).
+
+**Follow-up:** Where does `queueMicrotask` fit? With promises. Where does `requestAnimationFrame` fit? A rendering-related callback, not a substitute for `setTimeout(0)`.
+
+### Why does mutating an object inside `const` work?
+
+**A strong answer:** `const` prevents **rebinding** the binding. It does not freeze the value. `const user = { n: 1 }; user.n = 2` is legal. `user = {}` is not. If you need immutability, copy, or `Object.freeze` (shallow), or a library. Interviews that treat this as a trick question are testing whether you confuse bindings with values.
+
+**What they are scoring:** Language precision.
+
+**Follow-up:** Why does this matter in React? New object identity vs mutation. React compares with `Object.is`.
+
+### How do `map`, `filter`, and `reduce` differ from `for` when things fail?
+
+**A strong answer:** They are expressions and they allocate. A `for` loop can `break`, `await` in sequence, and avoid an intermediate array. `forEach` ignores async mistakes — it will not wait. If you `map` an async function you get `Promise[]`, not results. Use `for...of` with `await`, or `Promise.all` when parallelism is safe.
+
+**What they are scoring:** Async + arrays, a very common production bug.
+
+**Follow-up:** When is `Promise.all` the wrong parallel tool? When you need first-failure cancellation, bounded concurrency, or a huge fan-out that will starve a database.
+
+## Senior
+
+### How would you keep a CPU-heavy transform off the main thread in the browser?
+
+**A strong answer:** Web Worker or move the work to a server. Structured clone has a cost; transferables help for large buffers. Do not block the main thread with a 200ms JSON parse if input is user-driven. Measure. WASM is an option when the algorithm is a fit — not a default. Related note on this site: [WebGPU and the browser as compute](/blog/webgpu-browser-as-compute/) for the graphics/compute extreme, not for form validation.
+
+**What they are scoring:** You name the constraint (jank budget) before the tool.
+
+**Follow-up:** What breaks if you put React state updates inside the worker? Workers cannot touch the DOM or React. They send messages. The main thread applies state.
+
+### Prototype versus class — what do you still need to know?
+
+**A strong answer:** Classes are syntax over prototypes. `extends`, `super`, and instance fields have defined order. Most application code should not invent prototype chains. You still need the model to debug `instanceof`, library plugins, and "why is this method on the object." Prefer composition.
+
+**What they are scoring:** You are not stuck in 2014 or pretending prototypes vanished.
+
+### How do you reason about module side effects?
+
+**A strong answer:** ES modules are evaluated once per realm. Import order can run `console.log` and register listeners. Circular imports can see temporal dead zone bindings. Keep modules lazy for expensive init. In bundlers, a side-effectful import can survive tree-shaking and cost everyone. Mark `sideEffects` honestly.
+
+**What they are scoring:** Production JS, not a REPL.
+
+**Follow-up:** `import type` in TypeScript? Erased. It cannot have runtime side effects. Good.
+
+## Practical and scenario
+
+### `user.address.city` throws in production. The type said address exists. What happened?
+
+**A strong answer:** The type was a costume. The API omitted `address`. Use optional chaining for **present-or-absent** data you do not control, and fix the contract if you do. Don't optional-chain every line as a substitute for a parsed type. See [TypeScript as an API contract](/blog/typescript-api-contracts/).
+
+**What they are scoring:** You blamed the boundary, not "JavaScript is weird."
+
+### Two tabs write `localStorage` and the UI disagrees. Why?
+
+**A strong answer:** `localStorage` is same-origin and synchronous. Other tabs get a `storage` event (not the tab that wrote). If you only read on mount, you are stale. Also, storage is a string bag — parse errors are runtime. It is not a database.
+
+**What they are scoring:** Browser reality.
+
+## Architecture
+
+### When is "just JavaScript" the wrong architecture for a backend?
+
+**A strong answer:** When you need CPU isolation, multi-threading without a worker story, or a team whose operational standards are JVM/PHP. Node is excellent at I/O-bound orchestration. It is a poor silent default for a tight numerical loop. Choose the runtime for the bottleneck you can name.
+
+**What they are scoring:** Honesty about the language's strengths.
+
+## Common mistakes in JavaScript interviews
+
+- Reciting "JS is single-threaded" and ignoring workers, WASM, and Node's thread pool for fs/crypto.
+- Confusing `var` hoisting questions with how you would write code today. Say you use `let`/`const` and explain TDZ briefly.
+- Using `for...in` on arrays. It is for keys, and it sees inherited properties.
+- Treating `async` as parallelism. It is sequencing of waits.
+
+If you want one practice habit: **narrate the queue**. Interviewers can hear whether you see time.

@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     "QuickCart",
     "DocIndy",
   ],
-  authors: [{ name: person.name, url: SITE_URL }],
+  authors: [{ name: person.name, url: `${SITE_URL}/author/al-beltran/` }],
   creator: person.name,
   publisher: person.name,
   openGraph: {

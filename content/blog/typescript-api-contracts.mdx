@@ -1,0 +1,122 @@
+---
+title: "TypeScript as an API Contract, Not a Costume"
+description: "Share types across producer and consumer, validate at the edge, and stop trusting JSON because it compiled once."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Frontend"
+kind: article
+tags: ["typescript", "apis"]
+takeaways:
+  - "Compile-time types do not check JSON on the wire. Validation does."
+  - "Put the contract at the boundary: HTTP, queue payload, or SDK — not in every inner function."
+  - "unknown is the honest type for external input. any is a costume."
+  - "A shared package or OpenAPI types only help if both sides regenerate from the same source."
+---
+
+TypeScript can describe an API so well that teams stop testing the actual payload. The compiler is not on the network. A type is a **promise you still have to keep** at the edge where bytes become values.
+
+This is an architecture note. The language questions are in [TypeScript interview questions](/interviews/typescript-interview-questions/).
+
+## The costume
+
+A costume looks like this:
+
+```ts
+type CreateRewardRequest = {
+  accountId: string;
+  campaignId: string;
+  amount: number;
+};
+
+export async function createReward(req: Request) {
+  const body = (await req.json()) as CreateRewardRequest;
+  return rewards.insert(body);
+}
+```
+
+`as CreateRewardRequest` is not parsing. It is a comment the compiler believes. Extra fields, missing fields, `amount: "10"`, and `{ accountId: null }` all compile. They fail in production, or worse, they write garbage that looks fine in the happy-path dashboard.
+
+The costume also appears on the client: `fetch` plus `as Reward[]` after a single 200. Caching layers and mobile retries will replay responses you have never seen in unit tests.
+
+## A contract has three parts
+
+1. **Shape** — fields, unions, nullability, version.
+2. **Validation** — a runtime check that produces a typed value or a structured error.
+3. **Ownership** — who may change the shape, and how the other side learns.
+
+Types without (2) are documentation. Validation without (1) is a pile of `if` statements. Either without (3) becomes two teams arguing about a field that both renamed.
+
+```ts
+import { z } from "zod";
+
+const CreateRewardRequest = z.object({
+  accountId: z.string().min(1),
+  campaignId: z.string().min(1),
+  amount: z.number().int().positive(),
+});
+
+type CreateRewardRequest = z.infer<typeof CreateRewardRequest>;
+
+export async function createReward(req: Request) {
+  const parsed = CreateRewardRequest.safeParse(await req.json());
+  if (!parsed.success) {
+    return Response.json({ error: parsed.error.flatten() }, { status: 400 });
+  }
+  return rewards.insert(parsed.data);
+}
+```
+
+The inner domain can now take `CreateRewardRequest` and mean it. You do not sprinkle `z.string()` through the repository.
+
+Zod is one option. The important move is **parse at the edge, trust inward**. The same rule applies to queue messages, webhook bodies, and `JSON.parse` of `localStorage`.
+
+## Sharing types without lying
+
+Monorepos often export types from a `contracts` package. That is useful when producer and consumer compile against the same commit. It is not a substitute for versioned HTTP.
+
+- If the client is a separate repo, generate types from OpenAPI or JSON Schema and fail CI when the spec drifts.
+- If you only share a TypeScript interface, you still need a runtime parser on at least the side that cannot afford a bad payload — usually the server, and the client when the UI must degrade instead of crash.
+- Optional fields are a change-control tool. Making everything optional so "it still compiles" destroys the contract.
+
+For event-driven systems, the message name and version belong in the envelope. A loyalty reward event that silently gained a new required field will poison a consumer that deployed last week. Types make that visible only if the consumer rebuilt. Validation makes it visible in the dead-letter queue.
+
+## Common mistakes
+
+- Exporting DTOs that leak database column names, then renaming a column and calling it a "minor refactor."
+- Using `any` on the Axios response "just for now" in the integration layer — the only layer where types pay rent. See also [TypeScript won the integration layer](/blog/typescript-won-the-integration-layer/).
+- Validating twice: a loose gateway check and a different, stricter domain check with no shared schema. Pick one source and derive both.
+- Returning 200 with `{ success: false }` so the client's `as Reward` stays green.
+
+## Interview questions this note answers
+
+**What is the difference between `unknown` and `any`?** `unknown` forces a narrowing before use. `any` disables checking. External input starts as `unknown`.
+
+**Why not type the whole application as the wire JSON?** Because the domain has invariants the wire cannot express (an amount already converted, a user already authorized). Map at the boundary.
+
+**How do you version a breaking field change?** New field optional first, dual-read, then a dated cutoff — or a new route / event name. Do not rely on "everyone deploys on Friday."
+
+## Senior-level considerations
+
+A staff-level contract discussion is not "Zod versus io-ts." It is: **which failures are user-visible 400s, which are operator-visible 500s, and which are silently dropped.** Dropping an invalid event can hide fraud. Failing the whole batch can stall a pipeline. Partial batch failure is a contract too — see [AWS Lambda failure modes](/blog/lambda-failure-modes/).
+
+Idempotency is part of the contract when clients retry. The type of the request is not enough; the type of the **attempt** matters. That is written up separately in [Idempotency keys are the real API contract](/blog/idempotency-keys-are-the-contract/).
+
+## Performance considerations
+
+Parsing every payload has a cost. It is almost always cheaper than a downstream incident. If a hot path cannot afford a general schema library, generate a specialized validator, or validate once at the ingress and pass a branded type inward.
+
+Do not JSON-parse the same body in middleware and again in the handler "to be safe." Parse once. Attach the result.
+
+## Security considerations
+
+Type assertions do not stop injection, mass assignment, or prototype pollution. If you spread `req.body` into an ORM create call, extra keys become columns. Allow-list fields in the schema. Reject unknown keys on write endpoints unless you have a documented extension bag.
+
+## When to use a typed contract
+
+Public APIs, payments, identity, webhooks, and anything two teams deploy independently. Internal functions in the same module can stay inferred.
+
+## When not to use it
+
+Do not invent a company-wide schema platform for a weekend prototype. Do not generate types from a live database and call that an API. The database will change for reasons that should not break mobile clients.
+
+Related: [JavaScript interview questions](/interviews/javascript-interview-questions/) for the runtime story underneath the types.

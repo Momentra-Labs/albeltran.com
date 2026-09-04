@@ -31,7 +31,7 @@ export function LatestWriting({ posts }: { posts: BlogPost[] }) {
             <li key={post.slug}>
               <RevealItem index={index}>
                 <Link
-                  href={`/blog/${post.slug}/`}
+                  href={post.href}
                   className="group grid gap-3 py-6 sm:grid-cols-[64px_1fr_auto]"
                   data-cursor="→"
                 >

@@ -95,7 +95,11 @@ export function personSchema() {
       creator: { "@id": `${SITE_URL}/#person` },
       author: { "@id": `${SITE_URL}/#person` },
     })),
-    sameAs: [...person.sameAs],
+    sameAs: [
+      ...person.sameAs,
+      `${SITE_URL}/author/al-beltran/`,
+      `${SITE_URL}/about/`,
+    ],
     knowsAbout: [...person.knowsAbout],
     contactPoint: {
       "@type": "ContactPoint",
@@ -262,12 +266,20 @@ export function projectSchema(project: Project) {
 }
 
 export function blogItemListSchema(
-  posts: { slug: string; title: string; date: string; description: string }[],
+  posts: {
+    slug: string;
+    title: string;
+    date: string;
+    description: string;
+    href?: string;
+  }[],
+  options?: { path?: string; name?: string },
 ) {
+  const path = options?.path ?? "/blog/";
   return {
     "@type": "ItemList",
-    "@id": `${SITE_URL}/blog/#posts`,
-    name: "Engineering articles by Al Beltran",
+    "@id": `${SITE_URL}${path}#posts`,
+    name: options?.name ?? "Engineering articles by Al Beltran",
     itemListOrder: "https://schema.org/ItemListOrderDescending",
     numberOfItems: posts.length,
     itemListElement: posts.map((post, index) => ({
@@ -275,9 +287,50 @@ export function blogItemListSchema(
       position: index + 1,
       name: post.title,
       description: post.description,
-      url: `${SITE_URL}/blog/${post.slug}/`,
+      url: `${SITE_URL}${post.href ?? `/blog/${post.slug}/`}`,
       datePublished: post.date,
     })),
+  };
+}
+
+export function collectionPageSchema({
+  path,
+  name,
+  description,
+}: {
+  path: string;
+  name: string;
+  description: string;
+}) {
+  const url = `${SITE_URL}${path}`;
+  return {
+    "@type": "CollectionPage",
+    "@id": `${url}#collection`,
+    url,
+    name,
+    description,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#person` },
+    author: { "@id": `${SITE_URL}/#person` },
+  };
+}
+
+export function authorProfilePageSchema() {
+  return {
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/author/al-beltran/#profilepage`,
+    url: `${SITE_URL}/author/al-beltran/`,
+    name: `${person.shortName} — ${person.currentRole}`,
+    description: person.summary,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#person` },
+    mainEntity: { "@id": `${SITE_URL}/#person` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: person.image,
+      contentUrl: person.image,
+      caption: `${person.name} — ${person.currentRole}`,
+    },
   };
 }
 
@@ -310,11 +363,17 @@ export function articleSchema({
     },
     datePublished,
     dateModified: dateModified ?? datePublished,
-    author: { "@id": `${SITE_URL}/#person` },
+    author: {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: person.shortName,
+      alternateName: person.name,
+      url: `${SITE_URL}/author/al-beltran/`,
+    },
     publisher: {
       "@type": "Person",
       name: person.name,
-      url: SITE_URL,
+      url: `${SITE_URL}/author/al-beltran/`,
       image: person.image,
     },
     image: image

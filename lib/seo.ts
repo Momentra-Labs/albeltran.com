@@ -106,7 +106,7 @@ export function buildMetadata({
       description,
       images: [imageUrl],
     },
-    authors: [{ name: person.name, url: SITE_URL }],
+    authors: [{ name: person.name, url: `${SITE_URL}/author/al-beltran/` }],
     creator: person.name,
     publisher: person.name,
     category: type === "article" ? "Technology" : undefined,

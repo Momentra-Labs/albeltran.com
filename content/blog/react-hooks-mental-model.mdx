@@ -1,0 +1,143 @@
+---
+title: "A Mental Model for React Hooks That Survives Production"
+description: "Treat hooks as subscriptions to render, not lifecycle methods with new names. The model that prevents stale state and mystery effects."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Frontend"
+kind: article
+tags: ["react", "hooks"]
+takeaways:
+  - "Hooks subscribe to the current render. They are not class lifecycle aliases."
+  - "If a value must be current inside a callback, store it in state, a ref, or close over a render that still owns it."
+  - "Effects are for synchronizing with something outside React. Event handlers are for user intent."
+  - "Do not disable the dependency warning to silence a stale closure. Change the design."
+---
+
+React hooks look like functions you call. In production they behave like **subscriptions to a specific render**. If you treat `useEffect` as `componentDidMount` with a new name, you will ship stale props, double fetches, and effects that fight the UI.
+
+This note is the model. The interview set lives in [React interview questions](/interviews/react-interview-questions/).
+
+## Hooks are per-render, not per-lifetime
+
+Each render of a function component is a snapshot: props, state, and the closures created in that snapshot. Hooks run in that snapshot.
+
+- `useState` returns the state for **this** render and a setter that schedules a later one.
+- `useRef` returns a box whose `.current` is mutable and does **not** schedule a render.
+- `useEffect` registers a function to run after React commits **this** render, then again when its dependencies change.
+
+The rules of hooks exist because React maps hook calls to slots by **call order**. Conditional hooks break the map. That is not pedantry. It is how the runtime finds state.
+
+```tsx
+function Panel({ id }: { id: string }) {
+  const [data, setData] = useState<Item | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadItem(id).then((item) => {
+      if (!cancelled) setData(item);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [id]);
+
+  return data ? <ItemView item={data} /> : <Loading />;
+}
+```
+
+The effect depends on `id` because the work is "keep `data` synchronized with `id`." The cleanup exists because a slow response for `id=1` must not win after the user already moved to `id=2`.
+
+## Closures freeze the snapshot
+
+The function you pass to `setTimeout`, `addEventListener`, or a child callback captures the values from the render that created it. That is correct JavaScript. It surprises people who expected "always the latest state."
+
+```tsx
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  function scheduleLog() {
+    window.setTimeout(() => {
+      console.log(count);
+    }, 1000);
+  }
+
+  return <button onClick={scheduleLog}>{count}</button>;
+}
+```
+
+If the user clicks `scheduleLog` at `count === 0` and then increments, the timeout still prints `0`. The callback did not subscribe to later renders.
+
+When you need the latest value inside an unstable callback, use a ref that you update during render, or put the value in the dependency list of an effect that re-subscribes.
+
+```tsx
+const countRef = useRef(count);
+countRef.current = count;
+```
+
+That is not a hack if the ref is an escape hatch for **non-reactive** readers. It is a hack if you are avoiding a render that the UI actually needed.
+
+## Effects synchronize. Events decide.
+
+A useful split:
+
+| Kind | Question it answers | Typical tool |
+| --- | --- | --- |
+| Event | The user did something. What should happen once? | Handler on click, submit, keydown |
+| Effect | The UI must stay aligned with a system React does not own | Network, DOM APIs, subscriptions, external stores |
+
+Fetching in `useEffect` is a synchronization: "this screen should reflect this id." Submitting a form in `useEffect` because a flag flipped is usually an event that you buried in state. Buried events are how you get double posts in React 18 Strict Mode and how you lose the user's intent in the network tab.
+
+If you are about to write:
+
+```tsx
+useEffect(() => {
+  if (shouldSave) save(form);
+}, [shouldSave, form]);
+```
+
+stop. Call `save` from the submit handler. Keep `shouldSave` out of the model unless you are literally synchronizing with an external autosave protocol.
+
+## Common mistakes
+
+- Copying props into state "to make them editable" and then wondering why parent updates never appear. Derive during render, or key the component so it remounts when the identity changes.
+- Putting objects and functions into dependency arrays without stabilizing them, then "fixing" the loop with an empty array.
+- Using `useMemo` as a correctness tool. Memo is a performance hint. If removing it breaks behavior, the design is wrong.
+- Treating Strict Mode double-invoking as a React bug. It is telling you the effect is not resilient to setup/cleanup.
+
+## Interview questions this model answers
+
+**Why can't hooks run inside `if`?** Because React associates state with call position, not with hook names.
+
+**Why did my effect run twice in development?** Strict Mode mounts, cleans up, and mounts again to prove your cleanup is real.
+
+**When is `useRef` better than `useState`?** When updating the value must not redraw the UI: instance ids, latest callbacks, DOM nodes.
+
+A longer scored set is in the [React Interview Lab](/interviews/react-interview-questions/).
+
+## Senior-level considerations
+
+In a large tree, the expensive part is rarely "too many hooks." It is **how much of the tree re-renders when a high-frequency value changes**, and whether effects are doing work that should have been an event or a server cache.
+
+Server Components change where the snapshot lives. Data that used to be an effect on the client can be awaited on the server and passed as props. That does not retire hooks. It retires a class of client effects that existed only because the component was the data loader.
+
+If you are introducing a custom hook, name it after the subscription (`useAccount`, `useMediaQuery`), not after an implementation detail (`useStuff`). Custom hooks are how teams share the model. They are also how teams share a stale-closure bug.
+
+## Performance considerations
+
+- State that updates on every keystroke should live close to the input. Lifting it to a layout that renders a table will tax every key.
+- `useCallback` does not make a function cheap. It makes its **identity** stable for children that compare props by reference. Measure before wrapping every handler.
+- An effect that fetches on every object-identity change is a performance bug and a correctness bug.
+
+## Security considerations
+
+Effects that sync URL state or `postMessage` data must validate the payload the same way a server would. A hook is not a trust boundary. If user-controlled search params drive a query, treat them as untrusted input even though they "came from React."
+
+## When to use this model
+
+Use it whenever you are deciding between state, refs, and effects, or when a bug smells like "the UI shows 2 but the request sent 1."
+
+## When not to use it
+
+Do not turn this into a rule that "effects are banned." External systems still need synchronization. Do not replace a simple controlled input with a ref because someone said renders are expensive. They usually are not.
+
+Related writing on this site: [The SPA hangover and server components](/blog/spa-hangover-and-server-components/).

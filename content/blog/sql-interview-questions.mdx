@@ -1,0 +1,157 @@
+---
+title: "SQL Interview Questions, With the Reasoning"
+description: "Joins, indexes, NULL, and transactions — answered the way a production engineer talks about plans."
+date: "2026-09-05"
+updated: "2026-09-05"
+category: "Interview Lab"
+kind: interview
+tags: ["sql", "interviews"]
+takeaways:
+  - "SQL interviews score whether you can predict a plan and a wrong result, not whether you memorized join names."
+  - "NULL, indexes that do not match the query, and transactions are where senior answers separate from syntax."
+  - "A strong answer asks about cardinality and isolation before drawing boxes."
+---
+
+SQL is still how most product systems tell the truth. The interview should sound like you have read a plan, not like you completed a crossword of join types.
+
+Companion writing on this site: [SQL still compounds](/blog/sql-still-compounds/). Engine-specific follow-ups are planned on the [databases topic](/topics/databases/).
+
+## What interviewers are actually evaluating
+
+- Can you write a query that is **correct with duplicates and NULL**?
+- Do you know what an index can and cannot do for a given `WHERE` and `ORDER BY`?
+- Can you talk about transactions without saying "we use REPEATABLE READ" as a personality?
+- Do you ask how big the table is before you propose a clever subquery?
+
+A candidate who writes a correct `GROUP BY` and then says "we should check `EXPLAIN`" is already ahead of one who recites every isolation level in textbook order.
+
+## Beginner
+
+### What does `INNER JOIN` keep, and what does `LEFT JOIN` keep?
+
+**A strong answer:** `INNER JOIN` keeps rows that match on both sides. `LEFT JOIN` keeps every row from the left, and fills right-hand columns with NULL when there is no match. People fail this when they put a filter on the right table in `WHERE` and accidentally turn a left join into an inner join.
+
+```sql
+SELECT u.id, o.id AS order_id
+FROM users u
+LEFT JOIN orders o ON o.user_id = u.id
+WHERE o.created_at >= DATE '2026-01-01'; -- drops users with no matching order
+```
+
+The filter belongs in the `ON` clause if you still want users without recent orders.
+
+**What they are scoring:** Result-set thinking, not vocabulary.
+
+**Follow-up:** When do you need `EXISTS` instead of `JOIN`? When you only care about existence and a join would multiply rows.
+
+### Why is `NULL = NULL` not true?
+
+**A strong answer:** `NULL` means unknown. Comparisons with `NULL` yield unknown, which `WHERE` treats as not true. Use `IS NULL` / `IS NOT NULL`. Aggregates skip NULL except `COUNT(*)`. `NOT IN` with a NULL in the list is a famous trap: the whole predicate can become unknown.
+
+**What they are scoring:** You will not debug "missing rows" for an hour.
+
+**Follow-up:** How do you sort NULL first or last? `ORDER BY col NULLS LAST` (Postgres) or a `CASE`. Do not assume the engine's default.
+
+### What is the difference between `WHERE` and `HAVING`?
+
+**A strong answer:** `WHERE` filters rows before grouping. `HAVING` filters groups after aggregation. `HAVING COUNT(*) > 1` cannot be a `WHERE`. Putting `SUM` in `WHERE` is a syntax error for a reason.
+
+**What they are scoring:** The logical order of a SELECT (FROM → WHERE → GROUP → HAVING → SELECT → ORDER). Engines may optimize; the mental model still helps.
+
+## Intermediate
+
+### Which index would you consider for this query?
+
+```sql
+SELECT *
+FROM payments
+WHERE account_id = $1
+  AND created_at >= $2
+ORDER BY created_at DESC
+LIMIT 20;
+```
+
+**A strong answer:** A composite index on `(account_id, created_at DESC)` matches equality then range/order. `account_id` alone may still sort. `created_at` alone helps everyone and helps no one. `SELECT *` may still hit the heap (or table) after an index scan; if this is hot, a covering index with only needed columns is the next conversation.
+
+**What they are scoring:** Left-prefix and sort avoidance, not "we index every column."
+
+**Follow-up:** Why can a function on the column disable the index? `WHERE DATE(created_at) = $1` often cannot use `created_at`. Query the range instead.
+
+### What does this `GROUP BY` get wrong?
+
+```sql
+SELECT account_id, amount, COUNT(*)
+FROM payments
+GROUP BY account_id;
+```
+
+**A strong answer:** `amount` is not aggregated and not in the group. In strict engines this is an error. In loose modes you get an arbitrary `amount`. That is a correctness bug, not a warning to ignore.
+
+**What they are scoring:** Functional dependence.
+
+**Follow-up:** `COUNT(amount)` versus `COUNT(*)`? The first skips NULL amounts.
+
+### Explain a transaction as if a payment could retry.
+
+**A strong answer:** `BEGIN` … work … `COMMIT` is atomic to other transactions according to isolation. A retry needs a **business key** so you do not insert twice. `SERIALIZABLE` is not a substitute for idempotency. Deadlocks happen; one side retries. See [Idempotency keys](/blog/idempotency-keys-are-the-contract/).
+
+**What they are scoring:** You connected SQL to an API.
+
+**Follow-up:** Read-your-writes in the same request? Same connection, same transaction. A second pool connection will not see uncommitted rows.
+
+## Senior
+
+### How do you choose isolation without reciting the Wikipedia table?
+
+**A strong answer:** Start from the anomaly you cannot tolerate. Lost updates on a balance → need a constraint, a version column, or a higher isolation / `SELECT … FOR UPDATE`. Non-repeatable read on a report that must be consistent to a timestamp → snapshot/repeatable read. Most web apps live in read committed plus explicit locks on the few money rows. Raising isolation globally is how you buy deadlocks.
+
+**What they are scoring:** Product risk, not flashcards.
+
+**Follow-up:** Postgres `REPEATABLE READ` is snapshot-like. MySQL InnoDB's names do not map 1:1. Say which engine.
+
+### A query was fine at 10k rows and timed out at 10M. What changed?
+
+**A strong answer:** The plan. Nested loops over a huge inner set, a sequential scan that no longer fits cache, a sort that spilled to disk, or statistics that lie. `EXPLAIN (ANALYZE, BUFFERS)` on a safe replica. Fix the query or the index; do not add a read replica as the first move.
+
+**What they are scoring:** You think in plans.
+
+**Follow-up:** Why can `LIMIT 1` still be slow? If the planner cannot use an index to find the first match, it may scan a lot to return one row.
+
+### When is a cache in front of SQL the wrong fix?
+
+**A strong answer:** When the data is write-heavy, when invalidation is the real problem, or when the query is missing an index. Caching a wrong result is faster and worse. Related: [SQL still compounds](/blog/sql-still-compounds/).
+
+**What they are scoring:** You did not say Redis by reflex.
+
+## Practical and scenario
+
+### `SELECT COUNT(*) FROM events` is slow. What do you tell a PM?
+
+**A strong answer:** Exact counts on huge tables are expensive. Approximate stats, a counter table maintained in the write path, or a nightly rollup. "Just add an index" does not make counting every row free.
+
+**What they are scoring:** Expectation management.
+
+### An OR across two columns ignores both indexes. What now?
+
+**A strong answer:** `UNION` of two indexed seeks can beat a single scan. Or a generated column / redesign. Measure. Do not add a 12-column index "to be safe."
+
+**What they are scoring:** Rewriting as a tool.
+
+## Architecture
+
+### How do you keep SQL honest in a service that also has a queue?
+
+**A strong answer:** The database commit is the source of truth. The queue publish uses an outbox in the same transaction, or you accept dual-write failure and reconcile. Consumers must be idempotent. Do not update the row in the consumer without a version check.
+
+**What they are scoring:** Distributed vs local transactions.
+
+**Follow-up:** Why might you choose Postgres over MySQL here? SKIP LOCKED, JSONB, exclusion constraints, or team experience — name the reason. Not branding.
+
+## Common mistakes in SQL interviews
+
+- Drawing an ER diagram for a question that asked for a query.
+- `SELECT DISTINCT` to hide a bad join.
+- Claiming indexes are free. They cost writes and space.
+- Using `BETWEEN` on timestamps without stating inclusive bounds.
+
+Practice one habit: **state the grain of the result** ("one row per account, not per payment") before you write `JOIN`. Grain errors are the usual production outage that looked like "SQL is hard."

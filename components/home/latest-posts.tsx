@@ -27,7 +27,7 @@ export function LatestPosts() {
               </div>
               <h3 className="text-lg font-semibold tracking-tight text-foreground">
                 <Link
-                  href={`/blog/${post.slug}/`}
+                  href={post.href}
                   className="hover:text-accent"
                 >
                   {post.title}
