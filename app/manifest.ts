@@ -17,15 +17,27 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "en-PH",
     icons: [
       {
-        src: "/favicon.svg",
-        type: "image/svg+xml",
-        sizes: "any",
+        src: "/favicon-32x32.png",
+        type: "image/png",
+        sizes: "32x32",
         purpose: "any",
       },
       {
         src: "/apple-touch-icon.png",
         type: "image/png",
         sizes: "180x180",
+        purpose: "any",
+      },
+      {
+        src: "/android-chrome-192x192.png",
+        type: "image/png",
+        sizes: "192x192",
+        purpose: "any",
+      },
+      {
+        src: "/android-chrome-512x512.png",
+        type: "image/png",
+        sizes: "512x512",
         purpose: "any",
       },
     ],

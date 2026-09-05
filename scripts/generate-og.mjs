@@ -12,7 +12,13 @@ const PHOTO_JPG = path.join(
   ROOT,
   "public/assets/al-beltran-software-engineer.jpg",
 );
+const PROFILE_JPG = path.join(ROOT, "public/assets/al-beltran-profile.jpg");
+const PROFILE_WEBP = path.join(ROOT, "public/assets/al-beltran-profile.webp");
 const APPLE = path.join(ROOT, "public/apple-touch-icon.png");
+const FAVICON_32 = path.join(ROOT, "public/favicon-32x32.png");
+const FAVICON_16 = path.join(ROOT, "public/favicon-16x16.png");
+const ICON_192 = path.join(ROOT, "public/android-chrome-192x192.png");
+const ICON_512 = path.join(ROOT, "public/android-chrome-512x512.png");
 const OUT_DIR = path.join(ROOT, "public/og");
 const OUT_JPG = path.join(OUT_DIR, "default.jpg");
 const OUT_PNG = path.join(OUT_DIR, "default.png");
@@ -100,11 +106,27 @@ const composed = sharp({
 await composed.clone().jpeg({ quality: 88, mozjpeg: true }).toFile(OUT_JPG);
 await composed.clone().png({ quality: 90 }).toFile(OUT_PNG);
 
-await sharp(SOURCE_PHOTO)
-  .rotate()
-  .resize(180, 180, { fit: "cover", position: "centre" })
-  .png({ quality: 90 })
-  .toFile(APPLE);
+const rotatedPhoto = await sharp(SOURCE_PHOTO).rotate().toBuffer();
+const rotatedMeta = await sharp(rotatedPhoto).metadata();
+const faceBand = await sharp(rotatedPhoto)
+  .extract({
+    left: 0,
+    top: 0,
+    width: rotatedMeta.width,
+    height: Math.round(rotatedMeta.height * 0.55),
+  })
+  .toBuffer();
+const face = sharp(faceBand).resize(512, 512, {
+  fit: "cover",
+  position: "attention",
+});
+await face.clone().jpeg({ quality: 86, mozjpeg: true }).toFile(PROFILE_JPG);
+await face.clone().webp({ quality: 82 }).toFile(PROFILE_WEBP);
+await face.clone().resize(180, 180).png({ compressionLevel: 9 }).toFile(APPLE);
+await face.clone().resize(32, 32).png({ compressionLevel: 9 }).toFile(FAVICON_32);
+await face.clone().resize(16, 16).png({ compressionLevel: 9 }).toFile(FAVICON_16);
+await face.clone().resize(192, 192).png({ compressionLevel: 9 }).toFile(ICON_192);
+await face.clone().resize(512, 512).png({ compressionLevel: 9 }).toFile(ICON_512);
 
 const jpgStat = fs.statSync(OUT_JPG);
 console.log(`Wrote ${OUT_JPG} (${Math.round(jpgStat.size / 1024)} KB)`);
@@ -116,3 +138,7 @@ console.log(
 console.log(
   `Wrote ${PHOTO_JPG} (${Math.round(fs.statSync(PHOTO_JPG).size / 1024)} KB)`,
 );
+console.log(
+  `Wrote ${PROFILE_JPG} (${Math.round(fs.statSync(PROFILE_JPG).size / 1024)} KB)`,
+);
+console.log(`Wrote ${APPLE}, ${FAVICON_32}, ${ICON_192}`);
