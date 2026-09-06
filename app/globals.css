@@ -15,6 +15,54 @@
   --success: #38d9a9;
 }
 
+@property --spot-x {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 74%;
+}
+
+@property --spot-y {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 36%;
+}
+
+@property --look-x {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.74;
+}
+
+@property --look-y {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.36;
+}
+
+@property --tilt-x {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@property --tilt-y {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+@property --tilt-px {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
+@property --tilt-py {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -102,8 +150,19 @@ body {
   isolation: isolate;
 }
 
+.magazine-plate-enter {
+  transform-origin: top center;
+  animation: magazine-plate-enter 0.8s cubic-bezier(0.23, 1, 0.32, 1) 0.28s both;
+}
+
 .magazine-plate-print {
   isolation: isolate;
+  transform: perspective(1400px)
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg))
+    translate3d(var(--tilt-px, 0px), var(--tilt-py, 0px), 0);
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .magazine-plate-back {
@@ -214,6 +273,29 @@ body {
   height: 18px;
 }
 
+.magazine-cover .magazine-register-mark {
+  animation: register-pulse 0.7s cubic-bezier(0.23, 1, 0.32, 1) 0.85s 1 both;
+}
+
+.magazine-cover-scan {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 46%,
+    color-mix(in srgb, var(--foreground) 28%, transparent) 50%,
+    transparent 54%,
+    transparent 100%
+  );
+  background-size: 100% 280%;
+  background-position: 0 -20%;
+  animation: magazine-cover-scan 8.5s ease-in-out 1.2s infinite;
+}
+
 .magazine-register-mark::before,
 .magazine-register-mark::after {
   content: "";
@@ -277,13 +359,35 @@ body {
   overflow: hidden;
 }
 
+.magazine-cover {
+  --spot-x: 74%;
+  --spot-y: 36%;
+  --look-x: 0.74;
+  --look-y: 0.36;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-px: 0px;
+  --tilt-py: 0px;
+  transition:
+    --spot-x 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    --spot-y 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    --look-x 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    --look-y 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    --tilt-x 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    --tilt-y 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    --tilt-px 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    --tilt-py 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .magazine-cover-wash {
   position: absolute;
   inset: -8%;
   background:
-    radial-gradient(ellipse 48% 72% at 78% 42%, rgba(226, 210, 186, 0.16), transparent 62%),
-    radial-gradient(ellipse 42% 36% at 12% 18%, rgba(79, 142, 255, 0.08), transparent 58%),
-    radial-gradient(ellipse 50% 40% at 18% 88%, rgba(255, 255, 255, 0.045), transparent 60%);
+    radial-gradient(ellipse 48% 72% at 78% 42%, rgba(226, 210, 186, 0.2), transparent 62%),
+    radial-gradient(ellipse 42% 36% at 12% 18%, rgba(79, 142, 255, 0.1), transparent 58%),
+    radial-gradient(ellipse 50% 40% at 18% 88%, rgba(255, 255, 255, 0.055), transparent 60%);
+  translate: calc((var(--look-x, 0.74) - 0.74) * 22px)
+    calc((var(--look-y, 0.36) - 0.36) * 16px);
   animation: cover-breathe 11s ease-in-out infinite;
 }
 
@@ -291,9 +395,9 @@ body {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    34rem circle at var(--spot-x, 74%) var(--spot-y, 36%),
-    rgba(255, 255, 255, 0.07),
-    transparent 42%
+    44rem circle at var(--spot-x, 74%) var(--spot-y, 36%),
+    rgba(255, 255, 255, 0.1),
+    transparent 54%
   );
 }
 
@@ -316,6 +420,7 @@ body {
       transparent 33.333%
     );
   mask-image: linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  animation: cover-grid-drift 32s linear infinite;
 }
 
 .magazine-cover-grain {
@@ -498,15 +603,70 @@ body {
   }
 }
 
+@keyframes magazine-plate-enter {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @keyframes cover-breathe {
   0%,
   100% {
-    opacity: 0.72;
-    transform: scale(1);
+    opacity: 0.68;
+    scale: 1;
   }
   50% {
     opacity: 1;
-    transform: scale(1.045);
+    scale: 1.06;
+  }
+}
+
+@keyframes cover-grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-1.6%, -1.1%, 0);
+  }
+}
+
+@keyframes magazine-cover-scan {
+  0%,
+  14% {
+    background-position: 0 -20%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.42;
+  }
+  58% {
+    background-position: 0 120%;
+    opacity: 0.26;
+  }
+  72%,
+  100% {
+    background-position: 0 145%;
+    opacity: 0;
+  }
+}
+
+@keyframes register-pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.84);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
   }
 }
 
@@ -529,9 +689,23 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .magazine-cover,
+  .magazine-plate-print {
+    transition: none;
+  }
+
+  .magazine-plate-print {
+    transform: none;
+  }
+
   .magazine-cover-wash,
-  .magazine-cover-grain {
+  .magazine-cover-grain,
+  .magazine-cover-grid,
+  .magazine-cover-scan,
+  .magazine-cover .magazine-register-mark,
+  .magazine-plate-enter {
     animation: none;
+    translate: none;
   }
 
   .magazine-plate-back,
