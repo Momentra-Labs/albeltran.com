@@ -36,7 +36,8 @@ export function CommandPalette({
     const nav: PaletteItem[] = [
       { id: "record", label: "Go to The record", href: "/#record" },
       { id: "work", label: "Go to Work", href: "/#work" },
-      { id: "lab", label: "Go to Lab", href: "/#lab" },
+      { id: "lab", label: "Engineering Lab", href: "/lab/" },
+      { id: "momentra", label: "Momentra Labs", href: "/#lab" },
       { id: "experience", label: "Go to Experience", href: "/experience/" },
       { id: "writing", label: "Go to Writing", href: "/blog/" },
       { id: "about", label: "Go to About", href: "/about/" },
@@ -45,7 +46,7 @@ export function CommandPalette({
       { id: "contact", label: "Contact", href: "/#contact" },
       { id: "blog", label: "Engineering Journal", href: "/blog/" },
       { id: "topics", label: "Topics", href: "/topics/" },
-      { id: "interviews", label: "Interview Lab", href: "/interviews/" },
+      { id: "interviews", label: "Interview notes", href: "/interviews/" },
       { id: "author", label: "Author: Al Beltran", href: "/author/al-beltran/" },
       { id: "projects", label: "All projects", href: "/projects/" },
       { id: "resume", label: "Download Resume", href: "/resume.pdf" },

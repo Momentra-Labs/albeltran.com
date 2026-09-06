@@ -3,6 +3,7 @@ import { WorldMarks } from "@/components/home/world-marks";
 import { IssueFolio } from "@/components/home/issue-folio";
 import { EngineeringSystem } from "@/components/home/engineering-system";
 import { SelectedWork } from "@/components/home/selected-work";
+import { LabPlayground } from "@/components/home/lab-playground";
 import { EngineeringLab } from "@/components/home/engineering-lab";
 import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { HomeNotes } from "@/components/home/home-notes";
@@ -57,6 +58,7 @@ export default function HomePage() {
       <HomeHero />
       <WorldMarks />
       <SelectedWork projects={featured} />
+      <LabPlayground />
       <EngineeringLab projects={lab} />
       <EngineeringSystem />
       <ExperienceTimeline items={featuredExperience} />

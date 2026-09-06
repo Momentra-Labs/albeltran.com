@@ -6,11 +6,12 @@ import { useReducedMotion } from "framer-motion";
 export const ISSUE_SPREADS = [
   { id: "record", label: "Record", index: "02" },
   { id: "work", label: "Work", index: "03" },
-  { id: "lab", label: "Lab", index: "04" },
-  { id: "system", label: "Stack", index: "05" },
-  { id: "experience", label: "Experience", index: "06" },
-  { id: "notes", label: "Notes", index: "07" },
-  { id: "contact", label: "Contact", index: "08" },
+  { id: "playground", label: "Play", index: "04" },
+  { id: "lab", label: "Lab", index: "05" },
+  { id: "system", label: "Stack", index: "06" },
+  { id: "experience", label: "Experience", index: "07" },
+  { id: "notes", label: "Notes", index: "08" },
+  { id: "contact", label: "Contact", index: "09" },
 ] as const;
 
 export function IssueFolio() {

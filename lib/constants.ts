@@ -8,7 +8,7 @@ export const SITE_DESCRIPTION =
 
 export const SECTION_NAV = [
   { href: "/#work", hash: "work", label: "Work" },
-  { href: "/#lab", hash: "lab", label: "Lab" },
+  { href: "/lab/", hash: "lab", label: "Lab" },
   { href: "/#experience", hash: "experience", label: "Experience" },
   { href: "/blog/", hash: "blog", label: "Writing" },
   { href: "/#contact", hash: "contact", label: "Contact" },
@@ -18,6 +18,7 @@ export const NAV_LINKS = [
   { href: "/about/", label: "About" },
   { href: "/experience/", label: "Experience" },
   { href: "/projects/", label: "Projects" },
+  { href: "/lab/", label: "Lab" },
   { href: "/blog/", label: "Journal" },
   { href: "/topics/", label: "Topics" },
   { href: "/uses/", label: "Uses" },

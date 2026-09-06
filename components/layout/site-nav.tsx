@@ -25,7 +25,7 @@ const focusRing =
 
 const SECTION_PAGES: Record<string, string> = {
   work: "/projects/",
-  lab: "/projects/",
+  lab: "/lab/",
   experience: "/experience/",
   blog: "/blog/",
   contact: "/contact/",
@@ -40,6 +40,7 @@ function sectionFromPath(pathname: string) {
   if (pathname.startsWith("/experience")) return "experience";
   if (pathname.startsWith("/now")) return "now";
   if (pathname.startsWith("/blog")) return "blog";
+  if (pathname.startsWith("/lab")) return "lab";
   if (pathname.startsWith("/projects")) return "work";
   if (pathname.startsWith("/contact")) return "contact";
   return null;
@@ -47,6 +48,7 @@ function sectionFromPath(pathname: string) {
 
 function sectionHref(hash: string, isHome: boolean) {
   if (hash === "blog") return "/blog/";
+  if (hash === "lab") return "/lab/";
   if (isHome) return `/#${hash}`;
   return SECTION_PAGES[hash] ?? `/#${hash}`;
 }
@@ -63,7 +65,13 @@ export function SiteNav() {
   const [modKey, setModKey] = useState("Ctrl");
   const isHome = pathname === "/";
   const routeSection = sectionFromPath(pathname);
-  const current = isHome ? active : routeSection;
+  const current = pathname.startsWith("/lab")
+    ? "lab"
+    : isHome
+      ? active === "lab"
+        ? null
+        : active
+      : routeSection;
   const raised = scrolled || !isHome;
   const contactHref = isHome ? "/#contact" : "/contact/";
   const shortcut = modKey === "⌘" ? "⌘K" : "Ctrl+K";

@@ -32,6 +32,9 @@ export function Footer() {
           <Link href="/projects/" data-cursor="→" className="hover:text-foreground">
             Projects
           </Link>
+          <Link href="/lab/" data-cursor="→" className="hover:text-foreground">
+            Lab
+          </Link>
           <Link href="/contact/" data-cursor="→" className="hover:text-foreground">
             Contact
           </Link>

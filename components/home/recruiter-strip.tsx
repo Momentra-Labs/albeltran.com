@@ -77,6 +77,12 @@ export function RecruiterStrip() {
                 </li>
               ))}
             </ul>
+            <p className="mt-6 text-sm">
+              <Link href="/lab/" className="text-accent hover:underline">
+                Engineering Lab
+              </Link>
+              <span className="text-muted-dim"> — interactive challenges</span>
+            </p>
             <div className="mt-6 flex gap-4 text-sm">
               <Link href="/resume/" className="text-accent hover:underline">
                 Resume

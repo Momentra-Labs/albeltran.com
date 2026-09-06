@@ -231,6 +231,34 @@ export function webPageSchema({
   };
 }
 
+export function learningResourceSchema({
+  path,
+  name,
+  description,
+  educationalLevel,
+}: {
+  path: string;
+  name: string;
+  description: string;
+  educationalLevel?: string;
+}) {
+  const url = path.startsWith("http") ? path : `${SITE_URL}${path}`;
+  return {
+    "@type": "LearningResource",
+    "@id": `${url}#resource`,
+    name,
+    description,
+    url,
+    isAccessibleForFree: true,
+    learningResourceType: "interactive resource",
+    inLanguage: "en",
+    author: { "@id": `${SITE_URL}/#person` },
+    creator: { "@id": `${SITE_URL}/#person` },
+    about: { "@id": `${SITE_URL}/#person` },
+    ...(educationalLevel ? { educationalLevel } : {}),
+  };
+}
+
 export function breadcrumbSchema(
   items: { name: string; path: string }[],
 ) {
