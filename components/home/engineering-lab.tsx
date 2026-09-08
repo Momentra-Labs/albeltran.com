@@ -29,6 +29,15 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
             </a>
             {" · "}
             <a
+              href="https://skyrealm-ruby.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline-offset-4 hover:underline"
+            >
+              Skyrealm live
+            </a>
+            {" · "}
+            <a
               href="https://lumina-momentra-labs.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"

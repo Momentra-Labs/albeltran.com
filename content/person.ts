@@ -8,6 +8,7 @@ export function oxfordJoin(items: readonly string[]) {
 
 const PERSONAL_PRODUCTS = [
   "RentaraH",
+  "Skyrealm",
   "Lumina",
   "Gloves Up",
   "PocketPOS",
