@@ -441,6 +441,58 @@ export const projects: Project[] = [
     repository: "https://github.com/rentahub2026/rentahub2026.github.io",
   },
   {
+    slug: "skyrealm",
+    name: "Skyrealm",
+    shortName: "Skyrealm",
+    tagline:
+      "Browser action-RPG — fly with a Guardian, bond Aetherlings, and play in the Aether.",
+    role: "Solo founder · product & engineering (Momentra Labs)",
+    year: "2026",
+    featured: false,
+    kind: "lab",
+    labTags: ["Web", "Game"],
+    overview:
+      "Skyrealm is a browser action-RPG Al Andrew Paul Beltran (Al Beltran) designed and developed as founder of Momentra Labs. The public game at skyrealm-ruby.vercel.app is Guardians of the Aether: fly with a Guardian, bond Aetherlings, and come home with coins, eggs, and glory.",
+    problem:
+      "Most personal game demos never become a public URL someone can open in a browser. Skyrealm needed a playable fantasy loop — Guardians, Aetherlings, quests, and aerial combat — without an install.",
+    solution:
+      "Shipped a React + Vite web game on Vercel with a magazine-like marketing cover, Play Now into the session, and in-browser controls (drag / WASD, auto-fire, E special). The live demo is the product.",
+    architecture: [
+      "Public Vite SPA on Vercel at skyrealm-ruby.vercel.app",
+      "React game and marketing surfaces in one browser bundle",
+      "Play Now session with Guardian loadout, Aetherlings, and HUD",
+      "End-to-end founder ownership of product and engineering",
+    ],
+    techStack: ["React", "Vite"],
+    features: [
+      "Play in the browser — no install",
+      "Guardians of the Aether cover, including Aurelia, guardian of dawn",
+      "Bond two Aetherlings; coins, eggs, and glory as the run rewards",
+      "Drag / WASD movement, auto-fire, and E special",
+      "Guardians, Treasures, World, and How to Play surfaces",
+      "Public demo at skyrealm-ruby.vercel.app",
+    ],
+    challenges: [
+      "Keeping a fantasy web game readable as a cover and immediately playable",
+      "Shipping a Vercel demo that is the real product, not a trailer page",
+    ],
+    performance: [
+      "Public web game live at https://skyrealm-ruby.vercel.app/",
+      "Shipped as a founder-owned Momentra Labs product, not a client case study",
+    ],
+    lessons: [
+      "A game belongs in a portfolio when someone can play it from a URL",
+      "Cover, controls, and a first Guardian have to land in one screen",
+    ],
+    screenshots: [
+      {
+        src: "/covers/skyrealm.png",
+        alt: "Skyrealm — Guardians of the Aether web game cover at skyrealm-ruby.vercel.app",
+      },
+    ],
+    demo: "https://skyrealm-ruby.vercel.app/",
+  },
+  {
     slug: "lumina",
     name: "Lumina",
     shortName: "Lumina",
@@ -504,7 +556,7 @@ export const projects: Project[] = [
     kind: "lab",
     labTags: ["Mobile", "Products"],
     overview:
-      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It is one of the independent products he publishes on this portfolio: RentaraH, Lumina, Gloves Up, PocketPOS, and QuickCart.",
+      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It is one of the independent products he publishes on this portfolio: RentaraH, Skyrealm, Lumina, Gloves Up, PocketPOS, and QuickCart.",
     problem:
       "Small operators often need a focused POS surface rather than a heavyweight retail suite.",
     solution:
@@ -546,7 +598,7 @@ export const projects: Project[] = [
     kind: "lab",
     labTags: ["Web", "Products"],
     overview:
-      "QuickCart is a personal commerce cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. Together with RentaraH, Lumina, Gloves Up, and PocketPOS, it is part of his independent product work.",
+      "QuickCart is a personal commerce cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. Together with RentaraH, Skyrealm, Lumina, Gloves Up, and PocketPOS, it is part of his independent product work.",
     problem:
       "Cart and checkout flows are often treated as an afterthought on a storefront instead of a product someone can own.",
     solution:
@@ -589,7 +641,14 @@ const FEATURED_ORDER = [
   "docindy",
 ];
 
-const LAB_ORDER = ["rentarah", "lumina", "gloves-up", "pocketpos", "quickcart"];
+const LAB_ORDER = [
+  "rentarah",
+  "skyrealm",
+  "lumina",
+  "gloves-up",
+  "pocketpos",
+  "quickcart",
+];
 
 function sortBySlugOrder<T extends { slug: string }>(items: T[], order: string[]) {
   return [...items].sort((a, b) => {
