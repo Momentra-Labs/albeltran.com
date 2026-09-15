@@ -81,6 +81,56 @@ export const projects: Project[] = [
     demo: "https://docindy.ivisitdoc.com/",
   },
   {
+    slug: "enz-consultancy",
+    name: "ENZ Education Consultancy",
+    shortName: "ENZ",
+    tagline:
+      "Study-abroad consultancy site at enzconsultancy.ca — destinations, services, and a book-a-call path.",
+    role: "Software Engineer · professional product delivery",
+    year: "2024–2026",
+    featured: true,
+    kind: "selected",
+    overview:
+      "ENZ Education Consultancy Services is a public study-abroad site at enzconsultancy.ca. The homepage presents destination countries, Study / Work / Visit services, and conversion paths to book a call or take a free assessment. I contributed professional product delivery on this client-facing web product.",
+    problem:
+      "A Manila-based education consultancy has to explain study, work, and visit options across several countries without losing the next step: get assessed or talk to a consultant.",
+    solution:
+      "Shipped the public consultancy site: destination and service information architecture, country surfaces, and book-a-call / free-assessment conversion. Marketing claims on the site are the client's — not personal performance metrics.",
+    architecture: [
+      "Public marketing site at enzconsultancy.ca",
+      "Study, Work, and Visit service paths by destination country",
+      "Book-a-call and free-assessment conversion on the homepage",
+      "LeadConnector-hosted experience for the live funnel",
+    ],
+    techStack: ["LeadConnector"],
+    features: [
+      "Homepage gateway copy and Book a Call path",
+      "Country surfaces for Spain, Canada, Australia, Germany, New Zealand, the United States, Ireland, and the United Kingdom",
+      "Study, Work, and Visit service navigation",
+      "About, team, FAQs, credentials, promos, and referral program",
+      "Free eligibility assessment call to action",
+    ],
+    challenges: [
+      "Keeping a multi-country service menu coherent on one start path",
+      "Shipping a client marketing site without treating awards copy as personal proof",
+    ],
+    performance: [
+      "Live production site at https://enzconsultancy.ca/",
+      "Shipped as professional product delivery, separate from Momentra Labs personal products",
+    ],
+    lessons: [
+      "Consultancy sites succeed when destination choice and the next conversation are obvious",
+      "Client marketing claims stay on the client site — the case study should describe the product, not the awards",
+    ],
+    screenshots: [
+      {
+        src: "/covers/enz-consultancy.png",
+        alt: "ENZ Education Consultancy homepage at enzconsultancy.ca — study-abroad gateway and Book a Call path",
+      },
+    ],
+    demo: "https://enzconsultancy.ca/",
+  },
+  {
     slug: "disney-institute",
     name: "Disney Institute Platform",
     shortName: "Disney Institute",
@@ -639,6 +689,7 @@ const FEATURED_ORDER = [
   "disney-experiences",
   "disney-institute",
   "docindy",
+  "enz-consultancy",
 ];
 
 const LAB_ORDER = [
