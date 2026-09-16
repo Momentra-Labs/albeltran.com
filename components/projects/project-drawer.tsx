@@ -11,6 +11,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { ArchitectureFlow } from "@/components/projects/architecture-flow";
+import { ProjectStory } from "@/components/projects/project-story";
 import type { Project } from "@/content/projects";
 
 export function ProjectDrawer({
@@ -49,10 +50,17 @@ export function ProjectDrawer({
               </section>
               <section>
                 <h3 className="mb-2 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground">
+                  Role
+                </h3>
+                <p>{project.role}</p>
+              </section>
+              <section>
+                <h3 className="mb-2 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground">
                   Architecture
                 </h3>
                 <ArchitectureFlow steps={project.architecture} />
               </section>
+              <ProjectStory project={project} />
               <section>
                 <h3 className="mb-2 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground">
                   Implementation

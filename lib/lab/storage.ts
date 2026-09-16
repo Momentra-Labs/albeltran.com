@@ -164,7 +164,11 @@ function unlockAchievements(store: LabStore): AchievementId[] {
   const completedCount = Object.keys(store.completed).length;
   if (completedCount >= 1) unlocked.add("first-fix");
   if (countExperience(store, "debug-this") >= 10) unlocked.add("bug-hunter");
-  if (countExperience(store, "production-fire") >= 5) unlocked.add("production-hero");
+  if (
+    countExperience(store, "production-fire") + countExperience(store, "incident") >= 5
+  ) {
+    unlocked.add("production-hero");
+  }
   if (countExperience(store, "system-design") >= 10) unlocked.add("architect");
   if (countExperience(store, "sql-arena") >= 10) unlocked.add("sql-wizard");
   if (Object.values(store.completed).some((item) => item.underTarget)) {

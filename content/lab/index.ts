@@ -9,3 +9,5 @@ export * from "./sql-arena";
 export * from "./production-fire";
 export * from "./cloud-cost";
 export * from "./interview";
+export * from "./incidents";
+export * from "./how-id-build";

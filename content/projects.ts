@@ -28,6 +28,21 @@ export type Project = {
   privacyPolicy?: string;
   relatedArticles?: string[];
   relatedExperience?: string[];
+  story?: {
+    constraints?: string;
+    hardPart?: string;
+    tradeoff?: string;
+    whatBroke?: string;
+    whatChanged?: string;
+    differently?: string;
+  };
+  diagram?: {
+    id: string;
+    label: string;
+    purpose: string;
+    tradeoff: string;
+    scale: string;
+  }[];
 };
 
 export const projects: Project[] = [
@@ -79,6 +94,25 @@ export const projects: Project[] = [
       },
     ],
     demo: "https://docindy.ivisitdoc.com/",
+    story: {
+      constraints:
+        "A multi-specialty care brand still needs one obvious next step. Clinical claims stay on the product — not in this case study.",
+      hardPart:
+        "Keeping weight-loss, adjacent specialties, and intake on one public start path without fragmenting the journey.",
+      tradeoff:
+        "A single Vite SPA is faster to ship than a suite of microsites. It also concentrates every specialty's copy in one release.",
+      whatBroke:
+        "Nothing I can publish as a client incident. The hard part was editorial, not a named outage.",
+      whatChanged:
+        "The live site is the record: care journeys, shop, BMI start, partner apps.",
+      differently:
+        "I would keep the same hard line between UI delivery and clinical proof, and I would instrument the get-started path before adding another specialty.",
+    },
+    diagram: [
+      { id: "client", label: "Patient", purpose: "Arrives from search or a partner app.", tradeoff: "One entry, many specialties.", scale: "CDN and static assets do the easy work." },
+      { id: "web", label: "Vite SPA", purpose: "Care discovery, shop, BMI, login.", tradeoff: "Coupled releases.", scale: "Split routes if a specialty needs its own cadence." },
+      { id: "intake", label: "Intake", purpose: "Get-started and checkout leave the brochure.", tradeoff: "Handoff has to be obvious.", scale: "This is the product, not the marketing page." },
+    ],
   },
   {
     slug: "enz-consultancy",
@@ -129,6 +163,25 @@ export const projects: Project[] = [
       },
     ],
     demo: "https://enzconsultancy.ca/",
+    story: {
+      constraints:
+        "A consultancy site has to name destinations and still leave one obvious next conversation. Awards copy stays on the client site.",
+      hardPart:
+        "Study, work, and visit across several countries without turning the homepage into a directory.",
+      tradeoff:
+        "A LeadConnector-hosted funnel ships the conversion path faster than a custom React rebuild. It also means the live stack is the host's, not a hand-rolled SPA.",
+      whatBroke:
+        "Nothing I can publish as a client incident. The risk is treating platform chrome as original engineering.",
+      whatChanged:
+        "The live site is the record: destinations, services, book-a-call, free assessment.",
+      differently:
+        "I would keep the hosted funnel while the conversion path is the product, and I would not rewrite it into a custom stack to make a case study prettier.",
+    },
+    diagram: [
+      { id: "visitor", label: "Visitor", purpose: "Arrives from search or a referral.", tradeoff: "One start path, many countries.", scale: "Marketing traffic, not an API farm." },
+      { id: "site", label: "Public site", purpose: "Destinations, services, FAQs, team.", tradeoff: "Hosted on LeadConnector.", scale: "The host owns runtime and forms." },
+      { id: "call", label: "Book / assess", purpose: "The next conversation.", tradeoff: "Conversion lives in the funnel, not a custom checkout.", scale: "Consultants, not servers, are the capacity." },
+    ],
   },
   {
     slug: "disney-institute",
@@ -182,6 +235,25 @@ export const projects: Project[] = [
     demo: "https://www.disneyinstitute.com/",
     relatedArticles: ["aem-reusable-components"],
     relatedExperience: ["myridius"],
+    story: {
+      constraints:
+        "Enterprise authoring, multiple delivery teams, and a brand that cannot look experimental. Diagrams here are generalized — not an internal Disney topology.",
+      hardPart:
+        "Reusable components only help if authors recognize them and teams share names.",
+      tradeoff:
+        "A shared AEM library slows the first ticket and speeds the twentieth. Local one-offs feel faster until they fork.",
+      whatBroke:
+        "Nothing I can publish as a client incident. The recurring cost was duplicate authoring, not a named outage.",
+      whatChanged:
+        "Shared component patterns and clearer authoring paths on the public Institute site.",
+      differently:
+        "I would still start with the authoring workflow, then the component API — not the other way around.",
+    },
+    diagram: [
+      { id: "author", label: "Authors", purpose: "Write courses and keynotes in the CMS.", tradeoff: "Governance vs speed.", scale: "Many authors, one library." },
+      { id: "aem", label: "AEM", purpose: "Content, templates, and the shared component set.", tradeoff: "Enterprise contracts.", scale: "Publish tiers — not shown in detail." },
+      { id: "edge", label: "Public site", purpose: "disneyinstitute.com for a global audience.", tradeoff: "What authors can do is what the web can show.", scale: "CDN and dispatcher patterns, generalized." },
+    ],
   },
   {
     slug: "national-geographic",
@@ -235,6 +307,25 @@ export const projects: Project[] = [
     demo: "https://www.nationalgeographic.com/",
     relatedArticles: ["ai-augmented-engineering"],
     relatedExperience: ["myridius"],
+    story: {
+      constraints:
+        "A flagship publishing brand. Story hierarchy and photography come first. This diagram is generalized — not an internal National Geographic topology.",
+      hardPart:
+        "Reusable front-end patterns on a site that must still feel like a magazine, not a component catalog.",
+      tradeoff:
+        "Shared UI keeps teams aligned. Over-abstracting a story page makes editors fight the template.",
+      whatBroke:
+        "Nothing I can publish as a client incident. The hard part was editorial consistency, not a named outage.",
+      whatChanged:
+        "The public nationalgeographic.com experience is the record.",
+      differently:
+        "I would keep contracts and names boring, and I would not invent a parallel design system beside the one authors already use.",
+    },
+    diagram: [
+      { id: "desk", label: "Editorial", purpose: "Stories, photography, video.", tradeoff: "Hierarchy over chrome.", scale: "Global readership." },
+      { id: "web", label: "Publishing web", purpose: "Reusable page patterns.", tradeoff: "Shared UI vs story-specific layouts.", scale: "Many templates, one reader path." },
+      { id: "reader", label: "Reader", purpose: "Arrives for the story, not the stack.", tradeoff: "Performance is part of trust.", scale: "CDN and caching, generalized." },
+    ],
   },
   {
     slug: "disney-experiences",
@@ -489,6 +580,25 @@ export const projects: Project[] = [
     ],
     demo: "https://rentahub2026.github.io/",
     repository: "https://github.com/rentahub2026/rentahub2026.github.io",
+    story: {
+      constraints:
+        "Philippines-first rental flow. Public customer app on GitHub Pages. API and admin live elsewhere.",
+      hardPart:
+        "A marketplace is a shared ledger. Availability cannot be a private notebook — that lesson is also in the postmortems.",
+      tradeoff:
+        "Splitting web, API, and admin keeps the Pages demo honest about what it hosts. It also means three repos to keep in step.",
+      whatBroke:
+        "Not a published outage. The constraint that hurt was treating listing search as if it were a brochure.",
+      whatChanged:
+        "The public customer surface is live. Hosts and renters share one booking story.",
+      differently:
+        "I would keep the split. I would not sell offline-first as a default for vehicle inventory.",
+    },
+    diagram: [
+      { id: "renter", label: "Renter / host", purpose: "Search, book, or list in PHP.", tradeoff: "One SPA for both roles.", scale: "Pages can only host the customer UI." },
+      { id: "web", label: "Customer SPA", purpose: "Vite app at rentahub2026.github.io.", tradeoff: "No server secrets in this repo.", scale: "API stays in a sibling service." },
+      { id: "api", label: "API", purpose: "Express + Prisma in rentarah-api.", tradeoff: "Availability is shared state.", scale: "Admin is a third app." },
+    ],
   },
   {
     slug: "skyrealm",
@@ -541,6 +651,25 @@ export const projects: Project[] = [
       },
     ],
     demo: "https://skyrealm-ruby.vercel.app/",
+    story: {
+      constraints:
+        "A personal game has to be playable from a URL. No store listing. No install.",
+      hardPart:
+        "Cover, first Guardian, and controls have to land in one browser session.",
+      tradeoff:
+        "One Vite bundle is honest and shippable. It also means the marketing cover and the game loop share a release.",
+      whatBroke:
+        "Not a published outage. The failure mode to avoid is a trailer page that never plays.",
+      whatChanged:
+        "The live demo is the product.",
+      differently:
+        "I would still ship the loop first. I would split the cover route only if the bundle started to hurt first paint.",
+    },
+    diagram: [
+      { id: "player", label: "Player", purpose: "Opens a URL. No install.", tradeoff: "Browser constraints are the console.", scale: "One session, one machine." },
+      { id: "spa", label: "Vite SPA", purpose: "Cover plus Play Now.", tradeoff: "Shared release.", scale: "Vercel static host." },
+      { id: "loop", label: "Game loop", purpose: "Guardian, Aetherlings, HUD.", tradeoff: "Feel over a backend.", scale: "Client-side. No live telemetry here." },
+    ],
   },
   {
     slug: "lumina",
@@ -593,6 +722,25 @@ export const projects: Project[] = [
     demo: "https://lumina-momentra-labs.vercel.app/",
     repository: "https://github.com/codemoon2019/lumina",
     relatedArticles: ["ai-augmented-engineering"],
+    story: {
+      constraints:
+        "Gemini and ElevenLabs keys must never ship in the Vite bundle. Copy stays grounding, not therapy.",
+      hardPart:
+        "SPA + serverless /api only works if rewrites keep /api/* off the index.html fallback.",
+      tradeoff:
+        "A quiet first visit costs an extra handshake. A blank prompt would have shipped faster and felt worse.",
+      whatBroke:
+        "The failure mode to avoid was leaking keys via VITE_ prefixes. That is a design constraint, not a war story.",
+      whatChanged:
+        "Coach and optional voice are live. Preferred name stays in localStorage.",
+      differently:
+        "Same split: keys on the server, intro data local. I would add an explicit privacy line on the first screen sooner.",
+    },
+    diagram: [
+      { id: "person", label: "Visitor", purpose: "Check-in, then the daily board.", tradeoff: "Name lives on-device.", scale: "No account." },
+      { id: "spa", label: "Lumina SPA", purpose: "React + Vite + motion.", tradeoff: "Static host plus functions.", scale: "Vercel rewrite for /api." },
+      { id: "coach", label: "/api/coach", purpose: "Gemini stays server-side.", tradeoff: "You pay for a function on every ask.", scale: "Do not put the key in the client." },
+    ],
   },
   {
     slug: "pocketpos",

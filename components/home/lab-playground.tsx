@@ -15,10 +15,15 @@ export function LabPlayground() {
             Engineering Lab
           </p>
           <h2 className="mt-2 font-display text-3xl tracking-tight text-foreground sm:text-4xl">
-            Don&apos;t just read my portfolio. Break something.
+            Production problems. You investigate.
           </h2>
           <p className="mt-3 max-w-2xl text-sm text-muted">
-            Browser-only simulators for debugging, system design, incidents, and interviews.
+            System failures. Architectural trade-offs. Browser-only desks — no live telemetry.
+            Start with{" "}
+            <Link href="/lab/incident/?c=4821" className="text-foreground underline-offset-4 hover:underline">
+              Incident #4821
+            </Link>
+            .
           </p>
         </Reveal>
         <SpreadRule className="mt-5" />

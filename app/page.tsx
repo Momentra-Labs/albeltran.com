@@ -1,10 +1,15 @@
 import { HomeHero } from "@/components/home/home-hero";
+import { IssueWire } from "@/components/home/issue-wire";
 import { WorldMarks } from "@/components/home/world-marks";
+import { ChoosePath } from "@/components/home/choose-path";
 import { IssueFolio } from "@/components/home/issue-folio";
 import { EngineeringSystem } from "@/components/home/engineering-system";
 import { SelectedWork } from "@/components/home/selected-work";
 import { LabPlayground } from "@/components/home/lab-playground";
 import { EngineeringLab } from "@/components/home/engineering-lab";
+import { PhilosophyStrip } from "@/components/home/philosophy-strip";
+import { CurrentlyBuilding } from "@/components/home/currently-building";
+import { ThingsThatDidntWork } from "@/components/home/things-that-didnt-work";
 import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { HomeNotes } from "@/components/home/home-notes";
 import { HomeContact } from "@/components/home/home-contact";
@@ -56,10 +61,15 @@ export default function HomePage() {
       <JsonLd data={schema} />
       <RecruiterStrip />
       <HomeHero />
+      <IssueWire />
       <WorldMarks />
+      <ChoosePath />
       <SelectedWork projects={featured} />
       <LabPlayground />
       <EngineeringLab projects={lab} />
+      <PhilosophyStrip />
+      <CurrentlyBuilding />
+      <ThingsThatDidntWork />
       <EngineeringSystem />
       <ExperienceTimeline items={featuredExperience} />
       <HomeNotes />
