@@ -25,22 +25,22 @@ export function ArchitectureDiagram({
   if (nodes.length === 0 || !active) return null;
 
   return (
-    <figure className="mt-6 border border-border">
+    <figure className="mt-6 w-full min-w-0 border border-border">
       <p id={labelId} className="border-b border-border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-dim">
         {caption}
       </p>
       <div
-        className="flex flex-col gap-0 p-4 sm:flex-row sm:flex-wrap sm:items-stretch sm:justify-center sm:gap-0"
+        className="flex w-full min-w-0 flex-col gap-0 p-4 md:flex-row md:flex-wrap md:items-stretch md:justify-center"
         role="list"
         aria-labelledby={labelId}
       >
         {nodes.map((node, index) => {
           const selected = node.id === active.id;
           return (
-            <div key={node.id} className="flex flex-col sm:flex-row sm:items-center" role="listitem">
+            <div key={node.id} className="flex min-w-0 flex-col md:flex-row md:items-center" role="listitem">
               {index > 0 ? (
                 <span
-                  className="mx-auto h-4 w-px bg-border sm:mx-0 sm:h-px sm:w-6"
+                  className="mx-auto h-4 w-px bg-border md:mx-0 md:h-px md:w-6"
                   aria-hidden
                 />
               ) : null}
@@ -51,7 +51,7 @@ export function ArchitectureDiagram({
                 aria-pressed={selected}
                 aria-describedby={`${labelId}-detail`}
                 className={cn(
-                  "min-h-11 min-w-[9.5rem] border px-3 py-2 text-left font-mono text-[11px] uppercase tracking-[0.14em]",
+                  "min-h-11 w-full border px-3 py-2 text-left font-mono text-[11px] uppercase tracking-[0.14em] md:w-auto md:min-w-[9.5rem]",
                   selected
                     ? "border-accent text-foreground"
                     : "border-border text-muted hover:border-border-bright hover:text-foreground",

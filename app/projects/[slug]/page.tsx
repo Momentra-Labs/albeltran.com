@@ -80,10 +80,10 @@ export default async function ProjectDetailPage({ params }: Props) {
         ]}
       />
       <Container className="py-16 sm:py-20">
-        <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-dim">
+        <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-dim [overflow-wrap:anywhere]">
           {project.kind === "lab" ? "Lab" : "Case study"} · {project.role}
         </p>
-        <p className="mb-10 max-w-3xl text-base leading-relaxed text-muted">
+        <p className="mb-10 max-w-3xl text-base leading-relaxed break-words text-muted">
           Written by{" "}
           <Link href="/about/" className="text-accent hover:underline">
             Al Beltran

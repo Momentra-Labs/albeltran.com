@@ -23,11 +23,11 @@ export function PageHeader({
             {label}
           </p>
         )}
-        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="max-w-3xl text-3xl font-semibold tracking-tight break-words text-foreground sm:text-4xl lg:text-5xl">
           {title}
         </h1>
         {description && (
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+          <p className="mt-5 max-w-2xl text-base leading-relaxed break-words text-muted sm:text-lg">
             {description}
           </p>
         )}

@@ -66,10 +66,10 @@ export default function LabPage() {
           <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.22em] text-muted">
             {person.shortName}
           </p>
-          <h1 className="mt-2 max-w-3xl font-display text-5xl tracking-tight text-foreground sm:text-6xl">
+          <h1 className="mt-2 max-w-3xl font-display text-4xl tracking-tight break-words text-foreground sm:text-5xl lg:text-6xl">
             Engineering Lab
           </h1>
-          <p className="mt-5 max-w-2xl text-lg text-foreground">
+          <p className="mt-5 max-w-2xl text-base text-foreground sm:text-lg">
             Production problems. System failures. Architectural trade-offs. You investigate.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">

@@ -37,7 +37,7 @@ export function WorldMarks() {
                       {mark.name}
                     </Link>
                   </h3>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted [overflow-wrap:anywhere] sm:tracking-[0.16em]">
                     {mark.note}
                   </p>
                 </article>

@@ -152,7 +152,7 @@ export function EasterDesk() {
 
   return (
     <div
-      className="fixed inset-x-3 bottom-3 z-[70] mx-auto max-w-lg border border-border bg-background p-3 shadow-none sm:inset-x-auto sm:right-3 sm:left-auto"
+      className="fixed inset-x-3 bottom-3 z-[70] mx-auto w-auto max-w-[min(32rem,calc(100vw-1.5rem))] border border-border bg-background p-3 shadow-none sm:inset-x-auto sm:right-3 sm:left-auto"
       role="dialog"
       aria-label="Issue console"
     >

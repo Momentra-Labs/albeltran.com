@@ -171,10 +171,10 @@ export function SiteNav() {
 
   return (
     <>
-      <header className="fixed left-3 right-3 top-3 z-[60]">
+      <header className="fixed inset-x-3 z-[60] top-[max(0.75rem,env(safe-area-inset-top))]">
         <div
           className={cn(
-            "relative grid h-12 grid-cols-[auto_1fr_auto] items-center gap-3 border px-3 sm:px-5 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-6",
+            "relative grid h-12 min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-2 border px-3 sm:gap-3 sm:px-5 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-6",
             raised
               ? reduceMotion
                 ? "border-border bg-background"
@@ -206,13 +206,13 @@ export function SiteNav() {
             <span className="truncate font-mono text-[10px] tracking-[0.22em] text-foreground">
               {person.brand}
             </span>
-            <span className="hidden font-mono text-[9px] uppercase tracking-[0.2em] text-muted-dim sm:inline">
+            <span className="hidden font-mono text-[9px] uppercase tracking-[0.2em] text-muted-dim lg:inline">
               Vol. 01
             </span>
           </Link>
 
           <nav
-            className="hidden items-center justify-center md:flex"
+            className="hidden items-center justify-center lg:flex"
             aria-label="Primary"
           >
             {SECTION_NAV.map((link, index) => {
@@ -261,7 +261,7 @@ export function SiteNav() {
             <button
               type="button"
               className={cn(
-                "hidden items-center gap-2 px-1 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted hover:text-foreground md:inline-flex",
+                "hidden items-center gap-2 px-1 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted hover:text-foreground lg:inline-flex",
                 focusRing,
               )}
               onClick={openPalette}
@@ -276,25 +276,26 @@ export function SiteNav() {
             <Link
               href={contactHref}
               data-cursor="→"
+              aria-label="Let's talk"
               aria-current={current === "contact" ? "page" : undefined}
               className={cn(
-                "inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors",
+                "inline-flex h-8 min-w-8 items-center justify-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors",
                 focusRing,
-                "px-2 py-1.5 md:border md:px-3",
+                "px-1.5 lg:h-auto lg:border lg:px-3 lg:py-1.5",
                 current === "contact"
-                  ? "text-accent md:border-accent"
-                  : "text-foreground hover:text-accent md:border-border md:hover:border-accent",
+                  ? "text-accent lg:border-accent"
+                  : "text-foreground hover:text-accent lg:border-border lg:hover:border-accent",
               )}
             >
-              Let&apos;s talk
-              <ArrowUpRight className="h-3 w-3" />
+              <span className="hidden lg:inline">Let&apos;s talk</span>
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
                 <button
                   type="button"
                   className={cn(
-                    "flex h-8 w-8 items-center justify-center text-muted hover:text-foreground md:hidden",
+                    "flex h-8 w-8 items-center justify-center text-muted hover:text-foreground lg:hidden",
                     focusRing,
                   )}
                   aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -309,7 +310,7 @@ export function SiteNav() {
               </SheetTrigger>
               <SheetContent
                 showClose={false}
-                className="top-[4.75rem] right-3 bottom-3 left-auto h-auto max-h-[calc(100dvh-5.5rem)] w-[min(100%,24rem)] border border-border shadow-none"
+                className="top-[4.75rem] right-3 bottom-3 left-auto h-auto max-h-[calc(100dvh-5.5rem)] w-[min(100%,24rem)] max-w-[calc(100vw-1.5rem)] border border-border shadow-none"
               >
                 <SheetHeader>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">

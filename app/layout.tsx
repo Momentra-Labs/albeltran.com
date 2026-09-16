@@ -147,7 +147,7 @@ export default function RootLayout({
           href="/feed.xml"
         />
       </head>
-      <body className="bg-background flex min-h-full flex-col font-sans text-foreground">
+      <body className="bg-background flex min-h-full min-w-0 flex-col font-sans text-foreground">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-3 focus:py-2 focus:text-white"
@@ -157,7 +157,7 @@ export default function RootLayout({
         <RecruiterProvider>
           <CustomCursor />
           <SiteNav />
-          <main id="main-content" className="flex-1">
+          <main id="main-content" className="min-w-0 flex-1">
             {children}
           </main>
           <Footer />

@@ -20,15 +20,15 @@ export function BuildStudio() {
   if (!challenge) return null;
 
   return (
-    <div>
-      <div className="mb-6 flex flex-wrap gap-2">
+    <div className="min-w-0">
+      <div className="mb-6 grid gap-2 sm:flex sm:flex-wrap">
         {BUILD_CHALLENGES.map((item) => (
           <button
             key={item.id}
             type="button"
             onClick={() => setId(item.id)}
             className={cn(
-              "min-h-11 border px-3 py-2 text-left font-mono text-[11px] uppercase tracking-[0.12em]",
+              "min-h-11 w-full border px-3 py-2 text-left font-mono text-[11px] uppercase tracking-[0.12em] sm:w-auto",
               item.id === challenge.id
                 ? "border-accent text-foreground"
                 : "border-border text-muted hover:text-foreground",
@@ -75,8 +75,8 @@ function BuildBoard({ challenge }: { challenge: BuildChallenge }) {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,22rem)]">
-      <div>
+    <div className="grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,22rem)]">
+      <div className="min-w-0">
         <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           How I&apos;d build this
         </p>
@@ -131,7 +131,7 @@ function BuildBoard({ challenge }: { challenge: BuildChallenge }) {
         </button>
       </div>
 
-      <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
+      <aside className="min-w-0 space-y-4 lg:sticky lg:top-28 lg:self-start">
         <ArchitectureDiagram
           caption="The diagram fills in as you choose. Notes wait until you commit."
           nodes={[
