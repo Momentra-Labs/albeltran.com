@@ -27,7 +27,7 @@ export function LabPlayground() {
           </p>
         </Reveal>
         <SpreadRule className="mt-5" />
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
           {featured.map((experience, index) => (
             <RevealItem key={experience.id} index={index}>
               <article className="magazine-plate flex h-full flex-col border border-border p-4 transition-colors hover:border-border-bright">

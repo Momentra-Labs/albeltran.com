@@ -91,32 +91,15 @@ function CoverTitle({ reduce }: { reduce: boolean | null }) {
   }
 
   return (
-    <>
-      <span className="invisible" aria-hidden>
-        {text}
-      </span>
-      <span className="absolute left-0 top-0 whitespace-nowrap" aria-hidden>
-        {text.split("").map((char, index) => (
-          <span
-            key={`${char}-${index}`}
-            className="inline-block overflow-hidden align-bottom"
-          >
-            <motion.span
-              className="inline-block"
-              initial={{ y: "110%", clipPath: "inset(0 0 100% 0)" }}
-              animate={{ y: "0%", clipPath: "inset(0 0 0% 0)" }}
-              transition={{
-                duration: 0.72,
-                ease: coverEase,
-                delay: index * 0.038,
-              }}
-            >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          </span>
-        ))}
-      </span>
-    </>
+    <motion.span
+      aria-hidden
+      className="inline-block"
+      initial={{ opacity: 0.2, clipPath: "inset(0 0 88% 0)" }}
+      animate={{ opacity: 1, clipPath: "inset(0 0 0% 0)" }}
+      transition={{ duration: 0.85, ease: coverEase, delay: 0.06 }}
+    >
+      {text}
+    </motion.span>
   );
 }
 
@@ -278,10 +261,10 @@ export function HomeHero() {
         Myridius. Maya fintech.
       </p>
 
-      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] lg:h-full lg:min-h-0 lg:max-h-full lg:overflow-hidden lg:grid-rows-[auto_minmax(0,1fr)_auto]">
-        <header className="flex items-start justify-between gap-6 px-5 pt-20 sm:px-8 lg:px-10">
+      <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] content-start lg:h-full lg:min-h-0 lg:max-h-full lg:content-stretch lg:overflow-hidden lg:grid-rows-[auto_minmax(0,1fr)_auto]">
+        <header className="flex items-start justify-between gap-4 px-5 pt-20 sm:px-8 lg:gap-8 lg:px-10">
           <h1
-            className="relative font-display text-[clamp(2.4rem,8vw,7.2rem)] leading-[0.82] tracking-tight text-foreground"
+            className="relative min-w-0 flex-1 whitespace-nowrap font-display text-[clamp(1.7rem,8.8vw,7.2rem)] leading-[0.9] tracking-tight text-foreground lg:text-[clamp(3.1rem,9.4vw,6.4rem)]"
             aria-label="AL BELTRAN"
           >
             <CoverTitle reduce={reduce} />
@@ -302,24 +285,24 @@ export function HomeHero() {
         </motion.div>
 
         <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(20rem,48%)] lg:gap-6 lg:px-10 lg:py-0">
-          <figure className="magazine-plate group relative order-2 flex min-h-0 origin-top flex-col lg:order-last lg:h-full lg:min-h-0 lg:self-stretch">
+          <figure className="magazine-plate group relative order-2 flex min-h-0 w-full origin-top flex-col lg:order-last lg:h-full lg:min-h-0 lg:self-stretch">
             <div
-              className={`flex min-h-0 flex-1 flex-col ${reduce ? "" : "magazine-plate-enter"}`}
+              className={`flex w-full flex-col items-center lg:h-full lg:min-h-0 lg:flex-1 lg:items-stretch ${reduce ? "" : "magazine-plate-enter"}`}
             >
-            <div className="magazine-plate-print relative min-h-0 lg:flex-1">
+            <div className="magazine-plate-print relative w-[min(100%,calc(11rem+48vw))] shrink-0 lg:h-full lg:min-h-0 lg:w-full lg:max-w-none lg:flex-1 lg:shrink">
               <span className="magazine-plate-back" aria-hidden />
               <p className="magazine-plate-spine hidden lg:block">
                 Cover portrait · 01
               </p>
-              <div className="magazine-portrait magazine-scan relative aspect-[3/4] max-h-[62vh] overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
+              <div className="magazine-portrait magazine-scan relative aspect-[3/4] w-full overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
                 <Image
                   src={person.photo}
                   alt={person.imageAlt}
                   fill
                   priority
                   quality={90}
-                  sizes="(max-width: 1024px) 100vw, 48vw"
-                  className={`magazine-portrait-img object-cover object-top ${
+                  sizes="(max-width: 1023px) min(92vw, calc(11rem + 48vw)), 48vw"
+                  className={`magazine-portrait-img ${
                     reduce
                       ? ""
                       : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"
@@ -339,7 +322,7 @@ export function HomeHero() {
                 <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
               </div>
             </div>
-            <figcaption className="magazine-plate-caption mt-3">
+            <figcaption className="magazine-plate-caption mt-3 w-[min(100%,calc(11rem+48vw))] lg:w-full">
               <span>
                 <span className="text-accent">Cover</span>
                 <span className="text-muted-dim"> / Al Beltran</span>
@@ -349,7 +332,7 @@ export function HomeHero() {
             </div>
           </figure>
 
-          <div className="order-1 flex min-h-0 flex-col justify-end gap-6 pb-2 lg:justify-between lg:gap-8 lg:pt-2 lg:pb-6">
+          <div className="order-1 flex min-h-0 flex-col justify-start gap-6 pb-2 lg:justify-between lg:gap-8 lg:pt-2 lg:pb-6">
             <motion.div {...inkReveal(0.12, reduce)}>
               <CoverEpigraph />
             </motion.div>
@@ -362,7 +345,7 @@ export function HomeHero() {
                   I design, build, and ship digital products from idea to
                   production.
                 </p>
-                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted sm:text-[11px]">
+                <p className="mt-3 max-w-full font-mono text-[10px] uppercase leading-5 tracking-[0.12em] text-muted sm:tracking-[0.18em] sm:text-[11px]">
                   {person.currentRole} · {person.founderTitle}
                 </p>
               </motion.div>

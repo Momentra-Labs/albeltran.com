@@ -25,7 +25,7 @@ export function ProjectDrawer({
 }) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full max-w-xl overflow-y-auto p-6 sm:p-8">
+      <SheetContent className="w-full max-w-full overflow-y-auto p-6 sm:max-w-xl sm:p-8">
         {project ? (
           <>
             <SheetHeader className="pr-8">

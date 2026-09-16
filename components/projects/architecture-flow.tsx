@@ -15,10 +15,11 @@ export function ArchitectureFlow({
   const height = 72;
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("min-w-0 space-y-6", className)}>
+      <div className="hidden overflow-x-auto md:block">
       <svg
         viewBox={`0 0 ${width} ${height}`}
-        className="hidden h-auto w-full text-border md:block"
+        className="h-auto w-full min-w-[28rem] text-border"
         role="img"
         aria-label="Architecture flow"
       >
@@ -68,6 +69,7 @@ export function ArchitectureFlow({
           );
         })}
       </svg>
+      </div>
       <ol className="space-y-4">
         {steps.map((step, index) => (
           <li key={step} className="flex gap-4">

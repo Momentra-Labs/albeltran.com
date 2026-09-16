@@ -61,7 +61,7 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
                       <h3 className="font-display text-2xl tracking-tight text-foreground group-hover:text-accent">
                         {project.name}
                       </h3>
-                      <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
+                      <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted [overflow-wrap:anywhere]">
                         {project.year} · {project.role}
                       </p>
                     </div>

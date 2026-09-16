@@ -31,13 +31,13 @@ export function ChoosePath() {
                 <Link
                   href={item.href}
                   data-cursor="→"
-                  className="flex min-h-14 items-baseline justify-between gap-4 py-3 sm:py-4"
+                  className="flex min-h-14 min-w-0 items-baseline justify-between gap-3 py-3 sm:gap-4 sm:py-4"
                 >
                   <span className="font-mono text-[11px] text-accent">{item.index}</span>
-                  <span className="flex-1 font-display text-xl tracking-tight text-foreground sm:text-2xl">
+                  <span className="min-w-0 flex-1 font-display text-xl tracking-tight break-words text-foreground sm:text-2xl">
                     {item.label}
                   </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                  <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
                     Open
                   </span>
                 </Link>
