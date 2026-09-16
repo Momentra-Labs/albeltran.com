@@ -3,6 +3,7 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 import { person } from "@/content/person";
 import { coverMarksLine } from "@/content/marks";
 import { Container } from "@/components/shared/container";
+import { DeskMark } from "@/components/layout/desk-mark";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -34,6 +35,12 @@ export function Footer() {
           </Link>
           <Link href="/lab/" data-cursor="→" className="hover:text-foreground">
             Lab
+          </Link>
+          <Link href="/lab/incident/?c=4821" data-cursor="→" className="hover:text-foreground">
+            Incident Desk
+          </Link>
+          <Link href="/failures/" data-cursor="→" className="hover:text-foreground">
+            Postmortems
           </Link>
           <Link href="/contact/" data-cursor="→" className="hover:text-foreground">
             Contact
@@ -77,6 +84,7 @@ export function Footer() {
         </nav>
         <p className="text-xs text-muted-dim">
           © {year} {person.name}
+          <DeskMark />
         </p>
       </Container>
     </footer>

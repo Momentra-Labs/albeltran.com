@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
@@ -42,6 +42,7 @@ function sectionFromPath(pathname: string) {
   if (pathname.startsWith("/blog")) return "blog";
   if (pathname.startsWith("/lab")) return "lab";
   if (pathname.startsWith("/projects")) return "work";
+  if (pathname.startsWith("/failures")) return "lab";
   if (pathname.startsWith("/contact")) return "contact";
   return null;
 }
@@ -53,16 +54,68 @@ function sectionHref(hash: string, isHome: boolean) {
   return SECTION_PAGES[hash] ?? `/#${hash}`;
 }
 
+function subscribeReduceMotion(onChange: () => void) {
+  const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+  media.addEventListener("change", onChange);
+  return () => media.removeEventListener("change", onChange);
+}
+
+function reduceMotionSnapshot() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function subscribeScroll(onChange: () => void) {
+  window.addEventListener("scroll", onChange, { passive: true });
+  window.addEventListener("resize", onChange);
+  return () => {
+    window.removeEventListener("scroll", onChange);
+    window.removeEventListener("resize", onChange);
+  };
+}
+
+let scrollCache = { scrolled: false, progress: 0 };
+
+function scrollSnapshot() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const next = {
+    scrolled: window.scrollY > 16,
+    progress: max > 0 ? Math.min(window.scrollY / max, 1) : 0,
+  };
+  if (
+    scrollCache.scrolled === next.scrolled &&
+    scrollCache.progress === next.progress
+  ) {
+    return scrollCache;
+  }
+  scrollCache = next;
+  return scrollCache;
+}
+
+function modKeySnapshot() {
+  return /Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘" : "Ctrl";
+}
+
 export function SiteNav() {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState("work");
-  const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [modKey, setModKey] = useState("Ctrl");
+  const { scrolled, progress } = useSyncExternalStore(
+    subscribeScroll,
+    scrollSnapshot,
+    () => scrollCache,
+  );
+  const reduceMotion = useSyncExternalStore(
+    subscribeReduceMotion,
+    reduceMotionSnapshot,
+    () => false,
+  );
+  const modKey = useSyncExternalStore(
+    () => () => {},
+    modKeySnapshot,
+    () => "Ctrl",
+  );
   const isHome = pathname === "/";
   const routeSection = sectionFromPath(pathname);
   const current = pathname.startsWith("/lab")
@@ -82,29 +135,6 @@ export function SiteNav() {
   const openPaletteFromMenu = useCallback(() => {
     setMenuOpen(false);
     window.setTimeout(() => setOpen(true), 160);
-  }, []);
-
-  useEffect(() => {
-    setModKey(
-      /Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘" : "Ctrl",
-    );
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncReduce = () => setReduceMotion(media.matches);
-    syncReduce();
-    media.addEventListener("change", syncReduce);
-
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setScrolled(window.scrollY > 16);
-      setProgress(max > 0 ? Math.min(window.scrollY / max, 1) : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      media.removeEventListener("change", syncReduce);
-      window.removeEventListener("scroll", onScroll);
-    };
   }, []);
 
   useEffect(() => {

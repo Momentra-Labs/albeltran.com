@@ -7,7 +7,9 @@ export type LabExperienceId =
   | "sql-arena"
   | "production-fire"
   | "cloud-cost"
-  | "interview";
+  | "interview"
+  | "incident"
+  | "how-id-build";
 
 export type LabExperience = {
   id: LabExperienceId;

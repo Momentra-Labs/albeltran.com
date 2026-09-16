@@ -36,6 +36,16 @@ export const DynamicCloudStudio = dynamic(
   { loading: () => <p className="text-sm text-muted">Loading estimator…</p> },
 );
 
+export const DynamicIncidentStudio = dynamic(
+  () => import("@/components/lab/incident/incident-studio").then((mod) => mod.IncidentStudio),
+  { loading: () => <p className="text-sm text-muted">Loading desk…</p> },
+);
+
+export const DynamicBuildStudio = dynamic(
+  () => import("@/components/lab/how-id-build/build-studio").then((mod) => mod.BuildStudio),
+  { loading: () => <p className="text-sm text-muted">Loading brief…</p> },
+);
+
 export const DynamicInterviewStudio = dynamic(
   () => import("@/components/lab/interview/interview-studio").then((mod) => mod.InterviewStudio),
   { loading: () => <p className="text-sm text-muted">Loading interview…</p> },

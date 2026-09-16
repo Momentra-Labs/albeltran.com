@@ -37,6 +37,11 @@ export function CommandPalette({
       { id: "record", label: "Go to The record", href: "/#record" },
       { id: "work", label: "Go to Work", href: "/#work" },
       { id: "lab", label: "Engineering Lab", href: "/lab/" },
+      { id: "incident", label: "Incident Desk #4821", href: "/lab/incident/?c=4821" },
+      { id: "build", label: "How I'd Build This", href: "/lab/how-id-build/" },
+      { id: "failures", label: "Things that didn't work", href: "/failures/" },
+      { id: "think", label: "How I think", href: "/#think" },
+      { id: "building", label: "Currently building", href: "/#building" },
       { id: "momentra", label: "Momentra Labs", href: "/#lab" },
       { id: "experience", label: "Go to Experience", href: "/experience/" },
       { id: "writing", label: "Go to Writing", href: "/blog/" },
@@ -71,13 +76,16 @@ export function CommandPalette({
     return `${item.label} ${item.hint ?? ""}`.toLowerCase().includes(q);
   });
 
-  useEffect(() => {
-    if (!open) setQuery("");
-    setActive(0);
-  }, [open, query]);
+  function handleOpenChange(next: boolean) {
+    if (!next) {
+      setQuery("");
+      setActive(0);
+    }
+    onOpenChange(next);
+  }
 
   function run(item: PaletteItem) {
-    onOpenChange(false);
+    handleOpenChange(false);
     if (item.action) item.action();
     if (item.href) {
       if (item.href.endsWith(".pdf")) {
@@ -89,7 +97,7 @@ export function CommandPalette({
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="p-0 sm:p-0">
         <DialogTitle className="sr-only">Command palette</DialogTitle>
         <DialogDescription className="sr-only">
@@ -99,7 +107,10 @@ export function CommandPalette({
           <input
             autoFocus
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setActive(0);
+            }}
             onKeyDown={(event) => {
               if (event.key === "ArrowDown") {
                 event.preventDefault();

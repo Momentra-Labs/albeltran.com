@@ -2,6 +2,32 @@ import type { LabEducationBlock, LabExperience, LabExperienceId } from "./types"
 
 export const LAB_EXPERIENCES: readonly LabExperience[] = [
   {
+    id: "incident",
+    href: "/lab/incident/",
+    title: "Incident Desk",
+    kicker: "Investigate",
+    tagline: "Production problems. System failures. You open the channels.",
+    description:
+      "A browser incident desk: logs, metrics, traces, database, cache, API, deploys, and changes. Name the root cause. Then read the postmortem.",
+    seoTitle: "Incident Desk — Production Investigation Lab | Al Beltran",
+    seoDescription:
+      "Investigate fictional production incidents from logs, metrics, traces, and deploys in Al Beltran's Engineering Lab. Browser-only. No live telemetry.",
+    featured: true,
+  },
+  {
+    id: "how-id-build",
+    href: "/lab/how-id-build/",
+    title: "How I'd Build This",
+    kicker: "Trade-offs",
+    tagline: "Pick a store, a cache, and a bus. See what you just committed to.",
+    description:
+      "Architecture prompts with no single right stack. Each choice has strengths, weaknesses, and operational cost.",
+    seoTitle: "How I'd Build This — Architecture Trade-offs | Al Beltran",
+    seoDescription:
+      "Choose database, cache, and messaging for real system-design prompts and read the trade-offs in Al Beltran's Engineering Lab.",
+    featured: true,
+  },
+  {
     id: "debug-this",
     href: "/lab/debug-this/",
     title: "Debug This",
@@ -12,7 +38,6 @@ export const LAB_EXPERIENCES: readonly LabExperience[] = [
     seoTitle: "Debug This — Production Incident Practice | Al Beltran",
     seoDescription:
       "Practice finding root causes from logs, errors, and metrics in Al Beltran's browser-based debugging lab.",
-    featured: true,
   },
   {
     id: "system-design",
@@ -63,7 +88,6 @@ export const LAB_EXPERIENCES: readonly LabExperience[] = [
     seoTitle: "Production Is On Fire — Incident Response Simulator | Al Beltran",
     seoDescription:
       "Run timed incident-response scenarios and score downtime, cost, and reliability in Al Beltran's Engineering Lab.",
-    featured: true,
   },
   {
     id: "cloud-cost",

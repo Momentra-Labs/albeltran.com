@@ -21,7 +21,7 @@ import { buildMetadata } from "@/lib/seo";
 const PATH = "/lab/";
 const TITLE = "Al Beltran Engineering Lab";
 const DESCRIPTION =
-  "Interactive experiments, challenges, simulators, and games for developers. Break things. Fix things. Learn engineering.";
+  "Production problems, system failures, and architectural trade-offs. Investigate fictional incidents and sit with design decisions in Al Beltran's Engineering Lab.";
 
 export const metadata = buildMetadata({
   title: "Engineering Lab — Interactive Challenges for Developers | Al Beltran",
@@ -70,11 +70,11 @@ export default function LabPage() {
             Engineering Lab
           </h1>
           <p className="mt-5 max-w-2xl text-lg text-foreground">
-            Break things. Fix things. Learn engineering.
+            Production problems. System failures. Architectural trade-offs. You investigate.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-            Interactive experiments, challenges, simulators, and games for developers. Everything
-            runs in the browser. Progress stays on this device.
+            Interactive desks for incidents, design, SQL, and interviews. Everything runs in the
+            browser. Progress stays on this device. Nothing here is live production telemetry.
           </p>
         </Container>
       </header>

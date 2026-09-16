@@ -8,7 +8,12 @@ import { CustomCursor } from "@/components/layout/custom-cursor";
 import { defaultMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
+import dynamic from "next/dynamic";
 import "./globals.css";
+
+const EasterDesk = dynamic(() =>
+  import("@/components/layout/easter-desk").then((mod) => mod.EasterDesk),
+);
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -156,6 +161,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <EasterDesk />
         </RecruiterProvider>
         <PlausibleAnalytics />
       </body>

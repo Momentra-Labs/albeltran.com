@@ -1,19 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 
+function subscribeCursorMedia(onChange: () => void) {
+  const fine = window.matchMedia("(pointer: fine)");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  fine.addEventListener("change", onChange);
+  reduce.addEventListener("change", onChange);
+  return () => {
+    fine.removeEventListener("change", onChange);
+    reduce.removeEventListener("change", onChange);
+  };
+}
+
+function cursorEnabled() {
+  return (
+    window.matchMedia("(pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 export function CustomCursor() {
+  const enabled = useSyncExternalStore(
+    subscribeCursorMedia,
+    cursorEnabled,
+    () => false,
+  );
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [label, setLabel] = useState("");
-  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduce) return;
+    if (!enabled) return;
 
-    setEnabled(true);
     document.documentElement.classList.add("has-custom-cursor");
 
     const onMove = (event: MouseEvent) => {
@@ -29,7 +48,7 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", onMove);
       document.documentElement.classList.remove("has-custom-cursor");
     };
-  }, []);
+  }, [enabled]);
 
   if (!enabled) return null;
 

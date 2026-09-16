@@ -2,6 +2,38 @@ import type { DailyPrompt } from "./types";
 
 export const DAILY_PROMPTS: readonly DailyPrompt[] = [
   {
+    id: "desk-4821",
+    experienceId: "incident",
+    challengeId: "4821",
+    question:
+      "Checkout latency +382%. Pool at 98%. What do you open first?",
+    href: "/lab/incident/?c=4821",
+  },
+  {
+    id: "desk-stampede",
+    experienceId: "incident",
+    challengeId: "cache-stampede",
+    question:
+      "Hit rate 12%. TTL just changed. Is Redis down, or did someone ship a zero?",
+    href: "/lab/incident/?c=cache-stampede",
+  },
+  {
+    id: "desk-tax",
+    experienceId: "incident",
+    challengeId: "bad-deploy",
+    question:
+      "Error rate 18% on /checkout/tax. The binary is ninety seconds old.",
+    href: "/lab/incident/?c=bad-deploy",
+  },
+  {
+    id: "build-short",
+    experienceId: "how-id-build",
+    challengeId: "url-shortener",
+    question:
+      "100M redirects a day. Where do you refuse to put the click counter?",
+    href: "/lab/how-id-build/?c=url-shortener",
+  },
+  {
     id: "traffic-spike",
     experienceId: "production-fire",
     challengeId: "traffic-8x",

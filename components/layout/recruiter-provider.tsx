@@ -6,7 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
 } from "react";
 
 type RecruiterContextValue = {
@@ -16,25 +16,41 @@ type RecruiterContextValue = {
 };
 
 const RecruiterContext = createContext<RecruiterContextValue | null>(null);
+const RECRUITER_EVENT = "albeltran-recruiter";
+
+function readRecruiter() {
+  const fromQuery =
+    new URLSearchParams(window.location.search).get("view") === "recruiter";
+  const fromStore = window.localStorage.getItem("albeltran-recruiter") === "1";
+  return fromQuery || fromStore;
+}
+
+function subscribeRecruiter(onChange: () => void) {
+  window.addEventListener(RECRUITER_EVENT, onChange);
+  window.addEventListener("storage", onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener(RECRUITER_EVENT, onChange);
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
 
 export function RecruiterProvider({ children }: { children: React.ReactNode }) {
-  const [recruiter, setRecruiterState] = useState(false);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const fromQuery = params.get("view") === "recruiter";
-    const fromStore = window.localStorage.getItem("albeltran-recruiter") === "1";
-    setRecruiterState(fromQuery || fromStore);
-  }, []);
+  const recruiter = useSyncExternalStore(
+    subscribeRecruiter,
+    readRecruiter,
+    () => false,
+  );
 
   const setRecruiter = useCallback((value: boolean) => {
-    setRecruiterState(value);
     window.localStorage.setItem("albeltran-recruiter", value ? "1" : "0");
     const url = new URL(window.location.href);
     if (value) url.searchParams.set("view", "recruiter");
     else url.searchParams.delete("view");
     window.history.replaceState({}, "", url.toString());
     document.documentElement.classList.toggle("recruiter", value);
+    window.dispatchEvent(new Event(RECRUITER_EVENT));
   }, []);
 
   useEffect(() => {

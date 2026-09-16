@@ -20,6 +20,7 @@ import {
 } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 import { ArchitectureFlow } from "@/components/projects/architecture-flow";
+import { ProjectStory } from "@/components/projects/project-story";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -128,7 +129,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <article className="space-y-14">
             <section>
               <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-                01 · Problem
+                01 · The problem
               </h2>
               <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">
                 {project.problem}
@@ -139,7 +140,13 @@ export default async function ProjectDetailPage({ params }: Props) {
             </section>
             <section>
               <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-                02 · Solution
+                02 · My role
+              </h2>
+              <p className="mt-4 max-w-2xl leading-relaxed text-muted">{project.role}</p>
+            </section>
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                03 · The result
               </h2>
               <p className="mt-4 max-w-2xl leading-relaxed text-muted">
                 {project.solution}
@@ -148,7 +155,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             {project.architecture.length > 0 && (
               <section>
                 <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-                  03 · Architecture
+                  04 · Architecture
                 </h2>
                 <ArchitectureFlow
                   className="mt-6"
@@ -156,6 +163,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 />
               </section>
             )}
+            <ProjectStory project={project} />
             <section>
               <h2 className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
                 Implementation
