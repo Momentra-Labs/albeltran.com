@@ -1,5 +1,4 @@
 import { HomeHero } from "@/components/home/home-hero";
-import { IssueWire } from "@/components/home/issue-wire";
 import { WorldMarks } from "@/components/home/world-marks";
 import { ChoosePath } from "@/components/home/choose-path";
 import { IssueFolio } from "@/components/home/issue-folio";
@@ -61,8 +60,8 @@ export default function HomePage() {
       <JsonLd data={schema} />
       <RecruiterStrip />
       <HomeHero />
-      <IssueWire />
       <WorldMarks />
+      <EngineeringSystem />
       <ChoosePath />
       <SelectedWork projects={featured} />
       <LabPlayground />
@@ -70,7 +69,6 @@ export default function HomePage() {
       <PhilosophyStrip />
       <CurrentlyBuilding />
       <ThingsThatDidntWork />
-      <EngineeringSystem />
       <ExperienceTimeline items={featuredExperience} />
       <HomeNotes />
       <HomeContact />

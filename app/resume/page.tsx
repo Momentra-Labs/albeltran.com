@@ -4,9 +4,10 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { experience } from "@/content/experience";
-import { person, techGroups } from "@/content/person";
+import { CertificationsList } from "@/components/shared/certifications";
+import { TechStack } from "@/components/shared/tech-stack";
+import { person } from "@/content/person";
 import {
   breadcrumbSchema,
   graphSchema,
@@ -69,6 +70,20 @@ export default function ResumePage() {
             </p>
           </section>
 
+          <section id="certifications">
+            <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+              Licenses &amp; certifications
+            </h2>
+            <CertificationsList className="mt-5" />
+          </section>
+
+          <section>
+            <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+              Skills
+            </h2>
+            <TechStack className="mt-5" />
+          </section>
+
           <section>
             <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
               Experience
@@ -91,24 +106,6 @@ export default function ResumePage() {
                 </li>
               ))}
             </ul>
-          </section>
-
-          <section>
-            <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-              Skills
-            </h2>
-            <div className="mt-4 space-y-4">
-              {techGroups.map((group) => (
-                <div key={group.title}>
-                  <p className="mb-2 text-sm text-muted-dim">{group.title}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <Badge key={item}>{item}</Badge>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
           </section>
         </div>
       </Container>

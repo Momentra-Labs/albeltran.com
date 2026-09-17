@@ -1,0 +1,51 @@
+---
+title: "Next.js `'use cache'` Is a Commit, Not a Faster Fetch"
+description: "Cache Components in Next.js look like a performance flag. They are a freshness contract: what is cached, who invalidates it, and what the user is allowed to see stale."
+date: "2026-09-17"
+category: "Frontend"
+tags: ["next.js", "cache-components", "use-cache", "react", "architecture"]
+takeaways:
+  - "'use cache' stores a result. Write down the tag and the lifetime before you ship it."
+  - "Static export is a different commit: HTML at build time, no runtime cache."
+  - "If you cannot name who invalidates the entry, you do not have a cache. You have luck."
+---
+
+Next.js Cache Components — the `'use cache'` directive, cache life, and cache tags — will show up in every 2026 hiring conversation that mentions App Router. The slide says "faster." The production question is **what did we just freeze, and who is allowed to thaw it?**
+
+A cache is a product decision wearing a compiler attribute. You are telling the framework: this output is reusable across requests until a tag, a timer, or a deploy says otherwise. If marketing copy, prices, or auth-aware chrome sneak into that output, you did not get a speedup. You got a consistency bug with a good Core Web Vitals screenshot.
+
+## What the directive actually stores
+
+`'use cache'` is not `fetch` with `{ next: { revalidate: 60 } }` in a new hat. It caches **the result of a component or function**, including the HTML and the data it closed over, keyed by the framework's rules.
+
+Before I put it on a tree I write down:
+
+- **Inputs.** Which arguments and which request bits (none, locale, a content id) are part of the key?
+- **Lifetime.** Seconds, or until `revalidateTag`, or until the next build?
+- **Audience.** Public HTML, or something that assumed a cookie?
+
+If the answer is "it should just be fast," I do not add the directive. I fix the query.
+
+## Static export is a different commit
+
+This site is `output: "export"`. There is no Node server to consult a data cache on request. The commit is **HTML at build time**. That is the correct contract for a portfolio and a journal: the page is the artifact.
+
+Cache Components earn their keep on a **running Next server** where:
+
+- A product catalog can be public and tagged, then busted when a price changes
+- A dashboard shell can be cached while the account strip stays dynamic
+- You are willing to operate invalidation, not only deploys
+
+Do not copy `'use cache'` onto a static export and expect magic. You chose a different freshness model. Name it.
+
+## Invalidation is the interface
+
+The teams that get hurt are the ones who cache the page and forget the **write path**. A CMS publish, a stock update, a "hide this case study" toggle — each one needs a tag you actually call.
+
+I want three lines in the design doc:
+
+1. What is cached.
+2. Which tag it wears.
+3. Which job, webhook, or button expires that tag.
+
+If those lines do not exist, I keep the page dynamic or static-at-build. Stale-and-wrong is worse than slightly slower-and-true, especially when search and AI crawlers will quote the cached sentence for a week.

@@ -6,7 +6,9 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { aboutContent } from "@/content/about";
 import { aboutFaqs } from "@/content/faqs";
 import { featuredExperience } from "@/content/experience";
-import { techGroups, person } from "@/content/person";
+import { CertificationsList } from "@/components/shared/certifications";
+import { TechStack } from "@/components/shared/tech-stack";
+import { person } from "@/content/person";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import { getLabProjects } from "@/content/projects";
 import {
@@ -105,20 +107,7 @@ export default function AboutPage() {
                   ),
                 )}
               </div>
-              <div className="mt-8 grid gap-8 sm:grid-cols-2">
-                {techGroups.map((group) => (
-                  <div key={group.title}>
-                    <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-                      {group.title}
-                    </h3>
-                    <ul className="mt-3 space-y-1.5 text-sm text-muted">
-                      {group.items.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+              <TechStack className="mt-8" />
               <p className="mt-6 text-base leading-relaxed text-muted">
                 Day-to-day stacks commonly include React, Next.js, TypeScript,
                 JavaScript, Node.js, PHP, Laravel, Java, Spring Boot,
@@ -169,6 +158,25 @@ export default function AboutPage() {
                 Institute, DocIndy, ENZ Education Consultancy, and serverless
                 ETL work.
               </p>
+            </section>
+
+            <section id="certifications">
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Licenses &amp; certifications
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-muted">
+                Public certificates from Anthropic Education and HackerRank.
+                Verify each one on the issuer&apos;s page, or see them with the
+                career record on{" "}
+                <Link
+                  href="/experience/#certifications"
+                  className="text-accent hover:underline"
+                >
+                  experience
+                </Link>
+                .
+              </p>
+              <CertificationsList className="mt-6" />
             </section>
 
             <section id="engineering-interests">
@@ -304,6 +312,14 @@ export default function AboutPage() {
                     className="text-accent hover:underline"
                   >
                     Full experience timeline
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/experience/#certifications"
+                    className="text-accent hover:underline"
+                  >
+                    Licenses &amp; certifications
                   </Link>
                 </li>
                 <li>

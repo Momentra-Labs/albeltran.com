@@ -34,6 +34,8 @@ export const LEGACY_PILLARS: Record<string, JournalTopicId> = {
   "wasm-on-the-server": "nodejs-backend",
   "event-sourcing-without-religion": "system-design",
   "webgpu-browser-as-compute": "react",
+  "react-compiler-is-a-purity-contract": "react",
+  "nextjs-use-cache-is-a-commit": "react",
 };
 
 export { articleHref, isInterviewSlug };

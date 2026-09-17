@@ -599,20 +599,6 @@ h3,
   animation: live-pulse 1.8s ease-in-out infinite;
 }
 
-.stack-ticker:hover .stack-ticker-track {
-  animation-play-state: paused;
-}
-
-.stack-ticker-track {
-  animation: issue-drift 46s linear infinite;
-}
-
-@keyframes issue-drift {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 @keyframes magazine-scan-move {
   from {
     background-position: 0 -40%;
@@ -743,7 +729,6 @@ h3,
     transform: translate(-0.55rem, 0.55rem);
   }
 
-  .stack-ticker-track,
   .magazine-live-dot {
     animation: none;
   }

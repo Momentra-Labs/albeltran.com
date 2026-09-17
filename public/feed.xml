@@ -6,6 +6,20 @@
     <description>Engineering notes and interview prep by Al Andrew Paul Beltran. Published articles only.</description>
     <language>en-ph</language>
   <item>
+    <title>The React Compiler Is a Purity Contract, Not a Speed Hack</title>
+    <link>https://albeltran.com/blog/react-compiler-is-a-purity-contract/</link>
+    <guid>https://albeltran.com/blog/react-compiler-is-a-purity-contract/</guid>
+    <pubDate>Thu, 17 Sep 2026 00:00:00 GMT</pubDate>
+    <description>React Compiler only pays off if render stays pure. Memo soup is not the same contract. Here is what I change in components before I trust automatic memoization.</description>
+  </item>
+  <item>
+    <title>Next.js `&apos;use cache&apos;` Is a Commit, Not a Faster Fetch</title>
+    <link>https://albeltran.com/blog/nextjs-use-cache-is-a-commit/</link>
+    <guid>https://albeltran.com/blog/nextjs-use-cache-is-a-commit/</guid>
+    <pubDate>Thu, 17 Sep 2026 00:00:00 GMT</pubDate>
+    <description>Cache Components in Next.js look like a performance flag. They are a freshness contract: what is cached, who invalidates it, and what the user is allowed to see stale.</description>
+  </item>
+  <item>
     <title>TypeScript Interview Questions, With the Reasoning</title>
     <link>https://albeltran.com/interviews/typescript-interview-questions/</link>
     <guid>https://albeltran.com/interviews/typescript-interview-questions/</guid>

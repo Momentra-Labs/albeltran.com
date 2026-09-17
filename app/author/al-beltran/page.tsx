@@ -5,8 +5,9 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { JournalNav } from "@/components/journal/journal-nav";
 import { aboutContent } from "@/content/about";
 import { featuredExperience } from "@/content/experience";
-import { person, techGroups } from "@/content/person";
+import { person } from "@/content/person";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
+import { TechStack } from "@/components/shared/tech-stack";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import {
   authorProfilePageSchema,
@@ -92,20 +93,7 @@ export default function AuthorPage() {
                 The Interview Lab exists because those interviews are how
                 engineering teams actually hire.
               </p>
-              <div className="mt-8 grid gap-8 sm:grid-cols-2">
-                {techGroups.map((group) => (
-                  <div key={group.title}>
-                    <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-                      {group.title}
-                    </h3>
-                    <ul className="mt-3 space-y-1.5 text-sm text-muted">
-                      {group.items.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+              <TechStack className="mt-8" />
             </section>
 
             <section>
