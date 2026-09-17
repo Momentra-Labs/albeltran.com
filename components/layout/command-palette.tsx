@@ -35,6 +35,7 @@ export function CommandPalette({
   const items = useMemo<PaletteItem[]>(() => {
     const nav: PaletteItem[] = [
       { id: "record", label: "Go to The record", href: "/#record" },
+      { id: "stack", label: "Skills & certifications", href: "/#stack" },
       { id: "work", label: "Go to Work", href: "/#work" },
       { id: "lab", label: "Engineering Lab", href: "/lab/" },
       { id: "incident", label: "Incident Desk #4821", href: "/lab/incident/?c=4821" },
@@ -44,6 +45,11 @@ export function CommandPalette({
       { id: "building", label: "Currently building", href: "/#building" },
       { id: "momentra", label: "Momentra Labs", href: "/#lab" },
       { id: "experience", label: "Go to Experience", href: "/experience/" },
+      {
+        id: "certifications",
+        label: "Licenses & certifications",
+        href: "/experience/#certifications",
+      },
       { id: "writing", label: "Go to Writing", href: "/blog/" },
       { id: "about", label: "Go to About", href: "/about/" },
       { id: "now", label: "Go to Now", href: "/#now" },

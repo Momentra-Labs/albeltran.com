@@ -1,0 +1,47 @@
+---
+title: "The React Compiler Is a Purity Contract, Not a Speed Hack"
+description: "React Compiler only pays off if render stays pure. Memo soup is not the same contract. Here is what I change in components before I trust automatic memoization."
+date: "2026-09-17"
+category: "Frontend"
+tags: ["react", "react-compiler", "react-19", "frontend", "performance"]
+takeaways:
+  - "Treat React Compiler as a purity checker with a cache, not a turbo button."
+  - "Side effects in render, unstable props, and hidden mutation still cost you."
+  - "Delete memo that the compiler can prove. Keep memo that encodes a human invariant."
+---
+
+Search for "React Compiler" and you will get benchmark screenshots. The useful question is not "how much faster." It is **what did I just promise this compiler about my render function?**
+
+React Compiler memoizes work when it can prove a component is pure: same inputs, same output, no surprise writes. If your tree is a jungle of `Date.now()`, mutated arrays, and subscriptions opened during render, the compiler cannot save you. It can only refuse to pretend.
+
+## What "pure" means in a product UI
+
+I treat a component as compiler-ready when:
+
+- Props and state are the only inputs. No reading `window` to decide the first paint.
+- Render does not write. Effects, event handlers, and server actions own the writes.
+- Values I pass down are stable because the data is stable, not because I wrapped them in `useCallback` until ESLint went quiet.
+
+That is the same discipline that makes Server Components honest. A client leaf that shuffles arrays in render is still a client leaf. The compiler does not move it to the server. It only skips redoing work it can prove is redundant.
+
+## Memo soup is a different contract
+
+`React.memo`, `useMemo`, and `useCallback` are **hints you own**. You can lie. You can memoize a value that still changes every time because the dependency is an object literal. You can skip memo and get lucky on a small page.
+
+The compiler's contract is the opposite: **if it cannot prove purity, it will not invent it.** Wrapping every list item in `memo` "to help the compiler" is how you get two sources of truth and a UI that is hard to review.
+
+What I actually do on a React 19 tree:
+
+1. Delete `memo` that exists because a linter once complained.
+2. Keep `memo` when a child is expensive **and** the parent cannot help passing a new identity (third-party widgets, canvas hosts).
+3. Fix the impurity: move the clock to an effect, clone on write, stop putting `Math.random()` in render.
+
+## What I measure
+
+A compiler badge in the build log is not a performance budget. I still look at:
+
+- Re-renders that do real DOM work after a keystroke
+- Waterfalls you blamed on React that are actually fetch waterfalls
+- Lists that should be windowed whether or not they are memoized
+
+This magazine UI is mostly documents and a few interactive desks. Compiler or not, the rule is the same as the rest of the journal: **name the invariant.** If render is a function, keep it a function.

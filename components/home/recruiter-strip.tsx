@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { featuredExperience } from "@/content/experience";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
-import { person, technologies } from "@/content/person";
+import { person } from "@/content/person";
 import { worldMarksLine } from "@/content/marks";
 import { Container } from "@/components/shared/container";
+import { CertificationsList } from "@/components/shared/certifications";
+import { TechStack } from "@/components/shared/tech-stack";
 import { RecruiterToggle } from "@/components/layout/recruiter-toggle";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
@@ -28,9 +30,11 @@ export function RecruiterStrip() {
           {worldMarksLine}
         </p>
         <p className="mt-3 max-w-2xl text-sm text-muted">{person.summary}</p>
-        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-          {technologies.join(" · ")}
-        </p>
+        <TechStack className="mt-6" />
+        <h3 className="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+          Licenses &amp; certifications
+        </h3>
+        <CertificationsList className="mt-3" />
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           <div>
             <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">

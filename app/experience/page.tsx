@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { Timeline } from "@/components/shared/timeline";
+import { CertificationsList } from "@/components/shared/certifications";
 import { JsonLd } from "@/components/shared/json-ld";
 import { experience } from "@/content/experience";
 import { person } from "@/content/person";
@@ -61,6 +62,28 @@ export default function ExperiencePage() {
           </Link>
           .
         </p>
+        <section id="certifications" className="mb-16 scroll-mt-24 sm:mb-20">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+            Licenses &amp; certifications
+          </p>
+          <h2 className="mt-2 font-display text-3xl tracking-tight text-foreground sm:text-4xl">
+            Issued and verifiable
+          </h2>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
+            Public certificates from Anthropic Education and HackerRank, as
+            listed on{" "}
+            <a
+              href="https://www.linkedin.com/in/al-beltran/"
+              target="_blank"
+              rel="me noopener noreferrer"
+              className="text-accent hover:underline"
+            >
+              LinkedIn
+            </a>
+            . Each plate opens the issuer&apos;s verification page.
+          </p>
+          <CertificationsList className="mt-8" />
+        </section>
         <Timeline items={experience} />
       </Container>
     </>

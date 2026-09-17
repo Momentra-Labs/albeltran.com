@@ -1,5 +1,6 @@
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person, oxfordJoin } from "@/content/person";
+import { certifications } from "@/content/certifications";
 import { worldMarks } from "@/content/marks";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
@@ -101,6 +102,17 @@ export function personSchema() {
     })),
     sameAs: [...person.sameAs],
     knowsAbout: [...person.knowsAbout],
+    hasCredential: certifications.map((cert) => ({
+      "@type": "EducationalOccupationalCredential",
+      name: cert.name,
+      credentialCategory: "certificate",
+      url: cert.url,
+      recognizedBy: {
+        "@type": "Organization",
+        name: cert.issuer,
+      },
+      ...(cert.completedOn ? { dateCreated: cert.completedOn } : {}),
+    })),
     knowsLanguage: ["en", "fil"],
     contactPoint: {
       "@type": "ContactPoint",
