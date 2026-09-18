@@ -57,12 +57,18 @@ export function ProjectCover({
   className,
   sizes = "(max-width: 768px) 100vw, 50vw",
   priority = false,
+  zoomOnHover = true,
+  imageClassName,
+  decorative = false,
 }: {
   project: Project;
   shot?: { src: string; alt: string };
   className?: string;
   sizes?: string;
   priority?: boolean;
+  zoomOnHover?: boolean;
+  imageClassName?: string;
+  decorative?: boolean;
 }) {
   const cover = shot ?? project.screenshots[0];
   const src = cover?.src;
@@ -75,8 +81,9 @@ export function ProjectCover({
 
   return (
     <div
-      role="img"
-      aria-label={alt}
+      role={decorative ? undefined : "img"}
+      aria-hidden={decorative || undefined}
+      aria-label={decorative ? undefined : alt}
       className={cn("relative isolate h-full w-full overflow-hidden bg-surface-2", className)}
     >
       <CoverFallback
@@ -95,8 +102,10 @@ export function ProjectCover({
           }}
           onError={() => setStatus("missing")}
           className={cn(
-            "object-cover transition-[opacity,transform] duration-700 group-hover:scale-105",
+            "object-cover transition-[opacity,transform] duration-700",
+            zoomOnHover && "group-hover:scale-105",
             status === "ready" ? "opacity-100" : "opacity-0",
+            imageClassName,
           )}
         />
       ) : null}

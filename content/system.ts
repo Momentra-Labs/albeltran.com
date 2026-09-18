@@ -25,7 +25,7 @@ export const systemNodes: SystemNode[] = [
   {
     id: "cloud",
     label: "Cloud",
-    children: ["AWS", "Docker", "Lambda", "SQS / SNS", "API Gateway"],
+    children: ["AWS", "Azure", "Docker", "Lambda", "SQS / SNS", "API Gateway"],
   },
   {
     id: "architecture",

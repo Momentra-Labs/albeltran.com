@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DeviceCluster, clusterVariantFor } from "@/components/projects/device-cluster";
 import { ProjectCover } from "@/components/shared/project-cover";
 import { notFound } from "next/navigation";
 import { Download, ExternalLink, Code2 } from "lucide-react";
@@ -8,7 +9,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { experience } from "@/content/experience";
-import { getProject, projects } from "@/content/projects";
+import { getProject, implementationShots, projects } from "@/content/projects";
 import { person } from "@/content/person";
 import { getAllPosts } from "@/lib/mdx";
 import {
@@ -25,7 +26,10 @@ import { ProjectStory } from "@/components/projects/project-story";
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return [
+    ...projects.map((project) => ({ slug: project.slug })),
+    { slug: "quickcart" },
+  ];
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -125,6 +129,14 @@ export default async function ProjectDetailPage({ params }: Props) {
           )}
         </div>
 
+        <DeviceCluster
+          className="mb-14"
+          project={project}
+          variant={clusterVariantFor(project, "hero")}
+          framed
+          priority
+        />
+
         <div className="grid gap-16 lg:grid-cols-[1fr_240px]">
           <article className="space-y-14">
             <section>
@@ -169,10 +181,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 Implementation
               </h2>
               <div className="mt-6 grid gap-4">
-                {(project.screenshots.length > 0
-                  ? project.screenshots
-                  : [{ src: "", alt: `${project.name} cover` }]
-                ).map((shot) => (
+                {implementationShots(project).map((shot) => (
                   <div
                     key={shot.src || project.slug}
                     className="relative aspect-video w-full overflow-hidden border border-border"
@@ -181,7 +190,6 @@ export default async function ProjectDetailPage({ params }: Props) {
                       project={project}
                       shot={shot}
                       sizes="(max-width: 1024px) 100vw, 720px"
-                      priority
                     />
                   </div>
                 ))}

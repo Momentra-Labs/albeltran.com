@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import type { Project } from "@/content/projects";
+import { type Project, projectFolio } from "@/content/projects";
 import { Container } from "@/components/shared/container";
-import { ProjectCover } from "@/components/shared/project-cover";
+import { DeviceCluster, clusterVariantFor } from "@/components/projects/device-cluster";
 import { ProjectDrawer } from "@/components/projects/project-drawer";
 import { Reveal, RevealItem, SpreadRule } from "@/components/shared/reveal";
 
@@ -38,7 +38,7 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
         <SpreadRule className="mb-6" />
         <ol className="grid gap-4 sm:grid-cols-2">
           {projects.map((project, index) => {
-            const folio = String(index + 1).padStart(2, "0");
+            const folio = projectFolio(project);
             return (
               <li key={project.slug}>
                 <RevealItem index={index}>
@@ -48,14 +48,21 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
                     className="group w-full overflow-hidden border border-border text-left transition-colors hover:border-border-bright"
                     onClick={() => setActive(project)}
                   >
-                    <div className="magazine-scan relative aspect-16/10">
-                      <ProjectCover
+                    <div className="magazine-scan relative">
+                      <DeviceCluster
                         project={project}
-                        sizes="(max-width: 640px) 100vw, 50vw"
+                        variant={clusterVariantFor(project, "card")}
+                        priority={index === 0}
                       />
-                      <span className="absolute left-3 top-3 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
+                      <span className="absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
                         {folio}
                       </span>
+                      {project.demo ? (
+                        <span className="absolute right-4 top-4 z-[5] inline-flex items-center gap-1.5 border border-border bg-background/85 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground backdrop-blur-[2px]">
+                          <span className="magazine-live-dot" aria-hidden />
+                          Live
+                        </span>
+                      ) : null}
                     </div>
                     <div className="p-4 sm:p-5">
                       <h3 className="font-display text-2xl tracking-tight text-foreground group-hover:text-accent">
