@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/shared/container";
-import { CertificationsSlider } from "@/components/shared/certifications-slider";
+import { CertificationsGallery } from "@/components/shared/certifications-gallery";
 import { TechStack } from "@/components/shared/tech-stack";
 import { Reveal, SpreadRule } from "@/components/shared/reveal";
 
@@ -38,7 +38,7 @@ export function EngineeringSystem() {
             Full list →
           </Link>
         </div>
-        <CertificationsSlider className="mt-4" />
+        <CertificationsGallery className="mt-4" />
       </Container>
     </section>
   );

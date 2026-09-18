@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { aboutContent } from "@/content/about";
 import { aboutFaqs } from "@/content/faqs";
 import { featuredExperience } from "@/content/experience";
-import { CertificationsSlider } from "@/components/shared/certifications-slider";
+import { CertificationsGallery } from "@/components/shared/certifications-gallery";
 import { TechStack } from "@/components/shared/tech-stack";
 import { person } from "@/content/person";
 import { SOCIAL_LINKS } from "@/lib/constants";
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 </Link>
                 .
               </p>
-              <CertificationsSlider className="mt-6" />
+              <CertificationsGallery className="mt-6" />
             </section>
 
             <section id="engineering-interests">

@@ -74,12 +74,14 @@ Public certificates as listed on LinkedIn, with issuer verification:
 
 | Certificate | Issuer | Issued | Verify |
 | --- | --- | --- | --- |
-| **AI Fluency: Framework & Foundations** | Anthropic Education | Apr 2026 | https://verify.skilljar.com/c/nwa32ew8z2ci |
-| **Introduction to agent skills** | Anthropic Education | Apr 2026 | https://verify.skilljar.com/c/gtjgsqoc2ymi |
-| **Introduction to subagents** | Anthropic Education | Apr 2026 | https://verify.skilljar.com/c/jh2cdrcc3guh |
-| **Frontend Developer (React)** | HackerRank | Jan 2024 | https://www.hackerrank.com/certificates/8d503b90bd78 |
-| **React (Basic)** | HackerRank | Jan 2024 | https://www.hackerrank.com/certificates/01d951aaae9d |
-| **JavaScript (Intermediate)** | HackerRank | Nov 2022 | https://www.hackerrank.com/certificates/8af4d4f84cd7 |
+| **Software Engineer** (role) | HackerRank | Sep 2026 | https://www.hackerrank.com/certificates/9a70c3c2bb8a |
+| **Frontend Developer (React)** (role) | HackerRank | Jan 2024 | https://www.hackerrank.com/certificates/8d503b90bd78 |
+| **JavaScript (Intermediate)** (skill) | HackerRank | Nov 2022 | https://www.hackerrank.com/certificates/8af4d4f84cd7 |
+| **SQL (Advanced)** (skill) | HackerRank | Sep 2026 | https://www.hackerrank.com/certificates/06f0e8c0ff2c |
+| **React (Basic)** (skill) | HackerRank | Jan 2024 | https://www.hackerrank.com/certificates/01d951aaae9d |
+| **AI Fluency: Framework & Foundations** (training) | Anthropic Education | Apr 2026 | https://verify.skilljar.com/c/nwa32ew8z2ci |
+| **Introduction to agent skills** (training) | Anthropic Education | Apr 2026 | https://verify.skilljar.com/c/gtjgsqoc2ymi |
+| **Introduction to subagents** (training) | Anthropic Education | Apr 2026 | https://verify.skilljar.com/c/jh2cdrcc3guh |
 
 Portfolio plate: https://albeltran.com/experience/#certifications
 

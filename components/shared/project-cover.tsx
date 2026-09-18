@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import type { Project } from "@/content/projects";
 import { cn } from "@/lib/utils";
+import {
+  DeviceShotPending,
+  useDecodedImage,
+} from "@/components/shared/use-decoded-image";
 
 function isLoadableShot(src?: string) {
   if (!src) return false;
@@ -74,13 +77,15 @@ export function ProjectCover({
   const src = cover?.src;
   const alt = cover?.alt ?? `${project.name} cover`;
   const canLoad = isLoadableShot(src);
-  const [status, setStatus] = useState<"pending" | "ready" | "missing">(
-    canLoad ? "pending" : "missing",
+  const { status, failed, boxRef, onLoad, onError } = useDecodedImage(
+    src,
+    canLoad,
   );
-  const showPhoto = canLoad && status !== "missing";
+  const showPhoto = canLoad && !failed;
 
   return (
     <div
+      ref={boxRef}
       role={decorative ? undefined : "img"}
       aria-hidden={decorative || undefined}
       aria-label={decorative ? undefined : alt}
@@ -90,11 +95,16 @@ export function ProjectCover({
         cover?.fit === "fill" && "bg-white",
         className,
       )}
+      data-shot={status}
     >
-      <CoverFallback
-        project={project}
-        label={project.kind === "lab" ? "Momentra Labs" : "Case study"}
-      />
+      {status === "missing" ? (
+        <CoverFallback
+          project={project}
+          label={project.kind === "lab" ? "Momentra Labs" : "Case study"}
+        />
+      ) : (
+        <DeviceShotPending />
+      )}
       {showPhoto ? (
         <Image
           src={src!}
@@ -102,14 +112,11 @@ export function ProjectCover({
           fill
           sizes={sizes}
           priority={priority}
-          onLoad={(event) => {
-            setStatus(event.currentTarget.naturalWidth > 0 ? "ready" : "missing");
-          }}
-          onError={() => setStatus("missing")}
+          onLoad={onLoad}
+          onError={onError}
           className={cn(
-            "object-cover transition-[opacity,transform] duration-700",
+            "z-[1] object-cover transition-transform duration-500",
             zoomOnHover && "group-hover:scale-105",
-            status === "ready" ? "opacity-100" : "opacity-0",
             imageClassName,
           )}
         />

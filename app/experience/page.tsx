@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { Container } from "@/components/shared/container";
 import { Timeline } from "@/components/shared/timeline";
-import { CertificationsList } from "@/components/shared/certifications";
+import { CertificationsGallery } from "@/components/shared/certifications-gallery";
 import { JsonLd } from "@/components/shared/json-ld";
 import { experience } from "@/content/experience";
 import { person } from "@/content/person";
@@ -82,7 +82,7 @@ export default function ExperiencePage() {
             </a>
             . Each plate opens the issuer&apos;s verification page.
           </p>
-          <CertificationsList className="mt-8" />
+          <CertificationsGallery className="mt-8" />
         </section>
         <Timeline items={experience} />
       </Container>
