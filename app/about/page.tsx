@@ -155,8 +155,8 @@ export default function AboutPage() {
                   projects page
                 </Link>
                 , including National Geographic, Disney Experiences, Disney
-                Institute, DocIndy, ENZ Education Consultancy, and serverless
-                ETL work.
+                Institute, Personal Collection, DocIndy, ENZ Education
+                Consultancy, and serverless ETL work.
               </p>
             </section>
 

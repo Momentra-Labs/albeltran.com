@@ -6,6 +6,7 @@ export type ProjectScreenshot = {
   src: string;
   alt: string;
   viewport?: ScreenshotViewport;
+  fit?: "cover" | "contain" | "fill";
 };
 
 export type Project = {
@@ -294,6 +295,86 @@ export const projects: Project[] = [
       { id: "author", label: "Authors", purpose: "Write courses and keynotes in the CMS.", tradeoff: "Governance vs speed.", scale: "Many authors, one library." },
       { id: "aem", label: "AEM", purpose: "Content, templates, and the shared component set.", tradeoff: "Enterprise contracts.", scale: "Publish tiers — not shown in detail." },
       { id: "edge", label: "Public site", purpose: "disneyinstitute.com for a global audience.", tradeoff: "What authors can do is what the web can show.", scale: "CDN and dispatcher patterns, generalized." },
+    ],
+  },
+  {
+    slug: "personal-collection",
+    name: "Personal Collection",
+    shortName: "Personal Collection",
+    tagline:
+      "Public site for a Philippine direct-selling brand at personalcollection.com.ph — products, dealership, and Life Made Great.",
+    role: "Software Engineer · professional product delivery",
+    year: "Professional work",
+    featured: true,
+    kind: "selected",
+    overview:
+      "Personal Collection Direct Selling Inc. is a public brand site at personalcollection.com.ph. The homepage presents Life Made Great, product and story paths, and a become-a-dealer start: sign up or try the products first. I contributed professional product delivery on this client-facing web product.",
+    problem:
+      "A direct-selling brand has to show products and livelihood in one start path without losing the next step: become a dealer or try the catalog.",
+    solution:
+      "Shipped the public brand site: navigation for products, magalogue, demos, and Earn with PC, plus the dealer banner on the homepage. Marketing claims on the site are the client's — not personal performance metrics.",
+    architecture: [
+      "Public marketing site at personalcollection.com.ph",
+      "About, Great Products, Magalogue, Wow Product Demos, and Earn with PC paths",
+      "Become-a-dealer conversion on the homepage: sign up or try products",
+      "Contact, find-a-branch, and cookie-consent surfaces on the live site",
+    ],
+    techStack: [],
+    features: [
+      "Life Made Great homepage with Our Story, Great Products, Earn with PC, and On Environment",
+      "Become a PC Dealer banner — sign up now or try products first",
+      "Great Products, Magalogue, and Wow Product Demos",
+      "Earn with PC and contact / find-a-branch paths",
+    ],
+    challenges: [
+      "Keeping product, story, and dealership on one start path",
+      "Shipping a client marketing site without treating brand copy as personal proof",
+    ],
+    performance: [
+      "Live production site at https://www.personalcollection.com.ph/",
+      "Shipped as professional product delivery, separate from Momentra Labs personal products",
+    ],
+    lessons: [
+      "Direct-selling sites succeed when the catalog and the dealer start are both obvious",
+      "Client marketing claims stay on the client site — the case study should describe the product, not the slogan",
+    ],
+    screenshots: [
+      {
+        src: "/projects/personalcollection-desktop.jpg",
+        alt: "Personal Collection homepage on desktop — Life Made Great hero and become-a-dealer banner",
+        viewport: "desktop",
+        fit: "fill",
+      },
+      {
+        src: "/projects/personalcollection-tablet.jpg",
+        alt: "Personal Collection homepage on tablet — Life Made Great, Our Story, and Great Products",
+        viewport: "tablet",
+      },
+      {
+        src: "/projects/personalcollection-mobile.jpg",
+        alt: "Personal Collection homepage on phone — Life Made Great hero and dealer banner",
+        viewport: "phone",
+      },
+    ],
+    demo: "https://www.personalcollection.com.ph/",
+    story: {
+      constraints:
+        "A brand site has to hold products, livelihood, and one obvious dealer start. Slogan copy stays on the client site.",
+      hardPart:
+        "Catalog, story, and dealership on one homepage without turning it into a directory.",
+      tradeoff:
+        "The live site is the record. I do not invent a private stack beside what the public pages show.",
+      whatBroke:
+        "Nothing I can publish as a client incident. The risk is treating marketing chrome as original engineering.",
+      whatChanged:
+        "The live site is the record: Life Made Great, products, magalogue, demos, Earn with PC.",
+      differently:
+        "I would still start with the dealer path and the product menu — not a custom stack to make a case study prettier.",
+    },
+    diagram: [
+      { id: "visitor", label: "Visitor", purpose: "Arrives from search or a referral.", tradeoff: "One start path, catalog plus livelihood.", scale: "Marketing traffic, not an API farm." },
+      { id: "site", label: "Public site", purpose: "Products, story, magalogue, demos.", tradeoff: "What the brand can say is what the web can show.", scale: "The live host owns runtime and forms." },
+      { id: "dealer", label: "Dealer start", purpose: "Sign up or try products first.", tradeoff: "Conversion lives on the homepage banner.", scale: "Dealers, not servers, are the capacity." },
     ],
   },
   {
@@ -1051,6 +1132,7 @@ const FEATURED_ORDER = [
   "national-geographic",
   "disney-experiences",
   "disney-institute",
+  "personal-collection",
   "docindy",
   "enz-consultancy",
 ];

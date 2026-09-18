@@ -62,7 +62,7 @@ export function ProjectCover({
   decorative = false,
 }: {
   project: Project;
-  shot?: { src: string; alt: string };
+  shot?: { src: string; alt: string; fit?: "cover" | "contain" | "fill" };
   className?: string;
   sizes?: string;
   priority?: boolean;
@@ -84,7 +84,12 @@ export function ProjectCover({
       role={decorative ? undefined : "img"}
       aria-hidden={decorative || undefined}
       aria-label={decorative ? undefined : alt}
-      className={cn("relative isolate h-full w-full overflow-hidden bg-surface-2", className)}
+      className={cn(
+        "relative isolate h-full w-full overflow-hidden bg-surface-2",
+        cover?.fit === "contain" && "bg-white",
+        cover?.fit === "fill" && "bg-white",
+        className,
+      )}
     >
       <CoverFallback
         project={project}
