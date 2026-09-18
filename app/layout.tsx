@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { PlausibleAnalytics } from "@/components/layout/plausible";
 import { RecruiterProvider } from "@/components/layout/recruiter-provider";
 import { CustomCursor } from "@/components/layout/custom-cursor";
+import { TechDeskMount } from "@/components/chat/tech-desk-mount";
 import { defaultMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
@@ -162,6 +163,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <EasterDesk />
+          <TechDeskMount />
         </RecruiterProvider>
         <PlausibleAnalytics />
       </body>

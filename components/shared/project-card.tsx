@@ -16,7 +16,7 @@ export function ProjectCard({
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden border border-border transition-colors hover:border-border-bright",
+        "showcase-card group relative border border-border transition-colors hover:border-border-bright",
         featured && "sm:col-span-2",
       )}
     >

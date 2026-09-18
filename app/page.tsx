@@ -64,8 +64,8 @@ export default function HomePage() {
       <EngineeringSystem />
       <ChoosePath />
       <SelectedWork projects={featured} />
-      <LabPlayground />
       <EngineeringLab projects={lab} />
+      <LabPlayground />
       <PhilosophyStrip />
       <CurrentlyBuilding />
       <ThingsThatDidntWork />
