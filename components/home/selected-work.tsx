@@ -40,9 +40,9 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
           {projects.map((project, index) => {
             const folio = projectFolio(project);
             return (
-              <li key={project.slug}>
-                <RevealItem index={index}>
-                  <article className="group overflow-hidden border border-border text-left transition-colors hover:border-border-bright">
+              <li key={project.slug} className="h-full min-w-0">
+                <RevealItem index={index} className="h-full min-w-0">
+                  <article className="showcase-card group border border-border text-left transition-colors hover:border-border-bright">
                     <div className="magazine-scan relative">
                       <DeviceCluster
                         project={project}
@@ -62,15 +62,16 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
                     <button
                       type="button"
                       data-cursor="VIEW"
-                      className="w-full p-4 text-left sm:p-5"
+                      className="showcase-card-copy w-full text-left"
                       onClick={() => setActive(project)}
                     >
                       <h3 className="font-display text-2xl tracking-tight text-foreground group-hover:text-accent">
                         {project.name}
                       </h3>
-                      <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted [overflow-wrap:anywhere]">
+                      <p className="mt-1 line-clamp-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted [overflow-wrap:anywhere]">
                         {project.year} · {project.role}
                       </p>
+                      <span className="mt-auto block min-h-11 pt-4" aria-hidden />
                       <p className="sr-only">{project.overview}</p>
                     </button>
                   </article>

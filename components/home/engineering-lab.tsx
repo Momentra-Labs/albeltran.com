@@ -48,10 +48,10 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
           </p>
         </Reveal>
         <SpreadRule className="mt-5" />
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {projects.map((project, index) => (
-            <RevealItem key={project.slug} index={index}>
-              <article className="magazine-plate group flex h-full flex-col overflow-hidden border border-border transition-colors hover:border-border-bright">
+            <RevealItem key={project.slug} index={index} className="h-full min-w-0">
+              <article className="showcase-card magazine-plate group border border-border transition-colors hover:border-border-bright">
                 <div className="magazine-scan relative">
                   <DeviceCluster
                     project={project}
@@ -68,8 +68,8 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
                     </span>
                   ) : null}
                 </div>
-                <div className="flex flex-1 flex-col p-4">
-                  <h3 className="font-display text-xl tracking-tight text-foreground">
+                <div className="showcase-card-copy">
+                  <h3 className="font-display text-2xl tracking-tight text-foreground">
                     <Link
                       href={`/projects/${project.slug}/`}
                       data-cursor="VIEW"
@@ -78,10 +78,12 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
                       {project.name}
                     </Link>
                   </h3>
-                  <p className="mt-2 line-clamp-2 flex-1 text-sm text-muted">
+                  <p className="mt-1 line-clamp-2 font-mono text-[11px] uppercase tracking-[0.14em] text-muted [overflow-wrap:anywhere]">
                     {project.tagline}
                   </p>
-                  <ProjectCtas project={project} className="mt-4" />
+                  <div className="mt-auto flex min-h-11 items-end pt-4">
+                    <ProjectCtas project={project} />
+                  </div>
                 </div>
               </article>
             </RevealItem>

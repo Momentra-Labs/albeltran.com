@@ -813,7 +813,8 @@ h3,
 }
 
 .device-cluster-spread,
-.device-cluster-compact {
+.device-cluster-compact,
+.device-cluster-phone[data-surface="card"] {
   aspect-ratio: 3 / 2;
 }
 
@@ -823,6 +824,39 @@ h3,
   align-items: center;
   justify-content: center;
   padding: 0.4rem 1.15rem 0.45rem;
+}
+
+.device-cluster-phone[data-surface="card"] {
+  padding: 0;
+}
+
+.device-cluster-phone[data-surface="card"] .device-phone-showcase {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  justify-content: flex-end;
+  padding: 0.55rem 0.7rem 0.4rem;
+}
+
+.device-cluster-phone[data-surface="card"] .device-phone-coverflow-wrap {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+}
+
+.device-cluster-phone[data-surface="card"] .device-phone-coverflow {
+  min-height: 0;
+  height: 100%;
+}
+
+.device-cluster-phone[data-surface="card"] .device-phone-coverflow-item [data-device="phone"] {
+  width: min(8.25rem, 24%);
+}
+
+@media (min-width: 640px) {
+  .device-cluster-phone[data-surface="card"] .device-phone-coverflow-item [data-device="phone"] {
+    width: min(9rem, 25%);
+  }
 }
 
 .device-phone-showcase {
@@ -949,14 +983,91 @@ h3,
 }
 
 .device-chrome {
-  background: #0b0b10;
-  border: 1px solid var(--border-bright);
+  position: relative;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, #3a3a44 0%, #1c1c24 16%, #101016 48%, #16161e 84%, #2a2a34 100%);
   box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 16px 36px rgba(0, 0, 0, 0.42);
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 18px 34px rgba(0, 0, 0, 0.48);
+}
+
+.device-glass {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background:
+    linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.04) 18%,
+      transparent 36%,
+      transparent 78%,
+      rgba(255, 255, 255, 0.035) 100%
+    );
+}
+
+.device-glass-soft {
+  background:
+    linear-gradient(
+      128deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.025) 14%,
+      transparent 30%,
+      transparent 84%,
+      rgba(255, 255, 255, 0.025) 100%
+    );
+}
+
+.device-monitor {
+  overflow: hidden;
+  border-radius: 6px;
+  padding: 2px 2px 0;
+  background:
+    linear-gradient(180deg, #2e2e36 0%, #14141c 38%, #0c0c12 100%);
+}
+
+.device-monitor-screen {
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.device-monitor-chin {
+  position: relative;
+  display: block;
+  height: 0.78rem;
+  background:
+    linear-gradient(180deg, #1a1a22, #0a0a10);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 640px) {
+  .device-monitor-chin {
+    height: 1.05rem;
+  }
+}
+
+.device-monitor-camera {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 35% 30%, #4a5a6c, #0b1220 62%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 4px rgba(90, 180, 255, 0.18);
 }
 
 .device-stand {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -965,26 +1076,40 @@ h3,
 
 .device-stand-neck {
   display: block;
-  width: 13%;
+  width: 12%;
   height: 1.25rem;
   background:
-    linear-gradient(90deg, #1a1a22, #2c2c36 18%, #121218 50%, #2c2c36 82%, #1a1a22);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-  clip-path: polygon(16% 0, 84% 0, 100% 100%, 0 100%);
+    linear-gradient(90deg, #14141c, #4a4a56 18%, #1a1a22 50%, #4a4a56 82%, #14141c);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 4px 10px rgba(0, 0, 0, 0.35);
+  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
 }
 
 .device-stand-base {
+  position: relative;
   display: block;
-  width: 56%;
-  height: 0.85rem;
-  margin-top: -3px;
-  border: 1px solid var(--border-bright);
+  width: 58%;
+  height: 0.72rem;
+  margin-top: -2px;
   border-radius: 50%;
   background:
-    radial-gradient(ellipse at 50% 30%, #2a2a34, #101018 62%);
+    radial-gradient(ellipse at 50% 28%, #4a4a54, #121218 64%);
   box-shadow:
-    0 8px 18px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    0 10px 18px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.device-stand-base::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -0.42rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.55), transparent 72%);
 }
 
 @media (min-width: 640px) {
@@ -993,29 +1118,244 @@ h3,
   }
 
   .device-stand-base {
-    height: 1.15rem;
+    height: 0.95rem;
   }
 }
 
 .device-iphone {
+  overflow: visible;
   border-radius: 22.5% / 10.6%;
-  background: #050507;
-  padding: 4px;
+  padding: 6px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(214, 214, 222, 0.62) 0%,
+      transparent 8%,
+      transparent 92%,
+      rgba(214, 214, 222, 0.48) 100%
+    ),
+    linear-gradient(180deg, #5a5a64 0%, #24242c 16%, #121218 48%, #1a1a22 84%, #3a3a44 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55),
+    0 18px 34px rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 640px) {
   .device-iphone {
-    padding: 5px;
+    padding: 7px;
   }
 }
 
 .device-iphone-screen {
-  border-radius: 20% / 9.4%;
+  isolation: isolate;
+  border-radius: 20.4% / 9.2%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .device-iphone-screen .device-phone-photo {
   backface-visibility: hidden;
   transform: translateZ(0);
+}
+
+.device-iphone-btn {
+  position: absolute;
+  z-index: 2;
+  width: 3px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #8a8a94, #2c2c34 42%, #4a4a54);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.device-iphone-btn-silent {
+  left: 0;
+  top: 14.5%;
+  height: 3.2%;
+}
+
+.device-iphone-btn-vol-up {
+  left: 0;
+  top: 20.5%;
+  height: 6.4%;
+}
+
+.device-iphone-btn-vol-down {
+  left: 0;
+  top: 28.2%;
+  height: 6.4%;
+}
+
+.device-iphone-btn-power {
+  right: 0;
+  top: 22.5%;
+  height: 9.2%;
+}
+
+.device-iphone-island {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 1.2%;
+  z-index: 4;
+  display: block;
+  width: 34%;
+  aspect-ratio: 126 / 36;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #050507;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.device-iphone-lens {
+  position: absolute;
+  top: 50%;
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+  border-radius: 999px;
+}
+
+.device-iphone-lens-cam {
+  right: 8%;
+  width: 22%;
+  background:
+    radial-gradient(circle at 38% 32%, #5a7a92, #1a3044 38%, #070b12 68%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(8, 8, 12, 0.85),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.16),
+    0 0 0 1px rgba(0, 0, 0, 0.45);
+}
+
+.device-iphone-lens-sensor {
+  right: 34%;
+  width: 12%;
+  background:
+    radial-gradient(circle at 40% 35%, #2a3848, #08080c 72%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.device-iphone-home {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  bottom: 1.05%;
+  z-index: 4;
+  width: 34%;
+  height: 0.38%;
+  min-height: 3px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.device-iphone-sheen {
+  pointer-events: none;
+  position: absolute;
+  left: 10%;
+  right: 22%;
+  top: 0;
+  z-index: 5;
+  height: 11%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 78%);
+}
+
+.device-ipad {
+  overflow: hidden;
+  border-radius: 11% / 14.5%;
+  padding: 10px 8px 8px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(210, 210, 218, 0.5) 0%,
+      transparent 10%,
+      transparent 90%,
+      rgba(210, 210, 218, 0.38) 100%
+    ),
+    linear-gradient(180deg, #6a6a74 0%, #2c2c34 20%, #1a1a22 52%, #24242c 86%, #5a5a64 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45),
+    0 18px 34px rgba(0, 0, 0, 0.48);
+}
+
+@media (min-width: 640px) {
+  .device-ipad {
+    padding: 12px 10px 10px;
+  }
+}
+
+.device-ipad-screen {
+  border-radius: 8% / 10.5%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.device-ipad-camera {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  z-index: 2;
+  width: 6px;
+  height: 6px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 35% 30%, #4a5a6c, #0b1220 62%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+@media (min-width: 640px) {
+  .device-ipad-camera {
+    top: 3px;
+    width: 7px;
+    height: 7px;
+  }
+}
+
+.device-ipad-home {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  bottom: 2.4%;
+  z-index: 4;
+  width: 18%;
+  height: 1.15%;
+  min-height: 3px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.device-cluster-spread [data-device="monitor"]::after,
+.device-cluster-compact [data-device="monitor"]::after,
+.device-cluster-spread [data-device="tablet"]::after,
+.device-cluster-compact [data-device="tablet"]::after,
+.device-cluster-spread [data-device="phone"]::after,
+.device-cluster-compact [data-device="phone"]::after,
+.device-cluster-phone .device-phone-coverflow-item [data-device="phone"]::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -7%;
+  z-index: 0;
+  height: 16%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.58), transparent 72%);
+}
+
+.device-cluster-spread [data-device="monitor"]::after,
+.device-cluster-compact [data-device="monitor"]::after {
+  left: 18%;
+  right: 18%;
+  bottom: -2%;
+  height: 12%;
 }
 
 .device-shot-pending {
@@ -1057,31 +1397,6 @@ h3,
   to {
     background-position: -20% 0;
   }
-}
-
-.device-iphone-island {
-  pointer-events: none;
-  position: absolute;
-  left: 50%;
-  top: 1.35%;
-  z-index: 4;
-  width: 32%;
-  aspect-ratio: 126 / 37;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: #050507;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-
-.device-iphone-lens {
-  position: absolute;
-  top: 50%;
-  right: 11%;
-  width: 22%;
-  aspect-ratio: 1;
-  transform: translateY(-50%);
-  border-radius: 999px;
-  background: radial-gradient(circle at 40% 35%, #2a3a4d, #0b1220 62%);
 }
 
 .device-cluster-spread [data-device="monitor"],
@@ -1149,6 +1464,28 @@ h3,
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+}
+
+.showcase-card {
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.showcase-card-copy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 10.75rem;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .showcase-card-copy {
+    padding: 1.25rem;
+  }
 }
 
 .device-phone-dot {
@@ -1573,6 +1910,11 @@ h3,
     background-position: 50% 0;
   }
 
+  .device-glass,
+  .device-iphone-sheen {
+    animation: none;
+  }
+
   .contact-send-busy {
     animation: none;
   }
@@ -1707,4 +2049,521 @@ h3,
 .recruiter #experience ul,
 .recruiter #experience .flex.flex-wrap {
   display: none;
+}
+
+.tech-desk {
+  --desk-pad: clamp(0.9rem, 4vw, 1.15rem);
+  --desk-gap: max(
+    clamp(0.85rem, 2.4vw, 1rem),
+    env(safe-area-inset-left),
+    env(safe-area-inset-right)
+  );
+  --desk-gap-top: max(clamp(0.85rem, 2.4vw, 1rem), env(safe-area-inset-top));
+  --desk-gap-bottom: max(clamp(0.85rem, 2.4vw, 1rem), env(safe-area-inset-bottom));
+  position: fixed;
+  right: var(--desk-gap);
+  bottom: var(--desk-gap-bottom);
+  z-index: 55;
+}
+
+div.tech-desk {
+  --desk-pad: clamp(0.9rem, 4vw, 1.15rem);
+  --desk-gap: max(
+    clamp(0.85rem, 2.4vw, 1rem),
+    env(safe-area-inset-left),
+    env(safe-area-inset-right)
+  );
+  --desk-gap-top: max(clamp(0.85rem, 2.4vw, 1rem), env(safe-area-inset-top));
+  --desk-gap-bottom: max(clamp(0.85rem, 2.4vw, 1rem), env(safe-area-inset-bottom));
+  right: var(--desk-gap);
+  bottom: var(--desk-gap-bottom);
+}
+
+.tech-desk-launch {
+  display: flex;
+  height: 3.5rem;
+  width: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  padding: 0;
+  filter: drop-shadow(0 8px 18px color-mix(in srgb, var(--accent) 42%, transparent));
+}
+
+.tech-desk-mark {
+  display: block;
+  height: 3.5rem;
+  width: 3.5rem;
+  overflow: visible;
+  transform-origin: 50% 55%;
+  transition: transform 280ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tech-desk-launch:hover {
+  filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--accent-hover) 55%, transparent));
+}
+
+.tech-desk-mark-lid {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  transform: scaleY(0.06);
+  transition: transform 220ms ease;
+}
+
+.tech-desk-launch:hover .tech-desk-mark {
+  transform: rotate(-6deg);
+}
+
+.tech-desk-launch:hover .tech-desk-mark-lid {
+  transform: scaleY(1);
+}
+
+.tech-desk-mark-antenna {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  transition: transform 280ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tech-desk-launch:hover .tech-desk-mark-antenna {
+  transform: translateY(-2px) rotate(-10deg);
+}
+
+.tech-desk-head-lead {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.tech-desk-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding: var(--desk-pad) var(--desk-pad) 0.75rem;
+  transition: border-color 280ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+div.tech-desk .tech-desk-head.is-listening {
+  border-bottom-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+
+.tech-desk-live {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tech-desk-live-pip {
+  display: block;
+  width: 0.38rem;
+  height: 0.38rem;
+  flex: none;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
+  animation: tech-desk-live 1.7s ease-out infinite;
+}
+
+.tech-desk-live-pip.is-listening {
+  animation-duration: 0.85s;
+}
+
+.tech-desk-live-pip.is-offline {
+  background: var(--muted);
+  box-shadow: none;
+  animation: none;
+}
+
+.tech-desk-head-status {
+  margin-top: 0.18rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+div.tech-desk .tech-desk-head.is-listening .tech-desk-head-status {
+  color: var(--accent);
+}
+
+.tech-desk-head-mascot {
+  flex: none;
+  width: 2.35rem;
+  height: 2.35rem;
+  margin-top: 0.12rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.tech-desk-head-mascot .tech-desk-mark {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark,
+div.tech-desk .tech-desk-head-mascot.is-peek .tech-desk-mark {
+  transform: rotate(-6deg);
+}
+
+div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark-lid,
+div.tech-desk .tech-desk-head-mascot.is-peek .tech-desk-mark-lid,
+div.tech-desk .tech-desk-head-mascot.is-wink .tech-desk-mark-lid {
+  transform: scaleY(1);
+}
+
+div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark-antenna,
+div.tech-desk .tech-desk-head-mascot.is-peek .tech-desk-mark-antenna {
+  transform: translateY(-2px) rotate(-10deg);
+}
+
+div.tech-desk .tech-desk-head-mascot.is-listening .tech-desk-mark {
+  animation: tech-desk-listen 900ms ease-in-out infinite;
+}
+
+.tech-desk-panel {
+  display: flex;
+  box-sizing: border-box;
+  width: min(24rem, calc(100vw - (var(--desk-gap) * 2)));
+  height: min(32rem, 70dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
+  max-width: calc(100vw - (var(--desk-gap) * 2));
+  max-height: min(70dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
+  min-width: 0;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  border: 1px solid var(--border);
+  background: var(--background);
+}
+
+div.tech-desk .tech-desk-panel {
+  box-sizing: border-box;
+  width: min(24rem, calc(100vw - (var(--desk-gap) * 2)));
+  height: min(32rem, 70dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
+  max-width: calc(100vw - (var(--desk-gap) * 2));
+  max-height: min(70dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+@media (max-width: 639px) {
+  div.tech-desk .tech-desk-panel {
+    height: min(36rem, 72dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
+    max-height: min(72dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
+  }
+}
+
+div.tech-desk .tech-desk-log {
+  min-width: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: var(--desk-pad);
+  scrollbar-gutter: stable both-edges;
+}
+
+div.tech-desk .tech-desk-turn {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+div.tech-desk .tech-desk-turn-you {
+  max-width: 92%;
+}
+
+div.tech-desk .tech-desk-turn-desk {
+  max-width: 100%;
+}
+
+div.tech-desk .tech-desk-bubble {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.tech-desk-log {
+  display: flex;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: var(--desk-pad);
+}
+
+.tech-desk-turn {
+  display: flex;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  flex-direction: column;
+  animation: tech-desk-in 280ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+div.tech-desk .tech-desk-turn-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.55rem;
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+div.tech-desk .tech-desk-copy {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  appearance: none;
+  background: transparent;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9px;
+  line-height: 1.2;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+div.tech-desk .tech-desk-copy:hover,
+div.tech-desk .tech-desk-copy:focus-visible {
+  color: var(--foreground);
+}
+
+div.tech-desk .tech-desk-copy.is-copied {
+  color: var(--accent);
+}
+
+.tech-desk-turn-foot {
+  display: flex;
+  margin-top: 0.22rem;
+  max-width: 100%;
+}
+
+.tech-desk-turn-you .tech-desk-turn-foot {
+  justify-content: flex-end;
+}
+
+div.tech-desk .tech-desk-turn-foot .tech-desk-copy {
+  padding: 0.2rem 0;
+}
+
+.tech-desk-turn-you {
+  align-self: flex-end;
+  align-items: flex-end;
+  max-width: 92%;
+}
+
+.tech-desk-turn-desk {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.tech-desk-bubble {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  margin-top: 0.28rem;
+  padding: 0.65rem 0.8rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--foreground);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.tech-desk-turn-you .tech-desk-bubble {
+  background: var(--accent-soft);
+}
+
+.tech-desk-turn-desk .tech-desk-bubble {
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.tech-desk-pips {
+  display: flex;
+  gap: 0.28rem;
+  padding: 0.2rem 0.05rem;
+}
+
+.tech-desk-pips i {
+  display: block;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 999px;
+  background: var(--accent);
+  animation: tech-desk-pip 1s ease-in-out infinite;
+}
+
+.tech-desk-pips i:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.tech-desk-pips i:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.tech-desk-caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 1em;
+  margin-left: 0.15em;
+  background: var(--accent);
+  vertical-align: -0.12em;
+  animation: tech-desk-caret 0.9s steps(1) infinite;
+}
+
+@keyframes tech-desk-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes tech-desk-pip {
+  0%,
+  80%,
+  100% {
+    opacity: 0.28;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes tech-desk-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes tech-desk-live {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 0.45rem transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes tech-desk-listen {
+  0%,
+  100% {
+    transform: rotate(-4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(5deg) translateY(-1px);
+  }
+}
+
+.tech-desk-starters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 0 var(--desk-pad) 0.75rem;
+}
+
+.tech-desk-chip {
+  border: 1px solid var(--border);
+  background: transparent;
+  padding: 0.4rem 0.55rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tech-desk-chip:hover:not(:disabled) {
+  border-color: var(--border-bright);
+  color: var(--foreground);
+}
+
+.tech-desk-chip:disabled {
+  opacity: 0.45;
+}
+
+div.tech-desk .tech-desk-notice {
+  padding: 0 var(--desk-pad) 0.5rem;
+}
+
+div.tech-desk .tech-desk-compose {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  box-sizing: border-box;
+  border-top: 1px solid var(--border);
+  background-color: var(--background);
+  padding: 0.75rem var(--desk-pad) var(--desk-pad);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-desk,
+  .tech-desk * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .tech-desk-launch:hover .tech-desk-mark {
+    transform: none;
+  }
+
+  .tech-desk-launch:hover .tech-desk-mark-antenna {
+    transform: none;
+  }
+
+  .tech-desk-launch:hover .tech-desk-mark-lid,
+  .tech-desk-head-mascot.is-wink .tech-desk-mark-lid,
+  .tech-desk-head-mascot.is-peek .tech-desk-mark-lid,
+  .tech-desk-head-mascot:hover .tech-desk-mark-lid {
+    transform: scaleY(0.06);
+  }
+
+  .tech-desk-head-mascot.is-listening .tech-desk-mark,
+  .tech-desk-head-mascot:hover .tech-desk-mark,
+  .tech-desk-head-mascot.is-peek .tech-desk-mark {
+    transform: none;
+  }
+
+  .tech-desk-head-mascot:hover .tech-desk-mark-antenna,
+  .tech-desk-head-mascot.is-peek .tech-desk-mark-antenna {
+    transform: none;
+  }
+
+  .tech-desk-live-pip {
+    animation: none !important;
+    box-shadow: none;
+  }
+
+  .tech-desk-turn {
+    animation: none !important;
+  }
+}
+
+@media print {
+  .tech-desk {
+    display: none !important;
+  }
 }

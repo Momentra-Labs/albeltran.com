@@ -2,6 +2,11 @@ import type { ReactNode } from "react";
 import type { Project, ScreenshotViewport } from "@/content/projects";
 import { isMobileApp, projectFolio, screenshotForViewport } from "@/content/projects";
 import { AppPhoneShowcase } from "@/components/projects/app-phone-slideshow";
+import {
+  IPadShell,
+  IPhoneShell,
+  MonitorShell,
+} from "@/components/projects/device-chrome";
 import { ProjectCover } from "@/components/shared/project-cover";
 import { cn } from "@/lib/utils";
 
@@ -60,15 +65,7 @@ function DeviceStage({ folio }: { folio?: string | null }) {
 function Monitor({ children }: { children: ReactNode }) {
   return (
     <div data-device="monitor" className="device-frame">
-      <div className="device-chrome overflow-hidden rounded-[5px] p-[6px] pb-3 sm:p-[8px] sm:pb-3.5">
-        <div className="relative aspect-[16/10] overflow-hidden bg-surface-2">
-          {children}
-        </div>
-      </div>
-      <div aria-hidden className="device-stand">
-        <span className="device-stand-neck" />
-        <span className="device-stand-base" />
-      </div>
+      <MonitorShell>{children}</MonitorShell>
     </div>
   );
 }
@@ -76,15 +73,7 @@ function Monitor({ children }: { children: ReactNode }) {
 function Tablet({ children }: { children: ReactNode }) {
   return (
     <div data-device="tablet" className="device-frame">
-      <div className="device-chrome device-ipad relative overflow-hidden rounded-[0.85rem] p-[7px] sm:rounded-[1.05rem] sm:p-[9px]">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[5px] z-[2] h-[5px] w-[5px] -translate-x-1/2 rounded-full bg-white/22"
-        />
-        <div className="relative aspect-[4/3] overflow-hidden rounded-[0.45rem] bg-surface-2 sm:rounded-[0.6rem]">
-          {children}
-        </div>
-      </div>
+      <IPadShell>{children}</IPadShell>
     </div>
   );
 }
@@ -92,14 +81,7 @@ function Tablet({ children }: { children: ReactNode }) {
 function Phone({ children }: { children: ReactNode }) {
   return (
     <div data-device="phone" className="device-frame">
-      <div className="device-chrome device-iphone relative overflow-hidden">
-        <div className="device-iphone-screen relative aspect-[393/852] overflow-hidden bg-surface-2">
-          {children}
-          <span aria-hidden className="device-iphone-island">
-            <span className="device-iphone-lens" />
-          </span>
-        </div>
-      </div>
+      <IPhoneShell>{children}</IPhoneShell>
     </div>
   );
 }

@@ -21,6 +21,7 @@ import {
   DeviceShotPending,
   useDecodedImage,
 } from "@/components/shared/use-decoded-image";
+import { IPhoneShell } from "@/components/projects/device-chrome";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
@@ -105,16 +106,7 @@ function PhoneChrome({
   onPointerDown?: (event: PointerEvent<HTMLElement>) => void;
 }) {
   const className = "device-frame border-0 bg-transparent p-0 text-left";
-  const chrome = (
-    <div className="device-chrome device-iphone relative overflow-hidden">
-      <div className="device-iphone-screen relative aspect-[393/852] overflow-hidden bg-surface-2">
-        {children}
-        <span aria-hidden className="device-iphone-island">
-          <span className="device-iphone-lens" />
-        </span>
-      </div>
-    </div>
-  );
+  const chrome = <IPhoneShell>{children}</IPhoneShell>;
 
   if (interactive) {
     return (
