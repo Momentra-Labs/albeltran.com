@@ -42,38 +42,38 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
             return (
               <li key={project.slug}>
                 <RevealItem index={index}>
-                  <button
-                    type="button"
-                    data-cursor="VIEW"
-                    className="group w-full overflow-hidden border border-border text-left transition-colors hover:border-border-bright"
-                    onClick={() => setActive(project)}
-                  >
+                  <article className="group overflow-hidden border border-border text-left transition-colors hover:border-border-bright">
                     <div className="magazine-scan relative">
                       <DeviceCluster
                         project={project}
                         variant={clusterVariantFor(project, "card")}
                         priority={index === 0}
                       />
-                      <span className="absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
+                      <span className="pointer-events-none absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
                         {folio}
                       </span>
                       {project.demo ? (
-                        <span className="absolute right-4 top-4 z-[5] inline-flex items-center gap-1.5 border border-border bg-background/85 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground backdrop-blur-[2px]">
+                        <span className="pointer-events-none absolute right-4 top-4 z-[5] inline-flex items-center gap-1.5 border border-border bg-background/85 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground backdrop-blur-[2px]">
                           <span className="magazine-live-dot" aria-hidden />
                           Live
                         </span>
                       ) : null}
                     </div>
-                    <div className="p-4 sm:p-5">
+                    <button
+                      type="button"
+                      data-cursor="VIEW"
+                      className="w-full p-4 text-left sm:p-5"
+                      onClick={() => setActive(project)}
+                    >
                       <h3 className="font-display text-2xl tracking-tight text-foreground group-hover:text-accent">
                         {project.name}
                       </h3>
                       <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted [overflow-wrap:anywhere]">
                         {project.year} · {project.role}
                       </p>
-                    </div>
-                    <p className="sr-only">{project.overview}</p>
-                  </button>
+                      <p className="sr-only">{project.overview}</p>
+                    </button>
+                  </article>
                 </RevealItem>
               </li>
             );
