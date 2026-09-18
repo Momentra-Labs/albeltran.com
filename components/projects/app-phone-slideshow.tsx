@@ -17,6 +17,10 @@ import {
 } from "framer-motion";
 import type { Project } from "@/content/projects";
 import { appScreensFor, type AppScreen } from "@/content/app-screens";
+import {
+  DeviceShotPending,
+  useDecodedImage,
+} from "@/components/shared/use-decoded-image";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.23, 1, 0.32, 1] as const;
@@ -28,16 +32,22 @@ function PhotoScreen({
   screen: AppScreen;
   decorative?: boolean;
 }) {
+  const { status, boxRef, onLoad, onError } = useDecodedImage(screen.src);
   if (!screen.src) return null;
   return (
-    <Image
-      src={screen.src}
-      alt={decorative ? "" : (screen.alt ?? screen.title)}
-      fill
-      unoptimized
-      sizes="(max-width: 640px) 70vw, 360px"
-      className="device-phone-photo object-cover object-top"
-    />
+    <div ref={boxRef} className="absolute inset-0" data-shot={status}>
+      {status === "missing" ? null : <DeviceShotPending />}
+      <Image
+        src={screen.src}
+        alt={decorative ? "" : (screen.alt ?? screen.title)}
+        fill
+        unoptimized
+        sizes="(max-width: 640px) 70vw, 360px"
+        onLoad={onLoad}
+        onError={onError}
+        className="device-phone-photo z-[1] object-cover object-top"
+      />
+    </div>
   );
 }
 
