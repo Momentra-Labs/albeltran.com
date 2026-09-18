@@ -20,10 +20,11 @@ export type Certification = {
 export const CERTIFICATION_CATEGORIES: {
   id: CertificationCategory;
   label: string;
+  shortLabel: string;
 }[] = [
-  { id: "role", label: "Role certification" },
-  { id: "skill", label: "Skill certification" },
-  { id: "training", label: "Basic certification" },
+  { id: "role", label: "Role certification", shortLabel: "Role" },
+  { id: "skill", label: "Skill certification", shortLabel: "Skill" },
+  { id: "training", label: "Basic certification", shortLabel: "Basic" },
 ];
 
 export const certifications: Certification[] = [
