@@ -17,6 +17,12 @@ function Screen({
   priority?: boolean;
 }) {
   const shot = screenshotForViewport(project, viewport);
+  const fitClass =
+    shot?.fit === "contain"
+      ? "object-contain object-center"
+      : shot?.fit === "fill"
+        ? "object-fill"
+        : "object-top";
   return (
     <ProjectCover
       project={project}
@@ -24,7 +30,7 @@ function Screen({
       sizes={sizes}
       priority={priority}
       zoomOnHover={false}
-      imageClassName="object-top"
+      imageClassName={fitClass}
       decorative
     />
   );
