@@ -101,7 +101,7 @@ export function TechDesk() {
   const [turns, setTurns] = useState<ChatTurn[]>([]);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
-  const [left, setLeft] = useState(GROQ_CONFIG.dailyTurns);
+  const [left, setLeft] = useState<number>(GROQ_CONFIG.dailyTurns);
   const [wink, setWink] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [peek, setPeek] = useState(false);
@@ -336,7 +336,7 @@ export function TechDesk() {
                   onPointerLeave={() => setPeek(false)}
                   onClick={triggerWink}
                 >
-                  <TechDeskMark />
+                  <TechDeskMark mood={busy ? "listen" : "idle"} />
                 </button>
                 <div className="min-w-0">
                   <div className="tech-desk-live">
