@@ -2102,23 +2102,63 @@ div.tech-desk {
   transition: transform 280ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+.tech-desk-mark-body {
+  transform-origin: 32px 40px;
+  transform-box: fill-box;
+}
+
+.tech-desk-mark-shadow {
+  transform-origin: 32px 61.4px;
+  transform-box: fill-box;
+  opacity: 0.2;
+}
+
+.tech-desk-mark-blush {
+  opacity: 0.58;
+}
+
+.tech-desk-mark-spark {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  opacity: 0;
+}
+
+.tech-desk-head-mascot .tech-desk-mark-sparkles,
+.tech-desk-head-mascot .tech-desk-mark-shadow {
+  display: none;
+}
+
+div.tech-desk rect.tech-desk-mark-lid {
+  transform: none;
+}
+
+.tech-desk-mark-pip-halo,
+.tech-desk-mark-pip {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+div.tech-desk .tech-desk-head-mascot.is-wink .tech-desk-mark-lid,
+div.tech-desk .tech-desk-head-mascot.is-peek .tech-desk-mark-lid,
+div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark-lid,
+div.tech-desk .tech-desk-launch:hover .tech-desk-mark-lid {
+  opacity: 1;
+}
+
+div.tech-desk .tech-desk-launch:hover .tech-desk-mark-body,
+div.tech-desk .tech-desk-launch:hover .tech-desk-mark-shadow,
+div.tech-desk .tech-desk-launch:hover .tech-desk-mark-antenna,
+div.tech-desk .tech-desk-launch:hover .tech-desk-mark-mouth,
+div.tech-desk .tech-desk-launch:hover .tech-desk-mark-blush {
+  animation: none;
+}
+
 .tech-desk-launch:hover {
   filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--accent-hover) 55%, transparent));
 }
 
-.tech-desk-mark-lid {
-  transform-box: fill-box;
-  transform-origin: 50% 0%;
-  transform: scaleY(0.06);
-  transition: transform 220ms ease;
-}
-
 .tech-desk-launch:hover .tech-desk-mark {
-  transform: rotate(-6deg);
-}
-
-.tech-desk-launch:hover .tech-desk-mark-lid {
-  transform: scaleY(1);
+  transform: rotate(-8deg) scale(1.06);
 }
 
 .tech-desk-mark-antenna {
@@ -2128,7 +2168,14 @@ div.tech-desk {
 }
 
 .tech-desk-launch:hover .tech-desk-mark-antenna {
-  transform: translateY(-2px) rotate(-10deg);
+  transform: translateY(-2px) rotate(-12deg);
+}
+
+.tech-desk-launch:hover .spark-a,
+.tech-desk-launch:hover .spark-b,
+.tech-desk-launch:hover .spark-c {
+  animation: tech-desk-spark 0.9s ease-in-out infinite;
+  opacity: 1;
 }
 
 .tech-desk-head-lead {
@@ -2210,12 +2257,6 @@ div.tech-desk .tech-desk-head.is-listening .tech-desk-head-status {
 div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark,
 div.tech-desk .tech-desk-head-mascot.is-peek .tech-desk-mark {
   transform: rotate(-6deg);
-}
-
-div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark-lid,
-div.tech-desk .tech-desk-head-mascot.is-peek .tech-desk-mark-lid,
-div.tech-desk .tech-desk-head-mascot.is-wink .tech-desk-mark-lid {
-  transform: scaleY(1);
 }
 
 div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark-antenna,
@@ -2478,6 +2519,22 @@ div.tech-desk .tech-desk-turn-foot .tech-desk-copy {
   }
 }
 
+@keyframes tech-desk-spark {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.35) rotate(0deg);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1) rotate(18deg);
+  }
+  70% {
+    opacity: 0.35;
+    transform: scale(0.75) rotate(-10deg);
+  }
+}
+
 .tech-desk-starters {
   display: flex;
   flex-wrap: wrap;
@@ -2538,7 +2595,7 @@ div.tech-desk .tech-desk-compose {
   .tech-desk-head-mascot.is-wink .tech-desk-mark-lid,
   .tech-desk-head-mascot.is-peek .tech-desk-mark-lid,
   .tech-desk-head-mascot:hover .tech-desk-mark-lid {
-    transform: scaleY(0.06);
+    opacity: 0;
   }
 
   .tech-desk-head-mascot.is-listening .tech-desk-mark,
