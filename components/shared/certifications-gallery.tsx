@@ -265,7 +265,8 @@ export function CertificationsGallery({ className }: { className?: string }) {
               className="cert-gallery-tab"
               onClick={() => setActive(room.id)}
             >
-              {room.label}
+              <span className="cert-gallery-tab-full">{room.label}</span>
+              <span className="cert-gallery-tab-short">{room.shortLabel}</span>
             </button>
           );
         })}
