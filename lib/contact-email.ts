@@ -70,7 +70,7 @@ export function buildInquiryEmailHtml(
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
-    <title>${escapeHtml(inquirySubject(next.name))}</title>
+    <title>${escapeHtml(inquirySubject(values.name))}</title>
   </head>
   <body style="margin:0;padding:0;background:${NIGHT};">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
