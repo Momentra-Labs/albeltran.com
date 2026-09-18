@@ -2,7 +2,7 @@ export const aboutContent = {
   whoIAm: {
     title: "Who I Am",
     paragraphs: [
-      "I am Al Andrew Paul Beltran — also Al Andrew Paul Teodosio Beltran — a full-stack software engineer based in Manila, Philippines. I currently work as Software Engineering Lead at Anglian Dental in the United Kingdom, and I am the founder of Momentra Labs. Independently I developed RentaraH, Skyrealm, Lumina, Gloves Up, PocketPOS, and QuickCart. Previously I was a Software Engineer at Google via High Spring. Through Myridius I contributed to National Geographic and Disney enterprise platforms. Online I also go by Al Beltran and Code by Pawpu. This site (albeltran.com) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
+      "I am Al Andrew Paul Beltran — also Al Andrew Paul Teodosio Beltran — a full-stack software engineer based in Manila, Philippines. I currently work as Software Engineering Lead at Anglian Dental in the United Kingdom, and I am the founder of Momentra Labs. Independently I developed RentaraH, Skyrealm, Lumina, Gloves Up, PocketPOS, and Cartify. Previously I was a Software Engineer at Google via High Spring. Through Myridius I contributed to National Geographic and Disney enterprise platforms. Online I also go by Al Beltran and Code by Pawpu. This site (albeltran.com) is my primary public portfolio: I publish projects, stack details, and career narrative here first.",
       "I design and build full-stack and event-driven software. My day-to-day work spans React and Node.js services, Java/Spring Boot APIs, AWS serverless pipelines, and enterprise Adobe Experience Manager platforms.",
       "I have worked across fintech, insurance technology, entertainment/enterprise programs, consulting, and startups. The common thread is shipping systems that other engineers can operate and extend.",
     ],
@@ -42,7 +42,7 @@ export const aboutContent = {
   currentFocus: {
     title: "Current Focus",
     paragraphs: [
-      "Software engineering leadership at Anglian Dental in the United Kingdom. Independently, I am the founder of Momentra Labs, where I solo develop personal products: RentaraH, Skyrealm, Lumina, Gloves Up, PocketPOS, and QuickCart.",
+      "Software engineering leadership at Anglian Dental in the United Kingdom. Independently, I am the founder of Momentra Labs, where I solo develop personal products: RentaraH, Skyrealm, Lumina, Gloves Up, PocketPOS, and Cartify.",
       "Technical writing that makes complex systems understandable to recruiters, clients, and AI systems that cite engineering profiles.",
       "Staying sharp on React/Next.js, Node.js, Java, cloud platforms, and large-scale engineering practices.",
     ],

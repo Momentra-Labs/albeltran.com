@@ -1,7 +1,7 @@
 import Link from "next/link";
-import type { Project } from "@/content/projects";
+import { type Project, labSurfaceLabel } from "@/content/projects";
 import { Container } from "@/components/shared/container";
-import { ProjectCover } from "@/components/shared/project-cover";
+import { DeviceCluster, clusterVariantFor } from "@/components/projects/device-cluster";
 import { Reveal, RevealItem, SpreadRule } from "@/components/shared/reveal";
 import { ProjectCtas } from "@/components/projects/project-ctas";
 
@@ -55,15 +55,19 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
                 <Link
                   href={`/projects/${project.slug}/`}
                   data-cursor="VIEW"
-                  className="contents"
+                  className="relative"
                 >
-                  <div className="magazine-scan relative aspect-16/10">
-                    <ProjectCover
+                  <div className="magazine-scan relative">
+                    <DeviceCluster
                       project={project}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      variant={clusterVariantFor(project, "card")}
+                      priority={index === 0}
                     />
+                    <span className="absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
+                      {labSurfaceLabel(project)}
+                    </span>
                     {project.demo ? (
-                      <span className="absolute left-3 top-3 z-[5] inline-flex items-center gap-2 border border-border bg-background/80 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-foreground backdrop-blur-[2px]">
+                      <span className="absolute right-4 top-4 z-[5] inline-flex items-center gap-1.5 border border-border bg-background/85 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground backdrop-blur-[2px]">
                         <span className="magazine-live-dot" aria-hidden />
                         Live
                       </span>

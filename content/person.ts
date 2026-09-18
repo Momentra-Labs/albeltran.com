@@ -12,7 +12,7 @@ const PERSONAL_PRODUCTS = [
   "Lumina",
   "Gloves Up",
   "PocketPOS",
-  "QuickCart",
+  "Cartify",
 ] as const;
 
 const PERSONAL_PRODUCTS_LIST = oxfordJoin(PERSONAL_PRODUCTS);
@@ -111,6 +111,7 @@ export const technologies = [
   "PostgreSQL",
   "MySQL",
   "Docker",
+  "Azure",
   "AWS Lambda",
   "AEM",
 ] as const;
@@ -129,8 +130,17 @@ export const techGroups = [
     items: ["Express", "Spring Boot", "Laravel", "REST APIs"],
   },
   {
-    title: "Cloud (AWS)",
-    items: ["Lambda", "S3", "SQS / SNS", "API Gateway", "EC2", "Step Functions"],
+    title: "Cloud",
+    items: [
+      "Azure",
+      "Docker",
+      "Lambda",
+      "S3",
+      "SQS / SNS",
+      "API Gateway",
+      "EC2",
+      "Step Functions",
+    ],
   },
   {
     title: "Data & Platforms",

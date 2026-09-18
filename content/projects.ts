@@ -1,5 +1,13 @@
 export type ProjectKind = "selected" | "lab";
 
+export type ScreenshotViewport = "desktop" | "tablet" | "phone";
+
+export type ProjectScreenshot = {
+  src: string;
+  alt: string;
+  viewport?: ScreenshotViewport;
+};
+
 export type Project = {
   slug: string;
   name: string;
@@ -19,7 +27,7 @@ export type Project = {
   challenges: string[];
   performance: string[];
   lessons: string[];
-  screenshots: { src: string; alt: string }[];
+  screenshots: ProjectScreenshot[];
   repository?: string;
   demo?: string;
   /** Direct Android APK download path or URL. */
@@ -89,8 +97,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/docindy.jpg",
-        alt: "DocIndy homepage at docindy.ivisitdoc.com — telehealth care journeys and patient start flows",
+        src: "/projects/doc-indy-desktop.jpg",
+        alt: "DocIndy Mental Health care journey on desktop — provider talk path and cookie consent",
+        viewport: "desktop",
+      },
+      {
+        src: "/projects/doc-indy-tablet.jpg",
+        alt: "DocIndy Skin Care journey on tablet — shop path and cookie consent",
+        viewport: "tablet",
+      },
+      {
+        src: "/projects/doc-indy-mobile.jpg",
+        alt: "DocIndy Hair Regrowth journey on phone — talk with a provider and cookie consent",
+        viewport: "phone",
       },
     ],
     demo: "https://docindy.ivisitdoc.com/",
@@ -158,8 +177,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/enz-consultancy.png",
-        alt: "ENZ Education Consultancy homepage at enzconsultancy.ca — study-abroad gateway and Book a Call path",
+        src: "/projects/enz-desktop.jpg",
+        alt: "ENZ Education Consultancy homepage on desktop — Expanding One's Horizon hero and Book a Call",
+        viewport: "desktop",
+      },
+      {
+        src: "/projects/enz-tablet.jpg",
+        alt: "ENZ Education Consultancy homepage on tablet — gateway hero and Why Choose ENZ",
+        viewport: "tablet",
+      },
+      {
+        src: "/projects/enz-mobile.jpg",
+        alt: "ENZ Education Consultancy on phone — Why Choose ENZ memberships, awards, and expertise",
+        viewport: "phone",
       },
     ],
     demo: "https://enzconsultancy.ca/",
@@ -228,8 +258,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/disney-institute.jpg",
-        alt: "Disney Institute homepage at disneyinstitute.com — professional development courses and keynotes on the enterprise AEM platform",
+        src: "/projects/disney-institute-desktop.jpg",
+        alt: "Disney Institute About page on desktop — team hero and institute introduction",
+        viewport: "desktop",
+      },
+      {
+        src: "/projects/disney-institute-tablet.jpg",
+        alt: "Disney Institute About page on tablet — team hero and classroom photo",
+        viewport: "tablet",
+      },
+      {
+        src: "/projects/disney-institute-mobile.jpg",
+        alt: "Disney Institute About page on phone — We Walk the Talk and classroom photo",
+        viewport: "phone",
       },
     ],
     demo: "https://www.disneyinstitute.com/",
@@ -300,8 +341,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/national-geographic.jpg",
-        alt: "National Geographic homepage at nationalgeographic.com — science, exploration, and storytelling platform",
+        src: "/projects/nat-geo-desktop.jpg",
+        alt: "National Geographic latest stories on desktop — new cat species feature and story rail",
+        viewport: "desktop",
+      },
+      {
+        src: "/projects/nat-geo-tablet.jpg",
+        alt: "National Geographic latest stories on tablet — new cat species feature and story grid",
+        viewport: "tablet",
+      },
+      {
+        src: "/projects/nat-geo-mobile.jpg",
+        alt: "National Geographic latest stories on phone — new cat species feature and photographer story",
+        viewport: "phone",
       },
     ],
     demo: "https://www.nationalgeographic.com/",
@@ -372,8 +424,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/disney-experiences.jpg",
-        alt: "Disney Experiences homepage at disneyexperiences.com — parks, cruise, and consumer products platform",
+        src: "/projects/disney-experience-desktop.jpg",
+        alt: "Disney Experiences homepage on desktop — Bringing Disney Stories to Life with Mickey and latest news",
+        viewport: "desktop",
+      },
+      {
+        src: "/projects/disney-experience-tablet.jpg",
+        alt: "Disney Experiences homepage on tablet — castle hero and latest news cards",
+        viewport: "tablet",
+      },
+      {
+        src: "/projects/disney-experience-mobile.jpg",
+        alt: "Disney Experiences homepage on phone — stories hero and latest news",
+        viewport: "phone",
       },
     ],
     demo: "https://disneyexperiences.com/",
@@ -523,8 +586,34 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/gloves-up-placeholder.svg",
-        alt: "Gloves Up boxing training app case study cover",
+        src: "/projects/glovesup/glovesup-1.jpg",
+        alt: "Gloves Up splash screen — boxing glove mark and Lacing up",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/glovesup/glovesup-2.jpg",
+        alt: "Gloves Up welcome screen — Show up. Put in the rounds.",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/glovesup/glovesup-3.jpg",
+        alt: "Gloves Up home — Good morning and today's training focus",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/glovesup/glovesup-4.jpg",
+        alt: "Gloves Up train tools — boxing timer and drills",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/glovesup/glovesup-5.jpg",
+        alt: "Gloves Up stats — training volume on device",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/glovesup/glovesup-6.jpg",
+        alt: "Gloves Up round timer in a live session",
+        viewport: "phone",
       },
     ],
     apk: "/apps/gloves-up/gloves-up.apk",
@@ -574,8 +663,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/rentarah.jpg",
-        alt: "RentaraH car rental marketplace homepage at rentahub2026.github.io",
+        src: "/covers/rentarah-desktop.png",
+        alt: "RentaraH car rental marketplace on a desktop viewport at rentahub2026.github.io",
+        viewport: "desktop",
+      },
+      {
+        src: "/covers/rentarah-tablet.png",
+        alt: "RentaraH marketplace on a tablet viewport — search, stats, and host actions",
+        viewport: "tablet",
+      },
+      {
+        src: "/covers/rentarah-phone.png",
+        alt: "RentaraH marketplace on a phone viewport — compact search and bottom navigation",
+        viewport: "phone",
       },
     ],
     demo: "https://rentahub2026.github.io/",
@@ -646,8 +746,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/skyrealm.png",
-        alt: "Skyrealm — Guardians of the Aether web game cover at skyrealm-ruby.vercel.app",
+        src: "/covers/skyrealm-desktop.png",
+        alt: "Skyrealm — Guardians of the Aether on a desktop viewport at skyrealm-ruby.vercel.app",
+        viewport: "desktop",
+      },
+      {
+        src: "/covers/skyrealm-tablet.png",
+        alt: "Skyrealm on a tablet viewport — stacked hero and play actions",
+        viewport: "tablet",
+      },
+      {
+        src: "/covers/skyrealm-phone.png",
+        alt: "Skyrealm on a phone viewport — compact menu and play actions",
+        viewport: "phone",
       },
     ],
     demo: "https://skyrealm-ruby.vercel.app/",
@@ -715,8 +826,19 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/lumina.jpg",
-        alt: "Lumina daily message cover — glass card with today's note from Lumina",
+        src: "/covers/lumina-desktop.png",
+        alt: "Lumina daily message on a desktop viewport — glass card with today's note",
+        viewport: "desktop",
+      },
+      {
+        src: "/covers/lumina-tablet.png",
+        alt: "Lumina daily message on a tablet viewport — centered glass card",
+        viewport: "tablet",
+      },
+      {
+        src: "/covers/lumina-phone.png",
+        alt: "Lumina daily message on a phone viewport — full-width glass card",
+        viewport: "phone",
       },
     ],
     demo: "https://lumina-momentra-labs.vercel.app/",
@@ -747,26 +869,29 @@ export const projects: Project[] = [
     name: "PocketPOS",
     shortName: "PocketPOS",
     tagline:
-      "Personal point-of-sale product designed and developed end to end under Momentra Labs.",
+      "Offline point of sale on the phone — open the register and start selling.",
     role: "Solo founder · product & engineering (Momentra Labs)",
     year: "Personal product",
     featured: false,
     kind: "lab",
     labTags: ["Mobile", "Products"],
     overview:
-      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It is one of the independent products he publishes on this portfolio: RentaraH, Skyrealm, Lumina, Gloves Up, PocketPOS, and QuickCart.",
+      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It keeps the register, catalog, and sale history on the phone — open a float and start selling offline. Together with RentaraH, Skyrealm, Lumina, Gloves Up, and Cartify, it is part of his independent product work.",
     problem:
       "Small operators often need a focused POS surface rather than a heavyweight retail suite.",
     solution:
-      "Developed PocketPOS as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation.",
+      "Developed PocketPOS as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation. Open the register, add a product, and keep the shift on the device.",
     architecture: [
       "Independent personal product under Momentra Labs",
       "End-to-end founder ownership of product and engineering",
     ],
     techStack: [],
     features: [
-      "Personal point-of-sale product developed by Al Beltran",
-      "Published as part of the Momentra Labs lab on albeltran.com",
+      "Today-at-a-glance home with register and weekly totals",
+      "Open the register with a cash float — works offline",
+      "Product catalog with name, SKU, price, and stock",
+      "Sale history with receipts on the device",
+      "Business, language, and currency settings",
     ],
     challenges: [
       "Keeping personal product work distinct from client and enterprise delivery",
@@ -779,36 +904,65 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/pocketpos-placeholder.svg",
-        alt: "PocketPOS personal point-of-sale product by Al Beltran / Momentra Labs",
+        src: "/projects/pocketpos/pocketpos-1.jpg",
+        alt: "PocketPOS home — today at a glance, register, and start selling",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/pocketpos/pocketpos-2.jpg",
+        alt: "PocketPOS add product — photo, name, SKU, category, price, and stock",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/pocketpos/pocketpos-3.jpg",
+        alt: "PocketPOS open register — opening cash float and open & sell",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/pocketpos/pocketpos-4.jpg",
+        alt: "PocketPOS settings — business, language, and currency",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/pocketpos/pocketpos-5.jpg",
+        alt: "PocketPOS history — no sales yet",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/pocketpos/pocketpos-6.jpg",
+        alt: "PocketPOS products — empty catalog and add product",
+        viewport: "phone",
       },
     ],
   },
   {
-    slug: "quickcart",
-    name: "QuickCart",
-    shortName: "QuickCart",
+    slug: "cartify",
+    name: "Cartify",
+    shortName: "Cartify",
     tagline:
-      "Personal commerce cart product designed and developed end to end under Momentra Labs.",
+      "Offline grocery cart — know your total before checkout.",
     role: "Solo founder · product & engineering (Momentra Labs)",
     year: "Personal product",
     featured: false,
     kind: "lab",
-    labTags: ["Web", "Products"],
+    labTags: ["Mobile", "Products"],
     overview:
-      "QuickCart is a personal commerce cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. Together with RentaraH, Skyrealm, Lumina, Gloves Up, and PocketPOS, it is part of his independent product work.",
+      "Cartify is a personal grocery cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It keeps a running total, a shopping list, and a budget on the phone — fast, simple, and offline. Together with RentaraH, Skyrealm, Lumina, Gloves Up, and PocketPOS, it is part of his independent product work.",
     problem:
-      "Cart and checkout flows are often treated as an afterthought on a storefront instead of a product someone can own.",
+      "Grocery totals usually stay hidden until the register. Cart tools are often bolted onto a storefront instead of living on the phone you take to the aisle.",
     solution:
-      "Developed QuickCart as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation.",
+      "Developed Cartify as an independent Momentra Labs product, with Al owning product definition and engineering from concept through implementation. Scan a price, add a line, and keep the trip under budget without a cloud account.",
     architecture: [
       "Independent personal product under Momentra Labs",
       "End-to-end founder ownership of product and engineering",
     ],
     techStack: [],
     features: [
-      "Personal commerce cart product developed by Al Beltran",
-      "Published as part of the Momentra Labs lab on albeltran.com",
+      "Running grocery total and budget on the phone",
+      "Scan a price tag or type an item in",
+      "Shopping list before you shop",
+      "History of past trips",
+      "Currency, language, and appearance settings",
     ],
     challenges: [
       "Keeping personal product work distinct from client and enterprise delivery",
@@ -821,15 +975,76 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/quickcart-placeholder.svg",
-        alt: "QuickCart personal commerce cart product by Al Beltran / Momentra Labs",
+        src: "/projects/cartify/cartify-1.jpg",
+        alt: "Cartify splash — Getting your cart ready",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/cartify/cartify-2.jpg",
+        alt: "Cartify welcome — Meet Cartify, know your grocery total before checkout",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/cartify/cartify-3.jpg",
+        alt: "Cartify home — budget, scan price, and add item",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/cartify/cartify-4.jpg",
+        alt: "Cartify shopping list with priced items",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/cartify/cartify-5.jpg",
+        alt: "Cartify scan price camera",
+        viewport: "phone",
+      },
+      {
+        src: "/projects/cartify/cartify-6.jpg",
+        alt: "Cartify settings — budget, currency, language, and appearance",
+        viewport: "phone",
       },
     ],
   },
 ];
 
+const PROJECT_SLUG_ALIASES: Record<string, string> = {
+  quickcart: "cartify",
+};
+
 export function getProject(slug: string) {
-  return projects.find((p) => p.slug === slug);
+  const resolved = PROJECT_SLUG_ALIASES[slug] ?? slug;
+  return projects.find((p) => p.slug === resolved);
+}
+
+export function screenshotForViewport(
+  project: Project,
+  viewport: ScreenshotViewport,
+): ProjectScreenshot | undefined {
+  return (
+    project.screenshots.find((shot) => shot.viewport === viewport) ??
+    project.screenshots[0]
+  );
+}
+
+export function implementationShots(project: Project): ProjectScreenshot[] {
+  const plates = project.screenshots.filter(
+    (shot) => shot.viewport !== "tablet" && shot.viewport !== "phone",
+  );
+  if (plates.length > 0) return plates;
+  return project.screenshots[0]
+    ? [project.screenshots[0]]
+    : [{ src: "", alt: `${project.name} cover` }];
+}
+
+const MOBILE_APP_SLUGS = new Set(["gloves-up", "pocketpos", "cartify"]);
+
+export function isMobileApp(project: Project) {
+  return MOBILE_APP_SLUGS.has(project.slug);
+}
+
+export function labSurfaceLabel(project: Project) {
+  return isMobileApp(project) ? "Mobile app" : "Web app";
 }
 
 const FEATURED_ORDER = [
@@ -846,7 +1061,7 @@ const LAB_ORDER = [
   "lumina",
   "gloves-up",
   "pocketpos",
-  "quickcart",
+  "cartify",
 ];
 
 function sortBySlugOrder<T extends { slug: string }>(items: T[], order: string[]) {
@@ -878,4 +1093,11 @@ export function getLabProjects() {
     projects.filter((p) => p.kind === "lab"),
     LAB_ORDER,
   );
+}
+
+export function projectFolio(project: Project) {
+  const list =
+    project.kind === "lab" ? getLabProjects() : getSelectedProjects();
+  const index = list.findIndex((item) => item.slug === project.slug);
+  return String((index < 0 ? 0 : index) + 1).padStart(2, "0");
 }

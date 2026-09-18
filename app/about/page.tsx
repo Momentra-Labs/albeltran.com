@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { aboutContent } from "@/content/about";
 import { aboutFaqs } from "@/content/faqs";
 import { featuredExperience } from "@/content/experience";
-import { CertificationsList } from "@/components/shared/certifications";
+import { CertificationsSlider } from "@/components/shared/certifications-slider";
 import { TechStack } from "@/components/shared/tech-stack";
 import { person } from "@/content/person";
 import { SOCIAL_LINKS } from "@/lib/constants";
@@ -59,8 +59,8 @@ export default function AboutPage() {
         ]}
       />
       <Container className="py-16">
-        <div className="grid gap-16 lg:grid-cols-[1fr_280px]">
-          <article className="space-y-14">
+        <div className="grid gap-16 lg:grid-cols-[minmax(0,1fr)_280px]">
+          <article className="min-w-0 space-y-14">
             <section id="professional-background">
               <h2 className="text-2xl font-semibold tracking-tight text-foreground">
                 Professional Background
@@ -176,7 +176,7 @@ export default function AboutPage() {
                 </Link>
                 .
               </p>
-              <CertificationsList className="mt-6" />
+              <CertificationsSlider className="mt-6" />
             </section>
 
             <section id="engineering-interests">

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/shared/container";
-import { CertificationsList } from "@/components/shared/certifications";
+import { CertificationsSlider } from "@/components/shared/certifications-slider";
 import { TechStack } from "@/components/shared/tech-stack";
 import { Reveal, SpreadRule } from "@/components/shared/reveal";
 
@@ -9,7 +9,7 @@ export function EngineeringSystem() {
     <section
       id="stack"
       aria-label="Stack and certifications"
-      className="magazine-spread scroll-mt-24 border-b border-border py-10 sm:py-12"
+      className="magazine-spread stack-stage scroll-mt-24 border-b border-border py-10 sm:py-12"
     >
       <Container>
         <Reveal variant="folio">
@@ -38,7 +38,7 @@ export function EngineeringSystem() {
             Full list →
           </Link>
         </div>
-        <CertificationsList className="mt-4" />
+        <CertificationsSlider className="mt-4" />
       </Container>
     </section>
   );
