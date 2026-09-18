@@ -53,10 +53,12 @@ function GroupChips({
   );
 }
 
+type TechGroupTitle = (typeof techGroups)[number]["title"];
+
 export function TechStack({ className }: { className?: string }) {
   const baseId = useId();
   const reduce = useReducedMotion();
-  const [active, setActive] = useState(techGroups[0].title);
+  const [active, setActive] = useState<TechGroupTitle>(techGroups[0].title);
   const [direction, setDirection] = useState(1);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeIndex = techGroups.findIndex((group) => group.title === active);
