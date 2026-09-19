@@ -146,6 +146,18 @@ function LaravelIcon(props: IconProps) {
   );
 }
 
+function ComposerIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        fill="currentColor"
+        d="M6.4 8.2 12 5.2l5.6 3v8.4L12 19.6 6.4 16.6zm1.8 1.4v5.6L12 17.6l3.8-2.4V9.6L12 7.2z"
+      />
+      <path fill="currentColor" d="M12 7.2 15.8 9.6 12 12 8.2 9.6z" opacity="0.55" />
+    </Mark>
+  );
+}
+
 function SpringIcon(props: IconProps) {
   return (
     <Mark {...props}>
@@ -429,6 +441,71 @@ function KubernetesIcon(props: IconProps) {
   );
 }
 
+function TerraformIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        fill="currentColor"
+        d="M1.44 0v7.575l6.561 3.79V3.787zm21.12 1.262L14.4 6.51v7.575l8.16-4.71zM8.16 9.49 1.44 13.28v7.575L8.16 24V9.49zm6.24 3.787v10.724l8.16-4.71v-7.572z"
+      />
+    </Mark>
+  );
+}
+
+function GitIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        fill="currentColor"
+        d="M23.546 10.93 13.067.452a1.546 1.546 0 0 0-2.186 0L8.448 2.886l2.76 2.76a2.06 2.06 0 0 1 1.894.444 2.07 2.07 0 0 1 .44 1.9l2.658 2.66a2.06 2.06 0 0 1 1.9.435 1.845 1.845 0 0 1 0 2.61 1.845 1.845 0 0 1-2.61 0 2.06 2.06 0 0 1-.4-1.996l-2.48-2.476v6.988c.176.086.342.203.488.348a1.845 1.845 0 1 1-2.61-2.61 2.05 2.05 0 0 1 .593-.402V8.726a2.06 2.06 0 0 1-.593-.403 2.07 2.07 0 0 1-.396-2.009L7.636 3.7.45 10.882a1.546 1.546 0 0 0 0 2.186l10.48 10.477a1.546 1.546 0 0 0 2.186 0l10.43-10.43a1.546 1.546 0 0 0 0-2.186"
+      />
+    </Mark>
+  );
+}
+
+function HelmIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <circle cx="12" cy="12" r="3.1" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="1.15" fill="currentColor" />
+      <path
+        fill="currentColor"
+        d="M11.25 2.2h1.5v3.1h-1.5zm0 16.5h1.5v3.1h-1.5zM2.2 11.25h3.1v1.5H2.2zm16.5 0h3.1v1.5h-3.1z"
+      />
+      <path
+        fill="currentColor"
+        d="M4.86 4.05 6.1 5.3 4.8 6.6 3.55 5.35zm13.05 13.05 1.24 1.25-1.25 1.25-1.25-1.25zM18.7 4.8 19.95 3.55 21.2 4.8 19.95 6.05zM4.8 19.95 6.05 18.7 7.3 19.95 6.05 21.2z"
+      />
+    </Mark>
+  );
+}
+
+function GithubActionsIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <circle cx="6.2" cy="6.4" r="2.15" fill="currentColor" />
+      <circle cx="17.8" cy="6.4" r="2.15" fill="currentColor" />
+      <circle cx="12" cy="17.6" r="2.15" fill="currentColor" />
+      <path
+        stroke="currentColor"
+        strokeWidth="1.5"
+        d="M8.2 6.4h7.6M7.1 8.2 10.8 16M16.9 8.2 13.2 16"
+      />
+    </Mark>
+  );
+}
+
+function NginxIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        fill="currentColor"
+        d="M12 2.4 21.2 7.6v8.8L12 21.6 2.8 16.4V7.6zm0 2.5L5.1 8.7v6.6L12 19.1l6.9-3.8V8.7zm-.9 3.2h1.8l2.7 5.1V8.1h1.7v8.2h-1.8l-2.7-5.1v5.1H11.1z"
+      />
+    </Mark>
+  );
+}
+
 function MongodbIcon(props: IconProps) {
   return (
     <Mark {...props}>
@@ -616,6 +693,54 @@ function MobileDevIcon(props: IconProps) {
   );
 }
 
+function Web1Icon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <rect x="5" y="3.6" width="14" height="16.8" rx="1.4" stroke="currentColor" strokeWidth="1.45" />
+      <path
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        d="M8 8h8M8 11.2h8M8 14.4h5.4"
+      />
+    </Mark>
+  );
+}
+
+function Web2Icon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <circle cx="9" cy="9.2" r="2.3" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="15.4" cy="9.6" r="2" stroke="currentColor" strokeWidth="1.4" />
+      <path
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        d="M5.2 17.4c.4-2.4 1.9-3.7 3.8-3.7s3.4 1.3 3.8 3.7M13.2 16.8c.3-1.7 1.4-2.6 2.6-2.6s2.3.9 2.6 2.6"
+      />
+    </Mark>
+  );
+}
+
+function Web3Icon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        stroke="currentColor"
+        strokeWidth="1.45"
+        strokeLinejoin="round"
+        d="m12 3.2 7.2 4.1v8.2L12 19.6 4.8 15.5V7.3z"
+      />
+      <path
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinejoin="round"
+        d="M12 3.2v16.4M4.8 7.3 12 11.4l7.2-4.1"
+      />
+    </Mark>
+  );
+}
+
 function AdobeAppMark({
   children,
   className,
@@ -708,6 +833,7 @@ const ICONS: Record<string, (props: IconProps) => ReactElement> = {
   Java: JavaIcon,
   PHP: PhpIcon,
   Laravel: LaravelIcon,
+  Composer: ComposerIcon,
   "Spring Boot": SpringIcon,
   NestJS: NestIcon,
   Flask: FlaskIcon,
@@ -717,6 +843,11 @@ const ICONS: Record<string, (props: IconProps) => ReactElement> = {
   Redis: RedisIcon,
   Docker: DockerIcon,
   Kubernetes: KubernetesIcon,
+  Terraform: TerraformIcon,
+  Git: GitIcon,
+  Helm: HelmIcon,
+  "GitHub Actions": GithubActionsIcon,
+  Nginx: NginxIcon,
   Azure: AzureIcon,
   Elasticsearch: ElasticIcon,
   AEM: AdobeIcon,
@@ -747,6 +878,15 @@ const ICONS: Record<string, (props: IconProps) => ReactElement> = {
   IOS: IosIcon,
   "Web Development": WebDevIcon,
   "Mobile App Development": MobileDevIcon,
+  Web1: Web1Icon,
+  "Web 1": Web1Icon,
+  "Web 1.0": Web1Icon,
+  Web2: Web2Icon,
+  "Web 2": Web2Icon,
+  "Web 2.0": Web2Icon,
+  Web3: Web3Icon,
+  "Web 3": Web3Icon,
+  "Web 3.0": Web3Icon,
   Photoshop: PhotoshopIcon,
   "Adobe Photoshop": PhotoshopIcon,
   Illustrator: IllustratorIcon,
@@ -768,6 +908,7 @@ const ICON_COLORS: Record<string, string> = {
   Java: "#ea2d2e",
   PHP: "#8892bf",
   Laravel: "#ff2d20",
+  Composer: "#885630",
   "Spring Boot": "#6db33f",
   NestJS: "#e0234e",
   Flask: "#eeeeee",
@@ -777,6 +918,11 @@ const ICON_COLORS: Record<string, string> = {
   Redis: "#ff4438",
   Docker: "#2496ed",
   Kubernetes: "#326ce5",
+  Terraform: "#7b42bc",
+  Git: "#f05032",
+  Helm: "#0f1689",
+  "GitHub Actions": "#2088ff",
+  Nginx: "#009639",
   Azure: "#0078d4",
   Elasticsearch: "#fecc63",
   AEM: "#eb1000",
@@ -811,6 +957,15 @@ const ICON_COLORS: Record<string, string> = {
   IOS: "#5ac8fa",
   "Web Development": "#4f8eff",
   "Mobile App Development": "#a78bfa",
+  Web1: "#94a3b8",
+  "Web 1": "#94a3b8",
+  "Web 1.0": "#94a3b8",
+  Web2: "#3b82f6",
+  "Web 2": "#3b82f6",
+  "Web 2.0": "#3b82f6",
+  Web3: "#8b5cf6",
+  "Web 3": "#8b5cf6",
+  "Web 3.0": "#8b5cf6",
   Photoshop: "#31a8ff",
   "Adobe Photoshop": "#31a8ff",
   Illustrator: "#ff9a00",

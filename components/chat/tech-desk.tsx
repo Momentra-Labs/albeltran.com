@@ -13,6 +13,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { DeskMarkdown } from "@/components/chat/desk-markdown";
 import { TechDeskMark } from "@/components/chat/tech-desk-mark";
 import {
   TECH_DESK,
@@ -114,9 +115,18 @@ export function TechDesk() {
       ? TECH_DESK.live
       : TECH_DESK.offlineShort;
 
-  const pinLog = useCallback(() => {
+  const pinLog = useCallback((mode: "follow" | "turn" = "follow") => {
     const node = logRef.current;
     if (!node) return;
+    if (mode === "turn") {
+      const items = node.querySelectorAll<HTMLElement>(".tech-desk-turn");
+      const last = items[items.length - 1];
+      if (last) {
+        node.scrollTop +=
+          last.getBoundingClientRect().top - node.getBoundingClientRect().top;
+        return;
+      }
+    }
     node.scrollTop = node.scrollHeight;
   }, []);
 
@@ -151,14 +161,15 @@ export function TechDesk() {
 
   useLayoutEffect(() => {
     if (!open) return;
-    pinLog();
-    const frame = window.requestAnimationFrame(pinLog);
-    const timer = window.setTimeout(pinLog, 320);
+    const mode = busy ? "follow" : "turn";
+    pinLog(mode);
+    const frame = window.requestAnimationFrame(() => pinLog(mode));
+    const timer = window.setTimeout(() => pinLog(mode), 320);
     return () => {
       window.cancelAnimationFrame(frame);
       window.clearTimeout(timer);
     };
-  }, [open, turns, pinLog]);
+  }, [open, turns, busy, pinLog]);
 
   useEffect(() => {
     if (busyRef.current && !busy) {
@@ -311,7 +322,7 @@ export function TechDesk() {
             exit={reduce ? undefined : { opacity: 0, y: 10 }}
             transition={{ duration: motionMs, ease: deskEase }}
             onAnimationComplete={() => {
-              pinLog();
+              pinLog(busy ? "follow" : "turn");
               inputRef.current?.focus();
             }}
           >
@@ -378,7 +389,6 @@ export function TechDesk() {
             <div
               ref={(node) => {
                 logRef.current = node;
-                if (node) node.scrollTop = node.scrollHeight;
               }}
               className="tech-desk-log"
             >
@@ -414,20 +424,27 @@ export function TechDesk() {
                           <CopyButton copied={copied} onCopy={onCopy} />
                         ) : null}
                       </div>
-                      <div className="tech-desk-bubble min-w-0 max-w-full [overflow-wrap:anywhere] [word-break:break-word]">
+                      <div
+                        className={cn(
+                          "tech-desk-bubble min-w-0 max-w-full",
+                          turn.role === "assistant" && "is-md",
+                        )}
+                      >
                         {waiting ? (
                           <span className="tech-desk-pips" aria-hidden="true">
                             <i />
                             <i />
                             <i />
                           </span>
-                        ) : (
+                        ) : turn.role === "assistant" ? (
                           <>
-                            {turn.content}
+                            <DeskMarkdown source={turn.content} />
                             {streaming ? (
                               <span className="tech-desk-caret" aria-hidden="true" />
                             ) : null}
                           </>
+                        ) : (
+                          turn.content
                         )}
                       </div>
                       {canCopy ? (
