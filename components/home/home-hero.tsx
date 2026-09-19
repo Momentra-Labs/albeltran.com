@@ -302,7 +302,7 @@ export function HomeHero() {
                   fill
                   priority
                   sizes="(max-width: 1023px) min(92vw, calc(11rem + 48vw)), 48vw"
-                  className={`magazine-portrait-img ${
+                  className={`magazine-portrait-img boot-asset ${
                     reduce
                       ? ""
                       : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"

@@ -1,5 +1,5 @@
 import { Download, ExternalLink } from "lucide-react";
-import type { Project } from "@/content/projects";
+import { type Project, projectDemoLabel } from "@/content/projects";
 import { Button } from "@/components/ui/button";
 
 export function ProjectCtas({
@@ -16,7 +16,7 @@ export function ProjectCtas({
       {project.demo ? (
         <Button asChild size="sm">
           <a href={project.demo} target="_blank" rel="noopener noreferrer">
-            Open live site <ExternalLink className="h-3.5 w-3.5" />
+            {projectDemoLabel(project)} <ExternalLink className="h-3.5 w-3.5" />
           </a>
         </Button>
       ) : null}

@@ -4,6 +4,7 @@ import { type Project, labSurfaceLabel, projectFolio } from "@/content/projects"
 import { DeviceCluster, clusterVariantFor } from "@/components/projects/device-cluster";
 import { Badge } from "@/components/ui/badge";
 import { ProjectCtas } from "@/components/projects/project-ctas";
+import { ProjectStatusBadge } from "@/components/shared/project-status-badge";
 import { cn } from "@/lib/utils";
 
 export function ProjectCard({
@@ -28,12 +29,7 @@ export function ProjectCard({
         <span className="pointer-events-none absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
           {project.kind === "lab" ? labSurfaceLabel(project) : projectFolio(project)}
         </span>
-        {project.demo ? (
-          <span className="pointer-events-none absolute right-4 top-4 z-[5] inline-flex items-center gap-1.5 border border-border bg-background/85 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground backdrop-blur-[2px]">
-            <span className="magazine-live-dot" aria-hidden />
-            Live
-          </span>
-        ) : null}
+        <ProjectStatusBadge project={project} />
       </div>
       <div className="flex flex-1 flex-col p-6 sm:p-8">
         <div className="mb-4 flex items-start justify-between gap-4">

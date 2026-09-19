@@ -1,6 +1,12 @@
 "use client";
 
-import { useId, useRef, useState, type KeyboardEvent } from "react";
+import {
+  useId,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type PointerEvent,
+} from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { techGroups } from "@/content/person";
 import { TechIcon } from "@/components/icons/tech-icons";
@@ -23,23 +29,29 @@ function tabLabel(title: string) {
   }
 }
 
+function folioIndex(index: number) {
+  return String(index + 1).padStart(2, "0");
+}
+
 function GroupChips({
   items,
   animate,
+  className,
 }: {
   items: readonly string[];
   animate?: boolean;
+  className?: string;
 }) {
   return (
-    <ul className="flex list-none flex-wrap gap-2 p-0">
+    <ul className={cn("stack-chip-list flex list-none flex-wrap gap-2 p-0", className)}>
       {items.map((item, index) => (
         <motion.li
           key={item}
-          initial={animate ? { opacity: 0, y: 12, filter: "blur(5px)" } : false}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={animate ? { opacity: 0, y: 10 } : false}
+          animate={{ opacity: 1, y: 0 }}
           transition={
             animate
-              ? { duration: 0.38, ease, delay: Math.min(index, 8) * 0.032 }
+              ? { duration: 0.32, ease, delay: Math.min(index, 8) * 0.028 }
               : { duration: 0 }
           }
         >
@@ -61,23 +73,19 @@ export function TechStack({ className }: { className?: string }) {
   const [active, setActive] = useState<TechGroupTitle>(techGroups[0].title);
   const [direction, setDirection] = useState(1);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const swipe = useRef<{ x: number; y: number } | null>(null);
   const activeIndex = techGroups.findIndex((group) => group.title === active);
   const activeGroup = techGroups[activeIndex] ?? techGroups[0];
+  const last = techGroups.length - 1;
 
   function select(index: number) {
     const group = techGroups[index];
     if (!group || group.title === active) return;
     setDirection(index > activeIndex ? 1 : -1);
     setActive(group.title);
-    tabRefs.current[index]?.scrollIntoView({
-      inline: "center",
-      block: "nearest",
-      behavior: reduce ? "auto" : "smooth",
-    });
   }
 
   function onTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
-    const last = techGroups.length - 1;
     let next = index;
     if (event.key === "ArrowRight" || event.key === "ArrowDown") {
       next = index === last ? 0 : index + 1;
@@ -93,6 +101,21 @@ export function TechStack({ className }: { className?: string }) {
     event.preventDefault();
     select(next);
     tabRefs.current[next]?.focus();
+  }
+
+  function onStagePointerDown(event: PointerEvent<HTMLDivElement>) {
+    swipe.current = { x: event.clientX, y: event.clientY };
+  }
+
+  function onStagePointerUp(event: PointerEvent<HTMLDivElement>) {
+    const start = swipe.current;
+    swipe.current = null;
+    if (!start) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) select(activeIndex === last ? 0 : activeIndex + 1);
+    else select(activeIndex === 0 ? last : activeIndex - 1);
   }
 
   return (
@@ -138,7 +161,23 @@ export function TechStack({ className }: { className?: string }) {
             })}
           </div>
         </div>
-        <div className="stack-tab-stage">
+        <div className="stack-tab-head">
+          <p className="stack-tab-kicker">
+            {activeGroup.title}
+            <span className="text-muted-dim"> · {activeGroup.items.length}</span>
+          </p>
+          <p className="stack-tab-folio">
+            {folioIndex(activeIndex)} / {folioIndex(last)}
+          </p>
+        </div>
+        <div
+          className="stack-tab-stage"
+          onPointerDown={onStagePointerDown}
+          onPointerUp={onStagePointerUp}
+          onPointerCancel={() => {
+            swipe.current = null;
+          }}
+        >
           <AnimatePresence mode="wait" initial={false} custom={direction}>
             <motion.div
               key={activeGroup.title}
@@ -148,17 +187,11 @@ export function TechStack({ className }: { className?: string }) {
               className="stack-tab-panel"
               custom={direction}
               initial={
-                reduce
-                  ? false
-                  : { opacity: 0, x: direction * 36, filter: "blur(8px)" }
+                reduce ? false : { opacity: 0, x: direction * 28 }
               }
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              exit={
-                reduce
-                  ? undefined
-                  : { opacity: 0, x: direction * -28, filter: "blur(6px)" }
-              }
-              transition={{ duration: reduce ? 0 : 0.32, ease }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={reduce ? undefined : { opacity: 0, x: direction * -22 }}
+              transition={{ duration: reduce ? 0 : 0.28, ease }}
             >
               <GroupChips items={activeGroup.items} animate={!reduce} />
             </motion.div>

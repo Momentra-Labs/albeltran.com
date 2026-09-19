@@ -7,7 +7,7 @@ export const now = {
       title: "Current work",
       items: [
         "Software Engineering Lead at Anglian Dental in the United Kingdom",
-        "Founder of Momentra Labs — RentaraH, Skyrealm, Lumina, Gloves Up, PocketPOS, and Cartify",
+        "Founder of Momentra Labs — RentaraH, Hiraya (in progress), Skyrealm, Lumina, Gloves Up, PocketPOS, and Cartify",
         "Leading software engineering delivery, quality, and technical direction",
         "Maintaining this portfolio as the canonical public engineering profile",
       ],

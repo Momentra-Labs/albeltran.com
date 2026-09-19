@@ -15,7 +15,7 @@ export const currentlyBuilding: readonly BuildingItem[] = [
     kind: "Project",
     title: "Momentra Labs products",
     summary:
-      "RentaraH, Skyrealm, Lumina, and the rest of the independent lab — public URLs, not slideware.",
+      "Hiraya is in progress at hiraya-phi.vercel.app, next to RentaraH, Skyrealm, Lumina, and the rest of the independent lab.",
     href: "/#lab",
   },
   {

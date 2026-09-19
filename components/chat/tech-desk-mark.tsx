@@ -3,14 +3,24 @@
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 
+export type DeskMood = "idle" | "listen" | "think" | "happy" | "sorry";
+
+const MOUTH: Record<DeskMood, string> = {
+  idle: "M25.2 51.4c3.4 4.2 10.2 4.2 13.8 0",
+  listen: "M25.2 51.4c3.4 4.2 10.2 4.2 13.8 0",
+  think: "M29.2 51.1h5.6",
+  happy: "M23.6 50.2c4.4 5.6 12.4 5.6 16.8 0",
+  sorry: "M26.6 53.1c3.2-2.4 8-2.4 11.2 0",
+};
+
 export function TechDeskMark({
   mood = "idle",
 }: {
-  mood?: "idle" | "listen";
+  mood?: DeskMood;
 }) {
   const reduce = useReducedMotion();
   const ref = useRef<SVGSVGElement>(null);
-  const play = !reduce && mood === "idle";
+  const play = !reduce && (mood === "idle" || mood === "happy");
 
   useEffect(() => {
     const node = ref.current;
@@ -23,6 +33,7 @@ export function TechDeskMark({
     <svg
       ref={ref}
       className="tech-desk-mark"
+      data-mood={mood}
       viewBox="0 0 64 64"
       aria-hidden="true"
       focusable="false"
@@ -184,18 +195,20 @@ export function TechDeskMark({
         </g>
         <path
           className="tech-desk-mark-mouth"
-          d="M25.2 51.4c3.4 4.2 10.2 4.2 13.8 0"
+          d={MOUTH[mood]}
           fill="none"
           stroke="var(--accent)"
           strokeWidth="2"
           strokeLinecap="round"
         />
-        <ellipse cx="25" cy="38.2" rx="4.7" ry="5.7" fill="#111" />
-        <ellipse cx="40.8" cy="39" rx="4.1" ry="5.1" fill="#111" />
-        <circle cx="23.5" cy="36" r="1.75" fill="#fff" />
-        <circle cx="26.4" cy="40" r="0.72" fill="#fff" />
-        <circle cx="39.4" cy="37" r="1.5" fill="#fff" />
-        <circle cx="42" cy="40.4" r="0.62" fill="#fff" />
+        <g className="tech-desk-mark-gaze">
+          <ellipse cx="25" cy="38.2" rx="4.7" ry="5.7" fill="#111" />
+          <ellipse cx="40.8" cy="39" rx="4.1" ry="5.1" fill="#111" />
+          <circle cx="23.5" cy="36" r="1.75" fill="#fff" />
+          <circle cx="26.4" cy="40" r="0.72" fill="#fff" />
+          <circle cx="39.4" cy="37" r="1.5" fill="#fff" />
+          <circle cx="42" cy="40.4" r="0.62" fill="#fff" />
+        </g>
         <rect
           className="tech-desk-mark-lid"
           x="20"

@@ -14,7 +14,13 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { DeskMarkdown } from "@/components/chat/desk-markdown";
-import { TechDeskMark } from "@/components/chat/tech-desk-mark";
+import { TechDeskLaunch } from "@/components/chat/tech-desk-launch";
+import { TechDeskMark, type DeskMood } from "@/components/chat/tech-desk-mark";
+import {
+  TechDeskNudge,
+  deskUnseen,
+  markDeskOpened,
+} from "@/components/chat/tech-desk-nudge";
 import {
   TECH_DESK,
   TECH_DESK_STARTERS,
@@ -109,6 +115,7 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [peek, setPeek] = useState(false);
   const [logReady, setLogReady] = useState(false);
+  const [ping, setPing] = useState(false);
   const online = groqConfigured();
   const motionMs = reduce ? 0 : 0.28;
   const lineLabel = busy
@@ -116,6 +123,13 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
     : online
       ? TECH_DESK.live
       : TECH_DESK.offlineShort;
+  const mood: DeskMood = busy
+    ? "think"
+    : notice
+      ? "sorry"
+      : wink
+        ? "happy"
+        : "idle";
 
   const pinLog = useCallback((mode: "follow" | "turn" = "follow") => {
     const node = logRef.current;
@@ -135,12 +149,20 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
   const triggerWink = useCallback(() => {
     setWink(true);
     window.clearTimeout(winkTimer.current);
-    winkTimer.current = window.setTimeout(() => setWink(false), 400);
+    winkTimer.current = window.setTimeout(() => setWink(false), 900);
+  }, []);
+
+  const openDesk = useCallback(() => {
+    markDeskOpened();
+    setPing(false);
+    setNotice(groqConfigured() ? "" : TECH_DESK.offline);
+    setOpen(true);
   }, []);
 
   useEffect(() => {
     setTurns(readDeskLog());
     setLeft(remainingDeskTurns());
+    setPing(deskUnseen());
     setLogReady(true);
     return () => {
       window.clearTimeout(winkTimer.current);
@@ -309,8 +331,9 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
   }, []);
 
   return (
-    <div className="tech-desk">
-      <AnimatePresence mode="wait" initial={false}>
+    <div className={cn("tech-desk", `is-${mood}`)}>
+      <TechDeskNudge open={open} busy={busy} onOpen={openDesk} />
+      <AnimatePresence mode="popLayout" initial={false}>
         {open ? (
           <motion.div
             key="panel"
@@ -319,9 +342,9 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            initial={reduce ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? undefined : { opacity: 0, y: 10 }}
+            initial={reduce ? false : { opacity: 0, y: 14, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={reduce ? undefined : { opacity: 0, y: 10, scale: 0.98 }}
             transition={{ duration: motionMs, ease: deskEase }}
             onAnimationComplete={() => {
               pinLog(busy ? "follow" : "turn");
@@ -333,6 +356,7 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
                 "tech-desk-head",
                 busy && "is-listening",
                 !online && "is-offline",
+                notice && "is-sorry",
               )}
             >
               <div className="tech-desk-head-lead">
@@ -343,13 +367,22 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
                     busy && "is-listening",
                     wink && "is-wink",
                     peek && "is-peek",
+                    mood === "happy" && "is-happy",
+                    mood === "sorry" && "is-sorry",
+                    mood === "think" && "is-think",
                   )}
                   aria-label={TECH_DESK.poke}
                   onPointerEnter={() => setPeek(true)}
                   onPointerLeave={() => setPeek(false)}
                   onClick={triggerWink}
                 >
-                  <TechDeskMark mood={busy ? "listen" : "idle"} />
+                  <motion.span
+                    className="tech-desk-launch-mark"
+                    layoutId="desk-mascot"
+                    layout
+                  >
+                    <TechDeskMark mood={mood} />
+                  </motion.span>
                 </button>
                 <div className="min-w-0">
                   <div className="tech-desk-live">
@@ -362,7 +395,7 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
                       aria-hidden="true"
                     />
                     <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
-                      {TECH_DESK.kicker}
+                      {TECH_DESK.subtitle}
                     </p>
                   </div>
                   <h2
@@ -381,10 +414,11 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
               </div>
               <button
                 type="button"
-                className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted hover:text-foreground"
+                className="tech-desk-close"
+                aria-label={TECH_DESK.close}
                 onClick={close}
               >
-                Close
+                ×
               </button>
             </header>
 
@@ -395,9 +429,11 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
               className="tech-desk-log"
             >
               {turns.length === 0 ? (
-                <p className="text-sm leading-relaxed text-muted">
-                  {TECH_DESK.empty}
-                </p>
+                <div className="tech-desk-welcome">
+                  <p className="tech-desk-greet">{TECH_DESK.greet}</p>
+                  <p className="tech-desk-greet-next">{TECH_DESK.greetNext}</p>
+                  <p className="tech-desk-empty">{TECH_DESK.empty}</p>
+                </div>
               ) : (
                 turns.map((turn, index) => {
                   const last = index === turns.length - 1;
@@ -473,6 +509,7 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
                     type="button"
                     disabled={busy || !online}
                     className="tech-desk-chip"
+                    data-cursor="→"
                     onClick={() => void send(starter.prompt)}
                   >
                     {starter.label}
@@ -520,25 +557,12 @@ export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
             </form>
           </motion.div>
         ) : (
-          <motion.button
+          <TechDeskLaunch
             key="launch"
-            type="button"
-            className="tech-desk-launch"
-            aria-label={TECH_DESK.launcher}
-            aria-expanded={false}
-            aria-haspopup="dialog"
-            data-cursor="ASK"
-            initial={reduce ? false : { opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? undefined : { opacity: 0, y: 8 }}
-            transition={{ duration: motionMs, ease: deskEase }}
-            onClick={() => {
-              setNotice(online ? "" : TECH_DESK.offline);
-              setOpen(true);
-            }}
-          >
-            <TechDeskMark />
-          </motion.button>
+            mood={mood}
+            ping={ping}
+            onClick={openDesk}
+          />
         )}
       </AnimatePresence>
     </div>

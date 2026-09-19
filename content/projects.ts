@@ -37,6 +37,8 @@ export type Project = {
   privacyPolicy?: string;
   relatedArticles?: string[];
   relatedExperience?: string[];
+  /** Defaults to live when `demo` is set. */
+  status?: "live" | "in-progress";
   story?: {
     constraints?: string;
     hardPart?: string;
@@ -782,6 +784,95 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "hiraya",
+    name: "Hiraya",
+    shortName: "Hiraya",
+    tagline:
+      "Unofficial Philippine exam trainer — Civil Service and university entrance practice. In progress.",
+    role: "Solo founder · product & engineering (Momentra Labs)",
+    year: "2026",
+    featured: false,
+    kind: "lab",
+    labTags: ["Web", "Products"],
+    status: "in-progress",
+    overview:
+      "Hiraya is an unofficial Philippine exam training platform Al Andrew Paul Beltran (Al Beltran) is building as founder of Momentra Labs. The public preview at hiraya-phi.vercel.app is practice for Civil Service and university entrance prep: lock an answer, see why a miss happened, and come back tomorrow. It is not affiliated with the Civil Service Commission or any school. The product is in progress.",
+    problem:
+      "Most exam apps either dump a PDF bank on the table or pretend they can predict a pass. Hiraya needed a daily lock-and-learn loop — tracks, explanations, and progress that stay honest about being unofficial practice.",
+    solution:
+      "Shipping a Next.js trainer on Vercel with on-device save, original practice items, CSC Professional / Subprofessional and university tracks, mock exams, ranks, and a public marketing surface. Sign-in is optional and stays on the device. Billing is not completed in the browser.",
+    architecture: [
+      "Next.js App Router preview at hiraya-phi.vercel.app",
+      "On-device trainer save — optional local sign-in, not a cloud account",
+      "Unofficial tracks mapped to published CSC announcement headings",
+      "Practice, mock exams, progress, and ranks in one product",
+    ],
+    techStack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Zustand",
+    ],
+    features: [
+      "Public preview at hiraya-phi.vercel.app",
+      "Unofficial CSC Professional, CSC Subprofessional, and university tracks",
+      "Lock-an-answer practice with a short explanation on a miss",
+      "Mock exams, progress, ranks, and on-device save",
+      "No official affiliation and no pass promise",
+    ],
+    challenges: [
+      "Keeping unofficial practice clearly unofficial while still being useful",
+      "Shipping a public preview before the bank, billing, and analysis are finished",
+    ],
+    performance: [
+      "Public preview at https://hiraya-phi.vercel.app/",
+      "In-progress Momentra Labs product, not a finished exam product and not a client case study",
+    ],
+    lessons: [
+      "A trainer belongs in a portfolio when someone can open the URL and lock an answer",
+      "In-progress is a status, not a reason to hide the work",
+    ],
+    screenshots: [
+      {
+        src: "/projects/hiraya-desktop.jpg",
+        alt: "Hiraya trainer dashboard on a desktop viewport at hiraya-phi.vercel.app",
+        viewport: "desktop",
+      },
+      {
+        src: "/projects/hiraya-tablet.jpg",
+        alt: "Hiraya trainer on a tablet viewport — journey, quests, and study companions",
+        viewport: "tablet",
+      },
+      {
+        src: "/projects/hiraya-mobile.jpg",
+        alt: "Hiraya trainer on a phone viewport — compact dashboard and practice actions",
+        viewport: "phone",
+      },
+    ],
+    demo: "https://hiraya-phi.vercel.app/",
+    story: {
+      constraints:
+        "Unofficial practice only. No CSC or university affiliation. Sign-in and progress stay on the device.",
+      hardPart:
+        "A public preview has to be playable without pretending the bank, billing, or analysis are finished.",
+      tradeoff:
+        "Shipping the lock loop first is honest. It also means the card has to say in progress.",
+      whatBroke:
+        "Not a published outage. The failure mode to avoid is selling unofficial practice as an official paper.",
+      whatChanged:
+        "The preview is live. The product is still being built.",
+      differently:
+        "I would still ship the loop first. I would not wait for a full bank to put a URL on the lab.",
+    },
+    diagram: [
+      { id: "learner", label: "Learner", purpose: "Picks a track and locks an answer.", tradeoff: "One device owns the save.", scale: "No cloud account required." },
+      { id: "app", label: "Hiraya", purpose: "Next.js preview on Vercel.", tradeoff: "Public URL before the bank is finished.", scale: "In progress." },
+      { id: "tracks", label: "Tracks", purpose: "Unofficial CSC and university practice.", tradeoff: "Mapped to published headings, not official specs.", scale: "Original items only." },
+    ],
+  },
+  {
     slug: "skyrealm",
     name: "Skyrealm",
     shortName: "Skyrealm",
@@ -957,7 +1048,7 @@ export const projects: Project[] = [
     kind: "lab",
     labTags: ["Mobile", "Products"],
     overview:
-      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It keeps the register, catalog, and sale history on the phone — open a float and start selling offline. Together with RentaraH, Skyrealm, Lumina, Gloves Up, and Cartify, it is part of his independent product work.",
+      "PocketPOS is a personal point-of-sale product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It keeps the register, catalog, and sale history on the phone — open a float and start selling offline. Together with RentaraH, Hiraya, Skyrealm, Lumina, Gloves Up, and Cartify, it is part of his independent product work.",
     problem:
       "Small operators often need a focused POS surface rather than a heavyweight retail suite.",
     solution:
@@ -1028,7 +1119,7 @@ export const projects: Project[] = [
     kind: "lab",
     labTags: ["Mobile", "Products"],
     overview:
-      "Cartify is a personal grocery cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It keeps a running total, a shopping list, and a budget on the phone — fast, simple, and offline. Together with RentaraH, Skyrealm, Lumina, Gloves Up, and PocketPOS, it is part of his independent product work.",
+      "Cartify is a personal grocery cart product Al Andrew Paul Beltran (Al Beltran) developed as founder of Momentra Labs. It keeps a running total, a shopping list, and a budget on the phone — fast, simple, and offline. Together with RentaraH, Hiraya, Skyrealm, Lumina, Gloves Up, and PocketPOS, it is part of his independent product work.",
     problem:
       "Grocery totals usually stay hidden until the register. Cart tools are often bolted onto a storefront instead of living on the phone you take to the aisle.",
     solution:
@@ -1139,12 +1230,26 @@ const FEATURED_ORDER = [
 
 const LAB_ORDER = [
   "rentarah",
+  "hiraya",
   "skyrealm",
   "lumina",
   "gloves-up",
   "pocketpos",
   "cartify",
 ];
+
+export function projectStatusLabel(
+  project: Project,
+): "In progress" | "Live" | null {
+  if (project.status === "in-progress") return "In progress";
+  if (project.demo) return "Live";
+  return null;
+}
+
+export function projectDemoLabel(project: Project) {
+  if (project.status === "in-progress") return "Open preview";
+  return project.kind === "lab" ? "Open live site" : "Live demo";
+}
 
 function sortBySlugOrder<T extends { slug: string }>(items: T[], order: string[]) {
   return [...items].sort((a, b) => {

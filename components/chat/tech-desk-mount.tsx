@@ -2,8 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { TechDeskMark } from "@/components/chat/tech-desk-mark";
-import { TECH_DESK } from "@/content/chat";
+import { TechDeskLaunch } from "@/components/chat/tech-desk-launch";
 
 function LaunchPlaceholder({
   onLoad,
@@ -12,19 +11,10 @@ function LaunchPlaceholder({
 }) {
   return (
     <div className="tech-desk">
-      <button
-        type="button"
-        className="tech-desk-launch"
-        aria-label={TECH_DESK.launcher}
-        aria-expanded={false}
-        aria-haspopup="dialog"
-        data-cursor="ASK"
-        onPointerEnter={onLoad ? () => onLoad(false) : undefined}
-        onFocus={onLoad ? () => onLoad(false) : undefined}
+      <TechDeskLaunch
+        onHover={onLoad ? () => onLoad(false) : undefined}
         onClick={onLoad ? () => onLoad(true) : undefined}
-      >
-        <TechDeskMark />
-      </button>
+      />
     </div>
   );
 }

@@ -9,7 +9,12 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { experience } from "@/content/experience";
-import { getProject, implementationShots, projects } from "@/content/projects";
+import {
+  getProject,
+  implementationShots,
+  projectDemoLabel,
+  projects,
+} from "@/content/projects";
 import { person } from "@/content/person";
 import { getAllPostMeta } from "@/lib/mdx";
 import {
@@ -86,6 +91,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       <Container className="py-16 sm:py-20">
         <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-dim [overflow-wrap:anywhere]">
           {project.kind === "lab" ? "Lab" : "Case study"} · {project.role}
+          {project.status === "in-progress" ? " · In progress" : ""}
         </p>
         <p className="mb-10 max-w-3xl text-base leading-relaxed break-words text-muted">
           Written by{" "}
@@ -99,7 +105,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           {project.demo && (
             <Button asChild>
               <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                {project.kind === "lab" ? "Open live site" : "Live demo"}{" "}
+                {projectDemoLabel(project)}{" "}
                 <ExternalLink className="h-4 w-4" />
               </a>
             </Button>
