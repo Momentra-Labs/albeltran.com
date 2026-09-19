@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { BlogPost } from "@/lib/mdx";
+import type { BlogPostMeta } from "@/lib/mdx";
 import { Badge } from "@/components/ui/badge";
 import { BlogCover } from "@/components/blog/blog-cover";
 
@@ -15,7 +15,7 @@ export function BlogPostList({
   posts,
   emptyMessage = "No articles match those filters.",
 }: {
-  posts: BlogPost[];
+  posts: BlogPostMeta[];
   emptyMessage?: string;
 }) {
   return (
@@ -41,7 +41,6 @@ export function BlogPostList({
               <div className="mb-3 flex flex-wrap items-center gap-3 font-mono text-[11px] text-muted-dim">
                 <Badge variant="accent">{post.category}</Badge>
                 <time dateTime={post.date}>{formatPostDate(post.date)}</time>
-                <span>{post.readingTime}</span>
               </div>
               <h2 className="text-2xl font-semibold tracking-tight text-foreground">
                 <Link

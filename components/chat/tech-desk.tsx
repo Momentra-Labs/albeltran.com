@@ -86,7 +86,7 @@ function errorCopy(error: unknown) {
   return "The desk dropped the line. Try once more.";
 }
 
-export function TechDesk() {
+export function TechDesk({ startOpen = false }: { startOpen?: boolean }) {
   const titleId = useId();
   const inputId = useId();
   const reduce = useReducedMotion();
@@ -97,11 +97,13 @@ export function TechDesk() {
   const busyRef = useRef(false);
   const winkTimer = useRef<number>(0);
   const copyTimer = useRef<number>(0);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(startOpen);
   const [draft, setDraft] = useState("");
   const [turns, setTurns] = useState<ChatTurn[]>([]);
   const [busy, setBusy] = useState(false);
-  const [notice, setNotice] = useState("");
+  const [notice, setNotice] = useState(() =>
+    startOpen && !groqConfigured() ? TECH_DESK.offline : "",
+  );
   const [left, setLeft] = useState<number>(GROQ_CONFIG.dailyTurns);
   const [wink, setWink] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);

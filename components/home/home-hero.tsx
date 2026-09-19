@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { person } from "@/content/person";
 import { coverMarksLine } from "@/content/marks";
+import { Reveal } from "@/components/shared/reveal";
 
 const coverEase = [0.23, 1, 0.32, 1] as const;
 
@@ -300,7 +301,6 @@ export function HomeHero() {
                   alt={person.imageAlt}
                   fill
                   priority
-                  quality={90}
                   sizes="(max-width: 1023px) min(92vw, calc(11rem + 48vw)), 48vw"
                   className={`magazine-portrait-img ${
                     reduce
@@ -333,9 +333,9 @@ export function HomeHero() {
           </figure>
 
           <div className="order-1 flex min-h-0 flex-col justify-start gap-6 pb-2 lg:justify-between lg:gap-8 lg:pt-2 lg:pb-6">
-            <motion.div {...inkReveal(0.12, reduce)}>
+            <Reveal variant="folio">
               <CoverEpigraph />
-            </motion.div>
+            </Reveal>
             <div>
               <motion.div {...inkReveal(0.2, reduce)}>
                 <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">

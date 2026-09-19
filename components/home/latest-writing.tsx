@@ -7,7 +7,7 @@ export function LatestWriting({ posts }: { posts: BlogPost[] }) {
   return (
     <section id="writing" className="magazine-spread py-16 sm:py-20">
       <Container>
-        <Reveal className="mb-4 flex items-end justify-between" variant="folio">
+        <Reveal className="mb-4 flex items-end justify-between">
           <div>
             <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
             <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">

@@ -9,7 +9,7 @@ export function HomeContact() {
   return (
     <section id="contact" className="magazine-spread scroll-mt-24 py-10 sm:py-12">
       <Container className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-        <Reveal variant="folio">
+        <Reveal>
           <div id="about" className="scroll-mt-24">
             <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
             <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">

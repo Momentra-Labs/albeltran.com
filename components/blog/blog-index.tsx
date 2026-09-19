@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, type ReactNode } from "react";
-import type { BlogPost } from "@/lib/mdx";
+import type { BlogPostMeta } from "@/lib/mdx";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { BlogPostList } from "@/components/blog/blog-post-list";
@@ -12,7 +12,7 @@ export function BlogIndex({
   tags,
   children,
 }: {
-  posts: BlogPost[];
+  posts: BlogPostMeta[];
   categories: string[];
   tags: string[];
   children: ReactNode;

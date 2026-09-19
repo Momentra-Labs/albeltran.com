@@ -29,9 +29,11 @@ const EASE = [0.23, 1, 0.32, 1] as const;
 function PhotoScreen({
   screen,
   decorative = false,
+  priority = false,
 }: {
   screen: AppScreen;
   decorative?: boolean;
+  priority?: boolean;
 }) {
   const { status, boxRef, onLoad, onError } = useDecodedImage(screen.src);
   if (!screen.src) return null;
@@ -43,6 +45,7 @@ function PhotoScreen({
         alt={decorative ? "" : (screen.alt ?? screen.title)}
         fill
         unoptimized
+        priority={priority}
         sizes="(max-width: 640px) 70vw, 360px"
         onLoad={onLoad}
         onError={onError}
@@ -140,14 +143,16 @@ function ScreenFace({
   screen,
   index,
   decorative,
+  priority,
 }: {
   project: Project;
   screen: AppScreen;
   index: number;
   decorative?: boolean;
+  priority?: boolean;
 }) {
   return screen.src ? (
-    <PhotoScreen screen={screen} decorative={decorative} />
+    <PhotoScreen screen={screen} decorative={decorative} priority={priority} />
   ) : (
     <EditorialScreen project={project} screen={screen} index={index} />
   );
@@ -161,9 +166,8 @@ function wrappedOffset(i: number, active: number, count: number) {
   return offset;
 }
 
-function indexesToRender(count: number, active: number, compact: boolean) {
+function indexesToRender(count: number, active: number) {
   if (count <= 1) return [active];
-  if (!compact) return Array.from({ length: count }, (_, i) => i);
   if (count === 2) return [active, (active + 1) % 2];
   return [(active - 1 + count) % count, active, (active + 1) % count];
 }
@@ -275,7 +279,7 @@ export function AppPhoneShowcase({
 
   if (count === 0) return null;
 
-  const visible = indexesToRender(count, index, compact);
+  const visible = indexesToRender(count, index);
 
   return (
     <div
@@ -337,6 +341,7 @@ export function AppPhoneShowcase({
                     screen={screen}
                     index={i}
                     decorative={false}
+                    priority={offset === 0}
                   />
                 </PhoneChrome>
               </motion.div>

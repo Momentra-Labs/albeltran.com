@@ -17,7 +17,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { homeFaqs } from "@/content/faqs";
 import { featuredExperience } from "@/content/experience";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
-import { getAllPosts } from "@/lib/mdx";
+import { getAllPostMeta } from "@/lib/mdx";
 import {
   blogItemListSchema,
   faqSchema,
@@ -43,7 +43,7 @@ export const metadata = buildMetadata({
 export default function HomePage() {
   const featured = getFeaturedProjects();
   const lab = getLabProjects();
-  const posts = getAllPosts();
+  const posts = getAllPostMeta();
   const schema = graphSchema([
     websiteSchema(),
     personSchema(),

@@ -9,7 +9,7 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
   return (
     <section id="lab" className="magazine-spread scroll-mt-24 py-10 sm:py-12">
       <Container>
-        <Reveal variant="folio">
+        <Reveal>
           <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             Engineering Lab
@@ -56,7 +56,6 @@ export function EngineeringLab({ projects }: { projects: Project[] }) {
                   <DeviceCluster
                     project={project}
                     variant={clusterVariantFor(project, "card")}
-                    priority={index === 0}
                   />
                   <span className="pointer-events-none absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
                     {labSurfaceLabel(project)}

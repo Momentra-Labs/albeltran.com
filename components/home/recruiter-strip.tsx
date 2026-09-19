@@ -4,8 +4,7 @@ import { getFeaturedProjects, getLabProjects } from "@/content/projects";
 import { person } from "@/content/person";
 import { worldMarksLine } from "@/content/marks";
 import { Container } from "@/components/shared/container";
-import { CertificationsGallery } from "@/components/shared/certifications-gallery";
-import { TechStack } from "@/components/shared/tech-stack";
+import { RecruiterExtras } from "@/components/home/recruiter-extras";
 import { RecruiterToggle } from "@/components/layout/recruiter-toggle";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
@@ -30,11 +29,7 @@ export function RecruiterStrip() {
           {worldMarksLine}
         </p>
         <p className="mt-3 max-w-2xl text-sm text-muted">{person.summary}</p>
-        <TechStack className="mt-6" />
-        <h3 className="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
-          Licenses &amp; certifications
-        </h3>
-        <CertificationsGallery className="mt-3" />
+        <RecruiterExtras />
         <div className="mt-8 grid gap-8 md:grid-cols-2">
           <div>
             <h3 className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">

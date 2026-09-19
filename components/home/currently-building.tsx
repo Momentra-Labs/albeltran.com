@@ -7,7 +7,7 @@ export function CurrentlyBuilding() {
   return (
     <section id="building" className="magazine-spread scroll-mt-24 py-10 sm:py-12">
       <Container>
-        <Reveal variant="folio" className="flex flex-wrap items-end justify-between gap-3">
+        <Reveal className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
             <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">

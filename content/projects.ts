@@ -1154,32 +1154,46 @@ function sortBySlugOrder<T extends { slug: string }>(items: T[], order: string[]
   });
 }
 
+let featuredProjects: Project[] | undefined;
+let selectedProjects: Project[] | undefined;
+let labProjects: Project[] | undefined;
+const folioBySlug = new Map<string, string>();
+
 export function getFeaturedProjects() {
-  return sortBySlugOrder(
+  featuredProjects ??= sortBySlugOrder(
     projects.filter((p) => p.featured && p.kind !== "lab"),
     FEATURED_ORDER,
   );
+  return featuredProjects;
 }
 
 export function getSelectedProjects() {
-  const selected = projects.filter((p) => p.kind === "selected");
-  const featured = FEATURED_ORDER
-    .map((slug) => selected.find((p) => p.slug === slug))
-    .filter((p): p is Project => Boolean(p));
-  const rest = selected.filter((p) => !FEATURED_ORDER.includes(p.slug));
-  return [...featured, ...rest];
+  if (!selectedProjects) {
+    const selected = projects.filter((p) => p.kind === "selected");
+    const featured = FEATURED_ORDER
+      .map((slug) => selected.find((p) => p.slug === slug))
+      .filter((p): p is Project => Boolean(p));
+    const rest = selected.filter((p) => !FEATURED_ORDER.includes(p.slug));
+    selectedProjects = [...featured, ...rest];
+  }
+  return selectedProjects;
 }
 
 export function getLabProjects() {
-  return sortBySlugOrder(
+  labProjects ??= sortBySlugOrder(
     projects.filter((p) => p.kind === "lab"),
     LAB_ORDER,
   );
+  return labProjects;
 }
 
 export function projectFolio(project: Project) {
+  const cached = folioBySlug.get(project.slug);
+  if (cached) return cached;
   const list =
     project.kind === "lab" ? getLabProjects() : getSelectedProjects();
   const index = list.findIndex((item) => item.slug === project.slug);
-  return String((index < 0 ? 0 : index) + 1).padStart(2, "0");
+  const folio = String((index < 0 ? 0 : index) + 1).padStart(2, "0");
+  folioBySlug.set(project.slug, folio);
+  return folio;
 }

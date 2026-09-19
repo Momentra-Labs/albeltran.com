@@ -8,7 +8,7 @@ export function HomeAbout() {
   return (
     <section id="about" className="magazine-spread py-16 sm:py-20">
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
-        <Reveal variant="folio">
+        <Reveal>
           <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
           <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             About

@@ -9,10 +9,7 @@ export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
   return (
     <section id="experience" className="magazine-spread scroll-mt-24 py-10 sm:py-12">
       <Container>
-        <Reveal
-          className="mb-4 flex items-end justify-between gap-4"
-          variant="folio"
-        >
+        <Reveal className="mb-4 flex items-end justify-between gap-4">
           <div>
             <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
             <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">

@@ -9,7 +9,7 @@ export function IssueContents({ features }: { features: readonly string[] }) {
     >
       <div className="px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
         <div className="flex items-end justify-between gap-4">
-          <Reveal variant="folio">
+          <Reveal>
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
               After the record
             </p>
