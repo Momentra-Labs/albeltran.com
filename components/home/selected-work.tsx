@@ -7,6 +7,7 @@ import {
   SelectedWorkOpen,
 } from "@/components/home/selected-work-drawer";
 import { Reveal, RevealItem, SpreadRule } from "@/components/shared/reveal";
+import { ProjectStatusBadge } from "@/components/shared/project-status-badge";
 
 export function SelectedWork({ projects }: { projects: Project[] }) {
   return (
@@ -48,12 +49,7 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
                         <span className="pointer-events-none absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
                           {folio}
                         </span>
-                        {project.demo ? (
-                          <span className="pointer-events-none absolute right-4 top-4 z-[5] inline-flex items-center gap-1.5 border border-border bg-background/85 px-2 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-foreground backdrop-blur-[2px]">
-                            <span className="magazine-live-dot" aria-hidden />
-                            Live
-                          </span>
-                        ) : null}
+                        <ProjectStatusBadge project={project} />
                       </div>
                       <SelectedWorkOpen project={project}>
                         <h3 className="font-display text-2xl tracking-tight text-foreground group-hover:text-accent">

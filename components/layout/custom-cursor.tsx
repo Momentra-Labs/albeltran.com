@@ -6,18 +6,23 @@ import { cn } from "@/lib/utils";
 function subscribeCursorMedia(onChange: () => void) {
   const fine = window.matchMedia("(pointer: fine)");
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const html = document.documentElement;
+  const boot = new MutationObserver(onChange);
   fine.addEventListener("change", onChange);
   reduce.addEventListener("change", onChange);
+  boot.observe(html, { attributes: true, attributeFilter: ["class"] });
   return () => {
     fine.removeEventListener("change", onChange);
     reduce.removeEventListener("change", onChange);
+    boot.disconnect();
   };
 }
 
 function cursorEnabled() {
   return (
     window.matchMedia("(pointer: fine)").matches &&
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    !document.documentElement.classList.contains("boot-pending")
   );
 }
 

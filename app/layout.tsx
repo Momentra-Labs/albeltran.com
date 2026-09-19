@@ -6,6 +6,9 @@ import { PlausibleAnalytics } from "@/components/layout/plausible";
 import { RecruiterProvider } from "@/components/layout/recruiter-provider";
 import { CustomCursor } from "@/components/layout/custom-cursor";
 import { TechDeskMount } from "@/components/chat/tech-desk-mount";
+import { PortfolioBootFrame } from "@/components/layout/portfolio-boot";
+import { PortfolioBootHydrate } from "@/components/layout/portfolio-boot-hydrate";
+import { BOOT_ENGINE_SCRIPT, BOOT_HEAD_SCRIPT, BOOT_HEAD_STYLE } from "@/lib/boot-inline";
 import { defaultMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { person } from "@/content/person";
@@ -118,9 +121,15 @@ export default function RootLayout({
   return (
     <html
       lang="en-PH"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} dark h-full antialiased`}
     >
       <head>
+        <style dangerouslySetInnerHTML={{ __html: BOOT_HEAD_STYLE }} />
+        <script dangerouslySetInnerHTML={{ __html: BOOT_HEAD_SCRIPT }} />
+        <noscript>
+          <style>{`html.boot-pending #portfolio-boot{display:none!important}html.boot-pending{overflow:auto}`}</style>
+        </noscript>
         <script
           dangerouslySetInnerHTML={{
             __html: `try{if(new URLSearchParams(location.search).get("view")==="recruiter"||localStorage.getItem("albeltran-recruiter")==="1")document.documentElement.classList.add("recruiter")}catch(e){}`,
@@ -149,22 +158,27 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background flex min-h-full min-w-0 flex-col font-sans text-foreground">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-3 focus:py-2 focus:text-white"
-        >
-          Skip to content
-        </a>
-        <RecruiterProvider>
-          <CustomCursor />
-          <SiteNav />
-          <main id="main-content" className="min-w-0 flex-1">
-            {children}
-          </main>
-          <Footer />
-          <EasterDesk />
-          <TechDeskMount />
-        </RecruiterProvider>
+        <PortfolioBootFrame />
+        <div id="site-root" className="flex min-h-full min-w-0 flex-1 flex-col">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-3 focus:py-2 focus:text-white"
+          >
+            Skip to content
+          </a>
+          <RecruiterProvider>
+            <CustomCursor />
+            <SiteNav />
+            <main id="main-content" className="min-w-0 flex-1">
+              {children}
+            </main>
+            <Footer />
+            <EasterDesk />
+            <TechDeskMount />
+          </RecruiterProvider>
+        </div>
+        <script dangerouslySetInnerHTML={{ __html: BOOT_ENGINE_SCRIPT }} />
+        <PortfolioBootHydrate />
         <PlausibleAnalytics />
       </body>
     </html>

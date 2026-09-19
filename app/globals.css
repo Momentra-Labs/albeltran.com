@@ -599,6 +599,12 @@ h3,
   animation: live-pulse 1.8s ease-in-out infinite;
 }
 
+.magazine-wip-dash {
+  width: 8px;
+  height: 2px;
+  background: var(--muted);
+}
+
 @keyframes magazine-scan-move {
   from {
     background-position: 0 -40%;
@@ -1543,57 +1549,34 @@ h3,
 
 .stack-tablist-wrap {
   position: relative;
-  margin: 0 0 0.9rem;
-}
-
-.stack-tablist-wrap::before,
-.stack-tablist-wrap::after {
-  content: "";
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-  width: 1.25rem;
-}
-
-.stack-tablist-wrap::before {
-  left: 0;
-  background: linear-gradient(to right, var(--background), transparent);
-}
-
-.stack-tablist-wrap::after {
-  right: 0;
-  background: linear-gradient(to left, var(--background), transparent);
+  margin: 0 0 0.85rem;
 }
 
 .stack-tablist {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.6rem, 1fr));
   gap: 0.35rem;
-  overflow-x: auto;
-  padding: 0.05rem 0.85rem 0.2rem;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.stack-tablist::-webkit-scrollbar {
-  display: none;
+  padding: 0;
 }
 
 .stack-tab {
   appearance: none;
   position: relative;
   isolation: isolate;
-  flex: 0 0 auto;
+  display: inline-flex;
+  min-height: 2.75rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface) 88%, transparent);
-  padding: 0.48rem 0.72rem;
+  padding: 0.55rem 0.45rem;
   color: var(--muted);
   font-family: var(--font-mono, ui-monospace, monospace);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
   cursor: pointer;
@@ -1623,14 +1606,54 @@ h3,
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
+.stack-tab-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0 0 0.7rem;
+  padding-top: 0.15rem;
+  border-top: 1px solid var(--border);
+}
+
+.stack-tab-kicker,
+.stack-tab-folio {
+  margin: 0;
+  padding-top: 0.65rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.stack-tab-kicker {
+  color: var(--foreground);
+}
+
+.stack-tab-folio {
+  flex: none;
+  color: var(--muted-dim);
+}
+
 .stack-tab-stage {
   position: relative;
   overflow: hidden;
-  min-height: 8.75rem;
+  min-height: 9.5rem;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .stack-tab-panel {
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
+}
+
+.stack-tab-panel .stack-chip-list {
+  gap: 0.55rem;
+}
+
+.stack-tab-panel .stack-chip {
+  padding: 0.58rem 0.82rem;
+  font-size: 0.9375rem;
 }
 
 .stack-stage {
@@ -2003,7 +2026,6 @@ h3,
 
   .stack-tab-panel {
     will-change: auto;
-    filter: none;
     transform: none;
   }
 
@@ -2190,9 +2212,11 @@ div.tech-desk {
 }
 
 .tech-desk-launch {
+  position: relative;
+  isolation: isolate;
   display: flex;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 4rem;
+  width: 4rem;
   align-items: center;
   justify-content: center;
   overflow: visible;
@@ -2200,13 +2224,88 @@ div.tech-desk {
   border-radius: 999px;
   background: transparent;
   padding: 0;
-  filter: drop-shadow(0 8px 18px color-mix(in srgb, var(--accent) 42%, transparent));
+  filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--accent) 46%, transparent));
+}
+
+.tech-desk-launch::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  z-index: -1;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 38%, transparent);
+  filter: blur(14px);
+  pointer-events: none;
+  animation: tech-desk-halo 3.8s ease-in-out infinite;
+}
+
+.tech-desk-launch:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.tech-desk-launch-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tech-desk-launch-pip {
+  position: absolute;
+  top: 0.15rem;
+  right: 0.15rem;
+  width: 0.48rem;
+  height: 0.48rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 2px var(--background);
+}
+
+.tech-desk-nudge {
+  position: absolute;
+  right: 0;
+  bottom: calc(4rem + 0.7rem);
+  display: flex;
+  max-width: min(16.5rem, calc(100vw - 2rem));
+  align-items: flex-start;
+  gap: 0.45rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  padding: 0.55rem 0.6rem 0.55rem 0.75rem;
+}
+
+.tech-desk-nudge-line {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--foreground);
+}
+
+.tech-desk-nudge-x {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.tech-desk-nudge-x:hover,
+.tech-desk-nudge-x:focus-visible {
+  color: var(--foreground);
 }
 
 .tech-desk-mark {
   display: block;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 4rem;
+  width: 4rem;
   overflow: visible;
   transform-origin: 50% 55%;
   transition: transform 280ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -2264,11 +2363,38 @@ div.tech-desk .tech-desk-launch:hover .tech-desk-mark-blush {
 }
 
 .tech-desk-launch:hover {
-  filter: drop-shadow(0 10px 22px color-mix(in srgb, var(--accent-hover) 55%, transparent));
+  filter: drop-shadow(0 12px 24px color-mix(in srgb, var(--accent-hover) 58%, transparent));
+}
+
+.tech-desk-launch:hover::after {
+  opacity: 0.9;
+  transform: scale(1.08);
 }
 
 .tech-desk-launch:hover .tech-desk-mark {
-  transform: rotate(-8deg) scale(1.06);
+  transform: rotate(-7deg) scale(1.07);
+}
+
+.tech-desk-launch:active .tech-desk-mark {
+  transform: scale(0.96);
+}
+
+.tech-desk-mark[data-mood="think"] .tech-desk-mark-gaze {
+  transform: translate(0, -1.6px);
+}
+
+.tech-desk-mark[data-mood="sorry"] .tech-desk-mark-gaze {
+  transform: translate(0, 1.1px);
+}
+
+.tech-desk-mark[data-mood="happy"] .tech-desk-mark-blush {
+  opacity: 0.88;
+}
+
+.tech-desk-mark-gaze {
+  transform-box: fill-box;
+  transform-origin: 32px 39px;
+  transition: transform 280ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .tech-desk-mark-antenna {
@@ -2291,8 +2417,8 @@ div.tech-desk .tech-desk-launch:hover .tech-desk-mark-blush {
 .tech-desk-head-lead {
   display: flex;
   min-width: 0;
-  align-items: flex-start;
-  gap: 0.7rem;
+  align-items: center;
+  gap: 0.85rem;
 }
 
 .tech-desk-head {
@@ -2307,6 +2433,10 @@ div.tech-desk .tech-desk-launch:hover .tech-desk-mark-blush {
 
 div.tech-desk .tech-desk-head.is-listening {
   border-bottom-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+
+div.tech-desk .tech-desk-head.is-sorry {
+  border-bottom-color: color-mix(in srgb, var(--muted) 45%, var(--border));
 }
 
 .tech-desk-live {
@@ -2351,17 +2481,71 @@ div.tech-desk .tech-desk-head.is-listening .tech-desk-head-status {
 
 .tech-desk-head-mascot {
   flex: none;
-  width: 2.35rem;
-  height: 2.35rem;
-  margin-top: 0.12rem;
+  width: 2.85rem;
+  height: 2.85rem;
   padding: 0;
   border: 0;
   background: transparent;
+  border-radius: 999px;
+}
+
+.tech-desk-head-mascot:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .tech-desk-head-mascot .tech-desk-mark {
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 2.85rem;
+  height: 2.85rem;
+}
+
+.tech-desk-close {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -0.35rem -0.35rem 0 0;
+  border: 0;
+  background: transparent;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.tech-desk-close:hover,
+.tech-desk-close:focus-visible {
+  color: var(--foreground);
+}
+
+.tech-desk-close:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tech-desk-welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.tech-desk-greet {
+  margin: 0;
+  font-family: var(--font-display), serif;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.tech-desk-greet-next,
+.tech-desk-empty {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.tech-desk-empty {
+  color: var(--muted-dim);
 }
 
 div.tech-desk .tech-desk-head-mascot:hover .tech-desk-mark,
@@ -2374,8 +2558,31 @@ div.tech-desk .tech-desk-head-mascot.is-peek .tech-desk-mark-antenna {
   transform: translateY(-2px) rotate(-10deg);
 }
 
-div.tech-desk .tech-desk-head-mascot.is-listening .tech-desk-mark {
+div.tech-desk .tech-desk-head-mascot.is-listening .tech-desk-mark,
+div.tech-desk .tech-desk-head-mascot.is-think .tech-desk-mark {
   animation: tech-desk-listen 900ms ease-in-out infinite;
+}
+
+div.tech-desk .tech-desk-head-mascot.is-happy .tech-desk-mark {
+  animation: tech-desk-nod 700ms cubic-bezier(0.23, 1, 0.32, 1) 1;
+}
+
+div.tech-desk .tech-desk-head-mascot.is-sorry .tech-desk-mark {
+  animation: tech-desk-sorry 900ms ease-in-out infinite;
+}
+
+div.tech-desk .tech-desk-head.is-listening {
+  position: relative;
+}
+
+div.tech-desk .tech-desk-head.is-listening::after {
+  content: "";
+  position: absolute;
+  inset: auto auto 0 0;
+  width: 2.4rem;
+  height: 1px;
+  background: var(--accent);
+  animation: tech-desk-think-bar 1.1s ease-in-out infinite;
 }
 
 .tech-desk-panel {
@@ -2408,6 +2615,34 @@ div.tech-desk .tech-desk-panel {
   div.tech-desk .tech-desk-panel {
     height: min(42rem, 80dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
     max-height: min(80dvh, calc(100dvh - var(--desk-gap-top) - var(--desk-gap-bottom)));
+  }
+
+  .tech-desk-launch {
+    width: 3.15rem;
+    height: 3.15rem;
+    filter: drop-shadow(0 6px 12px color-mix(in srgb, var(--accent) 34%, transparent));
+  }
+
+  .tech-desk-launch::after {
+    animation: none;
+    opacity: 0.28;
+  }
+
+  .tech-desk-launch .tech-desk-mark,
+  .tech-desk-mark {
+    width: 3.15rem;
+    height: 3.15rem;
+  }
+
+  .tech-desk-nudge {
+    bottom: calc(3.15rem + 0.55rem);
+    max-width: min(14.5rem, calc(100vw - 1.5rem));
+  }
+
+  .tech-desk-head-mascot,
+  .tech-desk-head-mascot .tech-desk-mark {
+    width: 2.45rem;
+    height: 2.45rem;
   }
 }
 
@@ -2808,6 +3043,54 @@ div.tech-desk .tech-desk-turn-foot .tech-desk-copy {
   }
 }
 
+@keyframes tech-desk-halo {
+  0%,
+  100% {
+    opacity: 0.32;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes tech-desk-nod {
+  0%,
+  100% {
+    transform: none;
+  }
+  35% {
+    transform: translateY(2px) rotate(-4deg);
+  }
+  65% {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes tech-desk-sorry {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(-2deg) translateY(1px);
+  }
+}
+
+@keyframes tech-desk-think-bar {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleX(0.4);
+    transform-origin: left;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
 .tech-desk-starters {
   display: flex;
   flex-wrap: wrap;
@@ -2818,17 +3101,30 @@ div.tech-desk .tech-desk-turn-foot .tech-desk-copy {
 .tech-desk-chip {
   border: 1px solid var(--border);
   background: transparent;
-  padding: 0.4rem 0.55rem;
+  padding: 0.45rem 0.6rem;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 9px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
+  transition:
+    border-color 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
 }
 
 .tech-desk-chip:hover:not(:disabled) {
   border-color: var(--border-bright);
   color: var(--foreground);
+}
+
+.tech-desk-chip:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.tech-desk-chip:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .tech-desk-chip:disabled {
@@ -2882,6 +3178,21 @@ div.tech-desk .tech-desk-compose {
     transform: none;
   }
 
+  .tech-desk-mark-gaze,
+  .tech-desk-launch:active .tech-desk-mark {
+    transform: none;
+  }
+
+  .tech-desk-nudge {
+    transform: none;
+  }
+
+  .tech-desk-launch::after {
+    animation: none !important;
+    opacity: 0.22;
+    transform: none;
+  }
+
   .tech-desk-live-pip {
     animation: none !important;
     box-shadow: none;
@@ -2895,5 +3206,313 @@ div.tech-desk .tech-desk-compose {
 @media print {
   .tech-desk {
     display: none !important;
+  }
+
+  #portfolio-boot {
+    display: none !important;
+  }
+}
+
+.boot-overlay {
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% -8%, rgba(79, 142, 255, 0.1), transparent 58%),
+    radial-gradient(ellipse 50% 36% at 100% 100%, rgba(240, 240, 245, 0.03), transparent 52%),
+    #050507;
+}
+
+html.boot-leaving #portfolio-boot {
+  opacity: 0;
+  transform: translate3d(0, -0.6rem, 0);
+  pointer-events: none;
+  transition:
+    opacity 420ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 420ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html.boot-done #portfolio-boot {
+  display: none !important;
+}
+
+.boot-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 26rem);
+}
+
+.boot-kicker {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0.85rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.boot-kicker span:first-child {
+  color: var(--accent);
+}
+
+.boot-name {
+  margin: 0;
+  font-family: var(--font-instrument-serif), "Times New Roman", serif;
+  font-size: clamp(2.4rem, 10vw, 3.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+}
+
+.boot-role {
+  margin: 0.45rem 0 1.35rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.boot-panel {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  padding: 0.95rem 1rem 1rem;
+}
+
+.boot-panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+.boot-meter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.boot-track {
+  flex: 1;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.boot-fill {
+  height: 100%;
+  transform: scaleX(var(--boot-p, 0));
+  transform-origin: left center;
+  background: var(--accent);
+}
+
+.boot-pct {
+  flex: none;
+  min-width: 2.6rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-align: right;
+  color: var(--foreground);
+}
+
+.boot-pct::after {
+  content: var(--boot-pct, "0%");
+}
+
+.boot-lanes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem 0.85rem;
+  margin: 0.95rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.boot-lanes li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+.boot-lanes li.is-on {
+  color: var(--foreground);
+}
+
+.boot-lanes i {
+  display: block;
+  width: 0.42rem;
+  height: 0.42rem;
+  border: 1px solid var(--muted-dim);
+  border-radius: 999px;
+}
+
+.boot-lanes li.is-on i {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.boot-line {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 1.25rem;
+  margin: 0.95rem 0 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.boot-status::after {
+  content: var(--boot-line, "Initializing portfolio...");
+}
+
+.boot-line > span:first-child {
+  color: var(--accent);
+}
+
+.boot-caret {
+  display: inline-block;
+  width: 0.42rem;
+  height: 0.85em;
+  margin-left: 0.08rem;
+  background: var(--accent);
+  animation: boot-caret 1s steps(1) infinite;
+}
+
+.boot-skip {
+  appearance: none;
+  display: block;
+  margin: 0.9rem 0 0 auto;
+  border: 0;
+  background: none;
+  padding: 0.35rem 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+  cursor: pointer;
+}
+
+.boot-skip:hover,
+.boot-skip:focus-visible {
+  color: var(--foreground);
+}
+
+.boot-skip:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.boot-motes {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.boot-motes i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 70%, white);
+  opacity: 0.35;
+  animation: boot-mote 7s linear infinite;
+}
+
+.boot-motes i:nth-child(1) {
+  left: 12%;
+  top: 22%;
+  animation-duration: 8s;
+}
+
+.boot-motes i:nth-child(2) {
+  left: 78%;
+  top: 18%;
+  animation-duration: 6.4s;
+  animation-delay: -2s;
+}
+
+.boot-motes i:nth-child(3) {
+  left: 64%;
+  top: 72%;
+  animation-duration: 9s;
+  animation-delay: -4s;
+}
+
+.boot-motes i:nth-child(4) {
+  left: 22%;
+  top: 68%;
+  animation-duration: 7.2s;
+  animation-delay: -1s;
+}
+
+.boot-motes i:nth-child(5) {
+  left: 48%;
+  top: 40%;
+  animation-duration: 10s;
+  animation-delay: -3s;
+}
+
+@keyframes boot-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes boot-mote {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .boot-motes {
+    display: none;
+  }
+
+  .boot-panel {
+    padding: 0.85rem 0.85rem 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-caret,
+  .boot-motes,
+  .boot-motes i {
+    animation: none;
+  }
+
+  .boot-caret {
+    opacity: 0.7;
+  }
+
+  html.boot-leaving #portfolio-boot {
+    transform: none;
+    transition-duration: 80ms;
+  }
+
+  .boot-fill {
+    will-change: auto;
   }
 }
