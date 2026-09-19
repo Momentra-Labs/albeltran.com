@@ -12,7 +12,7 @@ export const GROQ_CONFIG = {
   dailyTurns: 24,
   promptMax: 2000,
   history: 12,
-  maxTokens: 800,
+  maxTokens: 1400,
 } as const;
 
 export type ChatRole = "user" | "assistant";

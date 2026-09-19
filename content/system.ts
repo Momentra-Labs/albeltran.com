@@ -15,7 +15,7 @@ export const systemNodes: SystemNode[] = [
   {
     id: "backend",
     label: "Backend",
-    children: ["Java", "Spring Boot", "Node.js", "PHP", "Laravel"],
+    children: ["Java", "Spring Boot", "Node.js", "PHP", "Laravel", "Composer"],
   },
   {
     id: "data",
@@ -25,7 +25,12 @@ export const systemNodes: SystemNode[] = [
   {
     id: "cloud",
     label: "Cloud",
-    children: ["AWS", "Azure", "Docker", "Lambda", "SQS / SNS", "API Gateway"],
+    children: ["AWS", "Azure", "Lambda", "SQS / SNS", "API Gateway"],
+  },
+  {
+    id: "devops",
+    label: "DevOps",
+    children: ["Terraform", "Kubernetes", "Docker", "GitHub Actions"],
   },
   {
     id: "architecture",
