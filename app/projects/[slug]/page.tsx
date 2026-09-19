@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { experience } from "@/content/experience";
 import { getProject, implementationShots, projects } from "@/content/projects";
 import { person } from "@/content/person";
-import { getAllPosts } from "@/lib/mdx";
+import { getAllPostMeta } from "@/lib/mdx";
 import {
   breadcrumbSchema,
   graphSchema,
@@ -48,7 +48,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const project = getProject(slug);
   if (!project) notFound();
 
-  const relatedArticles = getAllPosts().filter((post) =>
+  const relatedArticles = getAllPostMeta().filter((post) =>
     project.relatedArticles?.includes(post.slug),
   );
   const relatedRoles = experience.filter((item) =>

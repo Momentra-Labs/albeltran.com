@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { getAllPosts } from "@/lib/mdx";
+import { getAllPostMeta } from "@/lib/mdx";
 import { Section } from "@/components/shared/section";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/shared/reveal";
 
 export function LatestPosts() {
-  const posts = getAllPosts().slice(0, 3);
+  const posts = getAllPostMeta().slice(0, 3);
 
   return (
     <Section
@@ -23,7 +23,6 @@ export function LatestPosts() {
             >
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="accent">{post.category}</Badge>
-                <span className="text-xs text-muted-dim">{post.readingTime}</span>
               </div>
               <h3 className="text-lg font-semibold tracking-tight text-foreground">
                 <Link

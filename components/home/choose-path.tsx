@@ -14,7 +14,7 @@ export function ChoosePath() {
   return (
     <section id="path" className="magazine-spread scroll-mt-24 py-10 sm:py-12">
       <Container>
-        <Reveal variant="folio">
+        <Reveal>
           <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
           <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             Contents

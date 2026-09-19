@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 
 function subscribeCursorMedia(onChange: () => void) {
@@ -27,7 +27,10 @@ export function CustomCursor() {
     cursorEnabled,
     () => false,
   );
-  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef("");
+  const posRef = useRef({ x: -100, y: -100 });
+  const frameRef = useRef(0);
   const [label, setLabel] = useState("");
 
   useEffect(() => {
@@ -36,16 +39,29 @@ export function CustomCursor() {
     document.documentElement.classList.add("has-custom-cursor");
 
     const onMove = (event: MouseEvent) => {
-      setPos({ x: event.clientX, y: event.clientY });
-      const target = (event.target as HTMLElement | null)?.closest(
-        "[data-cursor]",
-      );
-      setLabel(target?.getAttribute("data-cursor") ?? "");
+      posRef.current = { x: event.clientX, y: event.clientY };
+      const next =
+        (event.target as HTMLElement | null)
+          ?.closest("[data-cursor]")
+          ?.getAttribute("data-cursor") ?? "";
+      if (next !== labelRef.current) {
+        labelRef.current = next;
+        setLabel(next);
+      }
+      if (frameRef.current) return;
+      frameRef.current = window.requestAnimationFrame(() => {
+        frameRef.current = 0;
+        const node = nodeRef.current;
+        if (!node) return;
+        const { x, y } = posRef.current;
+        node.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      });
     };
 
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
     return () => {
       window.removeEventListener("mousemove", onMove);
+      window.cancelAnimationFrame(frameRef.current);
       document.documentElement.classList.remove("has-custom-cursor");
     };
   }, [enabled]);
@@ -54,9 +70,10 @@ export function CustomCursor() {
 
   return (
     <div
+      ref={nodeRef}
       aria-hidden
-      className="pointer-events-none fixed z-[100] mix-blend-difference"
-      style={{ left: pos.x, top: pos.y, transform: "translate(-50%, -50%)" }}
+      className="pointer-events-none fixed top-0 left-0 z-[100] mix-blend-difference"
+      style={{ transform: "translate(-100px, -100px) translate(-50%, -50%)" }}
     >
       <div
         className={cn(

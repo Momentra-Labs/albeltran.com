@@ -6,7 +6,14 @@ import {
   isInterviewSlug,
 } from "@/content/journal";
 import { getJournalTopic, type JournalTopicId } from "@/content/journal/topics";
-import { getAllPosts, getPostBySlug, getRelatedPosts, type BlogPost } from "@/lib/mdx";
+import {
+  getAllPostMeta,
+  getAllPosts,
+  getPostBySlug,
+  getRelatedPosts,
+  type BlogPost,
+  type BlogPostMeta,
+} from "@/lib/mdx";
 
 export const LEGACY_PILLARS: Record<string, JournalTopicId> = {
   "event-driven-loyalty": "system-design",
@@ -44,7 +51,7 @@ export function publishedArticleSlugs() {
   const fromCatalog = JOURNAL_CATALOG.filter(
     (entry) => entry.status === "published",
   ).map((entry) => entry.slug);
-  const fromPosts = getAllPosts().map((post) => post.slug);
+  const fromPosts = getAllPostMeta().map((post) => post.slug);
   return [...new Set([...fromCatalog, ...fromPosts])];
 }
 
@@ -142,8 +149,8 @@ export function adjacentInTopic(slug: string) {
   };
 }
 
-export function listPublishedNotes(): BlogPost[] {
-  return getAllPosts().filter((post) => !isInterviewSlug(post.slug));
+export function listPublishedNotes(): BlogPostMeta[] {
+  return getAllPostMeta().filter((post) => !isInterviewSlug(post.slug));
 }
 
 export function getLivePost(slug: string) {

@@ -15,10 +15,7 @@ export function HomeNotes() {
   return (
     <section id="notes" className="magazine-spread scroll-mt-24 py-10 sm:py-12">
       <Container>
-        <Reveal
-          className="mb-4 flex flex-wrap items-end justify-between gap-4"
-          variant="folio"
-        >
+        <Reveal className="mb-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="magazine-spread-kicker">Vol. 01 / Manila</p>
             <h2 className="mt-2 font-display text-3xl tracking-tight text-foreground sm:text-4xl">

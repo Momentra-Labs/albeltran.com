@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 import { projects } from "@/content/projects";
-import { getAllPosts } from "@/lib/mdx";
+import { getAllPostMeta } from "@/lib/mdx";
 import { JOURNAL_TOPIC_IDS } from "@/content/journal/topics";
 import { topicPath } from "@/content/journal";
 import { indexedSystemDesignScenarios } from "@/content/lab/system-design";
@@ -63,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const articleRoutes = getAllPosts().map((post) => ({
+  const articleRoutes = getAllPostMeta().map((post) => ({
     url: `${SITE_URL}${post.href}`,
     lastModified: new Date(post.updated ?? post.date),
     changeFrequency: "monthly" as const,
