@@ -701,6 +701,7 @@ export const projects: Project[] = [
     ],
     apk: "/apps/gloves-up/gloves-up.apk",
     privacyPolicy: "https://albeltran.com/apps/gloves-up/privacy/",
+    repository: "https://github.com/Momentra-Labs/gloves-up",
   },
   {
     slug: "rentarah",
@@ -720,7 +721,7 @@ export const projects: Project[] = [
     solution:
       "Shipped a React + TypeScript customer marketplace with browse, map, host listing, and booking flows. Backend and admin live in sibling repos; the public web app is the Momentra Labs customer surface.",
     architecture: [
-      "Customer web SPA (React, Vite, TypeScript) at rentahub2026.github.io",
+      "Customer web SPA (React, Vite, TypeScript) in Momentra-Labs/rentarah",
       "Express + Prisma API in a sibling rentarah-api service",
       "Operations console in a sibling rentarah-admin app",
       "End-to-end founder ownership of product and engineering",
@@ -762,7 +763,7 @@ export const projects: Project[] = [
       },
     ],
     demo: "https://rentahub2026.github.io/",
-    repository: "https://github.com/rentahub2026/rentahub2026.github.io",
+    repository: "https://github.com/Momentra-Labs/rentarah",
     story: {
       constraints:
         "Philippines-first rental flow. Public customer app on GitHub Pages. API and admin live elsewhere.",
@@ -779,7 +780,7 @@ export const projects: Project[] = [
     },
     diagram: [
       { id: "renter", label: "Renter / host", purpose: "Search, book, or list in PHP.", tradeoff: "One SPA for both roles.", scale: "Pages can only host the customer UI." },
-      { id: "web", label: "Customer SPA", purpose: "Vite app at rentahub2026.github.io.", tradeoff: "No server secrets in this repo.", scale: "API stays in a sibling service." },
+      { id: "web", label: "Customer SPA", purpose: "Vite app in Momentra-Labs/rentarah.", tradeoff: "No server secrets in this repo.", scale: "API stays in a sibling service." },
       { id: "api", label: "API", purpose: "Express + Prisma in rentarah-api.", tradeoff: "Availability is shared state.", scale: "Admin is a third app." },
     ],
   },
@@ -934,6 +935,7 @@ export const projects: Project[] = [
       },
     ],
     demo: "https://skyrealm-ruby.vercel.app/",
+    repository: "https://github.com/Momentra-Labs/skyrealm",
     story: {
       constraints:
         "A personal game has to be playable from a URL. No store listing. No install.",
@@ -1014,7 +1016,7 @@ export const projects: Project[] = [
       },
     ],
     demo: "https://lumina-momentra-labs.vercel.app/",
-    repository: "https://github.com/codemoon2019/lumina",
+    repository: "https://github.com/Momentra-Labs/lumina",
     relatedArticles: ["ai-augmented-engineering"],
     story: {
       constraints:
@@ -1106,6 +1108,7 @@ export const projects: Project[] = [
         viewport: "phone",
       },
     ],
+    repository: "https://github.com/Momentra-Labs/pocketpos",
   },
   {
     slug: "cartify",
@@ -1177,6 +1180,7 @@ export const projects: Project[] = [
         viewport: "phone",
       },
     ],
+    repository: "https://github.com/Momentra-Labs/quickcart",
   },
 ];
 

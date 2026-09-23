@@ -245,7 +245,7 @@ export default function AboutPage() {
                     rel="me noopener noreferrer"
                     className="text-accent hover:underline"
                   >
-                    GitHub — github.com/codemoon2019
+                    GitHub — github.com/altbeltran
                   </a>
                 </li>
                 <li>

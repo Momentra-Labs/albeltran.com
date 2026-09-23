@@ -28,7 +28,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const SOCIAL_LINKS = {
-  github: "https://github.com/codemoon2019",
+  github: "https://github.com/altbeltran",
   linkedin: "https://www.linkedin.com/in/al-beltran/",
   instagram: "https://www.instagram.com/codebypawpu/",
   codewars: "https://www.codewars.com/users/pawpu",

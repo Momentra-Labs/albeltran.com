@@ -38,7 +38,7 @@ export const now = {
     {
       title: "Open source",
       items: [
-        "Selective contributions and public experiments under github.com/codemoon2019",
+        "Personal products and this portfolio live under github.com/orgs/Momentra-Labs; the GitHub profile stays on github.com/altbeltran",
         "Prefer small, useful tooling over abandoned showcase repos",
       ],
     },
