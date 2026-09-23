@@ -1,8 +1,8 @@
 # Al Beltran — Portfolio
 
-Software Engineering Lead portfolio for **Al Andrew Paul Beltran** (Code by Pawpu).
+**Al Andrew Paul Beltran** (also **Al Beltran**, **Al Andrew Paul Teodosio Beltran**; brand **Code by Pawpu**) is a full-stack software engineer in Manila and **Software Engineering Lead at Anglian Dental** (United Kingdom). Previously **Software Engineer at Google via High Spring**. Founder of **Momentra Labs**.
 
-**Canonical site:** [https://albeltran.com](https://albeltran.com)
+**Canonical site:** [https://albeltran.com](https://albeltran.com) · **Source:** [github.com/Momentra-Labs/albeltran.com](https://github.com/Momentra-Labs/albeltran.com) · **GitHub profile:** [github.com/altbeltran](https://github.com/altbeltran)
 
 ## Stack
 

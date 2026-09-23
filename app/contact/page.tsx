@@ -95,7 +95,7 @@ export default function ContactPage() {
                   rel="me noopener noreferrer"
                   className="mt-1 inline-block text-foreground hover:text-accent"
                 >
-                  github.com/codemoon2019
+                  github.com/altbeltran
                 </a>
               </li>
               <li>
