@@ -69,6 +69,8 @@ export const metadata: Metadata = {
     "Google via High Spring",
     "Myridius",
     "Momentra Labs",
+    "open source",
+    "@altbeltran/safe-action",
   ],
   authors: [{ name: person.name, url: `${SITE_URL}/author/al-beltran/` }],
   creator: person.name,

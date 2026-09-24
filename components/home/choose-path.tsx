@@ -7,7 +7,8 @@ const PATHS = [
   { href: "/#think", label: "See how I think", index: "02" },
   { href: "/lab/incident/?c=4821", label: "Break my systems", index: "03" },
   { href: "/projects/", label: "Read the case studies", index: "04" },
-  { href: "/#contact", label: "Work with me", index: "05" },
+  { href: "/libraries/", label: "Open-source libraries", index: "05" },
+  { href: "/#contact", label: "Work with me", index: "06" },
 ] as const;
 
 export function ChoosePath() {

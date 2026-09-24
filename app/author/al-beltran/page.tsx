@@ -7,6 +7,7 @@ import { aboutContent } from "@/content/about";
 import { featuredExperience } from "@/content/experience";
 import { person } from "@/content/person";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
+import { libraries } from "@/content/libraries";
 import { TechStack } from "@/components/shared/tech-stack";
 import { SOCIAL_LINKS } from "@/lib/constants";
 import {
@@ -14,6 +15,8 @@ import {
   breadcrumbSchema,
   graphSchema,
   labProductsSchema,
+  librariesItemListSchema,
+  librarySchema,
   momentraLabsSchema,
   personSchema,
   websiteSchema,
@@ -34,6 +37,8 @@ export default function AuthorPage() {
     personSchema(),
     momentraLabsSchema(),
     labProductsSchema(labs),
+    librariesItemListSchema(),
+    ...libraries.map((library) => librarySchema(library)),
     authorProfilePageSchema(),
     breadcrumbSchema([
       { name: "Home", path: "/" },
@@ -148,6 +153,30 @@ export default function AuthorPage() {
               <p className="mt-6 text-sm">
                 <Link href="/projects/" className="text-accent hover:underline">
                   All project case studies
+                </Link>
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                Open-source libraries
+              </h2>
+              <ul className="mt-4 space-y-2 text-sm">
+                {libraries.map((library) => (
+                  <li key={library.slug}>
+                    <Link
+                      href={`/libraries/${library.slug}/`}
+                      className="text-accent hover:underline"
+                    >
+                      {library.packageName}
+                    </Link>
+                    <span className="text-muted"> — {library.tagline}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-6 text-sm">
+                <Link href="/libraries/" className="text-accent hover:underline">
+                  All libraries
                 </Link>
               </p>
             </section>
