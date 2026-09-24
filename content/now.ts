@@ -39,6 +39,7 @@ export const now = {
       title: "Open source",
       items: [
         "Personal products and this portfolio live under github.com/orgs/Momentra-Labs; the GitHub profile stays on github.com/altbeltran",
+        "@altbeltran/safe-action — reliable TypeScript actions for humans and AI agents (github.com/altbeltran/safe-action, v0.1.0, MIT). Canonical page: albeltran.com/libraries/safe-action/",
         "Prefer small, useful tooling over abandoned showcase repos",
       ],
     },

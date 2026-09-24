@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 import { projects } from "@/content/projects";
+import { libraries } from "@/content/libraries";
 import { getAllPostMeta } from "@/lib/mdx";
 import { JOURNAL_TOPIC_IDS } from "@/content/journal/topics";
 import { topicPath } from "@/content/journal";
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/author/al-beltran/",
     "/experience/",
     "/projects/",
+    "/libraries/",
     "/blog/",
     "/topics/",
     "/interviews/",
@@ -56,6 +58,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const libraryRoutes = libraries.map((library) => ({
+    url: `${SITE_URL}/libraries/${library.slug}/`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   const projectRoutes = projects.map((project) => ({
     url: `${SITE_URL}/projects/${project.slug}/`,
     lastModified: now,
@@ -74,6 +83,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...topicRoutes,
     ...labScenarioRoutes,
+    ...libraryRoutes,
     ...projectRoutes,
     ...articleRoutes,
   ];

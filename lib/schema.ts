@@ -4,6 +4,7 @@ import { certifications } from "@/content/certifications";
 import { worldMarks } from "@/content/marks";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
+import { libraries, type Library } from "@/content/libraries";
 
 export function worldMarksSchema() {
   return {
@@ -312,6 +313,42 @@ export function projectSchema(project: Project) {
     author: { "@id": `${SITE_URL}/#person` },
     creator: { "@id": `${SITE_URL}/#person` },
     keywords: project.techStack.join(", "),
+  };
+}
+
+export function librarySchema(library: Library) {
+  return {
+    "@type": "SoftwareSourceCode",
+    "@id": `${SITE_URL}/libraries/${library.slug}/#software`,
+    name: library.packageName,
+    alternateName: library.name,
+    description: library.description,
+    programmingLanguage: library.language,
+    runtimePlatform: library.runtime,
+    codeRepository: library.repository,
+    url: `${SITE_URL}/libraries/${library.slug}/`,
+    softwareVersion: library.version,
+    license: library.licenseUrl,
+    isAccessibleForFree: true,
+    author: { "@id": `${SITE_URL}/#person` },
+    creator: { "@id": `${SITE_URL}/#person` },
+    keywords: library.topics.join(", "),
+  };
+}
+
+export function librariesItemListSchema() {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/libraries/#list`,
+    name: "Open-source libraries by Al Beltran",
+    numberOfItems: libraries.length,
+    itemListElement: libraries.map((library, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: library.packageName,
+      description: library.tagline,
+      url: `${SITE_URL}/libraries/${library.slug}/`,
+    })),
   };
 }
 

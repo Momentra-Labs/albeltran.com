@@ -33,6 +33,9 @@ export function Footer() {
           <Link href="/projects/" data-cursor="→" className="hover:text-foreground">
             Projects
           </Link>
+          <Link href="/libraries/" data-cursor="→" className="hover:text-foreground">
+            Libraries
+          </Link>
           <Link href="/lab/" data-cursor="→" className="hover:text-foreground">
             Lab
           </Link>

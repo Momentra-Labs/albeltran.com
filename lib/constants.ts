@@ -18,6 +18,7 @@ export const NAV_LINKS = [
   { href: "/about/", label: "About" },
   { href: "/experience/", label: "Experience" },
   { href: "/projects/", label: "Projects" },
+  { href: "/libraries/", label: "Libraries" },
   { href: "/lab/", label: "Lab" },
   { href: "/blog/", label: "Journal" },
   { href: "/topics/", label: "Topics" },

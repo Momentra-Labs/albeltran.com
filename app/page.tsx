@@ -8,6 +8,7 @@ import { LabPlayground } from "@/components/home/lab-playground";
 import { EngineeringLab } from "@/components/home/engineering-lab";
 import { PhilosophyStrip } from "@/components/home/philosophy-strip";
 import { CurrentlyBuilding } from "@/components/home/currently-building";
+import { OpenSourceLibraries } from "@/components/home/open-source-libraries";
 import { ThingsThatDidntWork } from "@/components/home/things-that-didnt-work";
 import { ExperienceTimeline } from "@/components/home/experience-timeline";
 import { HomeNotes } from "@/components/home/home-notes";
@@ -17,6 +18,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { homeFaqs } from "@/content/faqs";
 import { featuredExperience } from "@/content/experience";
 import { getFeaturedProjects, getLabProjects } from "@/content/projects";
+import { libraries } from "@/content/libraries";
 import { getAllPostMeta } from "@/lib/mdx";
 import {
   blogItemListSchema,
@@ -25,6 +27,8 @@ import {
   personSchema,
   momentraLabsSchema,
   labProductsSchema,
+  librariesItemListSchema,
+  librarySchema,
   websiteSchema,
   profilePageSchema,
   worldMarksSchema,
@@ -49,6 +53,8 @@ export default function HomePage() {
     personSchema(),
     momentraLabsSchema(),
     labProductsSchema(lab),
+    librariesItemListSchema(),
+    ...libraries.map((library) => librarySchema(library)),
     profilePageSchema(),
     worldMarksSchema(),
     faqSchema(homeFaqs),
@@ -68,6 +74,7 @@ export default function HomePage() {
       <LabPlayground />
       <PhilosophyStrip />
       <CurrentlyBuilding />
+      <OpenSourceLibraries />
       <ThingsThatDidntWork />
       <ExperienceTimeline items={featuredExperience} />
       <HomeNotes />

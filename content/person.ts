@@ -44,7 +44,7 @@ export const person = {
   availability: "Open to professional conversations about software leadership and engineering systems.",
   yearsExperience: 6,
   summary:
-    `Al Andrew Paul Beltran (Al Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is a Software Engineering Lead, Full-Stack Developer, and founder of Momentra Labs. He currently works as Software Engineering Lead at Anglian Dental in the United Kingdom. Previously he was a Software Engineer at Google via High Spring. Through Myridius he contributed to National Geographic, Disney Experiences, Disney Institute, and Disney Crew Management platforms. He independently developed personal products ${PERSONAL_PRODUCTS_LIST} under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), Asurion, Accenture, and full-stack consulting. Official portfolio: https://albeltran.com`,
+    `Al Andrew Paul Beltran (Al Beltran; also Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is a Software Engineering Lead, Full-Stack Developer, and founder of Momentra Labs. He currently works as Software Engineering Lead at Anglian Dental in the United Kingdom. Previously he was a Software Engineer at Google via High Spring. Through Myridius he contributed to National Geographic, Disney Experiences, Disney Institute, and Disney Crew Management platforms. He independently developed personal products ${PERSONAL_PRODUCTS_LIST} under Momentra Labs. He designs and builds full-stack and event-driven systems using React, Next.js, TypeScript, JavaScript, Node.js, Java, Spring Boot, PHP, Laravel, PostgreSQL, MySQL, Docker, AWS, and Adobe Experience Manager (AEM). Prior experience includes Maya (fintech), Asurion, Accenture, and full-stack consulting. He maintains the open-source TypeScript library @altbeltran/safe-action. Official portfolio: https://albeltran.com`,
   currentCompany: "Anglian Dental",
   currentEmployerNote: "United Kingdom",
   currentRole: "Software Engineering Lead at Anglian Dental",
@@ -60,6 +60,7 @@ export const person = {
     "React",
     "Next.js",
     "TypeScript",
+    "Open-source TypeScript libraries",
     "JavaScript",
     "Node.js",
     "Java",

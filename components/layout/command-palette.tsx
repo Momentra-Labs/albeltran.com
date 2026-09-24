@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { projects } from "@/content/projects";
+import { libraries } from "@/content/libraries";
 import { useRecruiter } from "@/components/layout/recruiter-provider";
 import { cn } from "@/lib/utils";
 
@@ -60,6 +61,7 @@ export function CommandPalette({
       { id: "interviews", label: "Interview notes", href: "/interviews/" },
       { id: "author", label: "Author: Al Beltran", href: "/author/al-beltran/" },
       { id: "projects", label: "All projects", href: "/projects/" },
+      { id: "libraries", label: "Open-source libraries", href: "/libraries/" },
       { id: "resume", label: "Download Resume", href: "/resume.pdf" },
       {
         id: "recruiter",
@@ -67,13 +69,19 @@ export function CommandPalette({
         action: () => toggleRecruiter(),
       },
     ];
+    const libraryItems = libraries.map((library) => ({
+      id: `lib-${library.slug}`,
+      label: library.packageName,
+      hint: "Library",
+      href: `/libraries/${library.slug}/`,
+    }));
     const projectItems = projects.map((project) => ({
       id: `p-${project.slug}`,
       label: project.name,
       hint: project.kind === "lab" ? "Lab" : "Project",
       href: `/projects/${project.slug}/`,
     }));
-    return [...nav, ...projectItems];
+    return [...nav, ...libraryItems, ...projectItems];
   }, [toggleRecruiter]);
 
   const filtered = items.filter((item) => {
