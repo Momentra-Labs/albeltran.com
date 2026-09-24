@@ -3,7 +3,9 @@ import path from "path";
 import sharp from "sharp";
 
 const ROOT = process.cwd();
-const SOURCE_PHOTO = path.join(ROOT, "public/assets/professional-photo.png");
+const SOURCE_JPG = path.join(ROOT, "public/assets/professional-photo.jpg");
+const SOURCE_PNG = path.join(ROOT, "public/assets/professional-photo.png");
+const SOURCE_PHOTO = fs.existsSync(SOURCE_JPG) ? SOURCE_JPG : SOURCE_PNG;
 const PHOTO_WEBP = path.join(
   ROOT,
   "public/assets/al-beltran-software-engineer.webp",
@@ -15,6 +17,7 @@ const PHOTO_JPG = path.join(
 const PROFILE_JPG = path.join(ROOT, "public/assets/al-beltran-profile.jpg");
 const PROFILE_WEBP = path.join(ROOT, "public/assets/al-beltran-profile.webp");
 const APPLE = path.join(ROOT, "public/apple-touch-icon.png");
+const FAVICON_ICO = path.join(ROOT, "public/favicon.ico");
 const FAVICON_32 = path.join(ROOT, "public/favicon-32x32.png");
 const FAVICON_16 = path.join(ROOT, "public/favicon-16x16.png");
 const ICON_192 = path.join(ROOT, "public/android-chrome-192x192.png");
@@ -40,7 +43,7 @@ const photoBuffer = await sharp(SOURCE_PHOTO)
   .rotate()
   .resize(photoSize, Math.round(photoSize * 1.25), {
     fit: "cover",
-    position: "centre",
+    position: "attention",
   })
   .jpeg({ quality: 90 })
   .toBuffer();
@@ -125,8 +128,31 @@ await face.clone().webp({ quality: 82 }).toFile(PROFILE_WEBP);
 await face.clone().resize(180, 180).png({ compressionLevel: 9 }).toFile(APPLE);
 await face.clone().resize(32, 32).png({ compressionLevel: 9 }).toFile(FAVICON_32);
 await face.clone().resize(16, 16).png({ compressionLevel: 9 }).toFile(FAVICON_16);
+const faviconPng = fs.readFileSync(FAVICON_32);
+const icoHeader = Buffer.alloc(22);
+icoHeader.writeUInt16LE(0, 0);
+icoHeader.writeUInt16LE(1, 2);
+icoHeader.writeUInt16LE(1, 4);
+icoHeader.writeUInt8(32, 6);
+icoHeader.writeUInt8(32, 7);
+icoHeader.writeUInt8(0, 8);
+icoHeader.writeUInt8(0, 9);
+icoHeader.writeUInt16LE(1, 10);
+icoHeader.writeUInt16LE(32, 12);
+icoHeader.writeUInt32LE(faviconPng.length, 14);
+icoHeader.writeUInt32LE(22, 18);
+fs.writeFileSync(FAVICON_ICO, Buffer.concat([icoHeader, faviconPng]));
 await face.clone().resize(192, 192).png({ compressionLevel: 9 }).toFile(ICON_192);
 await face.clone().resize(512, 512).png({ compressionLevel: 9 }).toFile(ICON_512);
+
+const nextPng = `${SOURCE_PNG}.next.png`;
+await sharp(SOURCE_PHOTO)
+  .rotate()
+  .resize(1200, 1200, { fit: "cover", position: "attention" })
+  .png({ compressionLevel: 9 })
+  .toFile(nextPng);
+fs.rmSync(SOURCE_PNG, { force: true });
+fs.renameSync(nextPng, SOURCE_PNG);
 
 const jpgStat = fs.statSync(OUT_JPG);
 console.log(`Wrote ${OUT_JPG} (${Math.round(jpgStat.size / 1024)} KB)`);
