@@ -89,11 +89,12 @@ export const person = {
     SOCIAL_LINKS.codewars,
   ],
   url: SITE_URL,
-  image: `${SITE_URL}/assets/al-beltran-profile.jpg`,
+  image: `${SITE_URL}/assets/al-andrew-paul-beltran.jpg`,
   photo: "/assets/al-beltran-software-engineer.webp",
+  portrait: "/assets/al-andrew-paul-beltran.jpg",
   profilePhoto: "/assets/al-beltran-profile.jpg",
-  imageWidth: 512,
-  imageHeight: 512,
+  imageWidth: 1200,
+  imageHeight: 1304,
 } as const;
 
 export const stats = [

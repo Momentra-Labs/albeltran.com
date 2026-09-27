@@ -20,6 +20,9 @@ export function AuthorCard() {
         and AEM.
       </p>
       <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        <Link href="/biography/" className="text-accent hover:underline">
+          Biography
+        </Link>
         <Link href="/about/" className="text-accent hover:underline">
           About
         </Link>

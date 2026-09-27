@@ -25,7 +25,7 @@ export function HomeCTA() {
                 <Link href="/contact/">Contact Me</Link>
               </Button>
               <Button asChild variant="secondary" size="lg">
-                <Link href="/about/">About Al Beltran</Link>
+                <Link href="/biography/">Biography</Link>
               </Button>
               <Button asChild variant="secondary" size="lg">
                 <Link href="/resume/">View Resume</Link>

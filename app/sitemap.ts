@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const staticRoutes = [
     "",
+    "/biography/",
     "/about/",
     "/author/al-beltran/",
     "/experience/",
@@ -41,7 +42,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}${path || "/"}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : path.includes("/privacy/") ? 0.5 : 0.8,
+    priority:
+      path === ""
+        ? 1
+        : path === "/biography/"
+          ? 0.95
+          : path.includes("/privacy/")
+            ? 0.5
+            : 0.8,
   }));
 
   const topicRoutes = JOURNAL_TOPIC_IDS.map((id) => ({

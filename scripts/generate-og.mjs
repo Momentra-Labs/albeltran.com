@@ -9,6 +9,9 @@ const SOURCE_CUTOUT = path.join(
   ROOT,
   "public/assets/professional-photo-cutout.png",
 );
+const BIO_SOURCE = path.join(ROOT, "public/assets/biography-source.jpg");
+const BIO_JPG = path.join(ROOT, "public/assets/al-andrew-paul-beltran.jpg");
+const BIO_WEBP = path.join(ROOT, "public/assets/al-andrew-paul-beltran.webp");
 const SOURCE_PHOTO = fs.existsSync(SOURCE_JPG) ? SOURCE_JPG : SOURCE_PNG;
 const PHOTO_WEBP = path.join(
   ROOT,
@@ -29,6 +32,7 @@ const ICON_512 = path.join(ROOT, "public/android-chrome-512x512.png");
 const OUT_DIR = path.join(ROOT, "public/og");
 const OUT_JPG = path.join(OUT_DIR, "default.jpg");
 const OUT_PNG = path.join(OUT_DIR, "default.png");
+const BIO_OG = path.join(OUT_DIR, "al-beltran-biography.jpg");
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -208,4 +212,41 @@ console.log(
 console.log(
   `Wrote ${PROFILE_JPG} (${Math.round(fs.statSync(PROFILE_JPG).size / 1024)} KB)`,
 );
-console.log(`Wrote ${APPLE}, ${FAVICON_32}, ${ICON_192}`);
+if (fs.existsSync(BIO_SOURCE)) {
+  const bioPortrait = sharp(BIO_SOURCE).rotate().resize(1200, 1304, {
+    fit: "cover",
+    position: "north",
+  });
+  await bioPortrait
+    .clone()
+    .jpeg({ quality: 88, mozjpeg: true })
+    .toFile(BIO_JPG);
+  await bioPortrait.clone().webp({ quality: 84 }).toFile(BIO_WEBP);
+
+  const bioOgPhoto = await sharp(BIO_SOURCE)
+    .rotate()
+    .resize(WIDTH, HEIGHT, { fit: "cover", position: "north" })
+    .jpeg({ quality: 88, mozjpeg: true })
+    .toBuffer();
+  const bioOgLabel = Buffer.from(`
+<svg width="${WIDTH}" height="${HEIGHT}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="biofade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="42%" stop-color="#050507" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#050507" stop-opacity="0.72"/>
+    </linearGradient>
+  </defs>
+  <rect width="${WIDTH}" height="${HEIGHT}" fill="url(#biofade)"/>
+  <text x="72" y="548" fill="#f0f0f5" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700">Al Andrew Paul Beltran</text>
+  <text x="72" y="588" fill="#9aa3b5" font-family="Arial, Helvetica, sans-serif" font-size="22">Software Engineering Lead · Manila</text>
+</svg>`);
+  await sharp(bioOgPhoto)
+    .composite([{ input: bioOgLabel, top: 0, left: 0 }])
+    .jpeg({ quality: 88, mozjpeg: true })
+    .toFile(BIO_OG);
+
+  console.log(
+    `Wrote ${BIO_JPG} (${Math.round(fs.statSync(BIO_JPG).size / 1024)} KB)`,
+  );
+  console.log(`Wrote ${BIO_OG}`);
+}

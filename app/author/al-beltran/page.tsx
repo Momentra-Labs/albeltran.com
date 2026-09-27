@@ -201,6 +201,11 @@ export default function AuthorPage() {
               </p>
               <ul className="mt-3 space-y-2 text-sm">
                 <li>
+                  <Link href="/biography/" className="text-accent hover:underline">
+                    Biography
+                  </Link>
+                </li>
+                <li>
                   <Link href="/about/" className="text-accent hover:underline">
                     About
                   </Link>

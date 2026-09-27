@@ -35,18 +35,30 @@ export function personSchema() {
     givenName: person.givenName,
     familyName: person.familyName,
     url: SITE_URL,
-    mainEntityOfPage: `${SITE_URL}/about/`,
-    image: {
-      "@type": "ImageObject",
-      "@id": `${SITE_URL}/#person-image`,
-      url: person.image,
-      contentUrl: person.image,
-      width: person.imageWidth,
-      height: person.imageHeight,
-      caption: person.imageAlt,
-      description: `${person.shortName} is a ${person.occupation} and ${person.jobTitle}.`,
-      encodingFormat: "image/jpeg",
-    },
+    mainEntityOfPage: `${SITE_URL}/biography/`,
+    image: [
+      {
+        "@type": "ImageObject",
+        "@id": `${SITE_URL}/#person-image`,
+        url: person.image,
+        contentUrl: person.image,
+        width: person.imageWidth,
+        height: person.imageHeight,
+        caption: person.imageAlt,
+        description: `${person.name} is a ${person.occupation} and ${person.jobTitle}.`,
+        encodingFormat: "image/jpeg",
+        representativeOfPage: true,
+      },
+      {
+        "@type": "ImageObject",
+        url: `${SITE_URL}${person.profilePhoto}`,
+        contentUrl: `${SITE_URL}${person.profilePhoto}`,
+        width: 512,
+        height: 512,
+        caption: person.imageAlt,
+        encodingFormat: "image/jpeg",
+      },
+    ],
     jobTitle: person.currentRole,
     hasOccupation: {
       "@type": "Occupation",
@@ -187,6 +199,27 @@ export function websiteSchema() {
     inLanguage: "en-PH",
     publisher: { "@id": `${SITE_URL}/#person` },
     copyrightHolder: { "@id": `${SITE_URL}/#person` },
+  };
+}
+
+export function aboutPageSchema() {
+  return {
+    "@type": "AboutPage",
+    "@id": `${SITE_URL}/biography/#aboutpage`,
+    url: `${SITE_URL}/biography/`,
+    name: `${person.name} — Biography`,
+    description: person.summary,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#person` },
+    mainEntity: { "@id": `${SITE_URL}/#person` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: person.image,
+      contentUrl: person.image,
+      width: person.imageWidth,
+      height: person.imageHeight,
+      caption: person.imageAlt,
+    },
   };
 }
 

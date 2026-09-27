@@ -24,6 +24,9 @@ export function Footer() {
           <p className="mt-1 text-sm text-muted-dim">Manila, Philippines</p>
         </div>
         <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+          <Link href="/biography/" data-cursor="→" className="hover:text-foreground">
+            Biography
+          </Link>
           <Link href="/about/" data-cursor="→" className="hover:text-foreground">
             About
           </Link>

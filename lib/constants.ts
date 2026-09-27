@@ -15,6 +15,7 @@ export const SECTION_NAV = [
 ] as const;
 
 export const NAV_LINKS = [
+  { href: "/biography/", label: "Biography" },
   { href: "/about/", label: "About" },
   { href: "/experience/", label: "Experience" },
   { href: "/projects/", label: "Projects" },
