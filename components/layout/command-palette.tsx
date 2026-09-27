@@ -52,6 +52,7 @@ export function CommandPalette({
         href: "/experience/#certifications",
       },
       { id: "writing", label: "Go to Writing", href: "/blog/" },
+      { id: "biography", label: "Go to Biography", href: "/biography/" },
       { id: "about", label: "Go to About", href: "/about/" },
       { id: "now", label: "Go to Now", href: "/#now" },
       { id: "notes", label: "Go to Notes", href: "/#notes" },

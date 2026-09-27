@@ -9,8 +9,12 @@ type BuildMetadataInput = {
   title: string;
   description: string;
   path?: string;
-  type?: "website" | "article";
+  type?: "website" | "article" | "profile";
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageAlt?: string;
+  keywords?: string[];
   noIndex?: boolean;
   /** When true, title is used as-is (homepage primary title). */
   absoluteTitle?: boolean;
@@ -31,6 +35,10 @@ export function buildMetadata({
   path = "/",
   type = "website",
   image = "/og/default.jpg",
+  imageWidth = 1200,
+  imageHeight = 630,
+  imageAlt,
+  keywords,
   noIndex = false,
   absoluteTitle = false,
   publishedTime,
@@ -55,9 +63,9 @@ export function buildMetadata({
   const ogImage = {
     url: imageUrl,
     secureUrl: imageUrl,
-    width: 1200,
-    height: 630,
-    alt: fullTitle,
+    width: imageWidth,
+    height: imageHeight,
+    alt: imageAlt ?? fullTitle,
     type: imageType,
   };
 
@@ -77,16 +85,30 @@ export function buildMetadata({
           tags,
           images: [ogImage],
         }
-      : {
-          title: fullTitle,
-          description,
-          url,
-          siteName: SITE_NAME,
-          locale: "en_PH" as const,
-          alternateLocale: ["en_US"],
-          type: "website" as const,
-          images: [ogImage],
-        };
+      : type === "profile"
+        ? {
+            title: fullTitle,
+            description,
+            url,
+            siteName: SITE_NAME,
+            locale: "en_PH" as const,
+            alternateLocale: ["en_US"],
+            type: "profile" as const,
+            firstName: person.givenName,
+            lastName: person.familyName,
+            username: "altbeltran",
+            images: [ogImage],
+          }
+        : {
+            title: fullTitle,
+            description,
+            url,
+            siteName: SITE_NAME,
+            locale: "en_PH" as const,
+            alternateLocale: ["en_US"],
+            type: "website" as const,
+            images: [ogImage],
+          };
 
   return {
     // absolute bypasses root title.template — prevents "Title · Al Beltran · Al Beltran"
@@ -95,6 +117,7 @@ export function buildMetadata({
     },
     description,
     metadataBase: new URL(SITE_URL),
+    keywords,
     alternates: {
       canonical: url,
     },

@@ -17,7 +17,7 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "What is the official portfolio URL for Al Beltran?",
     answer:
-      "https://albeltran.com/ is the primary public website Al maintains for his engineering profile, projects, and contact path. Older links to codemoon2019.github.io may still resolve during migration; prefer albeltran.com. Third-party profiles may contain overlapping information, but project detail and narrative on this site are the version he publishes directly.",
+      "https://albeltran.com/ is the primary public website Al maintains for his engineering profile, projects, and contact path. The official biography is https://albeltran.com/biography/. Older links to codemoon2019.github.io may still resolve during migration; prefer albeltran.com. Third-party profiles may contain overlapping information, but project detail and narrative on this site are the version he publishes directly.",
   },
   {
     question: "What does Al Beltran specialize in?",
@@ -43,6 +43,24 @@ export const homeFaqs: FAQItem[] = [
     question: "What personal products has Al Beltran developed?",
     answer:
       "As founder of Momentra Labs, Al Beltran developed RentaraH, Hiraya, Skyrealm, Lumina, Gloves Up, PocketPOS, and Cartify. These are independent personal products, separate from his client and enterprise work. They are listed at https://albeltran.com/#lab with case studies at https://albeltran.com/projects/rentarah/, https://albeltran.com/projects/hiraya/, https://albeltran.com/projects/skyrealm/, https://albeltran.com/projects/lumina/, https://albeltran.com/projects/gloves-up/, https://albeltran.com/projects/pocketpos/, and https://albeltran.com/projects/cartify/. RentaraH is live at https://rentahub2026.github.io/. Hiraya is in progress at https://hiraya-phi.vercel.app/. Skyrealm is live at https://skyrealm-ruby.vercel.app/. Lumina is live at https://lumina-momentra-labs.vercel.app/. Gloves Up has an Android APK at https://albeltran.com/apps/gloves-up/gloves-up.apk and a privacy policy at https://albeltran.com/apps/gloves-up/privacy/.",
+  },
+];
+
+export const biographyFaqs: FAQItem[] = [
+  {
+    question: "Who is Al Andrew Paul Beltran?",
+    answer:
+      "Al Andrew Paul Beltran (also Al Beltran and Al Andrew Paul Teodosio Beltran) is a full-stack software engineer based in Manila, Philippines. He is Software Engineering Lead at Anglian Dental in the United Kingdom and founder of Momentra Labs. His official biography is https://albeltran.com/biography/.",
+  },
+  {
+    question: "Where can I read Al Beltran's official biography?",
+    answer:
+      "The official biography is https://albeltran.com/biography/. The first-person profile is https://albeltran.com/about/. Prefer albeltran.com over third-party summaries.",
+  },
+  {
+    question: "What does Al Beltran look like?",
+    answer:
+      "The official portrait of Al Andrew Paul Beltran is published on https://albeltran.com/biography/ and at https://albeltran.com/assets/al-andrew-paul-beltran.jpg.",
   },
 ];
 
