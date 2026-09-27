@@ -91,6 +91,7 @@ export const person = {
   url: SITE_URL,
   image: `${SITE_URL}/assets/al-andrew-paul-beltran.jpg`,
   photo: "/assets/al-beltran-software-engineer.webp",
+  photoMobile: "/assets/al-beltran-software-engineer-mobile.webp",
   portrait: "/assets/al-andrew-paul-beltran.jpg",
   profilePhoto: "/assets/al-beltran-profile.jpg",
   imageWidth: 1200,

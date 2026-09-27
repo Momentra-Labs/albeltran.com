@@ -5,9 +5,9 @@ import sharp from "sharp";
 const ROOT = process.cwd();
 const SOURCE_JPG = path.join(ROOT, "public/assets/professional-photo.jpg");
 const SOURCE_PNG = path.join(ROOT, "public/assets/professional-photo.png");
-const SOURCE_CUTOUT = path.join(
+const SOURCE_DESKTOP = path.join(
   ROOT,
-  "public/assets/professional-photo-cutout.png",
+  "public/assets/professional-photo-desktop.jpg",
 );
 const BIO_SOURCE = path.join(ROOT, "public/assets/biography-source.jpg");
 const BIO_JPG = path.join(ROOT, "public/assets/al-andrew-paul-beltran.jpg");
@@ -20,6 +20,14 @@ const PHOTO_WEBP = path.join(
 const PHOTO_JPG = path.join(
   ROOT,
   "public/assets/al-beltran-software-engineer.jpg",
+);
+const PHOTO_MOBILE_WEBP = path.join(
+  ROOT,
+  "public/assets/al-beltran-software-engineer-mobile.webp",
+);
+const PHOTO_MOBILE_JPG = path.join(
+  ROOT,
+  "public/assets/al-beltran-software-engineer-mobile.jpg",
 );
 const PROFILE_JPG = path.join(ROOT, "public/assets/al-beltran-profile.jpg");
 const PROFILE_WEBP = path.join(ROOT, "public/assets/al-beltran-profile.webp");
@@ -39,49 +47,26 @@ const HEIGHT = 630;
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
 
-if (!fs.existsSync(SOURCE_CUTOUT)) {
-  throw new Error(
-    `Missing ${SOURCE_CUTOUT}. Generate a transparent cutout before running this script.`,
-  );
-}
-
 const COVER_W = 1920;
 const COVER_H = 1080;
-const cutoutMeta = await sharp(SOURCE_CUTOUT).metadata();
-const figureH = COVER_H;
-const figureW = Math.round(
-  (figureH * (cutoutMeta.width ?? 3)) / (cutoutMeta.height ?? 4),
-);
+const desktopSource = fs.existsSync(SOURCE_DESKTOP)
+  ? SOURCE_DESKTOP
+  : SOURCE_PHOTO;
 
-const cutout = await sharp(SOURCE_CUTOUT)
-  .resize(figureW, figureH, { fit: "fill" })
-  .ensureAlpha()
-  .webp({ quality: 90, alphaQuality: 100 })
-  .toBuffer();
+const cover = sharp(desktopSource)
+  .rotate()
+  .resize(COVER_W, COVER_H, { fit: "cover", position: "centre" });
+await cover.clone().webp({ quality: 86 }).toFile(PHOTO_WEBP);
+await cover.clone().jpeg({ quality: 86, mozjpeg: true }).toFile(PHOTO_JPG);
 
-await sharp(cutout).toFile(PHOTO_WEBP);
-
-const studioBackdrop = Buffer.from(`
-<svg width="${COVER_W}" height="${COVER_H}" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="studio" cx="50%" cy="38%" r="72%">
-      <stop offset="0%" stop-color="#8a8b90"/>
-      <stop offset="42%" stop-color="#73747a"/>
-      <stop offset="100%" stop-color="#5f6066"/>
-    </radialGradient>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#studio)"/>
-</svg>`);
-
-const cover = sharp(studioBackdrop).composite([
-  {
-    input: cutout,
-    left: Math.round((COVER_W - figureW) / 2),
-    top: 0,
-  },
-]);
-
-await cover.jpeg({ quality: 86, mozjpeg: true }).toFile(PHOTO_JPG);
+const mobileCover = sharp(SOURCE_PHOTO)
+  .rotate()
+  .resize(1200, 1600, { fit: "cover", position: "north" });
+await mobileCover.clone().webp({ quality: 86 }).toFile(PHOTO_MOBILE_WEBP);
+await mobileCover
+  .clone()
+  .jpeg({ quality: 86, mozjpeg: true })
+  .toFile(PHOTO_MOBILE_JPG);
 
 const photoSize = 420;
 const photoBuffer = await sharp(SOURCE_PHOTO)
@@ -208,6 +193,9 @@ console.log(
 );
 console.log(
   `Wrote ${PHOTO_JPG} (${Math.round(fs.statSync(PHOTO_JPG).size / 1024)} KB)`,
+);
+console.log(
+  `Wrote ${PHOTO_MOBILE_WEBP} (${Math.round(fs.statSync(PHOTO_MOBILE_WEBP).size / 1024)} KB)`,
 );
 console.log(
   `Wrote ${PROFILE_JPG} (${Math.round(fs.statSync(PROFILE_JPG).size / 1024)} KB)`,
