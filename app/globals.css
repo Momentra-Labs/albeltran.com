@@ -211,14 +211,40 @@ h3,
 .magazine-portrait {
   isolation: isolate;
   z-index: 1;
-  background: #e6dcd0;
+  background: #14161c;
   clip-path: polygon(0 1.5%, 100% 0, 100% 100%, 0 98.5%);
   box-shadow: -1.25rem 1.5rem 3.5rem rgba(0, 0, 0, 0.38);
 }
 
+.magazine-portrait-field {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 42% 58% at 50% 38%,
+      rgba(210, 198, 178, 0.3),
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 70% 50% at 78% 55%,
+      rgba(79, 142, 255, 0.16),
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 80% 70% at 50% 100%,
+      rgba(5, 5, 7, 0.58),
+      transparent 55%
+    ),
+    linear-gradient(180deg, #1c1e26 0%, #12141a 48%, #0c0d12 100%);
+  animation: portrait-field-drift 18s ease-in-out infinite;
+}
+
 .magazine-portrait-img {
-  object-fit: cover;
-  object-position: center 26%;
+  z-index: 1;
+  object-fit: contain;
+  object-position: center center;
   filter: contrast(1.16) saturate(0.94) brightness(0.88);
 }
 
@@ -227,11 +253,11 @@ h3,
   position: absolute;
   inset: 0;
   z-index: 1;
-  opacity: 0.07;
+  opacity: 0.18;
   background: radial-gradient(
-    ellipse 48% 38% at 48% 24%,
+    ellipse 52% 44% at 48% 28%,
     rgba(255, 232, 208, 1),
-    transparent 70%
+    transparent 72%
   );
   mix-blend-mode: screen;
 }
@@ -243,17 +269,17 @@ h3,
   z-index: 2;
   background:
     radial-gradient(
-      ellipse 78% 70% at 50% 30%,
-      transparent 32%,
-      rgba(6, 5, 5, 0.28) 78%,
-      rgba(6, 5, 5, 0.52) 100%
+      ellipse 82% 74% at 50% 36%,
+      transparent 42%,
+      rgba(6, 5, 5, 0.16) 82%,
+      rgba(6, 5, 5, 0.3) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(6, 5, 5, 0.12) 0%,
-      transparent 18%,
-      transparent 54%,
-      rgba(6, 5, 5, 0.58) 100%
+      rgba(6, 5, 5, 0.08) 0%,
+      transparent 20%,
+      transparent 58%,
+      rgba(6, 5, 5, 0.26) 100%
     );
 }
 
@@ -375,7 +401,29 @@ h3,
   }
 
   .magazine-portrait {
+    width: 100%;
+    height: 100%;
+    background: #14161c;
     clip-path: polygon(3% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .magazine-portrait-img {
+    object-fit: contain;
+    object-position: center center;
+    filter: none;
+  }
+
+  .magazine-portrait-fade {
+    background:
+      radial-gradient(
+        ellipse 90% 80% at 50% 42%,
+        transparent 52%,
+        rgba(6, 5, 5, 0.12) 100%
+      );
+  }
+
+  .magazine-plate:hover .magazine-portrait-img {
+    transform: none;
   }
 }
 
@@ -1911,6 +1959,16 @@ h3,
   }
 }
 
+@keyframes portrait-field-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(1.1%, -0.7%) scale(1.035);
+  }
+}
+
 @keyframes cover-grid-drift {
   from {
     transform: translate3d(0, 0, 0);
@@ -1988,7 +2046,8 @@ h3,
   .magazine-cover-grid,
   .magazine-cover-scan,
   .magazine-cover .magazine-register-mark,
-  .magazine-plate-enter {
+  .magazine-plate-enter,
+  .magazine-portrait-field {
     animation: none;
     translate: none;
   }

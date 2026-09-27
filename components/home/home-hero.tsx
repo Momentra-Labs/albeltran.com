@@ -285,7 +285,7 @@ export function HomeHero() {
           </p>
         </motion.div>
 
-        <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(20rem,48%)] lg:gap-6 lg:px-10 lg:py-0">
+        <div className="grid min-h-0 gap-8 px-5 py-6 sm:px-8 lg:h-full lg:grid-cols-[minmax(0,1fr)_minmax(26rem,58%)] lg:gap-6 lg:px-10 lg:py-0">
           <figure className="magazine-plate group relative order-2 flex min-h-0 w-full origin-top flex-col lg:order-last lg:h-full lg:min-h-0 lg:self-stretch">
             <div
               className={`flex w-full flex-col items-center lg:h-full lg:min-h-0 lg:flex-1 lg:items-stretch ${reduce ? "" : "magazine-plate-enter"}`}
@@ -295,17 +295,18 @@ export function HomeHero() {
               <p className="magazine-plate-spine hidden lg:block">
                 Cover portrait · 01
               </p>
-              <div className="magazine-portrait magazine-scan relative aspect-[3/4] w-full overflow-hidden lg:aspect-auto lg:h-full lg:max-h-none lg:min-h-0">
+              <div className="magazine-portrait magazine-scan relative aspect-[3/4] w-full overflow-hidden lg:aspect-auto lg:h-full lg:w-full lg:min-h-0">
+                <span className="magazine-portrait-field" aria-hidden />
                 <Image
                   src={person.photo}
                   alt={person.imageAlt}
                   fill
                   priority
-                  sizes="(max-width: 1023px) min(92vw, calc(11rem + 48vw)), 48vw"
+                  sizes="(max-width: 1023px) min(92vw, calc(11rem + 48vw)), 58vw"
                   className={`magazine-portrait-img boot-asset ${
                     reduce
                       ? ""
-                      : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      : "transition-transform duration-700 ease-out group-hover:scale-[1.03] lg:group-hover:scale-100"
                   }`}
                 />
                 {reduce ? null : (
