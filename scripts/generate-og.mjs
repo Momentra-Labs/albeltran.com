@@ -33,7 +33,7 @@ fs.mkdirSync(OUT_DIR, { recursive: true });
 
 const portrait = sharp(SOURCE_PHOTO).rotate().resize(1200, 1200, {
   fit: "cover",
-  position: "centre",
+  position: "attention",
 });
 await portrait.clone().webp({ quality: 82 }).toFile(PHOTO_WEBP);
 await portrait.clone().jpeg({ quality: 84, mozjpeg: true }).toFile(PHOTO_JPG);
