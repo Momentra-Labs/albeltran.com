@@ -296,17 +296,28 @@ export function HomeHero() {
                 Cover portrait · 01
               </p>
               <div className="magazine-portrait magazine-scan relative aspect-[3/4] w-full overflow-hidden lg:aspect-auto lg:h-full lg:w-full lg:min-h-0">
-                <span className="magazine-portrait-field" aria-hidden />
+                <Image
+                  src={person.photoMobile}
+                  alt={person.imageAlt}
+                  fill
+                  priority
+                  sizes="(max-width: 1023px) min(92vw, calc(11rem + 48vw)), 1px"
+                  className={`magazine-portrait-img boot-asset lg:hidden ${
+                    reduce
+                      ? ""
+                      : "transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  }`}
+                />
                 <Image
                   src={person.photo}
                   alt={person.imageAlt}
                   fill
                   priority
-                  sizes="(max-width: 1023px) min(92vw, calc(11rem + 48vw)), 58vw"
-                  className={`magazine-portrait-img boot-asset ${
+                  sizes="(min-width: 1024px) 58vw, 1px"
+                  className={`magazine-portrait-img boot-asset hidden lg:block ${
                     reduce
                       ? ""
-                      : "transition-transform duration-700 ease-out group-hover:scale-[1.03] lg:group-hover:scale-100"
+                      : "transition-transform duration-700 ease-out lg:group-hover:scale-100"
                   }`}
                 />
                 {reduce ? null : (
