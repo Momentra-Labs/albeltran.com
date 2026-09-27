@@ -12,6 +12,8 @@ export const TECH_DESK = {
   greet: "Hey. I'm the Tech desk — Al's AI on this magazine.",
   greetNext:
     "Want the projects, the stack, the lab, or a real engineering question?",
+  nudgeKicker: "Tech desk · Al's AI",
+  nudgeGreet: "Hey. Welcome to the magazine.",
   offline:
     "Oops — the line is down. Set NEXT_PUBLIC_GROQ_API_KEY in .env (and on Vercel) to open it.",
   capped:
