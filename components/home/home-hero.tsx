@@ -502,21 +502,7 @@ export function HomeHero() {
                 data-cursor="VIEW"
                 className={`${ctaClass} text-foreground hover:text-accent`}
               >
-                About Al Beltran →
-              </Link>
-              <Link
-                href="#work"
-                data-cursor="VIEW"
-                className={`${ctaClass} text-muted hover:text-foreground`}
-              >
-                Explore my work →
-              </Link>
-              <Link
-                href="#contact"
-                data-cursor="→"
-                className={`${ctaClass} text-muted hover:text-foreground`}
-              >
-                Let&apos;s talk ↗
+                About Al Beltran
               </Link>
             </nav>
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted lg:text-[11px]">
