@@ -63,6 +63,37 @@ export function CodewarsLeaderboardMark() {
   );
 }
 
+function kataPageItems(current: number, total: number) {
+  if (total <= 5) {
+    return Array.from({ length: total }, (_, index) => index);
+  }
+
+  const indexes = new Set<number>([0, total - 1, current]);
+  if (current <= 1) {
+    indexes.add(1);
+    indexes.add(2);
+  } else if (current >= total - 2) {
+    indexes.add(total - 3);
+    indexes.add(total - 2);
+  } else {
+    indexes.add(current - 1);
+    indexes.add(current + 1);
+  }
+
+  const sorted = [...indexes]
+    .filter((index) => index >= 0 && index < total)
+    .sort((a, b) => a - b);
+  const items: Array<number | "gap"> = [];
+  for (const index of sorted) {
+    const previous = items[items.length - 1];
+    if (typeof previous === "number" && index - previous > 1) {
+      items.push("gap");
+    }
+    items.push(index);
+  }
+  return items;
+}
+
 export function CodewarsRecordTable() {
   const [page, setPage] = useState(0);
   const [katas, setKatas] = useState<CodewarsKataRow[]>(fallbackKatas);
@@ -83,6 +114,7 @@ export function CodewarsRecordTable() {
   );
 
   const pageCount = Math.max(1, Math.ceil(katas.length / CODEWARS_PAGE_SIZE));
+  const pageItems = useMemo(() => kataPageItems(page, pageCount), [page, pageCount]);
   const rows = useMemo(
     () =>
       katas.slice(
@@ -143,40 +175,51 @@ export function CodewarsRecordTable() {
         </table>
       </div>
       <nav
-        className="mt-5 flex flex-wrap items-center justify-between gap-3"
+        className="mt-5 flex items-center justify-between gap-3"
         aria-label="Kata pages"
       >
-        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+        <p className="shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
           {String(page + 1).padStart(2, "0")} / {String(pageCount).padStart(2, "0")}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-center justify-end gap-0.5 sm:gap-1">
           <button
             type="button"
             data-cursor="→"
             data-kata-page="prev"
             disabled={page === 0}
             onClick={() => setPage((current) => Math.max(0, current - 1))}
-            className="min-h-11 px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground hover:text-accent disabled:pointer-events-none disabled:text-muted-dim"
+            className="min-h-11 shrink-0 px-2 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground hover:text-accent disabled:pointer-events-none disabled:text-muted-dim sm:px-3"
           >
             Prev
           </button>
-          {Array.from({ length: pageCount }, (_, index) => (
-            <button
-              key={index}
-              type="button"
-              data-cursor="→"
-              data-kata-page={index}
-              aria-current={index === page ? "page" : undefined}
-              onClick={() => setPage(index)}
-              className={`min-h-11 min-w-11 font-mono text-[11px] uppercase tracking-[0.16em] ${
-                index === page
-                  ? "text-accent"
-                  : "text-muted hover:text-foreground"
-              }`}
-            >
-              {index + 1}
-            </button>
-          ))}
+          {pageItems.map((item, order) =>
+            item === "gap" ? (
+              <span
+                key={`gap-${order}`}
+                aria-hidden
+                className="px-1 font-mono text-[11px] text-muted-dim"
+              >
+                …
+              </span>
+            ) : (
+              <button
+                key={item}
+                type="button"
+                data-cursor="→"
+                data-kata-page={item}
+                aria-label={`Page ${item + 1}`}
+                aria-current={item === page ? "page" : undefined}
+                onClick={() => setPage(item)}
+                className={`min-h-11 min-w-8 shrink-0 font-mono text-[11px] uppercase tracking-[0.16em] sm:min-w-11 ${
+                  item === page
+                    ? "text-accent"
+                    : "text-muted hover:text-foreground"
+                }`}
+              >
+                {item + 1}
+              </button>
+            ),
+          )}
           <button
             type="button"
             data-cursor="→"
@@ -185,7 +228,7 @@ export function CodewarsRecordTable() {
             onClick={() =>
               setPage((current) => Math.min(pageCount - 1, current + 1))
             }
-            className="min-h-11 px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground hover:text-accent disabled:pointer-events-none disabled:text-muted-dim"
+            className="min-h-11 shrink-0 px-2 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground hover:text-accent disabled:pointer-events-none disabled:text-muted-dim sm:px-3"
           >
             Next
           </button>
