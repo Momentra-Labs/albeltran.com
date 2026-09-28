@@ -9,11 +9,11 @@ export const TECH_DESK = {
   placeholder: "A systems question — React, SQL, AEM, AWS…",
   empty:
     "Ask about code, systems, data, or the web. This desk does not do life advice.",
-  greet: "Hey. I'm the Tech desk — Al's AI on this magazine.",
+  greet: "Welcome to Al's Personal Website",
   greetNext:
     "Want the projects, the stack, the lab, or a real engineering question?",
   nudgeKicker: "Tech desk · Al's AI",
-  nudgeGreet: "Hey. Welcome to the magazine.",
+  nudgeGreet: "Welcome to Al's Personal Website",
   offline:
     "Oops — the line is down. Set NEXT_PUBLIC_GROQ_API_KEY in .env (and on Vercel) to open it.",
   capped:
@@ -84,7 +84,7 @@ export function deskNudgeForPath(pathname: string) {
     return "The record is on the page. I can talk through the systems behind it.";
   }
   if (pathname === "/" || pathname === "") {
-    return "Welcome to the magazine.";
+    return "Welcome to Al's Personal Website";
   }
   return TECH_DESK_NUDGES[pathname.length % TECH_DESK_NUDGES.length];
 }
