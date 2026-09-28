@@ -32,6 +32,7 @@ import {
   websiteSchema,
   profilePageSchema,
   worldMarksSchema,
+  authoredKataSchema,
 } from "@/lib/schema";
 import { buildMetadata, PRIMARY_TITLE } from "@/lib/seo";
 import { SITE_DESCRIPTION } from "@/lib/constants";
@@ -57,6 +58,7 @@ export default function HomePage() {
     ...libraries.map((library) => librarySchema(library)),
     profilePageSchema(),
     worldMarksSchema(),
+    authoredKataSchema(),
     faqSchema(homeFaqs),
     blogItemListSchema(posts),
   ]);
