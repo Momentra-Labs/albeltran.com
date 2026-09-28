@@ -34,6 +34,8 @@ export const SOCIAL_LINKS = {
   linkedin: "https://www.linkedin.com/in/al-beltran/",
   instagram: "https://www.instagram.com/codebypawpu/",
   codewars: "https://www.codewars.com/users/pawpu",
+  codewarsBadge:
+    "https://www.codewars.com/users/pawpu/badges/micro",
   email: "mailto:al.andrew.p.beltran@gmail.com",
   messenger: "https://m.me/codebypawpu",
 } as const;
