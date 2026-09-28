@@ -1,7 +1,7 @@
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person, oxfordJoin } from "@/content/person";
 import { certifications } from "@/content/certifications";
-import { worldMarks } from "@/content/marks";
+import { hardestKatas } from "@/content/codewars";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
 import { libraries, type Library } from "@/content/libraries";
@@ -10,17 +10,16 @@ export function worldMarksSchema() {
   return {
     "@type": "ItemList",
     "@id": `${SITE_URL}/#record`,
-    name: "Recognizable work by Al Beltran",
-    description: person.headline,
-    numberOfItems: worldMarks.length,
-    itemListElement: worldMarks.map((mark, index) => ({
+    name: "Codewars problems solved by Al Beltran",
+    description:
+      "Codewars katas completed by Al Beltran as pawpu, ranked by kyu.",
+    numberOfItems: hardestKatas.length,
+    itemListElement: hardestKatas.map((mark, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: mark.name,
-      description: mark.note,
-      url: mark.href.startsWith("http")
-        ? mark.href
-        : `${SITE_URL}${mark.href}`,
+      description: `${mark.kyu} kyu`,
+      url: mark.href,
     })),
   };
 }
