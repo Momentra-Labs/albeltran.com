@@ -231,14 +231,14 @@ function AwsIcon(props: IconProps) {
   return (
     <Mark {...props}>
       <path
-        fill="currentColor"
-        d="M6.4 6.6h2.1l1.7 6.6 1.9-6.6h2l-3 9.1H9.3zm8.3 0h2v9.1h-2z"
+        d="M3.6 14.6c3.7 2.8 8.6 3.55 16.8.15"
+        stroke="currentColor"
+        strokeWidth="1.9"
+        strokeLinecap="round"
       />
       <path
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        d="M5.2 18.4c2.8 2 6.4 2.4 13.6.2"
+        fill="currentColor"
+        d="m17.35 12.7 4.15 1.85-3.65 2.7.4-2z"
       />
     </Mark>
   );

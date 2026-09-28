@@ -7,7 +7,35 @@ import { motion, useReducedMotion } from "framer-motion";
 import { person } from "@/content/person";
 import { coverMarksLine } from "@/content/marks";
 import { SOCIAL_LINKS } from "@/lib/constants";
+import {
+  githubAchievements,
+  githubOrganizations,
+} from "@/content/github";
 import { Reveal } from "@/components/shared/reveal";
+
+const COVER_TECH = [
+  {
+    name: "AWS",
+    label: "Amazon Web Services",
+    src: "/assets/cover-aws.png",
+    width: 713,
+    height: 476,
+  },
+  {
+    name: "Azure",
+    label: "Microsoft Azure",
+    src: "/assets/cover-azure.png",
+    width: 741,
+    height: 469,
+  },
+  {
+    name: "AEM",
+    label: "Adobe Experience Manager",
+    src: "/assets/cover-aem.png",
+    width: 359,
+    height: 140,
+  },
+] as const;
 
 const coverEase = [0.23, 1, 0.32, 1] as const;
 
@@ -326,6 +354,27 @@ export function HomeHero() {
                 )}
                 <span className="magazine-portrait-glow" aria-hidden />
                 <span className="magazine-portrait-fade" aria-hidden />
+                <div
+                  className="magazine-portrait-tech"
+                  aria-label="AWS, Azure, and Adobe Experience Manager"
+                >
+                  {COVER_TECH.map((item) => (
+                    <span
+                      key={item.name}
+                      className="magazine-tech-tile"
+                      title={item.label}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={item.src}
+                        alt={item.label}
+                        width={item.width}
+                        height={item.height}
+                        className="magazine-tech-mark"
+                      />
+                    </span>
+                  ))}
+                </div>
                 <a
                   href={SOCIAL_LINKS.codewars}
                   target="_blank"
@@ -348,8 +397,60 @@ export function HomeHero() {
                     }}
                   />
                 </a>
+                <div className="magazine-portrait-github">
+                  <div className="magazine-github-row magazine-github-achievements">
+                    {githubAchievements.map((item, index) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        target="_blank"
+                        rel="me noopener noreferrer"
+                        data-cursor="→"
+                        aria-label={
+                          "tier" in item && item.tier
+                            ? `GitHub achievement ${item.name} ${item.tier}`
+                            : `GitHub achievement ${item.name}`
+                        }
+                        style={{ zIndex: index + 1 }}
+                        className="rounded-full focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={item.image}
+                          alt=""
+                          width={40}
+                          height={40}
+                        />
+                        {"tier" in item && item.tier ? (
+                          <span className="magazine-github-tier">{item.tier}</span>
+                        ) : null}
+                      </a>
+                    ))}
+                  </div>
+                  <div className="magazine-github-row magazine-github-orgs">
+                    {githubOrganizations.map((org, index) => (
+                      <a
+                        key={org.href}
+                        href={org.href}
+                        target="_blank"
+                        rel="me noopener noreferrer"
+                        data-cursor="→"
+                        aria-label={`GitHub organization ${org.name}`}
+                        style={{ zIndex: index + 1 }}
+                        className="overflow-hidden rounded-[0.35rem] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={org.image}
+                          alt=""
+                          width={24}
+                          height={24}
+                        />
+                      </a>
+                    ))}
+                  </div>
+                </div>
                 <span className="magazine-register-mark hidden lg:block" aria-hidden />
-                <span className="magazine-crop magazine-crop-tl left-4 top-4 z-[4] hidden lg:block" />
                 <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
               </div>
             </div>
@@ -402,13 +503,6 @@ export function HomeHero() {
                 className={`${ctaClass} text-foreground hover:text-accent`}
               >
                 About Al Beltran →
-              </Link>
-              <Link
-                href="#record"
-                data-cursor="VIEW"
-                className={`${ctaClass} text-muted hover:text-foreground`}
-              >
-                The record →
               </Link>
               <Link
                 href="#work"
