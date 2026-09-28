@@ -102,7 +102,10 @@ async function fetchJson<T>(url: string): Promise<T> {
   let lastError: Error | null = null;
   for (let attempt = 0; attempt < 3; attempt += 1) {
     try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(10000) });
+      const res = await fetch(url, {
+        cache: "no-store",
+        signal: AbortSignal.timeout(10000),
+      });
       if (!res.ok) throw new Error(`Codewars ${res.status}`);
       return (await res.json()) as T;
     } catch (error) {
@@ -199,25 +202,30 @@ function emit(record: CodewarsLiveRecord) {
 
 async function runLoad() {
   const cached = readCache();
-  if (cached) {
-    emit(cached);
-    return;
-  }
+  if (cached) emit(cached);
+
   const [userResult, completedResult] = await Promise.allSettled([
     fetchUser(),
     fetchAllCompleted(),
   ]);
   const rank =
     userResult.status === "fulfilled"
-      ? userResult.value.ranks?.overall?.name ?? codewarsRecord.rank
-      : codewarsRecord.rank;
+      ? userResult.value.ranks?.overall?.name ?? cached?.rank ?? codewarsRecord.rank
+      : cached?.rank ?? codewarsRecord.rank;
   const leaderboardPosition =
     userResult.status === "fulfilled" &&
     typeof userResult.value.leaderboardPosition === "number"
       ? userResult.value.leaderboardPosition
-      : codewarsRecord.leaderboardPosition;
-  if (completedResult.status !== "fulfilled" || completedResult.value.length === 0) {
-    emit({ rank, leaderboardPosition, katas: fallbackKatas });
+      : cached?.leaderboardPosition ?? codewarsRecord.leaderboardPosition;
+  if (
+    completedResult.status !== "fulfilled" ||
+    completedResult.value.length === 0
+  ) {
+    emit({
+      rank,
+      leaderboardPosition,
+      katas: cached?.katas ?? fallbackKatas,
+    });
     return;
   }
   const listed = rowsFromCompleted(completedResult.value);
