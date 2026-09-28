@@ -17,9 +17,24 @@ export const githubAchievements = [
     href: "https://github.com/altbeltran?achievement=pair-extraordinaire&tab=achievements",
     image: "/assets/github-pair-extraordinaire.png",
   },
+  {
+    name: "Galaxy Brain",
+    href: "https://github.com/altbeltran?achievement=galaxy-brain&tab=achievements",
+    image: "/assets/github-galaxy-brain.png",
+  },
+  {
+    name: "YOLO",
+    href: "https://github.com/altbeltran?achievement=yolo&tab=achievements",
+    image: "/assets/github-yolo.png",
+  },
 ] as const;
 
 export const githubOrganizations = [
+  {
+    name: "Anglian Dental",
+    href: "https://github.com/anglian-dental",
+    image: "/assets/github-org-anglian-dental.png",
+  },
   {
     name: "Vaco Center of Excellence",
     href: "https://github.com/VacoSF",
