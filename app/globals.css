@@ -305,6 +305,34 @@ h3,
   }
 }
 
+.magazine-portrait-board {
+  position: absolute;
+  right: 0.65rem;
+  bottom: 1.1rem;
+  z-index: 5;
+  max-width: min(14rem, calc(100% - 5.25rem));
+  padding: 0.28rem 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(8, 8, 12, 0.92);
+  box-shadow: 0 1px 10px rgba(5, 5, 7, 0.45);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  color: #f0f0f5;
+  text-align: right;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .magazine-portrait-board {
+    right: 0.95rem;
+    bottom: 1.15rem;
+    max-width: 16rem;
+    font-size: 0.72rem;
+  }
+}
+
 .magazine-portrait-github {
   position: absolute;
   left: 0.75rem;

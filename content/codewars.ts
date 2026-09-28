@@ -5,6 +5,7 @@ export const CODEWARS_PAGE_SIZE = 5;
 export const codewarsRecord = {
   username: "pawpu",
   rank: "3 kyu",
+  leaderboardPosition: 20251,
   href: SOCIAL_LINKS.codewars,
 } as const;
 

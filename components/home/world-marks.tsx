@@ -1,5 +1,7 @@
-import { codewarsRecord } from "@/content/codewars";
-import { CodewarsRecordTable } from "@/components/home/codewars-record-table";
+import {
+  CodewarsRecordMeta,
+  CodewarsRecordTable,
+} from "@/components/home/codewars-record-table";
 import { Container } from "@/components/shared/container";
 import { Reveal, SpreadRule } from "@/components/shared/reveal";
 
@@ -18,15 +20,7 @@ export function WorldMarks() {
               Problems I solved on Codewars
             </h2>
           </div>
-          <a
-            href={codewarsRecord.href}
-            target="_blank"
-            rel="me noopener noreferrer"
-            data-cursor="→"
-            className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted hover:text-foreground"
-          >
-            Codewars · {codewarsRecord.username} · {codewarsRecord.rank}
-          </a>
+          <CodewarsRecordMeta />
         </Reveal>
         <SpreadRule className="mt-5" />
         <CodewarsRecordTable />
