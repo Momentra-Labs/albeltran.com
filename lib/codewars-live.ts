@@ -1,5 +1,6 @@
 import {
   CODEWARS_PAGE_SIZE,
+  authoredKatas,
   codewarsRecord,
   hardestKatas,
 } from "@/content/codewars";
@@ -27,6 +28,7 @@ export type CodewarsLiveRecord = {
   rank: string;
   leaderboardPosition: number;
   katas: CodewarsKataRow[];
+  authored: CodewarsKataRow[];
 };
 
 const API = "https://www.codewars.com/api/v1";
@@ -45,6 +47,14 @@ export const fallbackKatas: CodewarsKataRow[] = hardestKatas.map((kata) => ({
   href: kata.href,
   kyu: kata.kyu,
   rankLabel: String(kata.kyu),
+  completedAt: "",
+}));
+
+export const fallbackAuthored: CodewarsKataRow[] = authoredKatas.map((kata) => ({
+  name: kata.name,
+  href: kata.href,
+  kyu: kata.kyu,
+  rankLabel: kata.rankLabel,
   completedAt: "",
 }));
 
@@ -71,6 +81,7 @@ function readCache(): CodewarsLiveRecord | null {
       rank: string;
       leaderboardPosition?: number;
       katas: CodewarsKataRow[];
+      authored?: CodewarsKataRow[];
     };
     if (Date.now() - parsed.savedAt > CACHE_MS) return null;
     if (!Array.isArray(parsed.katas) || parsed.katas.length === 0) return null;
@@ -81,6 +92,10 @@ function readCache(): CodewarsLiveRecord | null {
           ? parsed.leaderboardPosition
           : codewarsRecord.leaderboardPosition,
       katas: parsed.katas,
+      authored:
+        Array.isArray(parsed.authored) && parsed.authored.length > 0
+          ? parsed.authored
+          : fallbackAuthored,
     };
   } catch {
     return null;
@@ -138,6 +153,19 @@ async function fetchAllCompleted() {
   return items;
 }
 
+type AuthoredItem = {
+  id: string;
+  name: string;
+  rankName?: string | null;
+};
+
+async function fetchAuthored() {
+  const json = await fetchJson<{ data?: AuthoredItem[] }>(
+    `${API}/users/${codewarsRecord.username}/code-challenges/authored`,
+  );
+  return json.data ?? [];
+}
+
 function rowsFromCompleted(items: CompletedItem[]): CodewarsKataRow[] {
   return items
     .map((item) => {
@@ -151,6 +179,19 @@ function rowsFromCompleted(items: CompletedItem[]): CodewarsKataRow[] {
       };
     })
     .sort((a, b) => b.completedAt.localeCompare(a.completedAt));
+}
+
+function rowsFromAuthored(items: AuthoredItem[]): CodewarsKataRow[] {
+  return items.map((item) => {
+    const kyu = kyuFromRankName(item.rankName ?? undefined);
+    return {
+      name: item.name,
+      href: `https://www.codewars.com/kata/${item.id}`,
+      kyu,
+      rankLabel: kyu != null ? String(kyu) : "Beta",
+      completedAt: "",
+    };
+  });
 }
 
 async function hydrateKyu(rows: CodewarsKataRow[]) {
@@ -204,9 +245,10 @@ async function runLoad() {
   const cached = readCache();
   if (cached) emit(cached);
 
-  const [userResult, completedResult] = await Promise.allSettled([
+  const [userResult, completedResult, authoredResult] = await Promise.allSettled([
     fetchUser(),
     fetchAllCompleted(),
+    fetchAuthored(),
   ]);
   const rank =
     userResult.status === "fulfilled"
@@ -217,6 +259,10 @@ async function runLoad() {
     typeof userResult.value.leaderboardPosition === "number"
       ? userResult.value.leaderboardPosition
       : cached?.leaderboardPosition ?? codewarsRecord.leaderboardPosition;
+  const authored =
+    authoredResult.status === "fulfilled"
+      ? rowsFromAuthored(authoredResult.value)
+      : cached?.authored ?? fallbackAuthored;
   if (
     completedResult.status !== "fulfilled" ||
     completedResult.value.length === 0
@@ -225,14 +271,15 @@ async function runLoad() {
       rank,
       leaderboardPosition,
       katas: cached?.katas ?? fallbackKatas,
+      authored,
     });
     return;
   }
   const listed = rowsFromCompleted(completedResult.value);
-  emit({ rank, leaderboardPosition, katas: listed });
+  emit({ rank, leaderboardPosition, katas: listed, authored });
   try {
     const hydrated = await hydrateKyu(listed);
-    emit({ rank, leaderboardPosition, katas: hydrated });
+    emit({ rank, leaderboardPosition, katas: hydrated, authored });
   } catch {
     // names stay live even if kyu lookups fail
   }

@@ -1,7 +1,7 @@
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person, oxfordJoin } from "@/content/person";
 import { certifications } from "@/content/certifications";
-import { hardestKatas } from "@/content/codewars";
+import { hardestKatas, authoredKatas } from "@/content/codewars";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
 import { libraries, type Library } from "@/content/libraries";
@@ -19,6 +19,24 @@ export function worldMarksSchema() {
       position: index + 1,
       name: mark.name,
       description: `${mark.kyu} kyu`,
+      url: mark.href,
+    })),
+  };
+}
+
+export function authoredKataSchema() {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/#authored-kata`,
+    name: "Codewars kata authored by Al Beltran",
+    description:
+      "Codewars kata published by Al Beltran as pawpu.",
+    numberOfItems: authoredKatas.length,
+    itemListElement: authoredKatas.map((mark, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: mark.name,
+      description: mark.rankLabel,
       url: mark.href,
     })),
   };

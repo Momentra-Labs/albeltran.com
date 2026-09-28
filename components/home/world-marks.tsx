@@ -1,4 +1,5 @@
 import {
+  CodewarsAuthoredTable,
   CodewarsRecordMeta,
   CodewarsRecordTable,
 } from "@/components/home/codewars-record-table";
@@ -24,6 +25,16 @@ export function WorldMarks() {
         </Reveal>
         <SpreadRule className="mt-5" />
         <CodewarsRecordTable />
+        <Reveal className="mt-12">
+          <h2
+            id="authored-kata"
+            className="font-display text-3xl tracking-tight text-foreground sm:text-4xl"
+          >
+            Authored kata
+          </h2>
+        </Reveal>
+        <SpreadRule className="mt-5" />
+        <CodewarsAuthoredTable />
       </Container>
     </section>
   );
