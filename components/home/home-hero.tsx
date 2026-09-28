@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { person } from "@/content/person";
 import { coverMarksLine } from "@/content/marks";
+import { SOCIAL_LINKS } from "@/lib/constants";
 import { Reveal } from "@/components/shared/reveal";
 
 const coverEase = [0.23, 1, 0.32, 1] as const;
@@ -325,10 +326,28 @@ export function HomeHero() {
                 )}
                 <span className="magazine-portrait-glow" aria-hidden />
                 <span className="magazine-portrait-fade" aria-hidden />
-                <span className="magazine-portrait-meta" aria-hidden>
-                  <span>Plate 01</span>
-                  <span>Vol. 01</span>
-                </span>
+                <a
+                  href={SOCIAL_LINKS.codewars}
+                  target="_blank"
+                  rel="me noopener noreferrer"
+                  data-cursor="→"
+                  aria-label="Codewars profile for pawpu"
+                  className="magazine-portrait-meta rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={SOCIAL_LINKS.codewarsBadge}
+                    alt="Codewars rank badge for pawpu"
+                    width={120}
+                    height={20}
+                    referrerPolicy="no-referrer"
+                    className="h-5 w-[7.5rem] drop-shadow-[0_1px_8px_rgba(5,5,7,0.55)] lg:h-[1.35rem] lg:w-[8.1rem]"
+                    onError={(event) => {
+                      event.currentTarget.src =
+                        "/assets/codewars-pawpu-micro.svg";
+                    }}
+                  />
+                </a>
                 <span className="magazine-register-mark hidden lg:block" aria-hidden />
                 <span className="magazine-crop magazine-crop-tl left-4 top-4 z-[4] hidden lg:block" />
                 <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
