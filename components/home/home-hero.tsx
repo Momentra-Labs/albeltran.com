@@ -12,6 +12,7 @@ import {
   githubOrganizations,
 } from "@/content/github";
 import { Reveal } from "@/components/shared/reveal";
+import { CodewarsLeaderboardMark } from "@/components/home/codewars-record-table";
 
 const COVER_TECH = [
   {
@@ -450,6 +451,7 @@ export function HomeHero() {
                     ))}
                   </div>
                 </div>
+                <CodewarsLeaderboardMark />
                 <span className="magazine-register-mark hidden lg:block" aria-hidden />
                 <span className="magazine-crop magazine-crop-tr right-4 top-4 z-[4] hidden lg:block" />
               </div>

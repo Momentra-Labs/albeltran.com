@@ -1,25 +1,99 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   CODEWARS_PAGE_SIZE,
-  hardestKatas,
-} from "@/content/codewars";
+  codewarsRecord,
+  fallbackKatas,
+  formatLeaderboardPosition,
+  subscribeCodewarsRecord,
+  type CodewarsKataRow,
+} from "@/lib/codewars-live";
 
-export function CodewarsRecordTable() {
-  const [page, setPage] = useState(0);
-  const pageCount = Math.ceil(hardestKatas.length / CODEWARS_PAGE_SIZE);
-  const rows = useMemo(
+export function CodewarsRecordMeta() {
+  const [rank, setRank] = useState<string>(codewarsRecord.rank);
+
+  useEffect(
     () =>
-      hardestKatas.slice(
-        page * CODEWARS_PAGE_SIZE,
-        page * CODEWARS_PAGE_SIZE + CODEWARS_PAGE_SIZE,
-      ),
-    [page],
+      subscribeCodewarsRecord((record) => {
+        setRank(record.rank);
+      }),
+    [],
   );
 
   return (
-    <div>
+    <a
+      href={codewarsRecord.href}
+      target="_blank"
+      rel="me noopener noreferrer"
+      data-cursor="→"
+      className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted hover:text-foreground"
+    >
+      Codewars · {codewarsRecord.username} · {rank}
+    </a>
+  );
+}
+
+export function CodewarsLeaderboardMark() {
+  const [position, setPosition] = useState<number>(
+    codewarsRecord.leaderboardPosition,
+  );
+
+  useEffect(
+    () =>
+      subscribeCodewarsRecord((record) => {
+        setPosition(record.leaderboardPosition);
+      }),
+    [],
+  );
+
+  const label = `Leaderboard position: ${formatLeaderboardPosition(position)}`;
+
+  return (
+    <a
+      href={codewarsRecord.href}
+      target="_blank"
+      rel="me noopener noreferrer"
+      data-cursor="→"
+      aria-label={`Codewars ${label}`}
+      className="magazine-portrait-board rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      {label}
+    </a>
+  );
+}
+
+export function CodewarsRecordTable() {
+  const [page, setPage] = useState(0);
+  const [katas, setKatas] = useState<CodewarsKataRow[]>(fallbackKatas);
+
+  useEffect(
+    () =>
+      subscribeCodewarsRecord((record) => {
+        setKatas(record.katas);
+        setPage((current) => {
+          const pages = Math.max(
+            1,
+            Math.ceil(record.katas.length / CODEWARS_PAGE_SIZE),
+          );
+          return Math.min(current, pages - 1);
+        });
+      }),
+    [],
+  );
+
+  const pageCount = Math.max(1, Math.ceil(katas.length / CODEWARS_PAGE_SIZE));
+  const rows = useMemo(
+    () =>
+      katas.slice(
+        page * CODEWARS_PAGE_SIZE,
+        page * CODEWARS_PAGE_SIZE + CODEWARS_PAGE_SIZE,
+      ),
+    [katas, page],
+  );
+
+  return (
+    <div data-codewars-count={katas.length}>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[20rem] border-collapse text-left">
           <caption className="sr-only">
@@ -60,7 +134,7 @@ export function CodewarsRecordTable() {
                     </a>
                   </td>
                   <td className="py-3 text-right align-middle font-mono text-sm text-muted">
-                    {kata.kyu}
+                    {kata.rankLabel}
                   </td>
                 </tr>
               );
@@ -108,7 +182,9 @@ export function CodewarsRecordTable() {
             data-cursor="→"
             data-kata-page="next"
             disabled={page === pageCount - 1}
-            onClick={() => setPage((current) => Math.min(pageCount - 1, current + 1))}
+            onClick={() =>
+              setPage((current) => Math.min(pageCount - 1, current + 1))
+            }
             className="min-h-11 px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-foreground hover:text-accent disabled:pointer-events-none disabled:text-muted-dim"
           >
             Next
