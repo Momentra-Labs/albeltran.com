@@ -4,8 +4,9 @@ export const CODEWARS_PAGE_SIZE = 5;
 
 export const codewarsRecord = {
   username: "pawpu",
-  rank: "2 kyu",
-  leaderboardPosition: 17150,
+  rank: "1 dan",
+  score: 14536,
+  leaderboardPosition: 436,
   href: SOCIAL_LINKS.codewars,
 } as const;
 
