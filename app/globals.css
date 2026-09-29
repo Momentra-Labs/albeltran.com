@@ -267,6 +267,75 @@ h3,
   align-items: flex-end;
 }
 
+.magazine-codewars-badge {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.9rem;
+  z-index: 4;
+  display: flex;
+  height: 1.25rem;
+  align-items: stretch;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 0.45rem) 0, 100% 50%, calc(100% - 0.45rem) 100%, 0 100%);
+  background: #1d1d1f;
+  box-shadow: 0 1px 8px rgba(5, 5, 7, 0.55);
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #e8e8e8;
+  text-decoration: none;
+}
+
+.magazine-codewars-badge-mark {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0.05rem 0.28rem 0.05rem 0.32rem;
+  align-self: center;
+}
+
+.magazine-codewars-badge-rank {
+  display: flex;
+  min-width: 2.85rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.55rem 0 0.4rem;
+  clip-path: polygon(0 0, calc(100% - 0.38rem) 0, 100% 50%, calc(100% - 0.38rem) 100%, 0 100%);
+  background: #111;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #f4f4f4;
+  text-transform: lowercase;
+}
+
+.magazine-codewars-badge-honor {
+  display: flex;
+  align-items: center;
+  padding: 0 0.7rem 0 0.45rem;
+  background: #303133;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: #e8e8e8;
+}
+
+@media (min-width: 1024px) {
+  .magazine-codewars-badge {
+    top: 1rem;
+    right: 0.95rem;
+    height: 1.35rem;
+  }
+
+  .magazine-codewars-badge-rank {
+    font-size: 0.68rem;
+  }
+
+  .magazine-codewars-badge-honor {
+    font-size: 0.78rem;
+  }
+}
+
 .magazine-portrait-tech {
   position: absolute;
   top: 0.75rem;
@@ -310,7 +379,7 @@ h3,
   right: 0.65rem;
   bottom: 1.1rem;
   z-index: 5;
-  max-width: min(14rem, calc(100% - 5.25rem));
+  max-width: min(14.5rem, calc(100% - 5.25rem));
   padding: 0.28rem 0.45rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(8, 8, 12, 0.92);

@@ -6,13 +6,12 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { person } from "@/content/person";
 import { coverMarksLine } from "@/content/marks";
-import { SOCIAL_LINKS } from "@/lib/constants";
 import {
   githubAchievements,
   githubOrganizations,
 } from "@/content/github";
 import { Reveal } from "@/components/shared/reveal";
-import { CodewarsLeaderboardMark } from "@/components/home/codewars-record-table";
+import { CodewarsHonorBadge, CodewarsLeaderboardMark } from "@/components/home/codewars-record-table";
 
 const COVER_TECH = [
   {
@@ -376,28 +375,7 @@ export function HomeHero() {
                     </span>
                   ))}
                 </div>
-                <a
-                  href={SOCIAL_LINKS.codewars}
-                  target="_blank"
-                  rel="me noopener noreferrer"
-                  data-cursor="→"
-                  aria-label="Codewars profile for pawpu"
-                  className="magazine-portrait-meta rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={SOCIAL_LINKS.codewarsBadge}
-                    alt="Codewars rank badge for pawpu"
-                    width={120}
-                    height={20}
-                    referrerPolicy="no-referrer"
-                    className="h-5 w-[7.5rem] drop-shadow-[0_1px_8px_rgba(5,5,7,0.55)] lg:h-[1.35rem] lg:w-[8.1rem]"
-                    onError={(event) => {
-                      event.currentTarget.src =
-                        "/assets/codewars-pawpu-micro.svg";
-                    }}
-                  />
-                </a>
+                <CodewarsHonorBadge />
                 <div className="magazine-portrait-github">
                   <div className="magazine-github-row magazine-github-achievements">
                     {githubAchievements.map((item, index) => (

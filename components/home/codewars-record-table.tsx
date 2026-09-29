@@ -6,6 +6,7 @@ import {
   codewarsRecord,
   fallbackKatas,
   fallbackAuthored,
+  formatKataScore,
   formatLeaderboardPosition,
   subscribeCodewarsRecord,
   type CodewarsKataRow,
@@ -35,6 +36,44 @@ export function CodewarsRecordMeta() {
   );
 }
 
+export function CodewarsHonorBadge() {
+  const [rank, setRank] = useState(codewarsRecord.rank);
+  const [score, setScore] = useState(codewarsRecord.score);
+
+  useEffect(
+    () =>
+      subscribeCodewarsRecord((record) => {
+        setRank(record.rank);
+        setScore(record.score);
+      }),
+    [],
+  );
+
+  return (
+    <a
+      href={codewarsRecord.href}
+      target="_blank"
+      rel="me noopener noreferrer"
+      data-cursor="→"
+      aria-label={`Codewars ${rank}, honor ${formatKataScore(score)}`}
+      className="magazine-codewars-badge focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/assets/codewars-mark.svg"
+        alt=""
+        width={16}
+        height={16}
+        className="magazine-codewars-badge-mark"
+      />
+      <span className="magazine-codewars-badge-rank">{rank}</span>
+      <span className="magazine-codewars-badge-honor">
+        {formatKataScore(score)}
+      </span>
+    </a>
+  );
+}
+
 export function CodewarsLeaderboardMark() {
   const [position, setPosition] = useState<number>(
     codewarsRecord.leaderboardPosition,
@@ -48,7 +87,7 @@ export function CodewarsLeaderboardMark() {
     [],
   );
 
-  const label = `Leaderboard position: ${formatLeaderboardPosition(position)}`;
+  const boardLabel = `Leaderboard position: ${formatLeaderboardPosition(position)}`;
 
   return (
     <a
@@ -56,10 +95,10 @@ export function CodewarsLeaderboardMark() {
       target="_blank"
       rel="me noopener noreferrer"
       data-cursor="→"
-      aria-label={`Codewars ${label}`}
+      aria-label={`Codewars ${boardLabel}`}
       className="magazine-portrait-board rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
-      {label}
+      {boardLabel}
     </a>
   );
 }
