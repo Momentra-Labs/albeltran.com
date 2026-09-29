@@ -37,8 +37,8 @@ export function CodewarsRecordMeta() {
 }
 
 export function CodewarsHonorBadge() {
-  const [rank, setRank] = useState(codewarsRecord.rank);
-  const [score, setScore] = useState(codewarsRecord.score);
+  const [rank, setRank] = useState<string>(codewarsRecord.rank);
+  const [score, setScore] = useState<number>(codewarsRecord.score);
 
   useEffect(
     () =>
