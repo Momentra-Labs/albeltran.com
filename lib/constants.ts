@@ -36,6 +36,7 @@ export const SOCIAL_LINKS = {
   codewars: "https://www.codewars.com/users/pawpu",
   codewarsBadge:
     "https://www.codewars.com/users/pawpu/badges/micro",
+  codewarsStats: "https://www.codewars.com/users/dev26th",
   email: "mailto:al.andrew.p.beltran@gmail.com",
   messenger: "https://m.me/codebypawpu",
 } as const;

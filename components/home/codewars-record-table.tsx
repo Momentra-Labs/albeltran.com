@@ -38,21 +38,25 @@ export function CodewarsRecordMeta() {
 
 export function CodewarsHonorBadge() {
   const [rank, setRank] = useState<string>(codewarsRecord.rank);
-  const [score, setScore] = useState<number>(codewarsRecord.score);
+  const [honor, setHonor] = useState<number>(codewarsRecord.honor);
 
   useEffect(
     () =>
       subscribeCodewarsRecord((record) => {
         setRank(record.rank);
-        setScore(record.score);
+        setHonor(record.honor);
       }),
     [],
   );
 
   return (
-    <div
-      aria-label={`Codewars ${rank}, honor ${formatKataScore(score)}`}
-      className="magazine-codewars-badge"
+    <a
+      href={codewarsRecord.statsHref}
+      target="_blank"
+      rel="me noopener noreferrer"
+      data-cursor="→"
+      aria-label={`Codewars ${rank}, honor ${formatKataScore(honor)}`}
+      className="magazine-codewars-badge focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -64,9 +68,9 @@ export function CodewarsHonorBadge() {
       />
       <span className="magazine-codewars-badge-rank">{rank}</span>
       <span className="magazine-codewars-badge-honor">
-        {formatKataScore(score)}
+        {formatKataScore(honor)}
       </span>
-    </div>
+    </a>
   );
 }
 
@@ -86,12 +90,16 @@ export function CodewarsLeaderboardMark() {
   const boardLabel = `Leaderboard position: ${formatLeaderboardPosition(position)}`;
 
   return (
-    <p
-      aria-label={boardLabel}
-      className="magazine-portrait-board rounded-sm"
+    <a
+      href={codewarsRecord.statsHref}
+      target="_blank"
+      rel="me noopener noreferrer"
+      data-cursor="→"
+      aria-label={`Codewars ${boardLabel}`}
+      className="magazine-portrait-board rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       {boardLabel}
-    </p>
+    </a>
   );
 }
 

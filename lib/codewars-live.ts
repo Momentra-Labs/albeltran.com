@@ -26,14 +26,14 @@ type CompletedPage = {
 
 export type CodewarsLiveRecord = {
   rank: string;
-  score: number;
+  honor: number;
   leaderboardPosition: number;
   katas: CodewarsKataRow[];
   authored: CodewarsKataRow[];
 };
 
 const API = "https://www.codewars.com/api/v1";
-const CACHE_KEY = "albeltran-codewars-record-v5";
+const CACHE_KEY = "albeltran-codewars-record-v6";
 const CACHE_MS = 15 * 60 * 1000;
 
 const knownKyu = new Map(
@@ -80,6 +80,7 @@ function readCache(): CodewarsLiveRecord | null {
     const parsed = JSON.parse(raw) as {
       savedAt: number;
       rank: string;
+      honor?: number;
       score?: number;
       leaderboardPosition?: number;
       katas: CodewarsKataRow[];
@@ -88,8 +89,8 @@ function readCache(): CodewarsLiveRecord | null {
     if (Date.now() - parsed.savedAt > CACHE_MS) return null;
     if (!Array.isArray(parsed.katas) || parsed.katas.length === 0) return null;
     return {
-      rank: pickRank(parsed.score, parsed.rank),
-      score: pickScore(parsed.score),
+      rank: pickRank(parsed.rank),
+      honor: pickHonor(parsed.honor ?? parsed.score),
       leaderboardPosition: pickLeaderboardPosition(parsed.leaderboardPosition),
       katas: parsed.katas,
       authored:
@@ -133,9 +134,10 @@ async function fetchJson<T>(url: string): Promise<T> {
 
 async function fetchUser() {
   return fetchJson<{
+    honor?: number;
     leaderboardPosition?: number;
-    ranks?: { overall?: { name?: string; score?: number } };
-  }>(`${API}/users/${codewarsRecord.username}`);
+    ranks?: { overall?: { name?: string } };
+  }>(`${API}/users/${codewarsRecord.statsUsername}`);
 }
 
 async function fetchAllCompleted() {
@@ -231,27 +233,19 @@ async function hydrateKyu(rows: CodewarsKataRow[]) {
   return next;
 }
 
-function pickScore(live?: number, cached?: number) {
-  if (typeof live === "number" && live >= codewarsRecord.score) return live;
-  return cached ?? codewarsRecord.score;
+function pickHonor(live?: number, cached?: number) {
+  if (typeof live === "number" && live >= 1000) return live;
+  return cached ?? codewarsRecord.honor;
 }
 
 function pickLeaderboardPosition(live?: number, cached?: number) {
-  if (typeof live === "number" && live > 0 && live <= codewarsRecord.leaderboardPosition) {
-    return live;
-  }
+  if (typeof live === "number" && live > 0 && live < 20000) return live;
   return cached ?? codewarsRecord.leaderboardPosition;
 }
 
-function pickRank(liveScore?: number, liveRank?: string, cached?: string) {
+function pickRank(liveRank?: string, cached?: string) {
   const fallback = cached ?? codewarsRecord.rank;
-  if (
-    !liveRank ||
-    typeof liveScore !== "number" ||
-    liveScore < codewarsRecord.score
-  ) {
-    return fallback;
-  }
+  if (!liveRank) return fallback;
   if (/dan/i.test(codewarsRecord.rank) && /kyu/i.test(liveRank)) {
     return fallback;
   }
@@ -276,17 +270,11 @@ async function runLoad() {
     fetchAllCompleted(),
     fetchAuthored(),
   ]);
-  const overall = userResult.status === "fulfilled" ? userResult.value.ranks?.overall : undefined;
-  const rank = pickRank(
-    overall?.score,
-    overall?.name,
-    cached?.rank,
-  );
-  const score = pickScore(overall?.score, cached?.score);
+  const user = userResult.status === "fulfilled" ? userResult.value : undefined;
+  const rank = pickRank(user?.ranks?.overall?.name, cached?.rank);
+  const honor = pickHonor(user?.honor, cached?.honor);
   const leaderboardPosition = pickLeaderboardPosition(
-    userResult.status === "fulfilled"
-      ? userResult.value.leaderboardPosition
-      : undefined,
+    user?.leaderboardPosition,
     cached?.leaderboardPosition,
   );
   const liveAuthored =
@@ -305,7 +293,7 @@ async function runLoad() {
   ) {
     emit({
       rank,
-      score,
+      honor,
       leaderboardPosition,
       katas: cached?.katas ?? fallbackKatas,
       authored,
@@ -313,10 +301,10 @@ async function runLoad() {
     return;
   }
   const listed = rowsFromCompleted(completedResult.value);
-  emit({ rank, score, leaderboardPosition, katas: listed, authored });
+  emit({ rank, honor, leaderboardPosition, katas: listed, authored });
   try {
     const hydrated = await hydrateKyu(listed);
-    emit({ rank, score, leaderboardPosition, katas: hydrated, authored });
+    emit({ rank, honor, leaderboardPosition, katas: hydrated, authored });
   } catch {
     // names stay live even if kyu lookups fail
   }

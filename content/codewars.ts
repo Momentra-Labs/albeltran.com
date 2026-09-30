@@ -4,10 +4,12 @@ export const CODEWARS_PAGE_SIZE = 5;
 
 export const codewarsRecord = {
   username: "pawpu",
+  statsUsername: "dev26th",
   rank: "1 dan",
-  score: 14536,
-  leaderboardPosition: 436,
+  honor: 13803,
+  leaderboardPosition: 486,
   href: SOCIAL_LINKS.codewars,
+  statsHref: SOCIAL_LINKS.codewarsStats,
 } as const;
 
 export const hardestKatas = [
