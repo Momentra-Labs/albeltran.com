@@ -1,7 +1,7 @@
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person, oxfordJoin } from "@/content/person";
 import { certifications } from "@/content/certifications";
-import { hardestKatas, authoredKatas } from "@/content/codewars";
+import { hardestKatas, authoredKatas, solvedKatas } from "@/content/codewars";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
 import { libraries, type Library } from "@/content/libraries";
@@ -12,13 +12,13 @@ export function worldMarksSchema() {
     "@id": `${SITE_URL}/#record`,
     name: "Codewars problems solved by Al Beltran",
     description:
-      "Codewars katas completed by Al Beltran as pawpu, ranked by kyu.",
-    numberOfItems: hardestKatas.length,
+      "Codewars katas completed by Al Beltran as ZozoFouchtra, listed from hardest to easiest.",
+    numberOfItems: solvedKatas.length,
     itemListElement: hardestKatas.map((mark, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: mark.name,
-      description: `${mark.kyu} kyu`,
+      description: mark.kyu != null ? `${mark.kyu} kyu` : mark.rankLabel,
       url: mark.href,
     })),
   };
@@ -30,7 +30,7 @@ export function authoredKataSchema() {
     "@id": `${SITE_URL}/#authored-kata`,
     name: "Codewars kata authored by Al Beltran",
     description:
-      "Codewars kata published by Al Beltran as pawpu.",
+      "Codewars kata published by Al Beltran as ZozoFouchtra, listed from hardest to easiest.",
     numberOfItems: authoredKatas.length,
     itemListElement: authoredKatas.map((mark, index) => ({
       "@type": "ListItem",

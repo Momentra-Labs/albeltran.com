@@ -37,6 +37,7 @@ export const person = {
     "Code by Pawpu",
     "pawpu",
     "dev26th",
+    "ZozoFouchtra",
   ],
   headline:
     "Software Engineering Lead at Anglian Dental in the United Kingdom. Founder of Momentra Labs. Previously Software Engineer at Google via High Spring. National Geographic and Disney enterprise programs via Myridius. Based in Manila.",
@@ -93,7 +94,6 @@ export const person = {
     SOCIAL_LINKS.github,
     SOCIAL_LINKS.instagram,
     SOCIAL_LINKS.codewars,
-    SOCIAL_LINKS.codewarsStats,
   ],
   url: SITE_URL,
   image: `${SITE_URL}/assets/al-andrew-paul-beltran.jpg`,

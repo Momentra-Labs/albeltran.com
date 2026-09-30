@@ -33,10 +33,10 @@ export const SOCIAL_LINKS = {
   github: "https://github.com/altbeltran",
   linkedin: "https://www.linkedin.com/in/al-beltran/",
   instagram: "https://www.instagram.com/codebypawpu/",
-  codewars: "https://www.codewars.com/users/pawpu",
+  codewars: "https://www.codewars.com/users/ZozoFouchtra",
   codewarsBadge:
-    "https://www.codewars.com/users/pawpu/badges/micro",
-  codewarsStats: "https://www.codewars.com/users/dev26th",
+    "https://www.codewars.com/users/ZozoFouchtra/badges/micro",
+  codewarsStats: "https://www.codewars.com/users/ZozoFouchtra",
   email: "mailto:al.andrew.p.beltran@gmail.com",
   messenger: "https://m.me/codebypawpu",
 } as const;
