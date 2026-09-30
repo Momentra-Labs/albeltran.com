@@ -798,6 +798,59 @@ function PremiereIcon(props: IconProps) {
   );
 }
 
+function JiraIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <rect x="2.2" y="2.2" width="19.6" height="19.6" rx="3.4" fill="currentColor" />
+      <path
+        fill="var(--background)"
+        d="M12 6.2c2.8 2.8 2.8 7.4 0 10.2-2.8-2.8-2.8-7.4 0-10.2z"
+      />
+      <path
+        fill="currentColor"
+        d="M12 8.7c1.4 1.4 1.4 3.8 0 5.2-1.4-1.4-1.4-3.8 0-5.2z"
+        opacity="0.38"
+      />
+    </Mark>
+  );
+}
+
+function TrelloIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <rect x="2.2" y="2.2" width="19.6" height="19.6" rx="3.4" fill="currentColor" />
+      <rect x="5.5" y="5.6" width="5" height="10.8" rx="1" fill="var(--background)" />
+      <rect x="13.5" y="5.6" width="5" height="6.6" rx="1" fill="var(--background)" />
+    </Mark>
+  );
+}
+
+function AsanaIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <circle cx="12" cy="6.35" r="3.05" fill="currentColor" />
+      <circle cx="6.85" cy="16.15" r="3.05" fill="currentColor" />
+      <circle cx="17.15" cy="16.15" r="3.05" fill="currentColor" />
+    </Mark>
+  );
+}
+
+function MondayIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <rect x="2.2" y="2.2" width="19.6" height="19.6" rx="5.4" fill="currentColor" />
+      <circle cx="9.05" cy="10.15" r="1.05" fill="var(--background)" />
+      <circle cx="14.95" cy="10.15" r="1.05" fill="var(--background)" />
+      <path
+        stroke="var(--background)"
+        strokeWidth="1.55"
+        strokeLinecap="round"
+        d="M8.05 13.85c.95 1.55 2.25 2.35 3.95 2.35s3-.8 3.95-2.35"
+      />
+    </Mark>
+  );
+}
+
 function FigmaIcon(props: IconProps) {
   return (
     <Mark {...props}>
@@ -896,6 +949,11 @@ const ICONS: Record<string, (props: IconProps) => ReactElement> = {
   Figma: FigmaIcon,
   "Premiere Pro": PremiereIcon,
   Premiere: PremiereIcon,
+  Jira: JiraIcon,
+  Trello: TrelloIcon,
+  Asana: AsanaIcon,
+  "Monday.com": MondayIcon,
+  Monday: MondayIcon,
 };
 
 const ICON_COLORS: Record<string, string> = {
@@ -975,6 +1033,11 @@ const ICON_COLORS: Record<string, string> = {
   Figma: "#f24e1e",
   "Premiere Pro": "#9999ff",
   Premiere: "#9999ff",
+  Jira: "#2684ff",
+  Trello: "#0079bf",
+  Asana: "#f06a6a",
+  "Monday.com": "#6161ff",
+  Monday: "#6161ff",
 };
 
 const PAINTED_TILES = new Set([
