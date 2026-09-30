@@ -297,7 +297,7 @@ export function CodewarsRecordTable() {
       <KataRowsTable
         katas={katas}
         page={page}
-        caption={`Codewars problems solved by pawpu, ${CODEWARS_PAGE_SIZE} per page`}
+        caption={`Codewars problems solved by ${codewarsRecord.username}, hardest to easiest, ${CODEWARS_PAGE_SIZE} per page`}
       />
       <KataPager
         page={page}
@@ -340,7 +340,7 @@ export function CodewarsAuthoredTable() {
       <KataRowsTable
         katas={authored}
         page={page}
-        caption="Codewars kata authored by pawpu"
+        caption={`Codewars kata authored by ${codewarsRecord.username}, hardest to easiest`}
       />
       <KataPager
         page={page}

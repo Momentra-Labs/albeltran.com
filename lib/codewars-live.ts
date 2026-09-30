@@ -2,7 +2,7 @@ import {
   CODEWARS_PAGE_SIZE,
   authoredKatas,
   codewarsRecord,
-  hardestKatas,
+  solvedKatas,
 } from "@/content/codewars";
 
 export type CodewarsKataRow = {
@@ -33,22 +33,24 @@ export type CodewarsLiveRecord = {
 };
 
 const API = "https://www.codewars.com/api/v1";
-const CACHE_KEY = "albeltran-codewars-record-v6";
+const CACHE_KEY = "albeltran-codewars-record-v7";
 const CACHE_MS = 15 * 60 * 1000;
 
-const knownKyu = new Map(
-  hardestKatas.map((kata) => {
+type KnownRank = { kyu: number | null; rankLabel: string };
+
+const knownRank = new Map<string, KnownRank>(
+  [...solvedKatas, ...authoredKatas].map((kata) => {
     const id = kata.href.split("/").pop() ?? "";
-    return [id, kata.kyu] as const;
+    return [id, { kyu: kata.kyu, rankLabel: kata.rankLabel }] as const;
   }),
 );
 
-export const fallbackKatas: CodewarsKataRow[] = hardestKatas.map((kata) => ({
+export const fallbackKatas: CodewarsKataRow[] = solvedKatas.map((kata) => ({
   name: kata.name,
   href: kata.href,
   kyu: kata.kyu,
-  rankLabel: String(kata.kyu),
-  completedAt: "",
+  rankLabel: kata.rankLabel,
+  completedAt: kata.completedAt,
 }));
 
 export const fallbackAuthored: CodewarsKataRow[] = authoredKatas.map((kata) => ({
@@ -65,6 +67,21 @@ function rankLabelFromKyu(kyu: number | null, name?: string) {
   const kyuMatch = name.match(/^(\d+)\s+kyu$/i);
   if (kyuMatch) return kyuMatch[1];
   return name;
+}
+
+function difficultyScore(row: CodewarsKataRow) {
+  const dan = row.rankLabel.match(/(\d+)\s*dan/i);
+  if (dan) return 2000 + Number(dan[1]);
+  if (row.kyu != null) return 1000 - row.kyu;
+  return 0;
+}
+
+function sortHardestFirst(rows: CodewarsKataRow[]) {
+  return rows.slice().sort((a, b) => {
+    const diff = difficultyScore(b) - difficultyScore(a);
+    if (diff !== 0) return diff;
+    return (a.name ?? "").localeCompare(b.name ?? "");
+  });
 }
 
 function kyuFromRankName(name?: string) {
@@ -92,10 +109,10 @@ function readCache(): CodewarsLiveRecord | null {
       rank: pickRank(parsed.rank),
       honor: pickHonor(parsed.honor ?? parsed.score),
       leaderboardPosition: pickLeaderboardPosition(parsed.leaderboardPosition),
-      katas: parsed.katas,
+      katas: sortHardestFirst(parsed.katas),
       authored:
         Array.isArray(parsed.authored) && parsed.authored.length > 0
-          ? parsed.authored
+          ? sortHardestFirst(parsed.authored)
           : fallbackAuthored,
     };
   } catch {
@@ -169,38 +186,41 @@ async function fetchAuthored() {
 }
 
 function rowsFromCompleted(items: CompletedItem[]): CodewarsKataRow[] {
-  return items
-    .map((item) => {
-      const kyu = knownKyu.get(item.id) ?? null;
+  return sortHardestFirst(
+    items.map((item) => {
+      const known = knownRank.get(item.id);
+      const kyu = known?.kyu ?? null;
       return {
         name: item.name,
         href: `https://www.codewars.com/kata/${item.id}`,
         kyu,
-        rankLabel: rankLabelFromKyu(kyu),
+        rankLabel: known?.rankLabel ?? rankLabelFromKyu(kyu),
         completedAt: item.completedAt,
       };
-    })
-    .sort((a, b) => b.completedAt.localeCompare(a.completedAt));
+    }),
+  );
 }
 
 function rowsFromAuthored(items: AuthoredItem[]): CodewarsKataRow[] {
-  return items.map((item) => {
-    const kyu = kyuFromRankName(item.rankName ?? undefined);
-    return {
-      name: item.name,
-      href: `https://www.codewars.com/kata/${item.id}`,
-      kyu,
-      rankLabel: kyu != null ? String(kyu) : "Beta",
-      completedAt: "",
-    };
-  });
+  return sortHardestFirst(
+    items.map((item) => {
+      const kyu = kyuFromRankName(item.rankName ?? undefined);
+      return {
+        name: item.name,
+        href: `https://www.codewars.com/kata/${item.id}`,
+        kyu,
+        rankLabel: kyu != null ? String(kyu) : item.rankName || "Beta",
+        completedAt: "",
+      };
+    }),
+  );
 }
 
 async function hydrateKyu(rows: CodewarsKataRow[]) {
   const pending = rows
     .map((row, index) => ({ row, index }))
-    .filter(({ row }) => row.kyu == null);
-  if (pending.length === 0) return rows;
+    .filter(({ row }) => row.kyu == null && row.rankLabel === "—");
+  if (pending.length === 0 || pending.length > 40) return rows;
 
   const next = rows.slice();
   let cursor = 0;
@@ -223,6 +243,7 @@ async function hydrateKyu(rows: CodewarsKataRow[]) {
             kyu,
             rankLabel: rankLabelFromKyu(kyu, challenge.rank?.name),
           };
+          knownRank.set(id, { kyu, rankLabel: next[index].rankLabel });
         } catch {
           // keep the placeholder
         }
@@ -230,7 +251,7 @@ async function hydrateKyu(rows: CodewarsKataRow[]) {
     },
   );
   await Promise.all(workers);
-  return next;
+  return sortHardestFirst(next);
 }
 
 function pickHonor(live?: number, cached?: number) {

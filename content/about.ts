@@ -61,7 +61,7 @@ export const aboutContent = {
     title: "Outside Programming",
     paragraphs: [
       "I care about craft beyond the editor: clear writing, photography-adjacent visual taste through the Code by Pawpu brand, and staying curious about how teams actually collaborate.",
-      "I practice problem-solving on Codewars as pawpu, and I keep a public presence on GitHub and LinkedIn so professional context stays verifiable.",
+      "I practice problem-solving on Codewars as ZozoFouchtra, and I keep a public presence on GitHub and LinkedIn so professional context stays verifiable.",
     ],
   },
 } as const;
