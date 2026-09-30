@@ -146,6 +146,7 @@ export default function RootLayout({
         <link rel="me" href="https://www.linkedin.com/in/al-beltran/" />
         <link rel="me" href="https://github.com/altbeltran" />
         <link rel="me" href="https://www.instagram.com/codebypawpu/" />
+        <link rel="me" href="https://www.codewars.com/users/dev26th" />
         <link
           rel="alternate"
           type="text/plain"
