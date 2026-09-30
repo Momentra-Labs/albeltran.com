@@ -289,10 +289,16 @@ async function runLoad() {
       : undefined,
     cached?.leaderboardPosition,
   );
-  const authored =
+  const liveAuthored =
     authoredResult.status === "fulfilled"
       ? rowsFromAuthored(authoredResult.value)
-      : cached?.authored ?? fallbackAuthored;
+      : [];
+  const authored =
+    liveAuthored.length > 0
+      ? liveAuthored
+      : cached?.authored?.length
+        ? cached.authored
+        : fallbackAuthored;
   if (
     completedResult.status !== "fulfilled" ||
     completedResult.value.length === 0

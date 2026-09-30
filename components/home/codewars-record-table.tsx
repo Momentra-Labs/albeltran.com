@@ -50,13 +50,9 @@ export function CodewarsHonorBadge() {
   );
 
   return (
-    <a
-      href={codewarsRecord.href}
-      target="_blank"
-      rel="me noopener noreferrer"
-      data-cursor="→"
+    <div
       aria-label={`Codewars ${rank}, honor ${formatKataScore(score)}`}
-      className="magazine-codewars-badge focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      className="magazine-codewars-badge"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -70,7 +66,7 @@ export function CodewarsHonorBadge() {
       <span className="magazine-codewars-badge-honor">
         {formatKataScore(score)}
       </span>
-    </a>
+    </div>
   );
 }
 
@@ -90,16 +86,12 @@ export function CodewarsLeaderboardMark() {
   const boardLabel = `Leaderboard position: ${formatLeaderboardPosition(position)}`;
 
   return (
-    <a
-      href={codewarsRecord.href}
-      target="_blank"
-      rel="me noopener noreferrer"
-      data-cursor="→"
-      aria-label={`Codewars ${boardLabel}`}
-      className="magazine-portrait-board rounded-sm focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    <p
+      aria-label={boardLabel}
+      className="magazine-portrait-board rounded-sm"
     >
       {boardLabel}
-    </a>
+    </p>
   );
 }
 
@@ -316,11 +308,14 @@ export function CodewarsAuthoredTable() {
   useEffect(
     () =>
       subscribeCodewarsRecord((record) => {
-        setAuthored(record.authored);
+        setAuthored(
+          record.authored.length > 0 ? record.authored : fallbackAuthored,
+        );
         setPage((current) => {
+          const next = record.authored.length > 0 ? record.authored : fallbackAuthored;
           const pages = Math.max(
             1,
-            Math.ceil(record.authored.length / CODEWARS_PAGE_SIZE),
+            Math.ceil(next.length / CODEWARS_PAGE_SIZE),
           );
           return Math.min(current, pages - 1);
         });

@@ -51,8 +51,8 @@ export const hardestKatas = [
 export const authoredKatas = [
   {
     name: "Unspeakable Names",
-    kyu: null,
-    rankLabel: "Beta",
+    kyu: 6,
+    rankLabel: "6",
     href: "https://www.codewars.com/kata/6abac73344c02a5087bf727b",
   },
 ] as const;
