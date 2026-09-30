@@ -379,6 +379,7 @@ h3,
   right: 0.65rem;
   bottom: 1.1rem;
   z-index: 5;
+  margin: 0;
   max-width: min(14.5rem, calc(100% - 5.25rem));
   padding: 0.28rem 0.45rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
