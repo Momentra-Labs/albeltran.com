@@ -81,6 +81,11 @@ export const person = {
     "System design",
     "Technical interviews",
     "REST APIs",
+    "Project management",
+    "Jira",
+    "Trello",
+    "Asana",
+    "Monday.com",
   ],
   sameAs: [
     SOCIAL_LINKS.linkedin,
@@ -154,6 +159,10 @@ export const technologies = [
   "Adobe XD",
   "Figma",
   "Premiere Pro",
+  "Jira",
+  "Trello",
+  "Asana",
+  "Monday.com",
 ] as const;
 
 export const techGroups = [
@@ -227,6 +236,10 @@ export const techGroups = [
   {
     title: "Design Tools",
     items: ["Photoshop", "Illustrator", "Adobe XD", "Figma", "Premiere Pro"],
+  },
+  {
+    title: "Project Management",
+    items: ["Jira", "Trello", "Asana", "Monday.com"],
   },
   {
     title: "AI Tools",
