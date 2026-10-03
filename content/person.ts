@@ -88,6 +88,15 @@ export const person = {
     "Trello",
     "Asana",
     "Monday.com",
+    "Blue team",
+    "Wireshark",
+    "Splunk",
+    "Snort",
+    "Suricata",
+    "Nessus",
+    "Wazuh",
+    "Sysmon",
+    "Nmap",
   ],
   sameAs: [
     SOCIAL_LINKS.linkedin,
@@ -165,6 +174,14 @@ export const technologies = [
   "Trello",
   "Asana",
   "Monday.com",
+  "Wireshark",
+  "Splunk",
+  "Snort",
+  "Suricata",
+  "Nessus",
+  "Wazuh",
+  "Sysmon",
+  "Nmap",
 ] as const;
 
 export const techGroups = [
@@ -242,6 +259,19 @@ export const techGroups = [
   {
     title: "Project Management",
     items: ["Jira", "Trello", "Asana", "Monday.com"],
+  },
+  {
+    title: "Blue Team",
+    items: [
+      "Wireshark",
+      "Splunk",
+      "Snort",
+      "Suricata",
+      "Nessus",
+      "Wazuh",
+      "Sysmon",
+      "Nmap",
+    ],
   },
   {
     title: "AI Tools",
