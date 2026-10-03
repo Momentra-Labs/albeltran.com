@@ -24,6 +24,8 @@ function tabLabel(title: string) {
       return "Design";
     case "Project Management":
       return "PM";
+    case "Blue Team":
+      return "Blue";
     case "AI Tools":
       return "AI";
     default:

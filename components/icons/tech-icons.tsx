@@ -851,6 +851,112 @@ function MondayIcon(props: IconProps) {
   );
 }
 
+function WiresharkIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        fill="currentColor"
+        d="M4.2 16.6c2.2-4.4 4.6-8.8 7.8-13.2 3.2 4.4 5.6 8.8 7.8 13.2H4.2z"
+      />
+      <path
+        fill="var(--background)"
+        d="M8.1 15.1c1.2-2.2 2.4-4.4 3.9-6.8 1.5 2.4 2.7 4.6 3.9 6.8z"
+      />
+    </Mark>
+  );
+}
+
+function SplunkIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        fill="currentColor"
+        d="M6.2 5.2h4.4L16.8 12 10.6 18.8H6.2L12.4 12z"
+      />
+      <path fill="currentColor" d="M13.4 5.2h4.4L17.8 12l-4.4 6.8H9z" opacity="0.45" />
+    </Mark>
+  );
+}
+
+function SnortIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <ellipse cx="12" cy="13.2" rx="7.2" ry="6.2" fill="currentColor" />
+      <ellipse cx="9.4" cy="12.6" rx="1.15" ry="1.35" fill="var(--background)" />
+      <ellipse cx="14.6" cy="12.6" rx="1.15" ry="1.35" fill="var(--background)" />
+      <path
+        stroke="var(--background)"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+        d="M10.2 16.1c.6.55 1.2.8 1.8.8s1.2-.25 1.8-.8"
+      />
+    </Mark>
+  );
+}
+
+function SuricataIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <circle cx="12" cy="12" r="8.2" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="4.6" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="12" cy="12" r="1.7" fill="currentColor" />
+    </Mark>
+  );
+}
+
+function NessusIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <circle cx="12" cy="12" r="8.2" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="m8.1 12.2 2.5 2.6 5.3-5.6"
+      />
+    </Mark>
+  );
+}
+
+function WazuhIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <path
+        fill="currentColor"
+        d="M3.8 5.6h3.3l2.1 8.4 2.8-6.2h2l2.8 6.2 2.1-8.4h3.3L17.4 18.4h-3.2L12 12.4l-2.2 6H6.6z"
+      />
+    </Mark>
+  );
+}
+
+function SysmonIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <rect x="3.2" y="4.4" width="17.6" height="12.2" rx="1.6" stroke="currentColor" strokeWidth="1.45" />
+      <path fill="currentColor" d="M8.2 19.2h7.6v1.3H8.2z" />
+      <path
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        d="M6.4 8.2h4.2M6.4 11h7.4M6.4 13.8h5.6"
+      />
+    </Mark>
+  );
+}
+
+function NmapIcon(props: IconProps) {
+  return (
+    <Mark {...props}>
+      <circle cx="12" cy="12" r="8.2" stroke="currentColor" strokeWidth="1.4" />
+      <path
+        fill="currentColor"
+        d="M12 4.6 13.3 11H19.4L14.4 14.4 16 20.2 12 16.6 8 20.2 9.6 14.4 4.6 11h6.1z"
+      />
+    </Mark>
+  );
+}
+
 function FigmaIcon(props: IconProps) {
   return (
     <Mark {...props}>
@@ -954,6 +1060,14 @@ const ICONS: Record<string, (props: IconProps) => ReactElement> = {
   Asana: AsanaIcon,
   "Monday.com": MondayIcon,
   Monday: MondayIcon,
+  Wireshark: WiresharkIcon,
+  Splunk: SplunkIcon,
+  Snort: SnortIcon,
+  Suricata: SuricataIcon,
+  Nessus: NessusIcon,
+  Wazuh: WazuhIcon,
+  Sysmon: SysmonIcon,
+  Nmap: NmapIcon,
 };
 
 const ICON_COLORS: Record<string, string> = {
@@ -1038,6 +1152,14 @@ const ICON_COLORS: Record<string, string> = {
   Asana: "#f06a6a",
   "Monday.com": "#6161ff",
   Monday: "#6161ff",
+  Wireshark: "#1679a7",
+  Splunk: "#65a637",
+  Snort: "#e87722",
+  Suricata: "#e30613",
+  Nessus: "#00a0df",
+  Wazuh: "#00b4d8",
+  Sysmon: "#00a4ef",
+  Nmap: "#4b8bbe",
 };
 
 const PAINTED_TILES = new Set([
