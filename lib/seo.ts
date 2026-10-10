@@ -29,9 +29,32 @@ export function absoluteUrl(path = "/") {
   return `${SITE_URL}${normalized}`;
 }
 
+/** Google shows roughly 155–160 characters of a meta description. */
+const DESCRIPTION_MAX = 158;
+/** Titles longer than this get cut off in results, so the name suffix is dropped. */
+const TITLE_MAX = 60;
+
+/**
+ * Keep descriptions inside the snippet length: end on a full sentence when one fits,
+ * otherwise on a word boundary with an ellipsis.
+ */
+export function fitDescription(text: string, max = DESCRIPTION_MAX) {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+  const window = clean.slice(0, max + 1);
+  const sentenceEnd = Math.max(
+    window.lastIndexOf(". "),
+    window.lastIndexOf("! "),
+    window.lastIndexOf("? "),
+  );
+  if (sentenceEnd >= 80) return clean.slice(0, sentenceEnd + 1);
+  const wordEnd = clean.slice(0, max).lastIndexOf(" ");
+  return `${clean.slice(0, wordEnd > 0 ? wordEnd : max).replace(/[\s,;:·—-]+$/, "")}…`;
+}
+
 export function buildMetadata({
   title,
-  description,
+  description: rawDescription,
   path = "/",
   type = "website",
   image = "/og/default.jpg",
@@ -45,6 +68,7 @@ export function buildMetadata({
   modifiedTime,
   tags,
 }: BuildMetadataInput): Metadata {
+  const description = fitDescription(rawDescription);
   const url = absoluteUrl(path);
   const imageUrl = absoluteUrl(image);
   const imageType = image.endsWith(".png")
@@ -58,7 +82,9 @@ export function buildMetadata({
     ? title
     : title === SITE_NAME || title === PRIMARY_TITLE || alreadyNamed
       ? title
-      : `${title} · ${person.shortName}`;
+      : `${title} · ${person.shortName}`.length > TITLE_MAX
+        ? title
+        : `${title} · ${person.shortName}`;
 
   const ogImage = {
     url: imageUrl,

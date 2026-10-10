@@ -5,17 +5,18 @@ import { useReducedMotion } from "framer-motion";
 
 export const ISSUE_SPREADS = [
   { id: "record", label: "Record", index: "02" },
-  { id: "path", label: "Path", index: "03" },
-  { id: "work", label: "Work", index: "04" },
-  { id: "lab", label: "Lab", index: "05" },
-  { id: "playground", label: "Play", index: "06" },
-  { id: "think", label: "Think", index: "07" },
-  { id: "building", label: "Building", index: "08" },
-  { id: "failures", label: "Failures", index: "09" },
-  { id: "system", label: "Stack", index: "10" },
-  { id: "experience", label: "Experience", index: "11" },
-  { id: "notes", label: "Notes", index: "12" },
-  { id: "contact", label: "Contact", index: "13" },
+  { id: "stack", label: "Stack", index: "03" },
+  { id: "path", label: "Path", index: "04" },
+  { id: "work", label: "Work", index: "05" },
+  { id: "lab", label: "Lab", index: "06" },
+  { id: "playground", label: "Play", index: "07" },
+  { id: "think", label: "Think", index: "08" },
+  { id: "building", label: "Building", index: "09" },
+  { id: "libraries", label: "Libraries", index: "10" },
+  { id: "failures", label: "Failures", index: "11" },
+  { id: "experience", label: "Experience", index: "12" },
+  { id: "notes", label: "Notes", index: "13" },
+  { id: "contact", label: "Contact", index: "14" },
 ] as const;
 
 export function IssueFolio() {

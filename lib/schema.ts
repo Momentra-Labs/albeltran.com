@@ -1,7 +1,13 @@
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { person, oxfordJoin } from "@/content/person";
 import { certifications } from "@/content/certifications";
-import { hardestKatas, authoredKatas, solvedKatas } from "@/content/codewars";
+import {
+  authoredKatas,
+  codewarsHeadline,
+  codewarsRecord,
+  hardestKatas,
+  solvedKatas,
+} from "@/content/codewars";
 import type { FAQItem } from "@/content/faqs";
 import type { Project } from "@/content/projects";
 import { libraries, type Library } from "@/content/libraries";
@@ -11,8 +17,7 @@ export function worldMarksSchema() {
     "@type": "ItemList",
     "@id": `${SITE_URL}/#record`,
     name: "Codewars problems solved by Al Beltran",
-    description:
-      "Codewars katas completed by Al Beltran as ZozoFouchtra, listed from hardest to easiest.",
+    description: `Codewars katas completed by Al Beltran as ${codewarsRecord.username} (${codewarsHeadline}), listed from hardest to easiest.`,
     numberOfItems: solvedKatas.length,
     itemListElement: hardestKatas.map((mark, index) => ({
       "@type": "ListItem",
@@ -132,6 +137,13 @@ export function personSchema() {
     })),
     sameAs: [...person.sameAs],
     knowsAbout: [...person.knowsAbout],
+    // Live Codewars standing (refreshed each build) so search and AI answers can cite it.
+    award: [
+      `Codewars ${codewarsRecord.rank} rank`,
+      `Codewars honor: ${codewarsRecord.honor.toLocaleString("en-US")}`,
+      `Codewars global leaderboard position #${codewarsRecord.leaderboardPosition}`,
+      `${codewarsRecord.totalCompleted.toLocaleString("en-US")} Codewars kata solved, ${codewarsRecord.totalAuthored} authored`,
+    ],
     hasCredential: certifications.map((cert) => ({
       "@type": "EducationalOccupationalCredential",
       name: cert.name,

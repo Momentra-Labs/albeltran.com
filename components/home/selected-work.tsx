@@ -44,7 +44,6 @@ export function SelectedWork({ projects }: { projects: Project[] }) {
                         <DeviceCluster
                           project={project}
                           variant={clusterVariantFor(project, "card")}
-                          priority={index === 0}
                         />
                         <span className="pointer-events-none absolute left-4 top-4 z-[5] font-mono text-[10px] uppercase tracking-[0.18em] text-foreground">
                           {folio}

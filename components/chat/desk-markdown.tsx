@@ -1,10 +1,11 @@
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { parseDeskMarkdown } from "@/lib/desk-markdown";
 
 function renderInline(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
   const pattern =
-    /`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|\*([^*\n]+)\*/g;
+    /`([^`]+)`|\*\*([^*]+)\*\*|\[([^\]]+)\]\(((?:https?:\/\/|\/|#)[^\s)]*)\)|\*([^*\n]+)\*/g;
   let cursor = 0;
   let match: RegExpExecArray | null;
   let key = 0;
@@ -18,15 +19,18 @@ function renderInline(text: string): ReactNode[] {
     } else if (match[2] != null) {
       nodes.push(<strong key={`s-${key}`}>{match[2]}</strong>);
     } else if (match[3] != null && match[4] != null) {
+      const href = match[4];
+      // Pages on this site open in place; everything else opens in a new tab.
       nodes.push(
-        <a
-          key={`a-${key}`}
-          href={match[4]}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          {match[3]}
-        </a>,
+        /^https?:\/\//.test(href) ? (
+          <a key={`a-${key}`} href={href} target="_blank" rel="noreferrer noopener">
+            {match[3]}
+          </a>
+        ) : (
+          <Link key={`a-${key}`} href={href}>
+            {match[3]}
+          </Link>
+        ),
       );
     } else if (match[5] != null) {
       nodes.push(<em key={`e-${key}`}>{match[5]}</em>);

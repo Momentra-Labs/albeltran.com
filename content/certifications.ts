@@ -38,7 +38,7 @@ export const certifications: Certification[] = [
     seal: "hackerrank",
     category: "role",
     image: {
-      src: "/certification/softwareengineer.png",
+      src: "/certification/softwareengineer.webp",
       alt: "HackerRank Software Engineer role certificate presented to Al Andrew Paul Beltran",
     },
   },
@@ -51,7 +51,7 @@ export const certifications: Certification[] = [
     seal: "hackerrank",
     category: "role",
     image: {
-      src: "/certification/frontenddeveloper.png",
+      src: "/certification/frontenddeveloper.webp",
       alt: "HackerRank Frontend Developer (React) role certificate presented to Al Andrew Paul Beltran",
     },
   },
@@ -65,7 +65,7 @@ export const certifications: Certification[] = [
     seal: "hackerrank",
     category: "skill",
     image: {
-      src: "/certification/javascriptintermediate.png",
+      src: "/certification/javascriptintermediate.webp",
       alt: "HackerRank JavaScript (Intermediate) skill certificate presented to Al Andrew Paul Beltran",
     },
   },
@@ -79,7 +79,7 @@ export const certifications: Certification[] = [
     seal: "hackerrank",
     category: "skill",
     image: {
-      src: "/certification/sqladvanced.png",
+      src: "/certification/sqladvanced.webp",
       alt: "HackerRank SQL (Advanced) skill certificate presented to Al Andrew Paul Beltran",
     },
   },
@@ -92,7 +92,7 @@ export const certifications: Certification[] = [
     seal: "hackerrank",
     category: "skill",
     image: {
-      src: "/certification/reactbasic.png",
+      src: "/certification/reactbasic.webp",
       alt: "HackerRank React (Basic) skill certificate presented to Al Andrew Paul Beltran",
     },
   },
@@ -106,7 +106,7 @@ export const certifications: Certification[] = [
     seal: "anthropic",
     category: "training",
     image: {
-      src: "/certification/anthropic/aifluency.jpg",
+      src: "/certification/anthropic/aifluency.webp",
       alt: "Anthropic Education AI Fluency: Framework & Foundations certificate presented to Al Andrew Paul Beltran",
     },
   },
@@ -120,7 +120,7 @@ export const certifications: Certification[] = [
     seal: "anthropic",
     category: "training",
     image: {
-      src: "/certification/anthropic/introductiontoagentskills.jpg",
+      src: "/certification/anthropic/introductiontoagentskills.webp",
       alt: "Anthropic Education Introduction to agent skills certificate presented to Al Andrew Paul Beltran",
     },
   },
@@ -134,7 +134,7 @@ export const certifications: Certification[] = [
     seal: "anthropic",
     category: "training",
     image: {
-      src: "/certification/anthropic/introductiontosubagents.png",
+      src: "/certification/anthropic/introductiontosubagents.webp",
       alt: "Anthropic Education Introduction to subagents certificate presented to Al Andrew Paul Beltran",
     },
   },

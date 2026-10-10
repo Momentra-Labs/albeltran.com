@@ -4,34 +4,34 @@ import { useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { person } from "@/content/person";
 import { coverMarksLine } from "@/content/marks";
 import {
   githubAchievements,
   githubOrganizations,
 } from "@/content/github";
-import { Reveal } from "@/components/shared/reveal";
 import { CodewarsHonorBadge, CodewarsLeaderboardMark } from "@/components/home/codewars-record-table";
 
 const COVER_TECH = [
   {
     name: "AWS",
     label: "Amazon Web Services",
-    src: "/assets/cover-aws.png",
+    src: "/assets/cover-aws.webp",
     width: 713,
     height: 476,
   },
   {
     name: "Azure",
     label: "Microsoft Azure",
-    src: "/assets/cover-azure.png",
+    src: "/assets/cover-azure.webp",
     width: 741,
     height: 469,
   },
   {
     name: "AEM",
     label: "Adobe Experience Manager",
-    src: "/assets/cover-aem.png",
+    src: "/assets/cover-aem.webp",
     width: 359,
     height: 140,
   },
@@ -293,12 +293,19 @@ export function HomeHero() {
 
       <div className="relative z-10 grid min-h-dvh grid-rows-[auto_auto_auto_auto] content-start lg:h-full lg:min-h-0 lg:max-h-full lg:content-stretch lg:overflow-hidden lg:grid-rows-[auto_minmax(0,1fr)_auto]">
         <header className="flex items-start justify-between gap-4 px-5 pt-20 sm:px-8 lg:gap-8 lg:px-10">
-          <h1
-            className="relative min-w-0 flex-1 whitespace-nowrap font-display text-[clamp(1.7rem,8.8vw,7.2rem)] leading-[0.9] tracking-tight text-foreground lg:text-[clamp(3.1rem,9.4vw,6.4rem)]"
-            aria-label="AL BELTRAN"
-          >
-            <CoverTitle reduce={reduce} />
-          </h1>
+          <div className="min-w-0 flex-1">
+            <h1
+              className="relative min-w-0 whitespace-nowrap font-display text-[clamp(2.4rem,13vw,7.2rem)] leading-[0.9] tracking-tight text-foreground lg:text-[clamp(3.1rem,9.4vw,6.4rem)]"
+              aria-label="Al Beltran"
+            >
+              <CoverTitle reduce={reduce} />
+            </h1>
+            {/* Phones/tablets: quote sits under the name. Desktop renders it in the left column instead,
+                so the header row stays short and the portrait can start higher. */}
+            <motion.div className="mt-4 lg:hidden" {...fadeOnly(0.2, reduce)}>
+              <CoverEpigraph />
+            </motion.div>
+          </div>
           <IssueLockup
             reduce={reduce}
             className="hidden shrink-0 pt-1 text-right lg:block"
@@ -444,10 +451,10 @@ export function HomeHero() {
             </div>
           </figure>
 
-          <div className="order-1 flex min-h-0 flex-col justify-start gap-6 pb-2 lg:justify-between lg:gap-8 lg:pt-2 lg:pb-6">
-            <Reveal variant="folio">
+          <div className="order-1 flex min-h-0 flex-col justify-start gap-6 pb-2 lg:justify-end lg:gap-9 lg:pt-2 lg:pb-6">
+            <motion.div className="hidden lg:mb-auto lg:block" {...fadeOnly(0.2, reduce)}>
               <CoverEpigraph />
-            </Reveal>
+            </motion.div>
             <div>
               <motion.div {...inkReveal(0.2, reduce)}>
                 <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
@@ -461,7 +468,34 @@ export function HomeHero() {
                   {person.currentRole} · {person.founderTitle}
                 </p>
               </motion.div>
-              <div className="mt-4 hidden lg:block">
+              <motion.div
+                className="cover-actions mt-5"
+                {...fadeOnly(0.36, reduce)}
+              >
+                <Link
+                  href="/#work"
+                  data-cursor="VIEW"
+                  className="cover-action cover-action-primary"
+                >
+                  View my work
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+                <Link
+                  href="/#contact"
+                  data-cursor="→"
+                  className="cover-action cover-action-ghost"
+                >
+                  Get in touch
+                </Link>
+                <Link
+                  href="/resume/"
+                  data-cursor="→"
+                  className="cover-action-link"
+                >
+                  Résumé
+                </Link>
+              </motion.div>
+              <div className="cover-lines mt-7">
                 <CoverLines reduce={reduce} />
               </div>
             </div>

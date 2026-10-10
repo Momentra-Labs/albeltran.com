@@ -48,7 +48,7 @@ export const LAB_EXPERIENCES: readonly LabExperience[] = [
     description:
       "Pick components and architecture decisions, then score scalability, reliability, performance, cost, and complexity.",
     seoTitle:
-      "System Design Simulator — Practice Scalable Architecture | Al Beltran",
+      "System Design Simulator — Practice Architecture | Al Beltran",
     seoDescription:
       "Practice system design by building scalable architectures for real-world engineering scenarios with Al Beltran's interactive system design simulator.",
     featured: true,

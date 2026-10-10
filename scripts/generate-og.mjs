@@ -31,6 +31,7 @@ const PHOTO_MOBILE_JPG = path.join(
 );
 const PROFILE_JPG = path.join(ROOT, "public/assets/al-beltran-profile.jpg");
 const PROFILE_WEBP = path.join(ROOT, "public/assets/al-beltran-profile.webp");
+const MASCOT_SVG = path.join(ROOT, "public/favicon.svg");
 const APPLE = path.join(ROOT, "public/apple-touch-icon.png");
 const FAVICON_ICO = path.join(ROOT, "public/favicon.ico");
 const FAVICON_32 = path.join(ROOT, "public/favicon-32x32.png");
@@ -55,13 +56,16 @@ const desktopSource = fs.existsSync(SOURCE_DESKTOP)
 
 const cover = sharp(desktopSource)
   .rotate()
-  .resize(COVER_W, COVER_H, { fit: "cover", position: "centre" });
+  .resize(COVER_W, COVER_H, { fit: "cover", position: "centre" })
+  // The sources are small (≈1024px), so the upscale needs a light unsharp mask to stay crisp.
+  .sharpen({ sigma: 0.8, m1: 0.6, m2: 2 });
 await cover.clone().webp({ quality: 86 }).toFile(PHOTO_WEBP);
 await cover.clone().jpeg({ quality: 86, mozjpeg: true }).toFile(PHOTO_JPG);
 
 const mobileCover = sharp(SOURCE_PHOTO)
   .rotate()
-  .resize(1200, 1600, { fit: "cover", position: "north" });
+  .resize(1200, 1600, { fit: "cover", position: "north" })
+  .sharpen({ sigma: 0.8, m1: 0.6, m2: 2 });
 await mobileCover.clone().webp({ quality: 86 }).toFile(PHOTO_MOBILE_WEBP);
 await mobileCover
   .clone()
@@ -155,9 +159,28 @@ const face = sharp(faceBand).resize(512, 512, {
 });
 await face.clone().jpeg({ quality: 86, mozjpeg: true }).toFile(PROFILE_JPG);
 await face.clone().webp({ quality: 82 }).toFile(PROFILE_WEBP);
-await face.clone().resize(180, 180).png({ compressionLevel: 9 }).toFile(APPLE);
-await face.clone().resize(32, 32).png({ compressionLevel: 9 }).toFile(FAVICON_32);
-await face.clone().resize(16, 16).png({ compressionLevel: 9 }).toFile(FAVICON_16);
+// Site icons use the Tech Desk mascot (public/favicon.svg), not the portrait.
+const mascotSvg = fs.readFileSync(MASCOT_SVG);
+const mascot = (size) =>
+  sharp(mascotSvg, { density: 600 }).resize(size, size).png().toBuffer();
+// Home-screen icons: mascot on the site background with safe padding (iOS fills transparency with black).
+const tile = async (size) =>
+  sharp({
+    create: {
+      width: size,
+      height: size,
+      channels: 4,
+      background: { r: 5, g: 5, b: 7, alpha: 1 },
+    },
+  }).composite([
+    {
+      input: await mascot(Math.round(size * 0.74)),
+      gravity: "centre",
+    },
+  ]);
+await (await tile(180)).png({ compressionLevel: 9 }).toFile(APPLE);
+await sharp(await mascot(32)).png({ compressionLevel: 9 }).toFile(FAVICON_32);
+await sharp(await mascot(16)).png({ compressionLevel: 9 }).toFile(FAVICON_16);
 const faviconPng = fs.readFileSync(FAVICON_32);
 const icoHeader = Buffer.alloc(22);
 icoHeader.writeUInt16LE(0, 0);
@@ -172,8 +195,8 @@ icoHeader.writeUInt16LE(32, 12);
 icoHeader.writeUInt32LE(faviconPng.length, 14);
 icoHeader.writeUInt32LE(22, 18);
 fs.writeFileSync(FAVICON_ICO, Buffer.concat([icoHeader, faviconPng]));
-await face.clone().resize(192, 192).png({ compressionLevel: 9 }).toFile(ICON_192);
-await face.clone().resize(512, 512).png({ compressionLevel: 9 }).toFile(ICON_512);
+await (await tile(192)).png({ compressionLevel: 9 }).toFile(ICON_192);
+await (await tile(512)).png({ compressionLevel: 9 }).toFile(ICON_512);
 
 const nextPng = `${SOURCE_PNG}.next.png`;
 await sharp(SOURCE_PHOTO)

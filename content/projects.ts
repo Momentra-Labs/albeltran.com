@@ -100,17 +100,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/doc-indy-desktop.jpg",
+        src: "/projects/doc-indy-desktop.webp",
         alt: "DocIndy Mental Health care journey on desktop — provider talk path and cookie consent",
         viewport: "desktop",
       },
       {
-        src: "/projects/doc-indy-tablet.jpg",
+        src: "/projects/doc-indy-tablet.webp",
         alt: "DocIndy Skin Care journey on tablet — shop path and cookie consent",
         viewport: "tablet",
       },
       {
-        src: "/projects/doc-indy-mobile.jpg",
+        src: "/projects/doc-indy-mobile.webp",
         alt: "DocIndy Hair Regrowth journey on phone — talk with a provider and cookie consent",
         viewport: "phone",
       },
@@ -180,17 +180,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/enz-desktop.jpg",
+        src: "/projects/enz-desktop.webp",
         alt: "ENZ Education Consultancy homepage on desktop — Expanding One's Horizon hero and Book a Call",
         viewport: "desktop",
       },
       {
-        src: "/projects/enz-tablet.jpg",
+        src: "/projects/enz-tablet.webp",
         alt: "ENZ Education Consultancy homepage on tablet — gateway hero and Why Choose ENZ",
         viewport: "tablet",
       },
       {
-        src: "/projects/enz-mobile.jpg",
+        src: "/projects/enz-mobile.webp",
         alt: "ENZ Education Consultancy on phone — Why Choose ENZ memberships, awards, and expertise",
         viewport: "phone",
       },
@@ -261,17 +261,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/disney-institute-desktop.jpg",
+        src: "/projects/disney-institute-desktop.webp",
         alt: "Disney Institute About page on desktop — team hero and institute introduction",
         viewport: "desktop",
       },
       {
-        src: "/projects/disney-institute-tablet.jpg",
+        src: "/projects/disney-institute-tablet.webp",
         alt: "Disney Institute About page on tablet — team hero and classroom photo",
         viewport: "tablet",
       },
       {
-        src: "/projects/disney-institute-mobile.jpg",
+        src: "/projects/disney-institute-mobile.webp",
         alt: "Disney Institute About page on phone — We Walk the Talk and classroom photo",
         viewport: "phone",
       },
@@ -342,18 +342,18 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/personalcollection-desktop.jpg",
+        src: "/projects/personalcollection-desktop.webp",
         alt: "Personal Collection homepage on desktop — Life Made Great hero and become-a-dealer banner",
         viewport: "desktop",
         fit: "fill",
       },
       {
-        src: "/projects/personalcollection-tablet.jpg",
+        src: "/projects/personalcollection-tablet.webp",
         alt: "Personal Collection homepage on tablet — Life Made Great, Our Story, and Great Products",
         viewport: "tablet",
       },
       {
-        src: "/projects/personalcollection-mobile.jpg",
+        src: "/projects/personalcollection-mobile.webp",
         alt: "Personal Collection homepage on phone — Life Made Great hero and dealer banner",
         viewport: "phone",
       },
@@ -424,17 +424,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/nat-geo-desktop.jpg",
+        src: "/projects/nat-geo-desktop.webp",
         alt: "National Geographic latest stories on desktop — new cat species feature and story rail",
         viewport: "desktop",
       },
       {
-        src: "/projects/nat-geo-tablet.jpg",
+        src: "/projects/nat-geo-tablet.webp",
         alt: "National Geographic latest stories on tablet — new cat species feature and story grid",
         viewport: "tablet",
       },
       {
-        src: "/projects/nat-geo-mobile.jpg",
+        src: "/projects/nat-geo-mobile.webp",
         alt: "National Geographic latest stories on phone — new cat species feature and photographer story",
         viewport: "phone",
       },
@@ -507,17 +507,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/disney-experience-desktop.jpg",
+        src: "/projects/disney-experience-desktop.webp",
         alt: "Disney Experiences homepage on desktop — Bringing Disney Stories to Life with Mickey and latest news",
         viewport: "desktop",
       },
       {
-        src: "/projects/disney-experience-tablet.jpg",
+        src: "/projects/disney-experience-tablet.webp",
         alt: "Disney Experiences homepage on tablet — castle hero and latest news cards",
         viewport: "tablet",
       },
       {
-        src: "/projects/disney-experience-mobile.jpg",
+        src: "/projects/disney-experience-mobile.webp",
         alt: "Disney Experiences homepage on phone — stories hero and latest news",
         viewport: "phone",
       },
@@ -669,32 +669,32 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/glovesup/glovesup-1.jpg",
+        src: "/projects/glovesup/glovesup-1.webp",
         alt: "Gloves Up splash screen — boxing glove mark and Lacing up",
         viewport: "phone",
       },
       {
-        src: "/projects/glovesup/glovesup-2.jpg",
+        src: "/projects/glovesup/glovesup-2.webp",
         alt: "Gloves Up welcome screen — Show up. Put in the rounds.",
         viewport: "phone",
       },
       {
-        src: "/projects/glovesup/glovesup-3.jpg",
+        src: "/projects/glovesup/glovesup-3.webp",
         alt: "Gloves Up home — Good morning and today's training focus",
         viewport: "phone",
       },
       {
-        src: "/projects/glovesup/glovesup-4.jpg",
+        src: "/projects/glovesup/glovesup-4.webp",
         alt: "Gloves Up train tools — boxing timer and drills",
         viewport: "phone",
       },
       {
-        src: "/projects/glovesup/glovesup-5.jpg",
+        src: "/projects/glovesup/glovesup-5.webp",
         alt: "Gloves Up stats — training volume on device",
         viewport: "phone",
       },
       {
-        src: "/projects/glovesup/glovesup-6.jpg",
+        src: "/projects/glovesup/glovesup-6.webp",
         alt: "Gloves Up round timer in a live session",
         viewport: "phone",
       },
@@ -747,17 +747,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/rentarah-desktop.png",
+        src: "/covers/rentarah-desktop.webp",
         alt: "RentaraH car rental marketplace on a desktop viewport at rentahub2026.github.io",
         viewport: "desktop",
       },
       {
-        src: "/covers/rentarah-tablet.png",
+        src: "/covers/rentarah-tablet.webp",
         alt: "RentaraH marketplace on a tablet viewport — search, stats, and host actions",
         viewport: "tablet",
       },
       {
-        src: "/covers/rentarah-phone.png",
+        src: "/covers/rentarah-phone.webp",
         alt: "RentaraH marketplace on a phone viewport — compact search and bottom navigation",
         viewport: "phone",
       },
@@ -837,17 +837,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/hiraya-desktop.jpg",
+        src: "/projects/hiraya-desktop.webp",
         alt: "Hiraya trainer dashboard on a desktop viewport at hiraya-phi.vercel.app",
         viewport: "desktop",
       },
       {
-        src: "/projects/hiraya-tablet.jpg",
+        src: "/projects/hiraya-tablet.webp",
         alt: "Hiraya trainer on a tablet viewport — journey, quests, and study companions",
         viewport: "tablet",
       },
       {
-        src: "/projects/hiraya-mobile.jpg",
+        src: "/projects/hiraya-mobile.webp",
         alt: "Hiraya trainer on a phone viewport — compact dashboard and practice actions",
         viewport: "phone",
       },
@@ -919,17 +919,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/skyrealm-desktop.png",
+        src: "/covers/skyrealm-desktop.webp",
         alt: "Skyrealm — Guardians of the Aether on a desktop viewport at skyrealm-ruby.vercel.app",
         viewport: "desktop",
       },
       {
-        src: "/covers/skyrealm-tablet.png",
+        src: "/covers/skyrealm-tablet.webp",
         alt: "Skyrealm on a tablet viewport — stacked hero and play actions",
         viewport: "tablet",
       },
       {
-        src: "/covers/skyrealm-phone.png",
+        src: "/covers/skyrealm-phone.webp",
         alt: "Skyrealm on a phone viewport — compact menu and play actions",
         viewport: "phone",
       },
@@ -1000,17 +1000,17 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/covers/lumina-desktop.png",
+        src: "/covers/lumina-desktop.webp",
         alt: "Lumina daily message on a desktop viewport — glass card with today's note",
         viewport: "desktop",
       },
       {
-        src: "/covers/lumina-tablet.png",
+        src: "/covers/lumina-tablet.webp",
         alt: "Lumina daily message on a tablet viewport — centered glass card",
         viewport: "tablet",
       },
       {
-        src: "/covers/lumina-phone.png",
+        src: "/covers/lumina-phone.webp",
         alt: "Lumina daily message on a phone viewport — full-width glass card",
         viewport: "phone",
       },
@@ -1078,32 +1078,32 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/pocketpos/pocketpos-1.jpg",
+        src: "/projects/pocketpos/pocketpos-1.webp",
         alt: "PocketPOS home — today at a glance, register, and start selling",
         viewport: "phone",
       },
       {
-        src: "/projects/pocketpos/pocketpos-2.jpg",
+        src: "/projects/pocketpos/pocketpos-2.webp",
         alt: "PocketPOS add product — photo, name, SKU, category, price, and stock",
         viewport: "phone",
       },
       {
-        src: "/projects/pocketpos/pocketpos-3.jpg",
+        src: "/projects/pocketpos/pocketpos-3.webp",
         alt: "PocketPOS open register — opening cash float and open & sell",
         viewport: "phone",
       },
       {
-        src: "/projects/pocketpos/pocketpos-4.jpg",
+        src: "/projects/pocketpos/pocketpos-4.webp",
         alt: "PocketPOS settings — business, language, and currency",
         viewport: "phone",
       },
       {
-        src: "/projects/pocketpos/pocketpos-5.jpg",
+        src: "/projects/pocketpos/pocketpos-5.webp",
         alt: "PocketPOS history — no sales yet",
         viewport: "phone",
       },
       {
-        src: "/projects/pocketpos/pocketpos-6.jpg",
+        src: "/projects/pocketpos/pocketpos-6.webp",
         alt: "PocketPOS products — empty catalog and add product",
         viewport: "phone",
       },
@@ -1150,32 +1150,32 @@ export const projects: Project[] = [
     ],
     screenshots: [
       {
-        src: "/projects/cartify/cartify-1.jpg",
+        src: "/projects/cartify/cartify-1.webp",
         alt: "Cartify splash — Getting your cart ready",
         viewport: "phone",
       },
       {
-        src: "/projects/cartify/cartify-2.jpg",
+        src: "/projects/cartify/cartify-2.webp",
         alt: "Cartify welcome — Meet Cartify, know your grocery total before checkout",
         viewport: "phone",
       },
       {
-        src: "/projects/cartify/cartify-3.jpg",
+        src: "/projects/cartify/cartify-3.webp",
         alt: "Cartify home — budget, scan price, and add item",
         viewport: "phone",
       },
       {
-        src: "/projects/cartify/cartify-4.jpg",
+        src: "/projects/cartify/cartify-4.webp",
         alt: "Cartify shopping list with priced items",
         viewport: "phone",
       },
       {
-        src: "/projects/cartify/cartify-5.jpg",
+        src: "/projects/cartify/cartify-5.webp",
         alt: "Cartify scan price camera",
         viewport: "phone",
       },
       {
-        src: "/projects/cartify/cartify-6.jpg",
+        src: "/projects/cartify/cartify-6.webp",
         alt: "Cartify settings — budget, currency, language, and appearance",
         viewport: "phone",
       },

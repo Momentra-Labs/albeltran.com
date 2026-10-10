@@ -24,7 +24,7 @@ const DESCRIPTION =
   "Production problems, system failures, and architectural trade-offs. Investigate fictional incidents and sit with design decisions in Al Beltran's Engineering Lab.";
 
 export const metadata = buildMetadata({
-  title: "Engineering Lab — Interactive Challenges for Developers | Al Beltran",
+  title: "Engineering Lab — Interactive Dev Challenges | Al Beltran",
   description: DESCRIPTION,
   path: PATH,
 });

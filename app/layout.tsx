@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { SiteNav } from "@/components/layout/site-nav";
+import { MotionProvider } from "@/components/layout/motion-provider";
 import { Footer } from "@/components/layout/footer";
 import { PlausibleAnalytics } from "@/components/layout/plausible";
 import { RecruiterProvider } from "@/components/layout/recruiter-provider";
@@ -170,14 +171,16 @@ export default function RootLayout({
             Skip to content
           </a>
           <RecruiterProvider>
-            <CustomCursor />
-            <SiteNav />
-            <main id="main-content" className="min-w-0 flex-1">
-              {children}
-            </main>
-            <Footer />
-            <EasterDesk />
-            <TechDeskMount />
+            <MotionProvider>
+              <CustomCursor />
+              <SiteNav />
+              <main id="main-content" className="min-w-0 flex-1">
+                {children}
+              </main>
+              <Footer />
+              <EasterDesk />
+              <TechDeskMount />
+            </MotionProvider>
           </RecruiterProvider>
         </div>
         <script dangerouslySetInnerHTML={{ __html: BOOT_ENGINE_SCRIPT }} />

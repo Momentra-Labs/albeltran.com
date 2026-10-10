@@ -1,17 +1,21 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 
 export type DeskMood = "idle" | "listen" | "think" | "happy" | "sorry";
 
+/** Mouth strokes drawn on the visor, centred on x=32. */
 const MOUTH: Record<DeskMood, string> = {
-  idle: "M25.2 51.4c3.4 4.2 10.2 4.2 13.8 0",
-  listen: "M25.2 51.4c3.4 4.2 10.2 4.2 13.8 0",
-  think: "M29.2 51.1h5.6",
-  happy: "M23.6 50.2c4.4 5.6 12.4 5.6 16.8 0",
-  sorry: "M26.6 53.1c3.2-2.4 8-2.4 11.2 0",
+  idle: "M28.4 42.4c2 2.1 5.2 2.1 7.2 0",
+  listen: "M28.4 42.4c2 2.1 5.2 2.1 7.2 0",
+  think: "M29.6 43.2h4.8",
+  happy: "M27.2 41.4c2.6 3.6 7 3.6 9.6 0",
+  sorry: "M28.6 44.2c2-1.7 4.8-1.7 6.8 0",
 };
+
+const VISOR = "#0b1324";
+const EYE = "#e6f0ff";
 
 export function TechDeskMark({
   mood = "idle",
@@ -21,6 +25,10 @@ export function TechDeskMark({
   const reduce = useReducedMotion();
   const ref = useRef<SVGSVGElement>(null);
   const play = !reduce && (mood === "idle" || mood === "happy");
+  // Two mascots can be on screen at once (launcher + panel header), so gradient ids must be unique.
+  const uid = useId().replace(/:/g, "");
+  const shell = `desk-shell-${uid}`;
+  const glass = `desk-glass-${uid}`;
 
   useEffect(() => {
     const node = ref.current;
@@ -42,6 +50,21 @@ export function TechDeskMark({
         if (play) ref.current?.unpauseAnimations();
       }}
     >
+      <defs>
+        <linearGradient id={shell} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="var(--accent-hover)" />
+          <stop offset="0.55" stopColor="var(--accent)" />
+          <stop
+            offset="1"
+            stopColor="color-mix(in srgb, var(--accent) 70%, #050507)"
+          />
+        </linearGradient>
+        <linearGradient id={glass} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#16223d" />
+          <stop offset="1" stopColor={VISOR} />
+        </linearGradient>
+      </defs>
+
       <g className="tech-desk-mark-sparkles">
         <path
           className="tech-desk-mark-spark spark-a"
@@ -126,23 +149,17 @@ export function TechDeskMark({
           repeatCount="indefinite"
           additive="sum"
         />
-        <path d="M17 51 7 62 27 55.5" fill="var(--accent)" />
-        <circle cx="32" cy="31.5" r="29.5" fill="var(--accent)" />
-        <path
-          d="M13 42c4 13 34 15 40-2"
-          fill="color-mix(in srgb, var(--accent) 72%, #050507)"
-        />
-        <ellipse cx="22" cy="20" rx="11" ry="7.5" fill="#fff" opacity="0.16" />
+
         <g className="tech-desk-mark-antenna">
           <animateTransform
             attributeName="transform"
             type="rotate"
-            values="0 34 16; -12 34 16; 0 34 16"
+            values="0 35.5 11; -12 35.5 11; 0 35.5 11"
             dur="2.4s"
             repeatCount="indefinite"
           />
           <path
-            d="M34 16.5 42.5 4.2"
+            d="M35.5 11.5 41.6 3.8"
             fill="none"
             stroke="#fff"
             strokeWidth="2.6"
@@ -150,9 +167,9 @@ export function TechDeskMark({
           />
           <circle
             className="tech-desk-mark-pip-halo"
-            cx="44.4"
+            cx="43"
             cy="2.4"
-            r="5.4"
+            r="5"
             fill="var(--accent-hover)"
             opacity="0.38"
           >
@@ -163,12 +180,12 @@ export function TechDeskMark({
               repeatCount="indefinite"
             />
           </circle>
-          <circle cx="44.4" cy="2.4" r="3.45" fill="#fff" />
+          <circle cx="43" cy="2.4" r="3.3" fill="#fff" />
           <circle
             className="tech-desk-mark-pip"
-            cx="44.4"
+            cx="43"
             cy="2.4"
-            r="2.05"
+            r="1.95"
             fill="var(--accent-hover)"
           >
             <animate
@@ -178,11 +195,49 @@ export function TechDeskMark({
               repeatCount="indefinite"
             />
           </circle>
-          <circle cx="43.4" cy="1.5" r="0.75" fill="#fff" />
         </g>
-        <circle cx="14.2" cy="31.8" r="5.4" fill="#fff" />
-        <circle cx="49.8" cy="31.8" r="5.4" fill="#fff" />
-        <ellipse cx="32" cy="39.6" rx="18.6" ry="17.4" fill="#fff" />
+
+        {/* Speech-bubble shell: rounded square with a tail at the lower left. */}
+        <path
+          d="M24 10h16c9.9 0 18 8.1 18 18v10c0 9.9-8.1 18-18 18H25.5L12.6 62.2c-1.2.6-2.5-.6-1.9-1.8l3.4-7.1C9.3 50.1 6 44.5 6 38V28c0-9.9 8.1-18 18-18Z"
+          fill={`url(#${shell})`}
+        />
+        <path
+          d="M15 19.5c2.8-4.6 7.6-6.5 12.6-6.5"
+          fill="none"
+          stroke="#fff"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          opacity="0.35"
+        />
+
+        {/* Headset: ear cups + mic boom. */}
+        <rect x="2" y="26" width="7.4" height="15" rx="3.7" fill="#fff" />
+        <rect x="4.3" y="29" width="2.8" height="9" rx="1.4" fill="var(--accent)" />
+        <rect x="54.6" y="26" width="7.4" height="15" rx="3.7" fill="#fff" />
+        <rect x="56.9" y="29" width="2.8" height="9" rx="1.4" fill="var(--accent)" />
+        <path
+          d="M58.3 40.6c0 6.6-4.6 10.4-11.2 10.4"
+          fill="none"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+        />
+        <rect x="42" y="48.6" width="6.4" height="4.8" rx="2.4" fill="#fff" />
+
+        {/* Visor face. */}
+        <rect x="13.5" y="22.5" width="37" height="27" rx="12" fill={`url(#${glass})`} />
+        <rect
+          x="13.5"
+          y="22.5"
+          width="37"
+          height="27"
+          rx="12"
+          fill="none"
+          stroke="#fff"
+          strokeOpacity="0.14"
+          strokeWidth="1"
+        />
         <g className="tech-desk-mark-blush" opacity="0.58">
           <animate
             attributeName="opacity"
@@ -190,33 +245,32 @@ export function TechDeskMark({
             dur="2.7s"
             repeatCount="indefinite"
           />
-          <ellipse cx="21.2" cy="44.6" rx="4.4" ry="2.5" fill="#ff9eb8" />
-          <ellipse cx="42.8" cy="44.6" rx="4.4" ry="2.5" fill="#ff9eb8" />
+          <ellipse cx="19.8" cy="41.4" rx="2.8" ry="1.6" fill="#ff9eb8" />
+          <ellipse cx="44.2" cy="41.4" rx="2.8" ry="1.6" fill="#ff9eb8" />
         </g>
         <path
           className="tech-desk-mark-mouth"
           d={MOUTH[mood]}
           fill="none"
-          stroke="var(--accent)"
+          stroke="var(--accent-hover)"
           strokeWidth="2"
           strokeLinecap="round"
         />
         <g className="tech-desk-mark-gaze">
-          <ellipse cx="25" cy="38.2" rx="4.7" ry="5.7" fill="#111" />
-          <ellipse cx="40.8" cy="39" rx="4.1" ry="5.1" fill="#111" />
-          <circle cx="23.5" cy="36" r="1.75" fill="#fff" />
-          <circle cx="26.4" cy="40" r="0.72" fill="#fff" />
-          <circle cx="39.4" cy="37" r="1.5" fill="#fff" />
-          <circle cx="42" cy="40.4" r="0.62" fill="#fff" />
+          <rect x="22" y="29.6" width="6.4" height="9" rx="3.2" fill={EYE} />
+          <rect x="35.6" y="29.6" width="6.4" height="9" rx="3.2" fill={EYE} />
+          <circle cx="24.1" cy="32.2" r="1.25" fill="#fff" />
+          <circle cx="37.7" cy="32.2" r="1.25" fill="#fff" />
         </g>
+        {/* Left-eye wink / blink: cover the eye, then draw it closed. */}
         <rect
           className="tech-desk-mark-lid"
-          x="20"
-          y="32"
-          width="10"
-          height="11.6"
-          rx="4.5"
-          fill="#fff"
+          x="21"
+          y="28.6"
+          width="8.4"
+          height="11"
+          rx="3"
+          fill="#111a2f"
           opacity="0"
         >
           <animate
@@ -227,6 +281,23 @@ export function TechDeskMark({
             repeatCount="indefinite"
           />
         </rect>
+        <path
+          className="tech-desk-mark-lid"
+          d="M22.2 35.2c1.9-2.2 4.1-2.2 6 0"
+          fill="none"
+          stroke={EYE}
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0"
+        >
+          <animate
+            attributeName="opacity"
+            values="0;0;1;1;0;0"
+            keyTimes="0;0.62;0.66;0.74;0.78;1"
+            dur="4.8s"
+            repeatCount="indefinite"
+          />
+        </path>
       </g>
     </svg>
   );

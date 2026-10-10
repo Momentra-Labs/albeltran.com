@@ -25,7 +25,7 @@ export function HomeNotes() {
         </Reveal>
         <SpreadRule className="mb-6" />
         <div className="grid gap-8 lg:grid-cols-2">
-          <div id="think" className="scroll-mt-24" data-hide-recruiter>
+          <div id="how-i-think" className="scroll-mt-24" data-hide-recruiter>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
               How I think
             </p>

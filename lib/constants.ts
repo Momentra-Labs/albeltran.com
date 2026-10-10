@@ -1,10 +1,12 @@
+import codewarsStats from "@/content/codewars-stats.json";
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
   "https://albeltran.com";
 
 export const SITE_NAME = "Al Beltran — Portfolio";
-export const SITE_DESCRIPTION =
-  "Al Beltran (Al Andrew Paul Beltran) is a software engineer in Manila and Software Engineering Lead at Anglian Dental. He works with React, TypeScript, Java, Node.js, AEM, and AWS. Previously Software Engineer at Google via High Spring.";
+/** Codewars numbers come from content/codewars-stats.json, refreshed on every build. */
+export const SITE_DESCRIPTION = `Al Beltran: Software Engineering Lead at Anglian Dental, ex-Google via High Spring. Codewars ${codewarsStats.rank}, #${codewarsStats.leaderboardPosition} worldwide, ${codewarsStats.honor.toLocaleString("en-US")} honor. React, TypeScript, AWS.`;
 
 export const SECTION_NAV = [
   { href: "/#work", hash: "work", label: "Work" },

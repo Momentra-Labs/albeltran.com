@@ -1,3 +1,9 @@
+import {
+  codewarsHeadline,
+  codewarsRecord,
+  codewarsSentence,
+} from "@/content/codewars";
+
 export type FAQItem = {
   question: string;
   answer: string;
@@ -18,6 +24,10 @@ export const homeFaqs: FAQItem[] = [
     question: "What is the official portfolio URL for Al Beltran?",
     answer:
       "https://albeltran.com/ is the primary public website Al maintains for his engineering profile, projects, and contact path. The official biography is https://albeltran.com/biography/. Older links to codemoon2019.github.io may still resolve during migration; prefer albeltran.com. Third-party profiles may contain overlapping information, but project detail and narrative on this site are the version he publishes directly.",
+  },
+  {
+    question: "What is Al Beltran's Codewars rank and honor?",
+    answer: `${codewarsSentence} Current standing: ${codewarsHeadline}. Profile: ${codewarsRecord.href}. The full solved and authored kata lists are on https://albeltran.com/#record.`,
   },
   {
     question: "What does Al Beltran specialize in?",

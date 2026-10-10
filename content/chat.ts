@@ -28,6 +28,17 @@ export const TECH_DESK = {
   poke: "Wake the desk bot",
   close: "Close Tech desk",
   nudgeDismiss: "Dismiss",
+  newChat: "Start a new chat",
+  send: "Send message",
+  stop: "Stop the reply",
+  jump: "Latest",
+  jumpLabel: "Jump to the latest message",
+  thinking: "Thinking",
+  replied: "The desk replied.",
+  stopped: "Stopped. Ask again whenever you like.",
+  hint: "Enter to send · Shift + Enter for a new line",
+  turnsLeft: (left: number) => (left === 1 ? "1 question left today" : `${left} questions left today`),
+  suggestions: "Try asking",
 } as const;
 
 export const TECH_DESK_STARTERS = [
