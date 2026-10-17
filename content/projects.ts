@@ -7,6 +7,8 @@ export type ProjectScreenshot = {
   alt: string;
   viewport?: ScreenshotViewport;
   fit?: "cover" | "contain" | "fill";
+  /** Phone shots: colour behind the simulated iOS status bar (the page's top colour). */
+  statusBar?: string;
 };
 
 export type Project = {
@@ -111,6 +113,7 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/doc-indy-mobile.webp",
+        statusBar: "#fdfdfd",
         alt: "DocIndy Hair Regrowth journey on phone — talk with a provider and cookie consent",
         viewport: "phone",
       },
@@ -191,6 +194,7 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/enz-mobile.webp",
+        statusBar: "#fdfdfd",
         alt: "ENZ Education Consultancy on phone — Why Choose ENZ memberships, awards, and expertise",
         viewport: "phone",
       },
@@ -272,6 +276,7 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/disney-institute-mobile.webp",
+        statusBar: "#ffffff",
         alt: "Disney Institute About page on phone — We Walk the Talk and classroom photo",
         viewport: "phone",
       },
@@ -354,6 +359,7 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/personalcollection-mobile.webp",
+        statusBar: "#d8202c",
         alt: "Personal Collection homepage on phone — Life Made Great hero and dealer banner",
         viewport: "phone",
       },
@@ -435,6 +441,7 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/nat-geo-mobile.webp",
+        statusBar: "#ffffff",
         alt: "National Geographic latest stories on phone — new cat species feature and photographer story",
         viewport: "phone",
       },
@@ -518,6 +525,7 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/disney-experience-mobile.webp",
+        statusBar: "#2778a8",
         alt: "Disney Experiences homepage on phone — stories hero and latest news",
         viewport: "phone",
       },
@@ -758,6 +766,7 @@ export const projects: Project[] = [
       },
       {
         src: "/covers/rentarah-phone.webp",
+        statusBar: "#fafafa",
         alt: "RentaraH marketplace on a phone viewport — compact search and bottom navigation",
         viewport: "phone",
       },
@@ -848,6 +857,7 @@ export const projects: Project[] = [
       },
       {
         src: "/projects/hiraya-mobile.webp",
+        statusBar: "#fef5e6",
         alt: "Hiraya trainer on a phone viewport — compact dashboard and practice actions",
         viewport: "phone",
       },
@@ -930,6 +940,7 @@ export const projects: Project[] = [
       },
       {
         src: "/covers/skyrealm-phone.webp",
+        statusBar: "#442c34",
         alt: "Skyrealm on a phone viewport — compact menu and play actions",
         viewport: "phone",
       },
@@ -1011,6 +1022,7 @@ export const projects: Project[] = [
       },
       {
         src: "/covers/lumina-phone.webp",
+        statusBar: "#0a0c19",
         alt: "Lumina daily message on a phone viewport — full-width glass card",
         viewport: "phone",
       },

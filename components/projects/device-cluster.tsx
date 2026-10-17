@@ -5,7 +5,8 @@ import { AppPhoneShowcase } from "@/components/projects/app-phone-slideshow";
 import {
   IPadShell,
   IPhoneShell,
-  MonitorShell,
+  LaptopShell,
+  MacDesktop,
 } from "@/components/projects/device-chrome";
 import { ProjectCover } from "@/components/shared/project-cover";
 import { cn } from "@/lib/utils";
@@ -62,10 +63,12 @@ function DeviceStage({ folio }: { folio?: string | null }) {
   );
 }
 
-function Monitor({ children }: { children: ReactNode }) {
+function Monitor({ children, url }: { children: ReactNode; url?: string }) {
   return (
     <div data-device="monitor" className="device-frame">
-      <MonitorShell>{children}</MonitorShell>
+      <LaptopShell>
+        <MacDesktop url={url}>{children}</MacDesktop>
+      </LaptopShell>
     </div>
   );
 }
@@ -78,10 +81,16 @@ function Tablet({ children }: { children: ReactNode }) {
   );
 }
 
-function Phone({ children }: { children: ReactNode }) {
+function Phone({
+  children,
+  statusBar,
+}: {
+  children: ReactNode;
+  statusBar?: string;
+}) {
   return (
     <div data-device="phone" className="device-frame">
-      <IPhoneShell>{children}</IPhoneShell>
+      <IPhoneShell statusBar={statusBar}>{children}</IPhoneShell>
     </div>
   );
 }
@@ -105,7 +114,7 @@ const SIZES = {
 } as const;
 
 const CAPTIONS = {
-  spread: "Desktop, tablet, and iPhone 16",
+  spread: "MacBook Pro, iPad Pro, and iPhone 16",
   phone: "Six screens · iPhone 16",
 } as const;
 
@@ -143,7 +152,7 @@ export function DeviceCluster({
     caption ??
     (variant === "phone"
       ? `${project.name} on iPhone 16`
-      : `${project.name} on desktop, tablet, and iPhone 16`);
+      : `${project.name} on MacBook Pro, iPad Pro, and iPhone 16`);
 
   return (
     <div className={cn("group min-w-0", className)}>
@@ -164,7 +173,7 @@ export function DeviceCluster({
           <AppPhoneShowcase project={project} compact={!framed} />
         ) : (
           <>
-            <Monitor>
+            <Monitor url={project.demo}>
               <Screen
                 project={project}
                 viewport="desktop"
@@ -179,7 +188,7 @@ export function DeviceCluster({
                 sizes={sizes.tablet}
               />
             </Tablet>
-            <Phone>
+            <Phone statusBar={screenshotForViewport(project, "phone")?.statusBar}>
               <Screen
                 project={project}
                 viewport="phone"

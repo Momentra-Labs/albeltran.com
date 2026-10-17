@@ -1969,106 +1969,6 @@ h3,
     );
 }
 
-.device-monitor {
-  overflow: hidden;
-  border-radius: 6px;
-  padding: 2px 2px 0;
-  background:
-    linear-gradient(180deg, #2e2e36 0%, #14141c 38%, #0c0c12 100%);
-}
-
-.device-monitor-screen {
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-}
-
-.device-monitor-chin {
-  position: relative;
-  display: block;
-  height: 0.78rem;
-  background:
-    linear-gradient(180deg, #1a1a22, #0a0a10);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-@media (min-width: 640px) {
-  .device-monitor-chin {
-    height: 1.05rem;
-  }
-}
-
-.device-monitor-camera {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  transform: translate(-50%, -50%);
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 35% 30%, #4a5a6c, #0b1220 62%);
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.12),
-    0 0 4px rgba(90, 180, 255, 0.18);
-}
-
-.device-stand {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: -1px;
-}
-
-.device-stand-neck {
-  display: block;
-  width: 12%;
-  height: 1.25rem;
-  background:
-    linear-gradient(90deg, #14141c, #4a4a56 18%, #1a1a22 50%, #4a4a56 82%, #14141c);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-    0 4px 10px rgba(0, 0, 0, 0.35);
-  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
-}
-
-.device-stand-base {
-  position: relative;
-  display: block;
-  width: 58%;
-  height: 0.72rem;
-  margin-top: -2px;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse at 50% 28%, #4a4a54, #121218 64%);
-  box-shadow:
-    0 10px 18px rgba(0, 0, 0, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.device-stand-base::after {
-  content: "";
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -0.42rem;
-  height: 0.6rem;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.55), transparent 72%);
-}
-
-@media (min-width: 640px) {
-  .device-stand-neck {
-    height: 1.7rem;
-  }
-
-  .device-stand-base {
-    height: 0.95rem;
-  }
-}
-
 .device-iphone {
   overflow: visible;
   border-radius: 22.5% / 10.6%;
@@ -2373,6 +2273,428 @@ h3,
 .device-cluster-phone [data-device="monitor"],
 .device-cluster-phone [data-device="tablet"] {
   display: none;
+}
+
+/* ---------- Realistic devices: MacBook Pro, iPad Pro, iPhone 16 ---------- */
+
+/* MacBook Pro (space black) */
+.device-laptop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.device-laptop-lid {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  padding: 0.55% 0.55% 0;
+  border-radius: 3.6% 3.6% 0 0 / 5.6% 5.6% 0 0;
+  /* Anodised lid edge, catching light along the top. */
+  background: linear-gradient(180deg, #5a5c62 0%, #2b2c31 10%, #1b1c20 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.device-laptop-bezel {
+  position: relative;
+  border-radius: 3.2% 3.2% 0 0 / 5% 5% 0 0;
+  background: #060607;
+  padding: 2.4% 2% 3%;
+}
+
+.device-laptop-notch {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  z-index: 4;
+  display: block;
+  width: 11%;
+  aspect-ratio: 6.4 / 1;
+  transform: translateX(-50%);
+  border-radius: 0 0 0.45rem 0.45rem;
+  background: #060607;
+}
+
+.device-laptop-camera {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  width: 0.28rem;
+  height: 0.28rem;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #4b5d72, #0a1220 62%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.device-laptop-screen {
+  border-radius: 0.35rem 0.35rem 0 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.device-laptop-base {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  aspect-ratio: 100 / 3.4;
+  margin-top: -1px;
+  /* Aluminium deck: bright front lip, darker underside. */
+  border-radius: 0.2rem 0.2rem 42% 42% / 0.2rem 0.2rem 100% 100%;
+  background: linear-gradient(
+    180deg,
+    #6c6e74 0%,
+    #44464c 26%,
+    #2b2c31 58%,
+    #18191c 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 10px 22px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Specular streak along the front edge of the deck. */
+.device-laptop-base::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+}
+
+.device-laptop-hinge {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 0;
+  height: 28%;
+  border-radius: 0 0 0.3rem 0.3rem;
+  background: linear-gradient(180deg, #0c0c0e, #26272b);
+}
+
+.device-laptop-groove {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 13%;
+  height: 46%;
+  transform: translateX(-50%);
+  border-radius: 0 0 0.45rem 0.45rem;
+  background: linear-gradient(180deg, #1b1c1f, #34363b);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+/* iPad Pro (space gray): uniform black bezel inside a machined aluminium edge. */
+.device-ipad {
+  overflow: hidden;
+  padding: 2.6%;
+  border-radius: 6.2% / 8.3%;
+  background: #070708;
+  box-shadow:
+    0 0 0 1.5px #55585e,
+    0 0 0 2.5px #2a2c30,
+    0 0 0 3px rgba(255, 255, 255, 0.16),
+    0 18px 34px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 640px) {
+  .device-ipad {
+    padding: 2.6%;
+  }
+}
+
+.device-ipad-screen {
+  border-radius: 3.8% / 5.1%;
+}
+
+.device-ipad-camera {
+  top: 0.9%;
+  width: 0.3rem;
+  height: 0.3rem;
+}
+
+@media (min-width: 640px) {
+  .device-ipad-camera {
+    top: 0.9%;
+    width: 0.32rem;
+    height: 0.32rem;
+  }
+}
+
+.device-ipad-home {
+  width: 22%;
+  height: 0.8%;
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* iPhone 16: natural-titanium band, thin black bezel. */
+.device-iphone {
+  padding: 3.4%;
+  background: #050506;
+  box-shadow:
+    0 0 0 1.5px #a19e98,
+    0 0 0 2.5px #6e6c67,
+    0 0 0 3px rgba(255, 255, 255, 0.22),
+    0 18px 34px rgba(0, 0, 0, 0.55);
+}
+
+@media (min-width: 640px) {
+  .device-iphone {
+    padding: 3.4%;
+  }
+}
+
+.device-iphone-btn {
+  width: 2px;
+  background: linear-gradient(90deg, #c4c1bb, #7c7a75 50%, #a19e98);
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.4);
+}
+
+.device-iphone-btn-silent,
+.device-iphone-btn-vol-up,
+.device-iphone-btn-vol-down {
+  left: -4.5px;
+}
+
+.device-iphone-btn-power {
+  right: -4.5px;
+}
+
+/* iOS status bar: 54pt of 852pt on iPhone 16. The screenshot starts underneath it. */
+.device-iphone-statusbar {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  display: flex;
+  height: 6.4%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 9% 0 12%;
+  container-type: inline-size;
+  color: #0a0a0c;
+}
+
+.device-iphone-statusbar[data-tone="light"] {
+  color: #fff;
+}
+
+.device-iphone-time {
+  font-family: -apple-system, "SF Pro Text", var(--font-geist-sans), system-ui, sans-serif;
+  /* Scales with the phone: ~15px on a 300px-wide screen. */
+  font-size: max(6px, 5.4cqw);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.device-iphone-indicators {
+  width: 22%;
+  height: auto;
+}
+
+.device-iphone-viewport {
+  position: absolute;
+  inset: 6.4% 0 0;
+  z-index: 1;
+}
+
+/* macOS desktop inside the MacBook: menu bar, Safari window (full-width page), Dock.
+   Sized in container units so it scales with the laptop. */
+.mac-desktop {
+  position: absolute;
+  inset: 0;
+  container-type: size;
+  overflow: hidden;
+  font-family: -apple-system, "SF Pro Text", var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.mac-wallpaper {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 18% 100%, #6d5bd0 0%, transparent 60%),
+    radial-gradient(ellipse 70% 70% at 90% 0%, #2f7de1 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 70% 95%, #d9608f 0%, transparent 55%),
+    linear-gradient(160deg, #0d1b3d 0%, #1b1446 55%, #2a0f33 100%);
+}
+
+.mac-menubar {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  display: flex;
+  height: 3.6cqh;
+  align-items: center;
+  gap: 1.6cqw;
+  padding: 0 1.6cqw;
+  background: rgba(20, 20, 30, 0.35);
+  backdrop-filter: blur(6px);
+  font-size: 1.15cqw;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+
+.mac-menubar-apple {
+  width: 1.1cqw;
+  height: 1.3cqw;
+  border-radius: 45% 45% 50% 50%;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.mac-menubar-app {
+  font-weight: 700;
+}
+
+.mac-menubar-spacer {
+  flex: 1;
+}
+
+.mac-window {
+  position: absolute;
+  top: 5.2cqh;
+  left: 1.6cqw;
+  right: 1.6cqw;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 0.9cqw;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 1.6cqw 4cqw rgba(0, 0, 0, 0.55);
+}
+
+.mac-toolbar {
+  position: relative;
+  display: flex;
+  height: 5.8cqh;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #d9d9de;
+  background: linear-gradient(180deg, #f6f6f8, #ececf0);
+}
+
+.mac-lights {
+  position: absolute;
+  left: 1.3cqw;
+  display: flex;
+  gap: 0.6cqw;
+}
+
+.mac-lights i {
+  width: 1cqw;
+  height: 1cqw;
+  border-radius: 999px;
+  background: #ff5f57;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.2);
+}
+
+.mac-lights i:nth-child(2) {
+  background: #febc2e;
+}
+
+.mac-lights i:nth-child(3) {
+  background: #28c840;
+}
+
+.mac-address {
+  display: inline-flex;
+  min-width: 34%;
+  height: 3.6cqh;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5cqw;
+  border-radius: 0.7cqw;
+  background: #e2e2e7;
+  padding: 0 1.4cqw;
+  font-size: 1.1cqw;
+  color: #3a3a40;
+  white-space: nowrap;
+}
+
+.mac-lock {
+  width: 0.75cqw;
+  height: 0.9cqw;
+  border-radius: 0.15cqw;
+  background: #8a8a92;
+}
+
+/* Page area matches wide browser captures (~2.08:1) so the whole screenshot shows. */
+.mac-page {
+  position: relative;
+  aspect-ratio: 2.08;
+  overflow: hidden;
+  background: #fff;
+}
+
+.mac-dock {
+  position: absolute;
+  left: 50%;
+  bottom: 1.4cqh;
+  z-index: 2;
+  display: flex;
+  gap: 0.7cqw;
+  transform: translateX(-50%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 1.4cqw;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+  padding: 0.7cqw;
+}
+
+.mac-dock-icon {
+  width: 4.2cqw;
+  height: 4.2cqw;
+  border-radius: 1cqw;
+  box-shadow: 0 0.3cqw 0.6cqw rgba(0, 0, 0, 0.3);
+}
+
+.mac-dock-icon[data-app="finder"] { background: linear-gradient(90deg, #1f8af0 50%, #e9eef5 50%); }
+.mac-dock-icon[data-app="safari"] { background: radial-gradient(circle, #fff 18%, #2a9cf4 20%, #1c6fe0 70%); }
+.mac-dock-icon[data-app="mail"] { background: linear-gradient(180deg, #4fb3ff, #1a6ff2); }
+.mac-dock-icon[data-app="maps"] { background: linear-gradient(135deg, #7bd88f, #4fb6f3 60%, #f4d35e); }
+.mac-dock-icon[data-app="photos"] { background: conic-gradient(#ff5f57, #febc2e, #28c840, #2a9cf4, #a463f2, #ff5f57); }
+.mac-dock-icon[data-app="notes"] { background: linear-gradient(180deg, #ffd54a 28%, #fffdf3 28%); }
+.mac-dock-icon[data-app="code"] { background: linear-gradient(135deg, #2d8ff0, #145fbf); }
+.mac-dock-icon[data-app="terminal"] { background: linear-gradient(180deg, #3a3a3e, #121214); }
+
+/* Laptop sits back and high; phone and iPad stand in front, low enough that they only
+   overlap the Dock and wallpaper, never the Safari page. */
+.device-cluster-spread [data-device="monitor"],
+.device-cluster-compact [data-device="monitor"] {
+  left: 15%;
+  bottom: 31%;
+  width: 70%;
+}
+
+.device-cluster-spread [data-device="tablet"],
+.device-cluster-compact [data-device="tablet"] {
+  right: 3%;
+  bottom: 3%;
+  width: 34%;
+}
+
+.device-cluster-spread [data-device="phone"],
+.device-cluster-compact [data-device="phone"] {
+  left: 3%;
+  bottom: 3%;
+  width: 17%;
+}
+
+/* Contact shadow under the laptop sits on the deck, not the lid. */
+.device-cluster-spread [data-device="monitor"]::after,
+.device-cluster-compact [data-device="monitor"]::after {
+  left: 4%;
+  right: 4%;
+  bottom: -5%;
+  height: 10%;
 }
 
 .device-phone-slide-meter {
