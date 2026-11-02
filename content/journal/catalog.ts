@@ -124,6 +124,8 @@ export const react = entries("react", [
     technologies: ["React"],
     tags: ["react", "reconciliation"],
     relatedArticles: ["react-list-virtualization-when", "react-interview-questions"],
+    status: "published",
+    priority: "high",
   },
   {
     slug: "react-performance-when-to-memo",

@@ -1,0 +1,67 @@
+---
+title: "The key Prop Is a Reconciliation Contract"
+description: "What React does with keys, why index keys break forms, and how lists should identify rows."
+date: "2026-11-02"
+category: "Frontend"
+tags: ["react", "reconciliation", "keys", "lists"]
+takeaways:
+  - "A key tells React which child is which across renders. It is identity, not a CSS hint."
+  - "Index keys are fine for static lists. They are a bug in anything the user can reorder, filter, or type into."
+  - "The key must be stable for that row. If the server has an id, use it. Do not invent a random key in render."
+---
+
+React does not "remember" a list item because you rendered it last time. It **matches** children by `key`. If the key is wrong, React will reuse the wrong DOM node, keep the wrong local state, and look like a ghost in a form.
+
+I treat `key` as a **reconciliation contract**: this child is the same record as last render, or it is a new one. Everything else — `memo`, CSS, "it worked in Storybook" — is downstream of that.
+
+## What React actually does
+
+On each render, a parent returns children. For arrays, React looks at `key` first, then position.
+
+- **Same key, same type.** Reuse the instance. Keep state. Update props.
+- **New key.** Mount. Fresh state. Effects run.
+- **Missing key.** React falls back to index and warns. You still shipped an implicit contract.
+
+That is why a todo list "jumps" when you delete the first item: the remaining rows inherited the old indexes, so the input that used to belong to row 0 now belongs to whatever slid into slot 0.
+
+## When an index is honest
+
+Index keys are not always a smell. They are honest when:
+
+- The list is **append-only or fully replaced**, never reordered or filtered in place
+- Rows have **no local state** (no inputs, no open accordions, no timers)
+- The collection is **static for the life of the page** — a table of kyu labels, a nav of three links
+
+A magazine TOC that never shuffles can use index. A kanban that the user drags cannot.
+
+## Forms are where index keys lie
+
+The failure I still see in product UIs:
+
+```tsx
+{items.map((item, index) => (
+  <Row key={index} item={item} />
+))}
+```
+
+`Row` has an `<input>`. The user types in item B, then sorts or deletes item A. React keeps the input state on **position**, not on **item B**. The typed value sticks to the wrong row.
+
+The fix is an id the row already owns:
+
+```tsx
+{items.map((item) => (
+  <Row key={item.id} item={item} />
+))}
+```
+
+If the API has no id yet, give the client a stable one **when the row is created**, not inside `map`. `crypto.randomUUID()` in render is a new identity every time. That remounts the row on every keystroke.
+
+## What I write on the PR
+
+Before I approve a list:
+
+1. **What is the row's identity in the domain?** Order id, kata slug, user id — not the loop index.
+2. **Can this list reorder, filter, or paginate without a full remount?** If yes, index is wrong.
+3. **Does the child hold state?** If yes, a bad key is a data bug, not a lint warning.
+
+Reconciliation is not a performance trick. It is how React decides whose state survives. Name the row the way the backend names the record, and the UI stops inventing ghosts.
